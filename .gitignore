@@ -128,11 +128,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-<<<<<<< HEAD
 
 #ANGULAr
 .angular/
 # Ignorar la caché de Angular
 .angular/cache/
-=======
->>>>>>> a08b39f4302d34e793c522e609916b4e56d4bee8

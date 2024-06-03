@@ -1,0 +1,100 @@
+/*
+Template Name: Dashonic - Admin & Dashboard Template
+Author: Pichforest
+Version: 1.3.0
+Website: https://Pichforest.com/
+Contact: Pichforest@gmail.com
+File: Main Css File
+*/
+
+@import "custom/instapago/variables";
+
+//Fonts
+@import "custom/fonts/fonts";
+
+//Core files
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/variables";
+@import "variables";
+@import "variables-dark";
+@import "./node_modules/bootstrap/scss/mixins.scss";
+
+// Structure
+@import "custom/structure/general";
+@import "custom/structure/topbar";
+@import "custom/structure/page-head";
+@import "custom/structure/footer";
+@import "custom/structure/right-sidebar";
+@import "custom/structure/vertical";
+@import "custom/structure/horizontal-nav";
+@import "custom/structure/layouts";
+
+// Components
+@import "custom/components/avatar";
+@import "custom/components/alerts";
+@import "custom/components/accordion";
+@import "custom/components/helper";
+@import "custom/components/preloader";
+@import "custom/components/modals";
+@import "custom/components/forms";
+@import "custom/components/widgets";
+@import "custom/components/demos";
+@import "custom/components/print";
+@import "custom/components/root";
+
+
+// Plugins
+@import "custom/plugins/custom-scrollbar";
+@import "custom/plugins/calendar";
+@import "custom/plugins/range-slider";
+@import "custom/plugins/sweatalert2";
+@import "custom/plugins/alertify";
+@import 'custom/plugins/swiper-slider';
+@import "custom/plugins/choices";
+@import "custom/plugins/switch";
+@import "custom/plugins/gridjs";
+@import "custom/plugins/colorpicker";
+@import "custom/plugins/datepicker";
+@import "custom/plugins/form-editors";
+@import "custom/plugins/form-upload";
+@import "custom/plugins/form-wizard";
+@import "custom/plugins/apexcharts";
+@import "custom/plugins/lightbox";
+@import "custom/plugins/google-map";
+@import "custom/plugins/vector-maps";
+@import "custom/plugins/leaflet-maps";
+
+// Pages
+@import "custom/pages/authentication";
+@import "custom/pages/kanbanboard";
+@import "custom/pages/file-manager";
+@import "custom/pages/email";
+@import "custom/pages/chat";
+@import "custom/pages/coming-soon";
+@import "custom/pages/timeline";
+@import "custom/pages/extras-pages";
+
+// Custom Scss
+@import "./custom.scss";
+
+// Rtl scss
+// @import "./custom/rtl/bootstrap-rtl";
+// @import "./custom/rtl/components-rtl";
+// @import "./custom/rtl/float-rtl";
+// @import "./custom/rtl/general-rtl";
+// @import "./custom/rtl/pages-rtl";
+// @import "./custom/rtl/plugins-rtl";
+// @import "./custom/rtl/spacing-rtl";
+// @import "./custom/rtl/structure-rtl";
+// @import "./custom/rtl/text-rtl";
+
+// Custom Instapago Scss
+
+@import "custom/instapago/buttons";
+@import "custom/instapago/nav-bar";
+@import "custom/instapago/utility";
+@import "custom/instapago/forms";
+@import "custom/instapago/header";
+@import "custom/instapago/icons";
+@import "custom/instapago/tables";
+@import "custom/instapago/root-instapago";

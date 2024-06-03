@@ -1,0 +1,17 @@
+// 
+// backgrounds.scss
+//
+
+
+@each $color,
+$value in $theme-colors {
+    .bg-soft-#{$color} {
+        background-color: rgba(($value), 0.25) !important;
+    }
+}
+
+// [data-bs-theme="dark"]{
+//     .bg-soft-light {
+//         background-color: rgba(var(--#{$variable-prefix}gray-200), var(--#{$variable-prefix}0.25)) !important;
+//     }
+// }

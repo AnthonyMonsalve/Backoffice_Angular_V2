@@ -1,0 +1,105 @@
+// Definiciones de variables para mayor coherencia y mantenibilidad
+$color-background: #fff;
+$color-border: #ccc;
+$color-text: #000;
+$color-highlight: $instapago-purpleblue; // Asegúrate de definir este color
+$color-focus-background: #eee;
+$color-focus-border-opacity: 0.30;
+
+// Mixin para el estado focus de form-control
+@mixin focus-state {
+  &:focus {
+    border-color: rgba($color-highlight, $color-focus-border-opacity);
+  }
+}
+
+// Comentarios para documentar secciones y decisiones de diseño
+// Estilos específicos para el formulario de login de Intapago
+.intapago-login-form {
+  .form-floating {
+    .form-control {
+      background-color: $color-background;
+      border-color: $color-border !important;
+      color: $color-text !important;
+
+      @include focus-state; // Aplicar mixin para estado de foco
+    }
+
+    .form-floating-icon,
+    label {
+      color: $color-highlight !important;
+    }
+
+    >.form-control:focus~label::after {
+      background-color: $color-focus-background !important;
+      color: $color-highlight !important;
+    }
+  }
+}
+
+// Mejoras en la coherencia visual para elementos seleccionados y activos
+.form-check-input:checked,
+.NgxEditor__MenuItem.NgxEditor__MenuItem--Active,
+.NgxEditor__MenuItem .NgxEditor__MenuItem--Active {
+  background-color: $color-highlight !important;
+  border-color: $color-highlight !important;
+  color: $color-highlight !important; // Añadido para consistencia en .NgxEditor
+}
+
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+  background-color: $color-highlight !important;
+  border-color: $color-highlight !important;
+}
+
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value .ng-value-icon:hover {
+  background-color: $color-highlight !important;
+}
+
+.flatpickr-months,
+.flatpickr-weekdays {
+  background-color: $color-highlight !important;
+}
+
+.flatpickr-day.today {
+  border-color: $color-highlight !important;
+  background-color: rgba($color-highlight, $color-focus-border-opacity);
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange,
+.flatpickr-day.selected.inRange,
+.flatpickr-day.startRange.inRange,
+.flatpickr-day.endRange.inRange,
+.flatpickr-day.selected:focus,
+.flatpickr-day.startRange:focus,
+.flatpickr-day.endRange:focus,
+.flatpickr-day.selected:hover,
+.flatpickr-day.startRange:hover,
+.flatpickr-day.endRange:hover,
+.flatpickr-day.selected.prevMonthDay,
+.flatpickr-day.startRange.prevMonthDay,
+.flatpickr-day.endRange.prevMonthDay,
+.flatpickr-day.selected.nextMonthDay,
+.flatpickr-day.startRange.nextMonthDay,
+.flatpickr-day.endRange.nextMonthDay {
+  background-color: $color-highlight !important;
+  border-color: $color-highlight !important;
+}
+
+
+.valid-tooltip {
+  background-color: $instapago-aqua;
+}
+
+.was-validated .form-control:valid,
+.form-control.is-valid,
+.form-control:focus {
+  border-color: $instapago-aqua;
+}
+
+.was-validated .form-control:valid:focus,
+.form-control.is-valid:focus {
+  border-color: $instapago-aqua;
+  box-shadow: 0 0 0 0.25rem rgba($instapago-aqua, 0.25);
+}

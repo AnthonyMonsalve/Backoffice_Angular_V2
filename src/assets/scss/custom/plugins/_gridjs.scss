@@ -1,0 +1,140 @@
+// 
+// gridjs.scss
+// 
+
+
+// gridjs-table
+
+.gridjs-container {
+    color: var(--#{$prefix}table-color);
+}
+
+.gridjs-wrapper {
+    box-shadow: none;
+    border: 1px solid var(--#{$prefix}table-border-color);
+
+    &::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+
+    &::-webkit-scrollbar:vertical {
+        width: 12px;
+    }
+
+    &::-webkit-scrollbar:horizontal {
+        height: 12px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba($dark, .075);
+        border-radius: 10px;
+        border: 2px solid var(--#{$prefix}border-color);
+    }
+
+    &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: var(--#{$prefix}secondary-bg);
+    }
+}
+
+.gridjs-table {
+    width: 100%;
+}
+
+.gridjs-tbody,
+td.gridjs-td {
+    background-color: transparent;
+}
+
+th.gridjs-th,
+td.gridjs-td {
+    border: 1px solid var(--#{$prefix}table-border-color);
+    padding: .75rem .75rem;
+}
+
+th {
+    &.gridjs-th {
+        border-top: 0;
+        color: var(--#{$prefix}table-color);
+        background-color: var(--#{$prefix}table-hover-bg);
+
+    }
+
+    &.gridjs-th-sort {
+        background-color: var(--#{$prefix}table-hover-bg);
+
+        &:focus,
+        &:hover {
+            background-color: var(--#{$prefix}table-hover-bg);
+        }
+    }
+}
+
+.gridjs-footer {
+    box-shadow: none;
+    border: 1px solid var(--#{$prefix}table-border-color);
+    border-top: 0;
+    background-color: transparent;
+}
+
+.gridjs-pagination {
+
+
+    .gridjs-pages button {
+        border: none !important;
+        border-radius: 30px !important;
+        margin: 0 5px;
+        min-width: 32px;
+        height: 32px;
+        padding: 0;
+        text-align: center;
+        line-height: 32px;
+        background-color: transparent;
+        color: var(--#{$prefix}pagination-color);
+
+        &:disabled,
+        &:hover:disabled,
+        &[disabled] {
+            color: var(--#{$prefix}pagination-disabled-color);
+            background-color: transparent;
+        }
+
+        &:hover {
+            background-color: var(--#{$prefix}pagination-bg);
+            color: var(--#{$prefix}pagination-hover-color);
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+
+        &:last-child,
+        &:first-child {
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        &.gridjs-currentPage {
+            background-color: $pagination-active-bg;
+            color: $pagination-active-color;
+            border-color: $pagination-active-border-color;
+        }
+    }
+
+    .gridjs-summary {
+        color: var(--#{$prefix}gray-500);
+    }
+}
+
+input.gridjs-input {
+    border-color: $input-border-color;
+    background-color: var(--#{$prefix}secondary-bg);
+    color: $input-color;
+
+    &:focus {
+        box-shadow: none;
+        border-color: $input-focus-border-color;
+        background-color: $input-focus-bg;
+    }
+}

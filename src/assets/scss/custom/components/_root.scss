@@ -1,0 +1,159 @@
+// 
+// root.scss
+//
+
+@mixin color-mode($mode: light, $root: false) {
+    @if $color-mode-type =="media-query" {
+        @if $root ==true {
+            @media (prefers-color-scheme: $mode) {
+                :root {
+                    @content;
+                }
+            }
+        }
+
+        @else {
+            @media (prefers-color-scheme: $mode) {
+                @content;
+            }
+        }
+    }
+
+    @else {
+        [data-bs-theme="#{$mode}"] {
+            @content;
+        }
+    }
+}
+
+//theme-light
+:root,
+[data-bs-theme="light"] {
+    --#{$prefix}header-bg: #{$white};
+    --#{$prefix}header-item-color: #555b6d;
+    --#{$prefix}header-item-sub-color: #{$text-muted};
+    --#{$prefix}sidebar-bg: #{$white};
+    // Topbar User
+    --#{$prefix}topbar-user-bg: #{$gray-100};
+
+    --#{$prefix}navbar-brand-box-bg: #ffff;
+
+    // Horizontal nav
+    --#{$prefix}topnav-bg: #{$white};
+    --#{$prefix}topnav-item-color: #{darken($gray-600, 10%)};
+    --#{$prefix}topnav-item-color-active: var(--#{$prefix}primary);
+
+    // twocolumn menu
+    --#{$prefix}twocolumn-menu-iconview-bg: #{$white};
+    --#{$prefix}twocolumn-menu-bg: #{$white};
+
+    --#{$prefix}alert-border-color: #{$gray-200};
+    --#{$prefix}list-group-color: #{$gray-700};
+
+    --#{$prefix}toast-background-color: #{$white};
+    --#{$prefix}toast-border-color: #{$gray-300};
+
+    --#{$prefix}input-bg: #{$white};
+    --#{$prefix}input-focus-border-color: #{$blue-200};
+    --#{$prefix}input-border-color: #{$gray-400};
+
+    --#{$prefix}menu-item-color: #7b8190;
+
+    --#{$prefix}boxed-body-bg: #eaedf2;
+
+    --#{$prefix}sidebar-bg: #ffffff;
+    --#{$prefix}sidebar-border-color: #e9ebef;
+    --#{$prefix}sidebar-menu-item-color: #7b8190;
+    --#{$prefix}sidebar-menu-sub-item-color: #7b8190;
+    --#{$prefix}sidebar-menu-item-icon-color: #7b8190;
+    --#{$prefix}sidebar-menu-item-hover-color: #383c40;
+    --#{$prefix}sidebar-menu-item-active-color: #038edc;
+    --#{$prefix}sidebar-menu-sub-item-active-color: #383c40;
+    --#{$prefix}sidebar-menu-item-active-bg-color: #f2f3fe;
+
+    [data-sidebar="dark"] {
+        --#{$prefix}sidebar-dark-bg: #032d46; //2c313a
+        --#{$prefix}sidebar-dark-menu-item-color: #7e93a0;
+        --#{$prefix}sidebar-dark-menu-sub-item-color: #718896;
+        --#{$prefix}sidebar-dark-menu-item-icon-color: #637c8c;
+        --#{$prefix}sidebar-dark-menu-item-hover-color: #ffffff;
+        --#{$prefix}sidebar-dark-menu-item-active-color: #ffffff;
+        --#{$prefix}sidebar-dark-menu-item-active-bg-color: #043655;
+    }
+
+
+}
+
+[data-topbar="dark"] {
+    --#{$prefix}header-dark-bg: #121212;
+    --#{$prefix}header-dark-item-color: #e9ecef;
+}
+
+//theme dark
+@if $enable-dark-mode {
+    @include color-mode(dark, true) {
+        --#{$prefix}light: #{$light-dark};
+        --#{$prefix}light-rgb: #{to-rgb($light-dark)};
+        --#{$prefix}dark: #{$light-dark};
+        --#{$prefix}dark-rgb: #{to-rgb($light-dark)};
+
+        --#{$prefix}header-item-color: #e9ecef;
+        --#{$prefix}header-bg: #032d46;
+
+        --#{$prefix}navbar-brand-box-bg: #032d46;
+
+        --#{$prefix}topnav-bg: #03314d;
+
+        --#{$prefix}boxed-body-bg: #212124;
+
+        &[data-sidebar="light"] {
+            --#{$prefix}sidebar-bg: #ffffff;
+            --#{$prefix}sidebar-border-color: #e9ebef;
+            --#{$prefix}sidebar-menu-item-color: #7b8190;
+            --#{$prefix}sidebar-menu-sub-item-color: #7b8190;
+            --#{$prefix}sidebar-menu-item-icon-color: #7b8190;
+            --#{$prefix}sidebar-menu-item-hover-color: #383c40;
+            --#{$prefix}sidebar-menu-item-active-color: #038edc;
+            --#{$prefix}sidebar-menu-sub-item-active-color: #383c40;
+            --#{$prefix}sidebar-menu-item-active-bg-color: #f2f3fe;
+
+        }
+
+        --#{$prefix}sidebar-bg: #032d46; //2c313a
+        --#{$prefix}sidebar-menu-item-color: #7e93a0;
+        --#{$prefix}sidebar-menu-sub-item-color: #718896;
+        --#{$prefix}sidebar-menu-item-icon-color: #637c8c;
+        --#{$prefix}sidebar-menu-item-hover-color: #ffffff;
+        --#{$prefix}sidebar-menu-item-active-color: #ffffff;
+        --#{$prefix}sidebar-menu-sub-item-active-color: #ffffff;
+        --#{$prefix}sidebar-menu-item-active-bg-color: #043655;
+
+        &[data-sidebar="dark"] {
+            --#{$prefix}sidebar-dark-bg: #032d46; //2c313a
+            --#{$prefix}sidebar-dark-menu-item-color: #7e93a0;
+            --#{$prefix}sidebar-dark-menu-sub-item-color: #718896;
+            --#{$prefix}sidebar-dark-menu-item-icon-color: #637c8c;
+            --#{$prefix}sidebar-dark-menu-item-hover-color: #ffffff;
+            --#{$prefix}sidebar-dark-menu-item-active-color: #ffffff;
+            --#{$prefix}sidebar-dark-menu-item-active-bg-color: #043655;
+        }
+
+        .table-light {
+            --bs-table-color: #{$white};
+            --bs-table-bg: var(--#{$prefix}light);
+            --bs-table-border-color: var(--#{$prefix}border-color);
+            --bs-table-striped-bg: var(--#{$prefix}light);
+            --bs-table-striped-color: #{lighten($light-dark, 100%)};
+            --bs-table-active-bg: var(--#{$prefix}light);
+            --bs-table-active-color: #{lighten($light-dark, 100%)};
+            --bs-table-hover-bg: var(--#{$prefix}light);
+            --bs-table-hover-color: #{lighten($light-dark, 100%)};
+        }
+
+        &[data-topbar="light"] {
+            --#{$prefix}header-bg: #{$white};
+            --#{$prefix}header-item-color: #555b6d;
+            --#{$prefix}header-item-sub-color: #8795ab;
+        }
+    }
+}

@@ -1,0 +1,123 @@
+// 
+// _buttons.scss
+// 
+
+button,
+a {
+    outline: none !important;
+}
+
+.btn-warning {
+    color: $white !important;
+}
+
+.btn-light {
+    background-color: var(--#{$prefix}light);
+    color: var(--#{$prefix}body-color);
+    border-color: var(--#{$prefix}light);
+
+    &:active,
+    &:hover,
+    &:focus {
+        border-color: var(--#{$prefix}light) !important;
+        background-color: var(--#{$prefix}light) !important;
+        color: var(--#{$prefix}body-color) !important;
+    }
+}
+
+//
+// Soft Buttons
+// 
+
+@mixin button-variant-soft($bg) {
+    color: $bg;
+    background-color: rgba($bg, 0.1);
+    border-color: transparent;
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: $white;
+        background-color: $bg;
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 $btn-focus-width rgba($bg, 0.5);
+    }
+}
+
+@each $color,
+$value in $theme-colors {
+    .btn-#{$color}-subtle {
+        @include button-variant-soft($value);
+    }
+}
+
+// Soft Light button
+.btn-light-subtle {
+    color: var(--#{$variable-prefix}gray-600);
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: var(--#{$variable-prefix}gray-800);
+    }
+}
+
+.btn-dark-subtle {
+    color: var(--#{$variable-prefix}gray-600);
+
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: var(--#{$variable-prefix}gray-300);
+        border: transparent;
+    }
+}
+
+.btn-secondary-subtle {
+
+    &:hover,
+    &:focus,
+    &:active {
+        border-color: transparent;
+    }
+}
+
+.btn-outline-light {
+    border-color: var(--#{$prefix}light);
+    color: var(--#{$prefix}body-color);
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: var(--#{$prefix}light) !important;
+        color: var(--#{$prefix}body-color) !important;
+        border-color: var(--#{$prefix}light) !important;
+    }
+}
+
+//
+// Split Dropdown buttons
+// 
+
+@mixin button-variant-split($bg) {
+    background-color: lighten($bg, 5%);
+    border: none;
+}
+
+@each $color,
+$value in $theme-colors {
+    .btn-#{$color}.dropdown-toggle-split {
+        @include button-variant-split($value);
+    }
+}
+
+.btn-light.dropdown-toggle-split {
+    background-color: var(--#{$prefix}border-color);
+}
+
+// Rounded Buttons
+.btn-rounded {
+    border-radius: 30px;
+}

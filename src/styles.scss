@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+/* Importing Bootstrap SCSS file. */
+// @import '~bootstrap/scss/bootstrap';
+
+.cdksteppercontent {
+    .content {
+        margin-top: 0px !important;
+    }
+}
+
+.NgxEditor__Wrapper {
+    border: 1px solid #eff0f2 !important;
+    border-radius: 4px;
+
+    .NgxEditor__MenuBar {
+        border-bottom: 1px solid #eff0f2 !important;
+    }
+}
+
+[data-bs-theme="dark"] {
+    .ng-select .ng-select-container {
+        background-color: #032d46 !important;
+    }
+
+    .NgxEditor {
+        background-color: #032d46 !important;
+        border-color: #043a5a !important;
+    }
+
+    .NgxEditor__Wrapper .NgxEditor__MenuBar {
+        background-color: rgba(var(--bs-light), .75) !important;
+        border: 1px solid var(--bs-border-color) !important;
+    }
+
+    .NgxEditor__Wrapper {
+        border: 1px solid #495057 !important;
+    }
+
+}
+
+
+.NgxEditor {
+    background: var(--bs-white) !important;
+    border-color: var(--bs-border-color) !important;
+}

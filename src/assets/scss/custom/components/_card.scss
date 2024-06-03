@@ -1,0 +1,49 @@
+// 
+// _card.scss
+// 
+
+.card {
+    margin-bottom: $grid-gutter-width;
+
+    .card-header.bg-light {
+        background-color: var(--#{$prefix}light) !important;
+    }
+
+    .card-header.bg-dark {
+        background-color: var(--#{$prefix}dark) !important;
+    }
+
+    &.bg-dark {
+        background-color: #1E1E1E;
+    }
+}
+
+.card-drop {
+    color: $body-color;
+}
+
+.card-title {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.card-title-desc {
+    color: $card-title-desc;
+    margin-bottom: 24px;
+}
+
+.card-h-100 {
+    height: calc(100% - #{$grid-gutter-width});
+}
+
+@mixin card-header-variant($bg) {
+    background-color: lighten($bg, 5%) !important;
+    border-bottom: none
+}
+
+@each $color,
+$value in $theme-colors {
+    .card-header.bg-#{$color} {
+        @include card-header-variant($value);
+    }
+}

@@ -1,0 +1,33 @@
+// Mixins para botones, para reutilización y consistencia
+@mixin button-style-instapago($bgColor, $bgColorHover) {
+  background-color: $bgColor;
+  border: none;
+  color: white;
+  transition: background-color 0.3s ease;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $bgColorHover !important;
+    color: white !important;
+  }
+}
+
+// Clases de botón con documentación
+// Botón primario Instapago
+// Utiliza el color púrpura-azul de Instapago como fondo y oscurece en hover/focus/active
+.btn-primary-instapago {
+  @include button-style-instapago($instapago-purpleblue, $instapago-purpleblue-dark);
+}
+
+// Enlace estilo botón
+// Se ve como un enlace pero se alinea con el diseño del botón Instapago
+.btn-link {
+  color: $instapago-purpleblue;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $instapago-purpleblue-dark;
+  }
+}

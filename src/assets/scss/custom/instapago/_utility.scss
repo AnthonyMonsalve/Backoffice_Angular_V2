@@ -1,0 +1,35 @@
+// Colores de fondo
+.bg-primary-instapago {
+  background-color: $instapago-purpleblue !important; // Valor definitivo elegido
+}
+
+.bg-primary-instapago-dark {
+  background-color: $instapago-purpleblue-dark !important;
+}
+
+.bg-secondary-instapago {
+  background-color: #217E87 !important; // Valor hexadecimal directo, considera usar una variable
+}
+
+.bg-orange-instapago {
+  background-color: $instapago-orange !important;
+}
+
+// Color de texto
+.text-info-purpleblue {
+  color: $instapago-purpleblue !important;
+}
+
+.text-warning-instapago {
+  color: $instapago-yellow !important;
+}
+
+.avatar-instapago-color {
+  background-color: rgba($instapago-purpleblue, 0.30) !important; // Aunque modifica el fondo, está más relacionado con la configuración de color del texto/avatar
+  color: $instapago-purpleblue !important;
+}
+
+// Color de borde
+.border-instapago {
+  border-color: $instapago-purpleblue !important;
+}

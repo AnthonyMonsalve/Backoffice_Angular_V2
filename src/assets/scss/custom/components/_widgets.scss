@@ -1,0 +1,33 @@
+// 
+// _widgets.scss
+// 
+
+.main-chart {
+    .chart-border-left {
+        border-left: 1.4px solid var(--#{$prefix}border-color);
+        padding: 2px 20px;
+
+        @media (max-width: 575.98px) {
+            border: 0;
+        }
+
+        &:last-child {
+            margin-right: 0px;
+        }
+    }
+}
+
+.widget-chat{
+    height: 300px !important;
+}
+
+.widget-chat-list{
+    height: 373px !important;
+}
+
+// map widget
+.map-widget{
+    @media (min-width: 992px) {
+        border-right: 1px solid var(--#{$prefix}border-color);
+    }
+}

@@ -1,0 +1,195 @@
+/* =============
+   General
+============= */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--#{$prefix}heading-color);
+}
+
+
+label {
+    font-weight: 500;
+    margin-bottom: $form-label-margin-bottom;
+}
+
+// Font weight help class
+
+.ff-primary {
+    font-family: $font-family-base;
+}
+
+.ff-secondary {
+    font-family: $font-family-secondary;
+}
+
+// Small
+
+.small,
+small {
+    font-weight: 400;
+}
+
+// blockquote
+
+.blockquote {
+    padding: 10px 20px;
+    border-left: 4px solid var(--#{$prefix}border-color);
+}
+
+.blockquote-reverse {
+    border-left: 0;
+    border-right: 4px solid var(--#{$prefix}border-color);
+    text-align: right;
+}
+
+
+// container
+
+.container,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
+    @media (min-width: 1200px) {
+        max-width: 1140px;
+    }
+}
+
+// row
+
+.row {
+    >* {
+        position: relative;
+    }
+}
+
+// Icon size
+.icon {
+    position: relative;
+    top: -2px;
+}
+
+.icon-xxs {
+    height: 14px !important;
+    width: 14px !important;
+}
+
+.icon-xs {
+    height: 16px !important;
+    width: 16px !important;
+}
+
+.icon-sm {
+    height: 20px !important;
+    width: 20px !important;
+}
+
+.icon-lg {
+    height: 32px !important;
+    width: 32px !important;
+}
+
+.icon-xl {
+    height: 46px !important;
+    width: 46px !important;
+}
+
+.icon-xxl {
+    height: 62px !important;
+    width: 62px !important;
+}
+
+.sw-3 {
+    stroke-width: 3px;
+}
+
+.sw-1_5 {
+    stroke-width: 1.5px;
+}
+
+.sw-1 {
+    stroke-width: 1px;
+}
+
+// icon color
+@each $color,
+$value in $theme-colors {
+    .icon-dual-#{$color} {
+        color: $value;
+        fill: rgba($value, 0.16);
+    }
+
+    .icon-fill-#{$color} {
+        fill: $value !important;
+    }
+}
+
+
+// Custom Blockquote
+
+.custom-blockquote {
+    &.blockquote {
+        padding: 20px 20px 20px 30px;
+        border-left: 3px solid;
+        font-size: 16px;
+    }
+}
+
+@each $color,
+$value in $theme-colors {
+    .custom-blockquote {
+        &.blockquote {
+            &.blockquote-#{$color} {
+                color: #{$value};
+                border-color: #{$value};
+                background-color: rgba($value, 0.15);
+
+                .blockquote-footer {
+                    color: #{$value};
+                }
+            }
+
+            &.blockquote-outline-#{$color} {
+                border: 1px solid #{$value};
+                border-left: 4px solid #{$value};
+
+                .blockquote-footer {
+                    color: #{$value};
+                }
+            }
+        }
+    }
+}
+
+.custom-blockquote {
+    &.blockquote {
+        &.blockquote-outline-dark {
+            border-color: var(--#{$prefix}dark);
+        }
+
+        p.text-dark {
+            color: var(--#{$prefix}body-color) !important;
+        }
+    }
+}

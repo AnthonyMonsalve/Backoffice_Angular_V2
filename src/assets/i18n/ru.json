@@ -1,0 +1,264 @@
+{
+  "HEADER": {
+    "SEARCH": "Поиск...",
+    "MEGA_MENU": "Мега Меню",
+    "NOTIFICATIONS": {
+      "TITLE": "Уведомления",
+      "NEW": "Новый",
+      "EARLIER": "Ранее",
+      "VIEW_ALL": "Посмотреть все",
+      "LOAD_MORE": "Посмотреть больше..",
+      "FIRST": {
+        "TITLE": "Ваш заказ размещен",
+        "TEXT": "Если несколько языков объединяют грамматику",
+        "TIME": "3 минуты назад"
+      },
+      "SECOND": {
+        "TITLE": "Джеймс Лемир",
+        "TEXT": "Это будет похоже на упрощенный английский.",
+        "TIME": "1 час назад"
+      },
+      "THIRD": {
+        "TITLE": "Ваш товар отправлен",
+        "TEXT": "Если несколько языков объединяют грамматику",
+        "TIME": "3 минуты назад"
+      },
+      "FOUR": {
+        "TITLE": "Салена Лэйфилд",
+        "TEXT": "Как скептически настроенный мой кембриджский друг с Запада.",
+        "TIME": "10 часов назад"
+      }
+    },
+    "REPORTS": {
+      "TEXT": "Об этом сообщает «Инстапаго».",
+      "LIST": {
+        "PAGE": "Рапорт о продаже"
+      }
+    },
+    "DASHBOARDS": {
+      "TEXT": "Дашборды",
+      "LIST": {
+        "SALES": "Продажи",
+        "ANALYTICS": "Аналитика"
+      }
+    },
+    "APPS": {
+      "TEXT": "Программы"
+    },
+    "COMPONENTS": {
+      "TEXT": "Составные части"
+    },
+    "EXTRAPAGES": {
+      "TEXT": "Дополнительные страницы"
+    },
+    "AUTHENTICATION": {
+      "TEXT": "Аутентификация",
+      "BADGE": "девять",
+      "LIST": {
+        "BASIC": "Базовый",
+        "COVER": "Обложка",
+        "SIGNIN": "Войти",
+        "SIGNUP": "Зарегистрироваться",
+        "SIGNOUT": "Выход",
+        "LOCKSCREEN": "Экран блокировки",
+        "FORGOTPASSWORD": "Забыли пароль",
+        "RESETPWD": "Сброс пароля",
+        "EMAILVERIFICATION": "подтверждение адреса электронной почты",
+        "TWOSTEPVERIFICATION": "Двухэтапная аутентификация",
+        "THANKYOU": "Спасибо"
+      }
+    }
+  },
+  "TOPBAR": {
+    "COMPONENT": {
+      "TEXT": "Составные части",
+      "LIST": {
+        "ALERTS": "Оповещения",
+        "BUTTONS": "Кнопки",
+        "CARDS": "Карты",
+        "DROPDOWNS": "Выпадающие списки",
+        "LIGHTBOX": "Лайтбокс",
+        "MODALS": "Модальные окна",
+        "RANGESLIDER": "Ползунок диапазона",
+        "PROGRESSBARS": "Индикаторы прогресса",
+        "SWEETALERTS": "Сладкое оповещение",
+        "TABS&ACCODIONS": "Табы и аккордеоны",
+        "TYPOGRAPHY": "Типография",
+        "GENERAL": "Общий",
+        "RATING": "Рейтинг",
+        "NOTIFICATIONS": "Уведомления"
+      }
+    },
+    "CATEGORIES": {
+      "TEXT": "Категории",
+      "LIST": {
+        "COMPUTERSACCESSORIES": "Компьютеры и аксессуары",
+        "LAPTOPSTABLETS": "Ноутбуки и планшеты",
+        "DESKTOPCOMPUTERS": "Настольные компьютеры",
+        "NETWORKINGPRODUCTS": "Сетевые продукты (NAS)"
+      }
+    }
+  },
+  "MENUITEMS": {
+    "DASHBOARDS": {
+      "TEXT": "ПАНЕЛИ"
+    },
+    "SALES": {
+      "TEXT": "Продажи",
+      "BADGE": "пять"
+    },
+    "ANALYTICS": {
+      "TEXT": "Аналитика"
+    },
+    "APPLICATIONS": {
+      "TEXT": "ПРИЛОЖЕНИЯ"
+    },
+    "CALENDAR": {
+      "TEXT": "Календарь"
+    },
+    "CHAT": {
+      "TEXT": "Чат",
+      "BADGE": "Горячий"
+    },
+    "CONTACTS": {
+      "TEXT": "Контакты",
+      "LIST": {
+        "USERGRID": "Сетка пользователя",
+        "USERLIST": "Список пользователей",
+        "SETTINGS": "Пользовательские настройки"
+      }
+    },
+    "GALLERY": {
+      "TEXT": "Галерея"
+    },
+    "PROJECTS": {
+      "TEXT": "Проекты",
+      "LIST": {
+        "PROJECTSGRID": "Сетка проекта",
+        "PROJECTSLIST": "Список проектов",
+        "PROJECTSOVERVIEW": "Обзор проекта",
+        "CREATENEW": "Создать новое"
+      }
+    },
+    "PAGES": {
+      "TEXT": "СТРАНИЦЫ"
+    },
+    "APPS": {
+      "TEXT": "Программы",
+      "LIST": {
+        "INVOICEDETAIL": "Детали счета",
+        "CONTACTS": "Контакты",
+        "USERGRID": "Сетка пользователя",
+        "USERLIST": "Список пользователей",
+        "PROFILE": "Профиль"
+      }
+    },
+    "AUTHENTICATION": {
+      "TEXT": "Аутентификация",
+      "BADGE": "девять",
+      "LIST": {
+        "SIGNIN": "Войти",
+        "BASIC": "Базовый",
+        "COVER": "Обложка",
+        "SIGNUP": "Зарегистрироваться",
+        "SIGNOUT": "Выход",
+        "LOCKSCREEN": "Экран блокировки",
+        "FORGOTPASSWORD": "Забыли пароль",
+        "RESETPWD": "Сброс пароля",
+        "EMAILVERIFICATION": "подтверждение адреса электронной почты",
+        "TWOSTEPVERIFICATION": "Двухэтапная аутентификация",
+        "THANKYOU": "Спасибо"
+      }
+    },
+    "UTILITY": {
+      "TEXT": "Полезность",
+      "LIST": {
+        "STARTER": "Стартовая страница",
+        "PROFILE": "Профиль",
+        "MAINTENANCE": "Обслуживание",
+        "COMINGSOON": "Скоро будет",
+        "FAQS": "FAQs"
+      }
+    },
+    "COMPONENTS": {
+      "TEXT": "СОСТАВНЫЕ ЧАСТИ"
+    },
+    "EXTENDED": {
+      "TEXT": "Расширенный интерфейс",
+      "LIST": {
+        "LIGHTBOX": "Лайтбокс",
+        "RANGESLIDER": "Ползунок диапазона",
+        "SWEETALERT": "SweetAlert 2",
+        "RATING": "Рейтинг",
+        "NOTIFICATION": "Уведомления",
+        "SWIPERSLIDER": "Ползунок Swiper"
+      }
+    },
+    "WIDGETS": {
+      "TEXT": "Виджеты"
+    },
+    "FORMS": {
+      "TEXT": "Формы",
+      "LIST": {
+        "ELEMENTS": "Основные элементы",
+        "VALIDATION": "Проверка",
+        "ADVANCED": "Расширенный плагин",
+        "EDITOR": "Редакторы",
+        "FILEUPLOAD": "Файл загружен",
+        "WIZARD": "волшебник",
+        "MASK": "Маска"
+      }
+    },
+    "TABLES": {
+      "TEXT": "Столы",
+      "LIST": {
+        "BASIC": "Bootstrap Basic",
+        "ADVANCEDTABLES": "Таблицы заранее"
+      }
+    },
+    "APEXCHARTS": {
+      "TEXT": "Графики Apex",
+      "LIST": {
+        "LINE": "Линия",
+        "AREA": "Площадь",
+        "COLUMN": "Столбец",
+        "BAR": "Бар",
+        "MIXED": "Смешанный",
+        "TIMELINE": "График",
+        "CANDLESTICK": "Подсвечник",
+        "BOXPLOT": "Boxplot",
+        "BUBBLE": "Пузырь",
+        "SCATTER": "Разброс",
+        "HEATMAP": "Тепловая карта",
+        "TREEMAP": "Древовидная карта",
+        "PIE": "Пирог",
+        "RADIALBAR": "Радиальная полоса",
+        "RADAR": "Радар",
+        "POLARAREA": "Полярная область"
+      }
+    },
+    "ICONS": {
+      "TEXT": "Иконки",
+      "LIST": {
+        "UNICONS": "Unicons",
+        "FEATHERICONS": "Перо иконы",
+        "BOXICONS": "Боксиконы",
+        "MATERIALDESIGN": "Материальный дизайн",
+        "FONTAWESOME": "Font Awesome"
+      }
+    },
+    "MULTILEVEL": {
+      "TEXT": "Многоуровневый",
+      "LIST": {
+        "LEVEL1": {
+          "1": "Уровень 1.1",
+          "2": "Уровень 1.2",
+          "LEVEL2": {
+            "1": "Уровень 2.1",
+            "2": "Уровень 2.2"
+          }
+        }
+      }
+    }
+  }
+}

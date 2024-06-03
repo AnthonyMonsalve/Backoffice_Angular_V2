@@ -1,0 +1,66 @@
+// 
+// _table.scss
+// 
+@each $color,
+$value in $theme-colors {
+  .table-#{$color} {
+    th {
+      color: $body-color !important;
+    }
+  }
+}
+
+
+.table {
+  th {
+    font-weight: $table-th-font-weight;
+    color: var(--#{$prefix}body-color);
+  }
+}
+
+
+.table-nowrap {
+
+  th,
+  td {
+    white-space: nowrap;
+  }
+}
+
+.table-responsive {
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+
+  &::-webkit-scrollbar:vertical {
+    width: 12px;
+  }
+
+  &::-webkit-scrollbar:horizontal {
+    height: 9px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba($dark, 0.2);
+    border-radius: 10px;
+    border: 2px solid $white;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: $white;
+  }
+}
+
+.table-light {
+  --bs-table-bg: var(--#{$prefix}light);
+  border-color: var(--#{$prefix}border-color);
+}
+
+thead {
+  &.table-light {
+    th {
+      color: var(--#{$prefix}body-color) !important;
+    }
+  }
+}

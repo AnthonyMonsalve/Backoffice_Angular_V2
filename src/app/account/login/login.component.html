@@ -47,7 +47,13 @@
                                     <span>Password is required</span>}
                                 </div>}
                             </div>
-
+                            @if(status === 'failed'){
+                            <div>
+                                <p class="text-center">
+                                    Credentials are invalid
+                                </p>
+                            </div>
+                            }
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="remember-check">
                                 <label class="form-check-label" for="remember-check">

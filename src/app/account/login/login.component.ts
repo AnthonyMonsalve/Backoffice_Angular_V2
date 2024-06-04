@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   returnUrl!: string;
   layout_mode!: string;
   fieldTextType!: boolean;
+  status: 'success' | 'failed' | 'init' = 'init';
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -79,11 +80,14 @@ export class LoginComponent implements OnInit {
     this.authenticationService
       .login(this.f.email.value, this.f.password.value)
       .subscribe({
-        next: (response) => {
-          console.log(response);
+        next: (data) => {
+          this.status = 'success';
+          this.router.navigate(['/']);
+          console.log(data);
         },
         error: (error) => {
           console.log(error);
+          this.status = 'failed';
         },
       });
   }

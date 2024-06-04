@@ -5,9 +5,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
 
-import { environment } from '../../../environments/environment';
 import { AuthenticationService } from '../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '../../core/services/authfake.service';
 import { LAYOUT_MODE } from '../../shared/layouts/layouts.model';
@@ -76,30 +74,18 @@ export class LoginComponent implements OnInit {
     // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
-    } else {
-      if (environment.defaultauth === 'firebase') {
-        this.authenticationService
-          .login(this.f.email.value, this.f.password.value)
-          .then((res: any) => {
-            this.router.navigate(['/']);
-          })
-          .catch((error) => {
-            this.error = error ? error : '';
-          });
-      } else {
-        this.authFackservice
-          .login(this.f.email.value, this.f.password.value)
-          .pipe(first())
-          .subscribe(
-            (data) => {
-              this.router.navigate(['/']);
-            },
-            (error) => {
-              this.error = error ? error : '';
-            }
-          );
-      }
     }
+
+    this.authenticationService
+      .login(this.f.email.value, this.f.password.value)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
 
   /**

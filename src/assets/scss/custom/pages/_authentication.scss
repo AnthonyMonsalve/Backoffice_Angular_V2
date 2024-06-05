@@ -14,7 +14,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url("../../../images/auth-bg.jpg");
+    background-image: url("../../../images/auth-bg.png");
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,7 +37,7 @@
     }
 
     .bg-overlay {
-        opacity: 0.8;
+        opacity: 0;
     }
 
     .auth-cover-card {
@@ -47,7 +47,7 @@
         }
 
         .bg-overlay {
-            opacity: 0.6;
+            opacity: 0;
         }
 
         .form-floating {

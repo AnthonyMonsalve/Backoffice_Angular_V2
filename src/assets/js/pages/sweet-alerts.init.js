@@ -7,7 +7,7 @@ File: Sweetalert Js File
 */
 
 //Basic
-document.getElementById("sa-basic").addEventListener("click", function() {
+document.getElementById("sa-basic").addEventListener("click", function () {
     Swal.fire(
         {
             title: 'Any fool can use a computer',
@@ -17,7 +17,7 @@ document.getElementById("sa-basic").addEventListener("click", function() {
 });
 
 //A title with a text under
-document.getElementById("sa-title").addEventListener("click", function() {
+document.getElementById("sa-title").addEventListener("click", function () {
     Swal.fire(
         {
             title: "The Internet?",
@@ -29,7 +29,7 @@ document.getElementById("sa-title").addEventListener("click", function() {
 });
 
 //Success Message
-document.getElementById("sa-success").addEventListener("click", function() {
+document.getElementById("sa-success").addEventListener("click", function () {
     Swal.fire(
         {
             title: 'Good job!',
@@ -43,7 +43,7 @@ document.getElementById("sa-success").addEventListener("click", function() {
 });
 
 //Warning Message
-document.getElementById("sa-warning").addEventListener("click", function() {
+document.getElementById("sa-warning").addEventListener("click", function () {
     Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -52,16 +52,16 @@ document.getElementById("sa-warning").addEventListener("click", function() {
         confirmButtonColor: "#51d28c",
         cancelButtonColor: "#f34e4e",
         confirmButtonText: "Yes, delete it!"
-      }).then(function (result) {
+    }).then(function (result) {
         if (result.value) {
-          Swal.fire("Deleted!", "Your file has been deleted.", "success"
-          );
+            Swal.fire("Deleted!", "Your file has been deleted.", "success"
+            );
         }
     });
 });
 
 //Parameter
-document.getElementById("sa-params").addEventListener("click", function() {
+document.getElementById("sa-params").addEventListener("click", function () {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -75,28 +75,28 @@ document.getElementById("sa-params").addEventListener("click", function() {
     }).then(function (result) {
         if (result.value) {
             Swal.fire({
-              title: 'Deleted!',
-              text: 'Your file has been deleted.',
-              icon: 'success',
-              confirmButtonColor: '#038edc',
+                title: 'Deleted!',
+                text: 'Your file has been deleted.',
+                icon: 'success',
+                confirmButtonColor: '#038edc',
             })
-          } else if (
+        } else if (
             // Read more about handling dismissals
             result.dismiss === Swal.DismissReason.cancel
-          ) {
+        ) {
             Swal.fire({
-              title: 'Cancelled',
-              text: 'Your imaginary file is safe :)',
-              icon: 'error',
-              confirmButtonColor: '#038edc',
+                title: 'Cancelled',
+                text: 'Your imaginary file is safe :)',
+                icon: 'error',
+                confirmButtonColor: '#038edc',
             })
-          }
+        }
     });
 });
 
 
 //Custom Image
-document.getElementById("sa-image").addEventListener("click", function() {
+document.getElementById("sa-image").addEventListener("click", function () {
     Swal.fire({
         title: 'Sweet!',
         text: 'Modal with a custom image.',
@@ -108,28 +108,28 @@ document.getElementById("sa-image").addEventListener("click", function() {
 });
 
 //Auto Close Timer
-document.getElementById("sa-close").addEventListener("click", function() {
+document.getElementById("sa-close").addEventListener("click", function () {
     var timerInterval;
     Swal.fire({
-    title: 'Auto close alert!',
-    html: 'I will close in <strong></strong> seconds.',
-    timer: 2000,
-    timerProgressBar: true,
-    didOpen:function () {
-        Swal.showLoading()
-        timerInterval = setInterval(function() {
-        var content = Swal.getHtmlContainer()
-        if (content) {
-            var b = content.querySelector('b')
-            if (b) {
-                b.textContent = Swal.getTimerLeft()
-            }
+        title: 'Auto close alert!',
+        html: 'I will close in <strong></strong> seconds.',
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: function () {
+            Swal.showLoading()
+            timerInterval = setInterval(function () {
+                var content = Swal.getHtmlContainer()
+                if (content) {
+                    var b = content.querySelector('b')
+                    if (b) {
+                        b.textContent = Swal.getTimerLeft()
+                    }
+                }
+            }, 100)
+        },
+        onClose: function () {
+            clearInterval(timerInterval)
         }
-        }, 100)
-    },
-    onClose: function () {
-        clearInterval(timerInterval)
-    }
     }).then(function (result) {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
@@ -139,13 +139,13 @@ document.getElementById("sa-close").addEventListener("click", function() {
 });
 
 //custom html alert
-document.getElementById("custom-html-alert").addEventListener("click", function() {
+document.getElementById("custom-html-alert").addEventListener("click", function () {
     Swal.fire({
         title: '<i>HTML</i> <u>example</u>',
         icon: 'info',
         html: 'You can use <b>bold text</b>, ' +
-        '<a href="//Pichforest.in/">links</a> ' +
-        'and other HTML tags',
+            '<a href="//Pichforest.in/">links</a> ' +
+            'and other HTML tags',
         showCloseButton: true,
         showCancelButton: true,
         confirmButtonClass: 'btn btn-success',
@@ -158,7 +158,7 @@ document.getElementById("custom-html-alert").addEventListener("click", function(
 });
 
 //position
-document.getElementById("sa-position").addEventListener("click", function() {
+document.getElementById("sa-position").addEventListener("click", function () {
     Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -169,18 +169,18 @@ document.getElementById("sa-position").addEventListener("click", function() {
 });
 
 //Custom width padding
-document.getElementById("custom-padding-width-alert").addEventListener("click", function() {
+document.getElementById("custom-padding-width-alert").addEventListener("click", function () {
     Swal.fire({
         title: 'Custom width, padding, background.',
         width: 600,
         padding: 100,
         confirmButtonColor: "#038edc",
-        background: '#fff url(assets/images/auth-bg.jpg)'
+        background: '#fff url(assets/images/auth-bg.png)'
     })
 });
 
 //Ajax
-document.getElementById("ajax-alert").addEventListener("click", function() {
+document.getElementById("ajax-alert").addEventListener("click", function () {
     Swal.fire({
         title: 'Submit email to run ajax request',
         input: 'email',

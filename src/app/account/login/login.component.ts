@@ -6,6 +6,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { RequestStatus } from '../../core/models/request-status.model';
 import { AuthenticationService } from '../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '../../core/services/authfake.service';
 import { LAYOUT_MODE } from '../../shared/layouts/layouts.model';
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
   returnUrl!: string;
   layout_mode!: string;
   fieldTextType!: boolean;
-  status: 'success' | 'failed' | 'init' = 'init';
+  status: RequestStatus = 'init';
 
   constructor(
     private formBuilder: UntypedFormBuilder,

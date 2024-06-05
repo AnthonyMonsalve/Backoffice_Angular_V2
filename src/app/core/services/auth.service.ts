@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment.prod';
+import { tap } from 'rxjs/operators';
 import { getFirebaseBackend } from '../../authUtils';
-import { User } from '../models/auth.models';
+import { TokenService } from '../../core/services/token.service';
+import { ResponseLogin, User } from '../models/auth.models';
 
 @Injectable({ providedIn: 'root' })
 
@@ -14,20 +16,27 @@ export class AuthenticationService {
   user!: User;
   currentUserValue: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private tokenService: TokenService) {}
 
   /**
    * Performs the register
+   * @param firstName email
+   * @param lastName password
    * @param email email
    * @param password password
    */
-  register(email: string, password: string) {
-    return getFirebaseBackend()!
-      .registerUser(email, password)
-      .then((response: any) => {
-        const user = response;
-        return user;
-      });
+  register(
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  ) {
+    return this.http.post(`${this.apiUrl}/api/auth/register`, {
+      firstName,
+      lastName,
+      email,
+      password,
+    });
   }
 
   /**
@@ -36,10 +45,16 @@ export class AuthenticationService {
    * @param password password of user
    */
   login(email: string, password: string) {
-    return this.http.post(`${this.apiUrl}/api/auth/login`, {
-      email,
-      password,
-    });
+    return this.http
+      .post<ResponseLogin>(`${this.apiUrl}/api/auth/login`, {
+        email,
+        password,
+      })
+      .pipe(
+        tap((response) => {
+          this.tokenService.saveToken(response.token);
+        })
+      );
   }
 
   /**

@@ -12,7 +12,6 @@ import { RegisterComponent } from './register/register.component';
 import { ResetPasswordModule } from './reset-password/reset-password.module';
 import { SigninModule } from './signin/signin.module';
 import { SignoutModule } from './signout/signout.module';
-import { SignupModule } from './signup/signup.module';
 import { ThankyouModule } from './thankyou/thankyou.module';
 import { TwostepVerificationModule } from './twostep-verification/twostep-verification.module';
 
@@ -22,7 +21,6 @@ import { TwostepVerificationModule } from './twostep-verification/twostep-verifi
     CommonModule,
     AccountRoutingModule,
     SigninModule,
-    SignupModule,
     SignoutModule,
     LockScreenModule,
     ForgotPasswordModule,

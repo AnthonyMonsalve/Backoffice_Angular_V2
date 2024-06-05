@@ -233,7 +233,7 @@ var options = {
     type: 'image',
     opacity: 0.85,
     image: {
-      src: ['./assets/images/auth-bg.jpg', './assets/images/profile-bg.jpg', './assets/images/small/img-5.jpg', './assets/images/small/img-2.jpg'],
+      src: ['./assets/images/auth-bg.png', './assets/images/profile-bg.jpg', './assets/images/small/img-5.jpg', './assets/images/small/img-2.jpg'],
       width: 25,
       imagedHeight: 25
     },
@@ -288,7 +288,7 @@ var options = {
     text: "Monochrome Pie",
     style: {
       fontWeight: 500,
-    },  
+    },
   },
   dataLabels: {
     formatter: function (val, opts) {

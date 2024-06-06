@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
 
-import { environment } from '../../../../environments/environment';
+import { User } from '../../../core/models/auth.models';
 import { AuthenticationService } from '../../../core/services/auth.service';
-import { AuthfakeauthenticationService } from '../../../core/services/authfake.service';
+
 import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
@@ -25,6 +25,7 @@ export class TopbarComponent implements OnInit {
   cookieValue: any;
   countryName: any;
   valueset: any;
+  user: User | null = null;
 
   @Output() mobileMenuButtonClicked = new EventEmitter();
 
@@ -33,8 +34,7 @@ export class TopbarComponent implements OnInit {
     public languageService: LanguageService,
     public _cookiesService: CookieService,
     public translate: TranslateService,
-    private authService: AuthenticationService,
-    private authFackservice: AuthfakeauthenticationService
+    private authService: AuthenticationService
   ) {}
 
   /***
@@ -62,6 +62,10 @@ export class TopbarComponent implements OnInit {
     } else {
       this.flagvalue = val.map((element) => element.flag);
     }
+
+    this.authService.currentUser().subscribe((user: User | null) => {
+      this.user = user;
+    });
   }
 
   /***
@@ -93,11 +97,7 @@ export class TopbarComponent implements OnInit {
    * Logout the user
    */
   logout() {
-    if (environment.defaultauth === 'firebase') {
-      this.authService.logout();
-    } else {
-      this.authFackservice.logout();
-    }
-    this.router.navigate(['/account/login']);
+    this.authService.logout();
+    this.router.navigate(['/account/signout/basic']);
   }
 }

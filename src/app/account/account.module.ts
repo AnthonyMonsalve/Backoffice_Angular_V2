@@ -10,7 +10,6 @@ import { LockScreenModule } from './lock-screen/lock-screen.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ResetPasswordModule } from './reset-password/reset-password.module';
-import { SigninModule } from './signin/signin.module';
 import { SignoutModule } from './signout/signout.module';
 import { ThankyouModule } from './thankyou/thankyou.module';
 import { TwostepVerificationModule } from './twostep-verification/twostep-verification.module';
@@ -20,7 +19,6 @@ import { TwostepVerificationModule } from './twostep-verification/twostep-verifi
   imports: [
     CommonModule,
     AccountRoutingModule,
-    SigninModule,
     SignoutModule,
     LockScreenModule,
     ForgotPasswordModule,

@@ -61,7 +61,12 @@ export class AuthenticationService {
    * Returns the current user
    */
   public currentUser(): any {
-    return getFirebaseBackend()!.getAuthenticatedUser();
+    const token = this.tokenService.getToken();
+    return this.http.get<User>(`${this.apiUrl}/api/auth/info-user`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 
   /**
@@ -69,7 +74,7 @@ export class AuthenticationService {
    */
   logout() {
     // logout the user
-    return getFirebaseBackend()!.logout();
+    this.tokenService.removeToken();
   }
 
   /**

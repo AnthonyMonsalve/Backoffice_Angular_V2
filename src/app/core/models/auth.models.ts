@@ -6,6 +6,7 @@ export class User {
   lastName?: string;
   token?: string;
   email?: string;
+  role?: string;
 }
 
 export interface ResponseLogin {

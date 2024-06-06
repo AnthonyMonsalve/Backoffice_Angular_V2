@@ -66,6 +66,7 @@
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.6.13",
     "tslib": "^2.6.2",
+    "typescript-cookie": "^1.0.6",
     "zone.js": "^0.14.2"
   },
   "devDependencies": {

@@ -3,9 +3,8 @@ import { NavigationEnd, Router } from '@angular/router';
 
 import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
-import { environment } from '../../../../environments/environment';
+import { User } from '../../../core/models/auth.models';
 import { AuthenticationService } from '../../../core/services/auth.service';
-import { AuthfakeauthenticationService } from '../../../core/services/authfake.service';
 import { LanguageService } from '../../../core/services/language.service';
 
 import { LAYOUT_MODE } from '../layouts.model';
@@ -31,6 +30,7 @@ export class HorizontaltopbarComponent implements OnInit {
   cookieValue: any;
   countryName: any;
   valueset: any;
+  user: User | null = null;
 
   /**
    * Language Listing
@@ -51,8 +51,7 @@ export class HorizontaltopbarComponent implements OnInit {
     public translate: TranslateService,
     public languageService: LanguageService,
     public _cookiesService: CookieService,
-    private authService: AuthenticationService,
-    private authFackservice: AuthfakeauthenticationService
+    private authService: AuthenticationService
   ) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -88,6 +87,10 @@ export class HorizontaltopbarComponent implements OnInit {
     } else {
       this.flagvalue = val.map((element) => element.flag);
     }
+
+    this.authService.currentUser().subscribe((user: User | null) => {
+      this.user = user;
+    });
   }
 
   /**
@@ -246,11 +249,7 @@ export class HorizontaltopbarComponent implements OnInit {
    * Logout the user
    */
   logout() {
-    if (environment.defaultauth === 'firebase') {
-      this.authService.logout();
-    } else {
-      this.authFackservice.logout();
-    }
-    this.router.navigate(['/account/login']);
+    this.authService.logout();
+    this.router.navigate(['/account/signout/basic']);
   }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { getCookie, removeCookie, setCookie } from 'typescript-cookie';
 
 @Injectable({
   providedIn: 'root',
@@ -7,15 +8,18 @@ export class TokenService {
   constructor() {}
 
   saveToken(token: string) {
-    localStorage.setItem('token', token);
+    setCookie('token-backoffice', token, {
+      expires: 365,
+      path: '/',
+    });
   }
 
   getToken() {
-    const token = localStorage.getItem('token');
+    const token = getCookie('token-backoffice');
     return token;
   }
 
   removeToken() {
-    localStorage.removeItem('token');
+    removeCookie('token-backoffice');
   }
 }

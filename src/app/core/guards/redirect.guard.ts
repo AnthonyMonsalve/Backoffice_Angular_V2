@@ -8,19 +8,17 @@ import {
 import { TokenService } from '../services/token.service';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard {
+export class RedirectGuard {
   constructor(private router: Router, private tokenService: TokenService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const token = this.tokenService.getToken();
     if (token) {
-      return true;
+      // not logged in so redirect to login page with the return url
+      this.router.navigate(['/'], {
+        queryParams: { returnUrl: state.url },
+      });
     }
-
-    // not logged in so redirect to login page with the return url
-    this.router.navigate(['/account/login'], {
-      queryParams: { returnUrl: state.url },
-    });
-    return false;
+    return true;
   }
 }

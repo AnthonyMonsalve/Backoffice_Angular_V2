@@ -1,19 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { RedirectGuard } from '../core/guards/redirect.guard';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
-    path: 'signin',
-    loadChildren: () =>
-      import('./signin/signin.module').then((m) => m.SigninModule),
-  },
-  {
     path: 'signout',
     loadChildren: () =>
       import('./signout/signout.module').then((m) => m.SignoutModule),
+    canActivate: [RedirectGuard],
   },
   {
     path: 'lockscreen',
@@ -58,10 +55,12 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [RedirectGuard],
   },
   {
     path: 'register',
     component: RegisterComponent,
+    canActivate: [RedirectGuard],
   },
 ];
 

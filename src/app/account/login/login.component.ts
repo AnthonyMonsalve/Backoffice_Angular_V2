@@ -54,8 +54,8 @@ export class LoginComponent implements OnInit {
     }
     //Validation Set
     this.loginForm = this.formBuilder.group({
-      email: ['admin@pichforest.com', [Validators.required, Validators.email]],
-      password: ['123456', [Validators.required]],
+      email: ['admin@google.com', [Validators.required, Validators.email]],
+      password: ['Abc123', [Validators.required]],
     });
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';

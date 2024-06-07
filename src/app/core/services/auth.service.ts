@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment.prod';
+import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { getFirebaseBackend } from '../../authUtils';
+import { checkToken } from '../../core/helpers/jwt.interceptor';
 import { TokenService } from '../../core/services/token.service';
 import { ResponseLogin, User } from '../models/auth.models';
 
@@ -13,10 +15,15 @@ import { ResponseLogin, User } from '../models/auth.models';
  */
 export class AuthenticationService {
   apiUrl = environment.API_URL;
+  user$ = new BehaviorSubject<User | null>(null);
   user!: User;
   currentUserValue: any;
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
+
+  getDataUser() {
+    return this.user$.getValue();
+  }
 
   /**
    * Performs the register
@@ -62,11 +69,13 @@ export class AuthenticationService {
    */
   public currentUser(): any {
     const token = this.tokenService.getToken();
-    return this.http.get<User>(`${this.apiUrl}/api/auth/info-user`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    return this.http
+      .get<User>(`${this.apiUrl}/api/auth/info-user`, { context: checkToken() })
+      .pipe(
+        tap((user) => {
+          this.user$.next(user);
+        })
+      );
   }
 
   /**

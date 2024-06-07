@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 
+import { AuthenticationService } from '../../core/services/auth.service';
 import { EventService } from '../../core/services/event.service';
 import {
   LAYOUT_HORIZONTAL,
@@ -33,7 +34,8 @@ export class LayoutComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private authService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
@@ -82,6 +84,8 @@ export class LayoutComponent implements OnInit {
       this.sidebarcolor = sidebarcolor;
       this.SidebarColor(this.sidebarcolor);
     });
+
+    this.authService.currentUser().subscribe(() => {});
   }
 
   /**

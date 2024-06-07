@@ -8,7 +8,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { RequestStatus } from '../../core/models/request-status.model';
 import { AuthenticationService } from '../../core/services/auth.service';
-import { AuthfakeauthenticationService } from '../../core/services/authfake.service';
 import { LAYOUT_MODE } from '../../shared/layouts/layouts.model';
 
 @Component({
@@ -38,14 +37,8 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private authFackservice: AuthfakeauthenticationService,
     private renderer: Renderer2
-  ) {
-    // redirect to home if already logged in
-    if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']);
-    }
-  }
+  ) {}
 
   ngOnInit(): void {
     this.layout_mode = LAYOUT_MODE;
@@ -71,7 +64,7 @@ export class LoginComponent implements OnInit {
    * Form submit
    */
   onSubmit() {
-    this.submitted = true;
+    // this.submitted = true;
 
     // stop here if form is invalid
     if (this.loginForm.invalid) {
@@ -84,11 +77,13 @@ export class LoginComponent implements OnInit {
         next: (data) => {
           this.status = 'success';
           this.router.navigate(['/']);
-          console.log(data);
+          console.log('data');
+          this.loginForm.reset();
         },
         error: (error) => {
           console.log(error);
           this.status = 'failed';
+          this.loginForm.reset();
         },
       });
   }

@@ -35,6 +35,27 @@
         "PAGE": "Verkaufsbericht"
       }
     },
+    "INSTAPRODUCTS": {
+      "TEXT": "Business-Produkte"
+    },
+    "INSTAPOS": {
+      "TEXT": "Insta Pos",
+      "LIST": {
+        "PAGE": "Zusammenfassung"
+      }
+    },
+    "INSTAWEB": {
+      "TEXT": "Insta Web",
+      "LIST": {
+        "PAGE": "Zusammenfassung"
+      }
+    },
+    "INSTACOMERCIO": {
+      "TEXT": "Insta Comercio",
+      "LIST": {
+        "PAGE": "Zusammenfassung"
+      }
+    },
     "DASHBOARDS": {
       "TEXT": "Cuadros de mando",
       "LIST": {
@@ -57,8 +78,6 @@
       "LIST": {
         "BASIC": "Básico",
         "COVER": "Cubrir",
-        "SIGNIN": "Registrarse",
-        "SIGNUP": "Inscribirse",
         "SIGNOUT": "Desconectar",
         "LOCKSCREEN": "Bloquear pantalla",
         "FORGOTPASSWORD": "Has olvidado tu contraseña",
@@ -157,10 +176,8 @@
       "TEXT": "Authentifizierung",
       "BADGE": "neun",
       "LIST": {
-        "SIGNIN": "Einloggen",
         "BASIC": "Basic",
         "COVER": "Abdeckung",
-        "SIGNUP": "Anmeldung",
         "SIGNOUT": "Austragen",
         "LOCKSCREEN": "Bildschirm sperren",
         "FORGOTPASSWORD": "Passwort vergessen",

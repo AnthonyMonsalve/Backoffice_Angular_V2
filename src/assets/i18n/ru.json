@@ -35,6 +35,27 @@
         "PAGE": "Рапорт о продаже"
       }
     },
+    "INSTAPRODUCTS": {
+      "TEXT": "бизнес-продукты"
+    },
+    "INSTAPOS": {
+      "TEXT": "Insta Pos",
+      "LIST": {
+        "PAGE": "Общее резюме"
+      }
+    },
+    "INSTAWEB": {
+      "TEXT": "Insta Web",
+      "LIST": {
+        "PAGE": "Общее резюме"
+      }
+    },
+    "INSTACOMERCIO": {
+      "TEXT": "Insta Comercio",
+      "LIST": {
+        "PAGE": "Общее резюме"
+      }
+    },
     "DASHBOARDS": {
       "TEXT": "Дашборды",
       "LIST": {
@@ -57,8 +78,6 @@
       "LIST": {
         "BASIC": "Базовый",
         "COVER": "Обложка",
-        "SIGNIN": "Войти",
-        "SIGNUP": "Зарегистрироваться",
         "SIGNOUT": "Выход",
         "LOCKSCREEN": "Экран блокировки",
         "FORGOTPASSWORD": "Забыли пароль",
@@ -157,10 +176,8 @@
       "TEXT": "Аутентификация",
       "BADGE": "девять",
       "LIST": {
-        "SIGNIN": "Войти",
         "BASIC": "Базовый",
         "COVER": "Обложка",
-        "SIGNUP": "Зарегистрироваться",
         "SIGNOUT": "Выход",
         "LOCKSCREEN": "Экран блокировки",
         "FORGOTPASSWORD": "Забыли пароль",

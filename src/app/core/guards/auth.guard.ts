@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { Router } from '@angular/router';
 
 import { TokenService } from '../services/token.service';
 
@@ -11,16 +7,12 @@ import { TokenService } from '../services/token.service';
 export class AuthGuard {
   constructor(private router: Router, private tokenService: TokenService) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const token = this.tokenService.getToken();
-    if (token) {
-      return true;
+  canActivate(): boolean {
+    const isValidToken = this.tokenService.isValidToken();
+    if (!isValidToken) {
+      this.router.navigate(['/account/login']);
+      return false;
     }
-
-    // not logged in so redirect to login page with the return url
-    this.router.navigate(['/account/login'], {
-      queryParams: { returnUrl: state.url },
-    });
-    return false;
+    return true;
   }
 }

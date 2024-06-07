@@ -88,7 +88,7 @@ export class HorizontaltopbarComponent implements OnInit {
       this.flagvalue = val.map((element) => element.flag);
     }
 
-    this.authService.currentUser().subscribe((user: User | null) => {
+    this.authService.user$.subscribe((user) => {
       this.user = user;
     });
   }

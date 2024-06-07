@@ -29,10 +29,31 @@
         "TIME": "Hace 1 hora"
       }
     },
+    "INSTAPRODUCTS": {
+      "TEXT": "Líneas de negocio"
+    },
     "REPORTS": {
       "TEXT": "Informes de Instapago",
       "LIST": {
         "PAGE": "Reporte de ventas"
+      }
+    },
+    "INSTAPOS": {
+      "TEXT": "Insta Pos",
+      "LIST": {
+        "PAGE": "Resumen general"
+      }
+    },
+    "INSTAWEB": {
+      "TEXT": "Insta Web",
+      "LIST": {
+        "PAGE": "Resumen general"
+      }
+    },
+    "INSTACOMERCIO": {
+      "TEXT": "Insta Comercio",
+      "LIST": {
+        "PAGE": "Resumen general"
       }
     },
     "DASHBOARDS": {
@@ -57,8 +78,6 @@
       "LIST": {
         "BASIC": "Básico",
         "COVER": "Cubrir",
-        "SIGNIN": "Registrarse",
-        "SIGNUP": "Inscribirse",
         "SIGNOUT": "Desconectar",
         "LOCKSCREEN": "Bloquear pantalla",
         "FORGOTPASSWORD": "Has olvidado tu contraseña",
@@ -157,10 +176,8 @@
       "TEXT": "Autenticación",
       "BADGE": "nueve",
       "LIST": {
-        "SIGNIN": "Registrarse",
         "BASIC": "Básico",
         "COVER": "Cubrir",
-        "SIGNUP": "Inscribirse",
         "SIGNOUT": "Desconectar",
         "LOCKSCREEN": "Bloquear pantalla",
         "FORGOTPASSWORD": "Has olvidado tu contraseña",

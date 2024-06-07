@@ -20,6 +20,25 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'pos',
+    component: LayoutComponent,
+    loadChildren: () => import('./_pos/pos.module').then((m) => m.PosModule),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'web',
+    component: LayoutComponent,
+    loadChildren: () => import('./_web/web.module').then((m) => m.WebModule),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'commerce',
+    component: LayoutComponent,
+    loadChildren: () =>
+      import('./_commerce/commerce.module').then((m) => m.CommerceModule),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'account',
     loadChildren: () =>
       import('./account/account.module').then((m) => m.AccountModule),

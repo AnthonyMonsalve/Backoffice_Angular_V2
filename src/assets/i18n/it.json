@@ -35,6 +35,27 @@
         "PAGE": "Rapporto delle vendite"
       }
     },
+    "INSTAPRODUCTS": {
+      "TEXT": "Prodotti aziendali"
+    },
+    "INSTAPOS": {
+      "TEXT": "Insta Pos",
+      "LIST": {
+        "PAGE": "Riepilogo generale"
+      }
+    },
+    "INSTAWEB": {
+      "TEXT": "Insta Web",
+      "LIST": {
+        "PAGE": "Riepilogo generale"
+      }
+    },
+    "INSTACOMERCIO": {
+      "TEXT": "Insta Comercio",
+      "LIST": {
+        "PAGE": "Riepilogo generale"
+      }
+    },
     "DASHBOARDS": {
       "TEXT": "Dashboard",
       "LIST": {
@@ -57,8 +78,6 @@
       "LIST": {
         "BASIC": "Di base",
         "COVER": "Coperchio",
-        "SIGNIN": "Registrazione",
-        "SIGNUP": "Iscrizione",
         "SIGNOUT": "Disconnessione",
         "LOCKSCREEN": "Blocca schermo",
         "FORGOTPASSWORD": "Ha dimenticato la password",
@@ -157,10 +176,8 @@
       "TEXT": "Autenticazione",
       "BADGE": "nove",
       "LIST": {
-        "SIGNIN": "Registrazione",
         "BASIC": "Di base",
         "COVER": "Coperchio",
-        "SIGNUP": "Iscrizione",
         "SIGNOUT": "Disconnessione",
         "LOCKSCREEN": "Blocca schermo",
         "FORGOTPASSWORD": "Ha dimenticato la password",

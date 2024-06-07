@@ -15,7 +15,7 @@
                         <div class="user-thumb mb-4 mb-md-5">
                             <img src="assets/images/users/avatar-10.jpg" class="rounded-circle img-thumbnail avatar-lg"
                                 alt="thumbnail">
-                            <h5 class="font-size-16 mt-3">Anthony Monsalve</h5>
+                            <h5 class="font-size-16 mt-3">{{user?.firstName}} {{user?.lastName}}</h5>
                         </div>
                         <form [formGroup]="lockscreenForm" (ngSubmit)="onSubmit()">
 
@@ -42,8 +42,8 @@
                         </form><!-- end form -->
 
                         <div class="mt-5 text-center text-muted">
-                            <p>Not you ? return <a routerLink="/account/signin/basic"
-                                    class="fw-medium text-decoration-underline"> Signin </a></p>
+                            <p>Not you ? return <a href="javascript: void(0);" (click)="logout()"
+                                    class="fw-medium text-decoration-underline"> Log In </a></p>
                         </div>
                     </div>
                 </div><!-- end col -->

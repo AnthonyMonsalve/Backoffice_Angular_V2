@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { Router } from '@angular/router';
 
 import { TokenService } from '../services/token.service';
 
@@ -11,13 +7,11 @@ import { TokenService } from '../services/token.service';
 export class RedirectGuard {
   constructor(private router: Router, private tokenService: TokenService) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const token = this.tokenService.getToken();
-    if (token) {
+  canActivate() {
+    const isValidToken = this.tokenService.isValidToken();
+    if (isValidToken) {
       // not logged in so redirect to login page with the return url
-      this.router.navigate(['/'], {
-        queryParams: { returnUrl: state.url },
-      });
+      this.router.navigate(['/']);
     }
     return true;
   }

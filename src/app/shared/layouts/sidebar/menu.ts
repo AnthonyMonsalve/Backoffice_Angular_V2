@@ -2,83 +2,69 @@ import { MenuItem } from './menu.model';
 
 export const MENU: MenuItem[] = [
   {
-    id: 100,
+    id: 1,
     label: 'HEADER.REPORTS.TEXT',
     isTitle: true,
   },
   {
-    id: 101,
+    id: 2,
     label: 'HEADER.REPORTS.LIST.PAGE',
     icon: 'trending-up',
     link: '/',
   },
   {
-    id: 21,
-    label: 'MENUITEMS.PAGES.TEXT',
+    id: 3,
+    label: 'HEADER.INSTAPRODUCTS.TEXT',
     isTitle: true,
   },
   {
-    id: 22,
-    label: 'MENUITEMS.AUTHENTICATION.TEXT',
-    icon: 'user',
-    badge: {
-      variant: 'orange-instapago',
-      text: 'MENUITEMS.AUTHENTICATION.BADGE',
-    },
+    id: 4,
+    label: 'HEADER.INSTAPOS.TEXT',
+    icon: 'smartphone',
+    // badge: {
+    //   variant: 'orange-instapago',
+    //   text: 'MENUITEMS.AUTHENTICATION.BADGE',
+    // },
     subItems: [
       {
-        id: 24,
-        label: 'MENUITEMS.AUTHENTICATION.LIST.SIGNIN',
-        link: '/account/signin/basic',
-        parentId: 22,
+        id: 40001,
+        label: 'HEADER.INSTAPOS.LIST.PAGE',
+        link: '/pos/summary',
+        parentId: 4,
       },
+    ],
+  },
+  {
+    id: 5,
+    label: 'HEADER.INSTAWEB.TEXT',
+    icon: 'monitor',
+    // badge: {
+    //   variant: 'orange-instapago',
+    //   text: 'MENUITEMS.AUTHENTICATION.BADGE',
+    // },
+    subItems: [
       {
-        id: 27,
-        label: 'MENUITEMS.AUTHENTICATION.LIST.SIGNUP',
-        link: '/account/signup/basic',
-        parentId: 22,
+        id: 50001,
+        label: 'HEADER.INSTAWEB.LIST.PAGE',
+        link: '/web/summary',
+        parentId: 5,
       },
+    ],
+  },
+  {
+    id: 6,
+    label: 'HEADER.INSTACOMERCIO.TEXT',
+    icon: 'shopping-cart',
+    // badge: {
+    //   variant: 'orange-instapago',
+    //   text: 'MENUITEMS.AUTHENTICATION.BADGE',
+    // },
+    subItems: [
       {
-        id: 30,
-        label: 'MENUITEMS.AUTHENTICATION.LIST.SIGNOUT',
-        link: '/account/signout/basic',
-        parentId: 22,
-      },
-      {
-        id: 33,
-        label: 'MENUITEMS.AUTHENTICATION.LIST.LOCKSCREEN',
-        link: '/account/lockscreen/basic',
-        parentId: 22,
-      },
-      {
-        id: 36,
-        label: 'MENUITEMS.AUTHENTICATION.LIST.FORGOTPASSWORD',
-        link: '/account/forgot-password/basic',
-        parentId: 22,
-      },
-      {
-        id: 39,
-        label: 'MENUITEMS.AUTHENTICATION.LIST.RESETPWD',
-        link: '/account/reset-password/basic',
-        parentId: 22,
-      },
-      {
-        id: 42,
-        label: 'MENUITEMS.AUTHENTICATION.LIST.EMAILVERIFICATION',
-        link: '/account/email-verification/basic',
-        parentId: 22,
-      },
-      {
-        id: 45,
-        label: 'MENUITEMS.AUTHENTICATION.LIST.TWOSTEPVERIFICATION',
-        link: '/account/twostep-verification/basic',
-        parentId: 22,
-      },
-      {
-        id: 48,
-        label: 'MENUITEMS.AUTHENTICATION.LIST.THANKYOU',
-        link: '/account/thankyou/basic',
-        parentId: 22,
+        id: 60001,
+        label: 'HEADER.INSTACOMERCIO.LIST.PAGE',
+        link: '/commerce/summary',
+        parentId: 6,
       },
     ],
   },

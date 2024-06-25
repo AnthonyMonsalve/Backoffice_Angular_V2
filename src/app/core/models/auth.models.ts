@@ -1,12 +1,17 @@
 export class User {
-  id?: number;
-  username?: string;
-  password?: string;
+  id?: string;
+  email?: string;
+  profile?: Profile;
+  isActive?: boolean;
+  roles?: string[];
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+class Profile {
   firstName?: string;
   lastName?: string;
-  token?: string;
-  email?: string;
-  role?: string;
+  avatar?: string;
 }
 
 export interface ResponseLogin {

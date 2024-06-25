@@ -84,7 +84,7 @@ export class RegisterComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.status = 'success';
-          this.router.navigate(['/login']);
+          this.router.navigate(['/account/login']);
           console.log(data);
         },
         error: (error) => {

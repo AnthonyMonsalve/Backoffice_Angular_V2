@@ -21,7 +21,8 @@
       "dom"
     ],
     "paths": {
-      "@environments/*": ["./src/environments/*"]
+      "@environments/*": ["./src/environments/*"],
+      "@services/*": ["./src/app/core/services/*"]
     },
     "useDefineForClassFields": false
   },

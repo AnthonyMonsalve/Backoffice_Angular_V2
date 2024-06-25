@@ -9,6 +9,11 @@ const routes: Routes = [
     title: 'Summary Commerce',
     component: SummaryCommerceComponent,
   },
+  // {
+  //   path: 'commerces-list',
+  //   title: 'Commerces List',
+  //   component: CommerceListComponent,
+  // },
 ];
 
 @NgModule({

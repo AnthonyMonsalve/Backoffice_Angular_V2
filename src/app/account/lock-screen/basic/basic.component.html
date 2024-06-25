@@ -8,14 +8,18 @@
                     <div class="text-center py-5">
                         <div class="mb-4 mb-md-5">
                             <a routerLink="/" class="d-block auth-logo">
-                                <img src="assets/images/logo-dark.png" alt="" height="22" class="auth-logo-dark">
-                                <img src="assets/images/logo-light.png" alt="" height="22" class="auth-logo-light">
+                                <img src="assets/images/logo-dark.png" alt="" height="30" class="auth-logo-dark">
+                                <img src="assets/images/logo-light.png" alt="" height="30" class="auth-logo-light">
                             </a>
                         </div>
                         <div class="user-thumb mb-4 mb-md-5">
-                            <img src="assets/images/users/avatar-10.jpg" class="rounded-circle img-thumbnail avatar-lg"
-                                alt="thumbnail">
-                            <h5 class="font-size-16 mt-3">{{user?.firstName}} {{user?.lastName}}</h5>
+                            @if(user?.profile?.avatar){
+                            <img class="rounded-circle header-profile-user" src={{user?.profile?.avatar}} alt="Avatar">
+                            }@else{
+                            <img class="rounded-circle header-profile-user" src="assets/images/users/avatar.png"
+                                alt="Avatar">
+                            }
+                            <h5 class="font-size-16 mt-3">{{user?.profile?.firstName}} {{user?.profile?.lastName}}</h5>
                         </div>
                         <form [formGroup]="lockscreenForm" (ngSubmit)="onSubmit()">
 

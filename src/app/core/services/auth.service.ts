@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@environments/environment.prod';
+import { environment_dev } from '@environments/environment.dev';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { getFirebaseBackend } from '../../authUtils';
@@ -14,7 +14,7 @@ import { ResponseLogin, User } from '../models/auth.models';
  * Auth-service Component
  */
 export class AuthenticationService {
-  apiUrl = environment.API_URL;
+  apiUrl = environment_dev.API_URL;
   user$ = new BehaviorSubject<User | null>(null);
   user!: User;
   currentUserValue: any;
@@ -39,10 +39,12 @@ export class AuthenticationService {
     password: string
   ) {
     return this.http.post(`${this.apiUrl}/api/auth/register`, {
-      firstName,
-      lastName,
       email,
       password,
+      profile: {
+        firstName,
+        lastName,
+      },
     });
   }
 
@@ -70,7 +72,9 @@ export class AuthenticationService {
   public currentUser(): any {
     const token = this.tokenService.getToken();
     return this.http
-      .get<User>(`${this.apiUrl}/api/auth/info-user`, { context: checkToken() })
+      .get<User>(`${this.apiUrl}/api/auth/verify-user`, {
+        context: checkToken(),
+      })
       .pipe(
         tap((user) => {
           this.user$.next(user);

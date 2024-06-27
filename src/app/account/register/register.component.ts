@@ -6,6 +6,7 @@ import {
 } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import { User } from 'src/app/core/models/auth.models';
 import { RequestStatus } from 'src/app/core/models/request-status.model';
 import { AuthenticationService } from '../../core/services/auth.service';
 import { UserProfileService } from '../../core/services/user.service';
@@ -74,23 +75,23 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this.authenticationService
-      .register(
-        this.f.firstName.value,
-        this.f.lastName.value,
-        this.f.email.value,
-        this.f.password.value
-      )
-      .subscribe({
-        next: (data) => {
-          this.status = 'success';
-          this.router.navigate(['/account/login']);
-          console.log(data);
-        },
-        error: (error) => {
-          console.log(error);
-          this.status = 'failed';
-        },
-      });
+    const user = new User(
+      this.f.email.value,
+      this.f.firstName.value,
+      this.f.lastName.value,
+      this.f.password.value
+    );
+
+    this.authenticationService.register(user).subscribe({
+      next: (data) => {
+        this.status = 'success';
+        this.router.navigate(['/account/login']);
+        console.log(data);
+      },
+      error: (error) => {
+        console.log(error);
+        this.status = 'failed';
+      },
+    });
   }
 }

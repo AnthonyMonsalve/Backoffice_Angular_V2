@@ -6,20 +6,28 @@ export class User {
   roles?: string[];
   createdAt?: Date;
   updatedAt?: Date;
+  password?: string;
+
+  constructor(
+    email: string,
+    firstName: string,
+    lastName: string,
+    password: string
+  ) {
+    this.email = email;
+    this.profile = new Profile(firstName, lastName);
+    this.password = password;
+  }
 }
 
 class Profile {
   firstName?: string;
   lastName?: string;
   avatar?: string;
-}
 
-export interface ResponseLogin {
-  active?: boolean;
-  email?: string;
-  firstName?: string;
-  id?: number;
-  lastName?: string;
-  role?: string;
-  token: string;
+  constructor(firstName?: string, lastName?: string, avatar?: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.avatar = avatar;
+  }
 }

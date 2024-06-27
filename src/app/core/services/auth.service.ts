@@ -6,7 +6,8 @@ import { tap } from 'rxjs/operators';
 import { getFirebaseBackend } from '../../authUtils';
 import { checkToken } from '../../core/helpers/jwt.interceptor';
 import { TokenService } from '../../core/services/token.service';
-import { ResponseLogin, User } from '../models/auth.models';
+import { ResponseLogin } from '../interfaces/auth.interface';
+import { User } from '../models/auth.models';
 
 @Injectable({ providedIn: 'root' })
 
@@ -32,20 +33,8 @@ export class AuthenticationService {
    * @param email email
    * @param password password
    */
-  register(
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string
-  ) {
-    return this.http.post(`${this.apiUrl}/api/auth/register`, {
-      email,
-      password,
-      profile: {
-        firstName,
-        lastName,
-      },
-    });
+  register(user: User) {
+    return this.http.post(`${this.apiUrl}/api/auth/register`, user);
   }
 
   /**
@@ -72,7 +61,7 @@ export class AuthenticationService {
   public currentUser(): any {
     const token = this.tokenService.getToken();
     return this.http
-      .get<User>(`${this.apiUrl}/api/auth/verify-user`, {
+      .get<User>(`${this.apiUrl}/api/auth/profile-user`, {
         context: checkToken(),
       })
       .pipe(

@@ -3,9 +3,17 @@
 <!-- end page title -->
 <div class="row">
   <div class="col-xl-4 col-sm-6">
-    <card-count-affiliates></card-count-affiliates>
+    <card-count [title]="'Comercios'" [icon]="'uil uil-shopping-cart-alt'" [count]="totalAffiliatesMaster"></card-count>
+  </div>
+  <div class="col-xl-4 col-sm-6">
+    <card-count [title]="'Afiliaciones bancarias'" [icon]="'fa fa-university'" [count]="totalAffiliates"></card-count>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-3 col-md-3 col-sm-4">
     <terminal-status-overview></terminal-status-overview>
   </div>
-  <div class="col-xl-4 col-md-6">
+  <div class="col-xl-9 col-md-9 col-sm-8">
+    <closures-data-chart></closures-data-chart>
   </div>
 </div>

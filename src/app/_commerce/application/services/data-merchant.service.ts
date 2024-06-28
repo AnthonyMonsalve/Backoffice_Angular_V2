@@ -48,15 +48,16 @@ export class MerchantService {
 
   // Nuevo método para obtener la cantidad diaria entre dos fechas
   getAmountDayBetweenTwoDates(
-    dateIni: string,
-    dateEnd: string
+    startDate: string,
+    endDate: string
   ): Observable<any> {
     const params = new HttpParams()
-      .set('dateIni', dateIni)
-      .set('dateEnd', dateEnd);
+      .set('startDate', startDate)
+      .set('endDate', endDate)
+      .set('origen', 'Merchant');
 
     return this.http.get(
-      `${this.apiUrl}/api/closures-merchant/amount-day-between-two-dates`,
+      `${this.apiUrl}/api/closures/date-range-daily-amount`,
       {
         context: checkToken(),
         params,
@@ -64,17 +65,18 @@ export class MerchantService {
     );
   }
 
-  getAmountBetweenTwoDates(dateIni: string, dateEnd: string): Observable<any> {
+  getAmountBetweenTwoDates(
+    startDate: string,
+    endDate: string
+  ): Observable<any> {
     const params = new HttpParams()
-      .set('dateIni', dateIni)
-      .set('dateEnd', dateEnd);
+      .set('startDate', startDate)
+      .set('endDate', endDate)
+      .set('origen', 'Merchant');
 
-    return this.http.get(
-      `${this.apiUrl}/api/closures/total-amount-between-two-dates`,
-      {
-        context: checkToken(),
-        params,
-      }
-    );
+    return this.http.get(`${this.apiUrl}/api/closures/date-range-amount`, {
+      context: checkToken(),
+      params,
+    });
   }
 }

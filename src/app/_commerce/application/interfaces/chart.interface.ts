@@ -18,5 +18,5 @@ export interface ChartOverviewData {
     TotalAmountGross: number;
     CountClosures: number;
     TotalQTY: number;
-  }[];
+  };
 }

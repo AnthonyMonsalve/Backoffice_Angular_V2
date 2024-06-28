@@ -22,15 +22,15 @@ export class ClosuresDataChartComponent implements OnInit {
     this.fetchChartData('2020-05-15', '2020-05-30');
   }
 
-  private fetchChartData(dateIni: string, dateEnd: string): void {
-    this.chartDataService.fetchChartData(dateIni, dateEnd).subscribe({
+  private fetchChartData(startDate: string, endDate: string): void {
+    this.chartDataService.fetchChartData(startDate, endDate).subscribe({
       next: (data) => this.updateChartData(data),
       error: (error) => console.error('Error fetching chart data', error),
       complete: () =>
         console.log('getAmountDayBetweenTwoDates fetching complete'),
     });
 
-    this.chartDataService.fetchChartOverviewData(dateIni, dateEnd).subscribe({
+    this.chartDataService.fetchChartOverviewData(startDate, endDate).subscribe({
       next: (data) => this.updateChartOverviewData(data),
       error: (error) =>
         console.error('Error fetching chart overview data', error),
@@ -74,7 +74,7 @@ export class ClosuresDataChartComponent implements OnInit {
   }
 
   private updateChartOverviewData(data: ChartOverviewData): void {
-    const overview = data.totalAmount[0] || {
+    const overview = data.totalAmount || {
       TotalAmountGross: 0,
       CountClosures: 0,
       TotalQTY: 0,

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 // slider
 
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { SummaryWebComponent } from './presentations/pages/summary/summary.component';
 import { WebRoutingModule } from './web-routing.module';
 

@@ -1,0 +1,36 @@
+<div class="card card-h-100 mt-4">
+  <div class="card-header justify-content-between d-flex align-items-center">
+    <h4 class="card-title">Actualizar perfil</h4>
+  </div>
+  <div class="card-body">
+    <form class="needs-validation" novalidate (ngSubmit)="onSubmit()" [formGroup]="profileForm">
+      <div class="mb-3">
+        <label class="form-label" for="validationCustom01">Nombre</label>
+        <input type="text" class="form-control" id="validationCustom01" formControlName="firstName" placeholder="Nombre"
+          [ngClass]="{'is-invalid': submit && form.firstName.errors}">
+        <div *ngIf="submit && form.firstName.errors" class="invalid-feedback">
+          <span *ngIf="form.firstName.errors.required">Nombre es obligatorio.</span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="validationCustom02">Apellido</label>
+        <input type="text" class="form-control" id="validationCustom02" formControlName="lastName"
+          placeholder="Apellido" [ngClass]="{'is-invalid': submit && form.lastName.errors}">
+        <div *ngIf="submit && form.lastName.errors" class="invalid-feedback">
+          <span *ngIf="form.lastName.errors.required">Apellido es obligatorio.</span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="validationCustom03" class="form-label">URL del Avatar</label>
+        <input class="form-control" type="url" id="validationCustom03" formControlName="avatar"
+          placeholder="URL del Avatar" [ngClass]="{'is-invalid': submit && form.avatar.errors}">
+        <div *ngIf="submit && form.avatar.errors" class="invalid-feedback">
+          <span *ngIf="form.avatar.errors.pattern">Por favor, ingrese una URL válida.</span>
+        </div>
+      </div>
+      <div class="mt-4">
+        <button type="submit" class="btn btn-primary btn-primary-instapago w-md">Actualizar perfil</button>
+      </div>
+    </form>
+  </div>
+</div>

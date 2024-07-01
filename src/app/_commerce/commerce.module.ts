@@ -7,8 +7,8 @@ import {
   NgbPaginationModule,
   NgbTypeaheadModule,
 } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from '@shared/shared.module';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { SharedModule } from '../shared/shared.module';
 import { CommerceRoutingModule } from './commerce-routing.module';
 import { CardCountComponent } from './presentations/components/card-count/card-count.component';
 import { TerminalsStatusOverviewComponent } from './presentations/components/terminals-status-overview/terminals-status-overview.component';

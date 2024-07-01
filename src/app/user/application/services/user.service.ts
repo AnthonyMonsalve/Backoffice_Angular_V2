@@ -22,4 +22,14 @@ export class UserService {
       context: checkToken(),
     });
   }
+
+  updatePassword(pass: any): Observable<any> {
+    return this.http.patch<any>(
+      `${this.apiUrl}/api/auth/change-password`,
+      pass,
+      {
+        context: checkToken(),
+      }
+    );
+  }
 }

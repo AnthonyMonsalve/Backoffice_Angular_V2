@@ -10,7 +10,7 @@ import { SimplebarAngularModule } from 'simplebar-angular';
 // slider
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { ReportService } from './applications/services/report.service';
 import { ReportImpRepository } from './infrastructures/repositories/report.imp.repository';
 import { TerminalActivityComponent } from './presentations/components/terminal-activity/terminal-activity.component';

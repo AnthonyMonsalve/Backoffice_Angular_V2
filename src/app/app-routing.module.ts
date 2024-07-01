@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './core/guards/auth.guard';
 
-import { LayoutComponent } from './shared/layouts/layout.component';
-import { Basic404Component } from './shared/pages/basic404/basic404.component';
+import { LayoutComponent } from '@shared/layouts/layout.component';
+import { Basic404Component } from '@shared/pages/basic404/basic404.component';
 
 const routes: Routes = [
   {

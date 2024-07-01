@@ -22,7 +22,8 @@
     ],
     "paths": {
       "@environments/*": ["./src/environments/*"],
-      "@services/*": ["./src/app/core/services/*"]
+      "@services/*": ["./src/app/core/services/*"],
+      "@shared/*": ["./src/app/shared/*"]
     },
     "useDefineForClassFields": false
   },

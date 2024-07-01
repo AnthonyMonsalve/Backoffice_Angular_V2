@@ -8,197 +8,56 @@
                     </div>
                 </div>
             </div>
-            <!-- end card -->
         </div>
     </div>
-    <!-- end row -->
 </div>
 
 <div class="row">
-    <div class="col-xl-3">
+    <div class="col-xl-4">
         <div class="card mt-n5">
             <div class="card-body text-center">
-                <div class="text-end">
-                    <div class="dropdown" ngbDropdown>
-                        <a class="btn btn-link text-body font-size-16 p-1 dropdown-toggle shadow-none"
-                            href="javascript:void(0);" role="button" aria-expanded="false" ngbDropdownToggle>
-                            <i class="uil uil-ellipsis-h"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
-                            <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                            <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                            <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                        </ul>
-                    </div>
-                </div>
                 <div class="avatar-xl mx-auto mb-4">
-                    @if(user?.profile?.avatar){
-                    <img class="rounded-circle img-thumbnail" src={{user?.profile?.avatar}} alt="Avatar">
-                    }@else{
-                    <img class="rounded-circle img-thumbnail" src="assets/images/users/avatar.png" alt="Avatar">
-                    }
+                    <img *ngIf="user?.profile?.avatar" class="rounded-circle img-thumbnail"
+                        [src]="user?.profile?.avatar" alt="Avatar">
+                    <img *ngIf="!user?.profile?.avatar" class="rounded-circle img-thumbnail"
+                        src="assets/images/users/avatar.png" alt="Avatar">
                 </div>
                 <h5 class="mb-1">{{user?.profile?.firstName}} {{user?.profile?.lastName}}</h5>
-                <p class="text-muted">{{user?.roles}}</p>
-
             </div>
-
         </div>
-        <!-- end card -->
 
         <div class="card">
             <div class="card-body">
-                <ul class="list-unstyled mb-0 text-muted">
-                    <li>
-                        <div class="d-flex align-items-center py-2">
-                            <div class="flex-grow-1">
-                                <i class="mdi mdi-github font-size-16 text-body me-1"></i> Github
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div>dashonic</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="d-flex align-items-center py-2">
-                            <div class="flex-grow-1">
-                                <i class="mdi mdi-twitter font-size-16 text-info me-1"></i> Twitter
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div>&#64;dashonic</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="d-flex align-items-center py-2">
-                            <div class="flex-grow-1">
-                                <i class="mdi mdi-linkedin font-size-16 text-primary me-1"></i> Linkedin
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div>dashonic</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="d-flex align-items-center py-2">
-                            <div class="flex-grow-1">
-                                <i class="mdi mdi-pinterest font-size-16 text-danger me-1"></i> Pinterest
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div>dashonic</div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                <h5 class="card-title mb-4">Roles</h5>
+                <div class="d-flex flex-wrap gap-2 font-size-16">
+                    <span *ngFor="let userRol of user?.roles" class="badge badge-primary-subtle">{{userRol}}</span>
+                </div>
             </div>
-            <!-- end card body -->
         </div>
-        <!-- end card -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Acciones</h5>
+                <div>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a routerLink="/user/user-list" class="py-2 d-block text-muted">
+                                <i class="uil uil-users-alt font-size-16 text-primary me-1"></i> Administrar usuarios
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- end col -->
 
-    <div class="col-xl-9">
-        <div class="mt-4">
-            <div class="row">
-
-                <div class="col-lg-8">
-                    <div class="card card-h-100">
-                        <div class="card-header justify-content-between d-flex align-items-center">
-                            <h4 class="card-title">Update profile</h4>
-                        </div>
-                        <div class="card-body">
-                            <form class="needs-validation" novalidate (ngSubmit)="onSubmit()" [formGroup]="profileForm">
-                                <div class="mb-3">
-                                    <label class="form-label" for="validationCustom01">First name</label>
-                                    <input type="text" class="form-control" id="validationCustom01"
-                                        formControlName="firstName" placeholder="First name"
-                                        [ngClass]="{'is-invalid': submit && form.firstName.errors}">
-                                    <div *ngIf="submit && form.firstName.errors" class="invalid-feedback">
-                                        <span *ngIf="form.firstName.errors.required">First name is required.</span>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="validationCustom02">Last name</label>
-                                    <input type="text" class="form-control" id="validationCustom02"
-                                        formControlName="lastName" placeholder="Last name"
-                                        [ngClass]="{'is-invalid': submit && form.lastName.errors}">
-                                    <div *ngIf="submit && form.lastName.errors" class="invalid-feedback">
-                                        <span *ngIf="form.lastName.errors.required">Last name is required.</span>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="validationCustom03" class="form-label">URL</label>
-                                    <input class="form-control" type="url" id="validationCustom03"
-                                        formControlName="avatar" placeholder="Avatar URL"
-                                        [ngClass]="{'is-invalid': submit && form.avatar.errors}">
-                                    <div *ngIf="submit && form.avatar.errors" class="invalid-feedback">
-                                        <span *ngIf="form.avatar.errors.pattern">Please enter a valid URL.</span>
-                                    </div>
-                                </div>
-                                <div class="mt-4">
-                                    <button class="btn btn-primary w-md" type="submit">Submit</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title mb-4">Skills</h5>
-
-                            <div class="d-flex flex-wrap gap-2 font-size-16">
-                                <a href="javascript:void(0);" class="badge badge-primary-subtle">Photoshop</a>
-                                <a href="javascript:void(0);" class="badge badge-primary-subtle">illustrator</a>
-                                <a href="javascript:void(0);" class="badge badge-primary-subtle">HTML</a>
-                                <a href="javascript:void(0);" class="badge badge-primary-subtle">CSS</a>
-                                <a href="javascript:void(0);" class="badge badge-primary-subtle">Javascript</a>
-                                <a href="javascript:void(0);" class="badge badge-primary-subtle">Php</a>
-                                <a href="javascript:void(0);" class="badge badge-primary-subtle">Python</a>
-                            </div>
-                        </div>
-                        <!-- end card body -->
-                    </div>
-                    <!-- end card -->
-
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title mb-3">Portfolio</h5>
-
-                            <div>
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="javascript:void(0);" class="py-2 d-block text-muted"><i
-                                                class="uil uil-globe font-size-16 text-primary me-1"></i> Website</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" class="py-2 d-block text-muted"><i
-                                                class="uil uil-newspaper font-size-16 text-primary me-1"></i> Blog</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" class="py-2 d-block text-muted"><i
-                                                class="uil uil-notebooks font-size-16 text-primary me-1"></i>
-                                            Projects</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" class="py-2 d-block text-muted"><i
-                                                class="uil uil-images font-size-16 text-primary me-1"></i> Posts</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" class="py-2 d-block text-muted"><i
-                                                class="uil uil-newspaper font-size-16 text-primary me-1"></i>
-                                            Portfolio</a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- end card body -->
-                    </div>
-                    <!-- end card -->
-                </div>
-            </div><!-- end row -->
+    <div class="col-xl-4 col-md-6 col-sm-12">
+        <div>
+            <app-profile-update-form [user]="user"></app-profile-update-form>
         </div>
-    </div><!-- end col -->
-</div><!-- end row -->
+    </div>
+    <div class="col-xl-4 col-md-6 col-sm-12">
+        <div>
+            <app-password-update-form></app-password-update-form>
+        </div>
+    </div>
+</div>

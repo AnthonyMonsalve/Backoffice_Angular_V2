@@ -13,11 +13,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { LayoutsModule } from './shared/layouts/layouts.module';
+import { LayoutsModule } from '@shared/layouts/layouts.module';
 
+import { SharedModule } from '@shared/shared.module';
 import { ErrorInterceptor } from './core/helpers/error.interceptor';
 import { JwtInterceptor } from './core/helpers/jwt.interceptor';
-import { SharedModule } from './shared/shared.module';
 
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');

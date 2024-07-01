@@ -7,6 +7,7 @@ import { User } from '../../../core/models/auth.models';
 import { AuthenticationService } from '../../../core/services/auth.service';
 import { LanguageService } from '../../../core/services/language.service';
 
+import { UserStateService } from '../../../user/application/services/user-state.service'; // Importar UserStateService
 import { LAYOUT_MODE } from '../layouts.model';
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
@@ -16,10 +17,6 @@ import { MenuItem } from './menu.model';
   templateUrl: './horizontaltopbar.component.html',
   styleUrls: ['./horizontaltopbar.component.scss'],
 })
-
-/**
- * Horizontal Topbar Component
- */
 export class HorizontaltopbarComponent implements OnInit {
   mode: string | undefined;
   layoutMode!: string;
@@ -32,9 +29,6 @@ export class HorizontaltopbarComponent implements OnInit {
   valueset: any;
   user: User | null = null;
 
-  /**
-   * Language Listing
-   */
   listLang = [
     { text: 'Spanish', flag: 'assets/images/flags/spain.jpg', lang: 'es' },
     { text: 'English', flag: 'assets/images/flags/us.jpg', lang: 'en' },
@@ -51,7 +45,8 @@ export class HorizontaltopbarComponent implements OnInit {
     public translate: TranslateService,
     public languageService: LanguageService,
     public _cookiesService: CookieService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userStateService: UserStateService // Inyectar UserStateService
   ) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -60,9 +55,6 @@ export class HorizontaltopbarComponent implements OnInit {
     });
   }
 
-  /***
-   * Language Value Set
-   */
   setLanguage(text: string, lang: string, flag: string) {
     this.countryName = text;
     this.flagvalue = flag;
@@ -74,9 +66,6 @@ export class HorizontaltopbarComponent implements OnInit {
     this.element = document.documentElement;
     this.layoutMode = LAYOUT_MODE;
     this.initialize();
-    /***
-     * Language value cookies wise set
-     */
     this.cookieValue = this._cookiesService.get('lang');
     const val = this.listLang.filter((x) => x.lang === this.cookieValue);
     this.countryName = val.map((element) => element.text);
@@ -88,36 +77,23 @@ export class HorizontaltopbarComponent implements OnInit {
       this.flagvalue = val.map((element) => element.flag);
     }
 
-    this.authService.user$.subscribe((user) => {
+    this.userStateService.user$.subscribe((user) => {
       this.user = user;
     });
   }
 
-  /**
-   * Initialize
-   */
   initialize(): void {
     this.menuItems = MENU;
   }
 
-  /**
-   * Returns true or false if given menu item has child or not
-   * @param item menuItem
-   */
   hasItems(item: MenuItem) {
     return item.subItems !== undefined ? item.subItems.length > 0 : false;
   }
 
-  /**
-   * on settings button clicked from topbar
-   */
   onSettingsButtonClicked() {
     document.body.classList.toggle('right-bar-enabled');
   }
 
-  /**
-   * On menu click
-   */
   onMenuClick(event: any) {
     const nextEl = event.target.nextElementSibling;
     if (nextEl) {
@@ -134,42 +110,27 @@ export class HorizontaltopbarComponent implements OnInit {
     this.activateMenu();
   }
 
-  /**
-   * remove active and mm-active class
-   */
   _removeAllClass(className: any) {
     const els = document.getElementsByClassName(className);
     while (els[0]) {
       els[0].classList.remove(className);
     }
   }
-  /**
-   * Topbar Light-Dark Mode Change
-   */
+
   changeMode(mode: string) {
     this.mode = mode;
     this.layoutMode = mode;
-    // this.eventService.broadcast('changeMode', mode);
   }
 
-  /**
-   * Toggle the menu bar when having mobile screen
-   */
   toggleMobileMenu(event: any) {
     event.preventDefault();
     this.mobileMenuButtonClicked.emit();
   }
 
-  /**
-   * Toggles the right sidebar
-   */
   toggleRightSidebar() {
     this.settingsButtonClicked.emit();
   }
 
-  /**
-   * Activates the menu
-   */
   private activateMenu() {
     const resetParent = (el: any) => {
       const parent = el.parentElement;
@@ -204,17 +165,12 @@ export class HorizontaltopbarComponent implements OnInit {
       }
     };
 
-    // activate menu item based on location
     const links: any = document.getElementsByClassName('side-nav-link-ref');
     let matchingMenuItem = null;
-    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < links.length; i++) {
-      // reset menu
       resetParent(links[i]);
     }
-    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < links.length; i++) {
-      // tslint:disable-next-line: no-string-literal
       if (location.pathname === links[i]['pathname']) {
         matchingMenuItem = links[i];
         break;
@@ -245,9 +201,6 @@ export class HorizontaltopbarComponent implements OnInit {
     }
   }
 
-  /**
-   * Logout the user
-   */
   logout() {
     this.authService.logout();
     this.router.navigate(['/account/signout/basic']);

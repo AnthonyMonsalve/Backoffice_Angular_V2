@@ -14,8 +14,9 @@ import { UserRoutingModule } from './user-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PasswordUpdateFormComponent } from './presentations/components/password-update-form/password-update.component';
 import { ProfileUpdateFormComponent } from './presentations/components/profile-update-form/profile-update.component';
+import { UserActionsComponent } from './presentations/components/user-actions/user-actions.component';
 import { ProfileComponent } from './presentations/pages/profile/profile.component';
-import { UserListComponent } from './presentations/pages/user-list/list.component';
+import { UserListComponent } from './presentations/pages/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { UserListComponent } from './presentations/pages/user-list/list.componen
     UserListComponent,
     ProfileUpdateFormComponent,
     PasswordUpdateFormComponent,
+    UserActionsComponent,
   ],
   imports: [
     CommonModule,

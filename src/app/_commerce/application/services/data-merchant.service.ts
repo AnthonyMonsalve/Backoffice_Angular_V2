@@ -27,8 +27,14 @@ export class MerchantService {
     );
   }
 
-  getListAffiliatesMaster(): Observable<AffiliateMasterList> {
-    const params = new HttpParams().set('origen', 'Merchant');
+  getListAffiliatesMaster(
+    page: number = 1,
+    limit: number = 10
+  ): Observable<AffiliateMasterList> {
+    const params = new HttpParams()
+      .set('search', 'Merchant')
+      .set('page', page.toString())
+      .set('limit', limit.toString());
     return this.http.get<AffiliateMasterList>(
       `${this.apiUrl}/api/affiliates-master/list`,
       {

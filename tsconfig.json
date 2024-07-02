@@ -23,7 +23,9 @@
     "paths": {
       "@environments/*": ["./src/environments/*"],
       "@services/*": ["./src/app/core/services/*"],
-      "@shared/*": ["./src/app/shared/*"]
+      "@shared/*": ["./src/app/shared/*"],
+      "@user/*": ["./src/app/user/*"],
+      "@commerce/*": ["./src/app/commerce/*"]
     },
     "useDefineForClassFields": false
   },

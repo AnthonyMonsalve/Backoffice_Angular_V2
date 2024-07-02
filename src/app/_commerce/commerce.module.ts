@@ -14,11 +14,13 @@ import { CardCountComponent } from './presentations/components/card-count/card-c
 import { TerminalsStatusOverviewComponent } from './presentations/components/terminals-status-overview/terminals-status-overview.component';
 
 import { ClosuresDataChartComponent } from './presentations/components/closures-data-chart/closures-data-chart.component';
+import { CommerceListComponent } from './presentations/pages/commerce-list/commerce-list.component';
 import { SummaryCommerceComponent } from './presentations/pages/summary/summary.component';
 
 @NgModule({
   declarations: [
     SummaryCommerceComponent,
+    CommerceListComponent,
     TerminalsStatusOverviewComponent,
     CardCountComponent,
     ClosuresDataChartComponent,

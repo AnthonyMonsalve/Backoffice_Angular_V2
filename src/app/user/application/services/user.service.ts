@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment_dev } from '@environments/environment.dev';
 import { Observable } from 'rxjs';
 import { checkToken } from 'src/app/core/helpers/jwt.interceptor';
 import { User } from 'src/app/core/models/auth.models';
+import { UserListResponse } from '../interfaces/list.model';
 
 @Injectable({
   providedIn: 'root',
@@ -31,5 +32,27 @@ export class UserService {
         context: checkToken(),
       }
     );
+  }
+
+  getUsers(
+    order: string = 'ASC',
+    page: number = 1,
+    limit: number = 10
+  ): Observable<UserListResponse> {
+    let params = new HttpParams()
+      .set('order', order)
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+
+    return this.http.get<UserListResponse>(`${this.apiUrl}/api/users`, {
+      params,
+      context: checkToken(),
+    });
+  }
+
+  getProfile(): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/api/auth/profile-user/`, {
+      context: checkToken(),
+    });
   }
 }

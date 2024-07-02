@@ -1,45 +1,45 @@
 export class AffiliateMaster {
-  AffiliateMasterSK: number;
-  IdAffiliateMaster: string;
-  Rif: string;
-  RazonSocial: string;
-  NombreComercial: string;
-  Email: string;
-  Phone: string;
-  Created: string;
-  Address: string;
-  ChargeEnable: boolean;
-  UpdateDate: string;
-  Status: boolean;
-  Origen: string;
+  affiliateMasterSK: number;
+  idAffiliateMaster: string;
+  rif: string;
+  razonSocial: string;
+  nombreComercial: string;
+  email: string;
+  phone: string;
+  created: Date;
+  address: string;
+  chargeEnable: number;
+  updateDate: Date;
+  status: number;
+  origen: string;
 
   constructor(
-    AffiliateMasterSK: number,
-    IdAffiliateMaster: string,
-    Rif: string,
-    RazonSocial: string,
-    NombreComercial: string,
-    Email: string,
-    Phone: string,
-    Created: string,
-    Address: string,
-    ChargeEnable: boolean,
-    UpdateDate: string,
-    Status: boolean,
-    Origen: string
+    affiliateMasterSK: number,
+    idAffiliateMaster: string,
+    rif: string,
+    razonSocial: string,
+    nombreComercial: string,
+    email: string,
+    phone: string,
+    created: Date,
+    address: string,
+    chargeEnable: number,
+    updateDate: Date,
+    status: number,
+    origen: string
   ) {
-    this.AffiliateMasterSK = AffiliateMasterSK;
-    this.IdAffiliateMaster = IdAffiliateMaster;
-    this.Rif = Rif;
-    this.RazonSocial = RazonSocial;
-    this.NombreComercial = NombreComercial;
-    this.Email = Email;
-    this.Phone = Phone;
-    this.Created = Created;
-    this.Address = Address;
-    this.ChargeEnable = ChargeEnable;
-    this.UpdateDate = UpdateDate;
-    this.Status = Status;
-    this.Origen = Origen;
+    this.affiliateMasterSK = affiliateMasterSK;
+    this.idAffiliateMaster = idAffiliateMaster;
+    this.rif = rif;
+    this.razonSocial = razonSocial;
+    this.nombreComercial = nombreComercial;
+    this.email = email;
+    this.phone = phone;
+    this.created = created;
+    this.address = address;
+    this.chargeEnable = chargeEnable;
+    this.updateDate = updateDate;
+    this.status = status;
+    this.origen = origen;
   }
 }

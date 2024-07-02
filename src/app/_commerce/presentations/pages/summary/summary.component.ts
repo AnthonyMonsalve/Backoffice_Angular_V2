@@ -25,7 +25,7 @@ export class SummaryCommerceComponent implements OnInit {
   private fetchAffiliatesMasterData(): void {
     this.merchantService.getListAffiliatesMaster().subscribe(
       (data) => {
-        this.totalAffiliatesMaster = data.count; // Asigna el valor recibido a la variable
+        this.totalAffiliatesMaster = data.metadata.total; // Asigna el valor recibido a la variable
       },
       (error) => {
         console.error('Error fetching affiliates data', error);

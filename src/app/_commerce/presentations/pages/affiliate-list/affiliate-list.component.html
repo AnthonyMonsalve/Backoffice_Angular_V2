@@ -1,5 +1,5 @@
 <!-- start page title -->
-<app-pagetitle title="Administrar lista de usuarios" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<app-pagetitle title="Listado de afiliados" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 <!-- end page title -->
 
 <div class="row">
@@ -17,40 +17,22 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                                <th>Roles</th>
                                                 <th>Member since</th>
                                                 <th style="width: 80px; min-width: 80px;">Action</th>
                                             </tr><!-- end tr -->
                                         </thead><!-- end thead -->
                                         <tbody>
-                                            <tr *ngFor="let user of users">
+                                            <tr *ngFor="let affiliate of affiliates">
                                                 <td>
-                                                    <a [routerLink]="['/user/user-administration', user.id]"
-                                                        class="text-body fw-medium">
-                                                        @if(user?.profile?.avatar){
-                                                        <img src="{{user.profile.avatar}}" alt=""
-                                                            class="avatar-sm rounded-circle me-2">
-                                                        }@else{
-                                                        <img src="assets/images/users/avatar.png" alt="Avatar"
-                                                            class="rounded-circle header-profile-user">
-                                                        }
-
-                                                        {{user.profile.firstName}} {{user.profile.lastName}}
+                                                    <a routerLink="/pages/profile" class="text-body fw-medium">
+                                                        {{affiliate.name}}
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    {{user.email}}
+                                                    {{affiliate.updateDate | date}}
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex gap-2">
-                                                        <span *ngFor="let role of user.roles"
-                                                            class="badge badge-secondary-subtle">
-                                                            {{role}}
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    {{user.createdAt | date}}
+                                                    {{affiliate.created | date}}
                                                 </td>
                                                 <td>
                                                     <div class="dropdown" ngbDropdown>
@@ -85,7 +67,7 @@
                                     <div class="col-sm-12 col-md-5">
                                         <div class="text-md-right float-md-end pagination-rounded">
                                             <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="limit"
-                                                (pageChange)="fetchUsers()">
+                                                (pageChange)="fetchCommerces()">
                                             </ngb-pagination>
                                         </div>
                                     </div>

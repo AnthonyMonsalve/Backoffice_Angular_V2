@@ -1,0 +1,101 @@
+<!-- start page title -->
+<app-pagetitle title="Administración de usuario" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<!-- end page title -->
+
+<div class="row">
+    @if(user && user.profile){
+    <div class="col-xxl-3 col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="profile-bg position-relative overflow-hidden rounded-top" style="height: 100px;">
+                    <div class="bg-overlay bg-dark bg-gradient"></div>
+                </div>
+                <div class="text-center">
+                    <div class="position-relative d-inline-block mx-auto mt-n5 mb-4">
+                        <div class="avatar-lg">
+                            @if(user.profile.avatar){
+                            <img class="rounded-circle img-thumbnail" src={{user.profile.avatar}} alt="Avatar">
+                            }@else{
+                            <img class="rounded-circle img-thumbnail" src="assets/images/users/avatar.png" alt="Avatar">
+                            }
+                        </div>
+                    </div>
+
+                    <h5 class="font-size-16 mb-1">{{user.profile.firstName}} {{user.profile.lastName}}</h5>
+                </div>
+                <hr class="my-4">
+                <div>
+                    <div class="mt-4">
+                        <p class="text-muted mb-1">Name :</p>
+                        <h5 class="font-size-14 text-truncate">{{user.profile.firstName}} {{user.profile.lastName}}
+                        </h5>
+                    </div>
+
+                    <div class="mt-4">
+                        <p class="text-muted mb-1">E-mail :</p>
+                        <h5 class="font-size-14 text-truncate">{{user.email}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+    @if(user && user.roles){
+    <div class="col-xxl-9 col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <form (ngSubmit)="onSubmit()">
+                    <div class="card border shadow-none mb-3">
+                        <div class="card-header d-flex align-items-center">
+                            <div class="flex-shrink-0 me-3">
+                                <div class="avatar-sm">
+                                    <div class="avatar-title rounded-circle bg-primary-subtle text-primary">
+                                        01
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h5 class="card-title">Asignar roles</h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <div>
+                                    <label for="choices-multiple-role-input" class="form-label">Roles</label>
+                                    <ng-select [items]="roleOptions" [multiple]="true" [(ngModel)]="user.roles"
+                                        name="roles"></ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header d-flex align-items-center">
+                            <div class="flex-shrink-0 me-3">
+                                <div class="avatar-sm">
+                                    <div class="avatar-title rounded-circle bg-primary-subtle text-primary">
+                                        02
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h5 class="card-title">Activar/Desactivar usuario</h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-check form-switch form-switch-lg mb-0" dir="ltr">
+                                <input type="checkbox" class="form-check-input" id="customSwitchsizelg"
+                                    [checked]="user.isActive" (change)="onToggleActive()">
+                                <label class="form-check-label" for="customSwitchsizelg">
+                                    {{ user.isActive ? 'Activar' : 'Desactivar' }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-start">
+                        <button type="submit" class="btn btn-primary w-sm">Actualizar usuario</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    }
+</div>

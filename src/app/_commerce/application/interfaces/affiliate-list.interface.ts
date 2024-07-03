@@ -1,6 +1,7 @@
 import { Affiliate } from '../../domain/models/affiliate.model';
+import { Metadata } from '../../domain/models/metadata.model';
 
 export interface AffiliateList {
-  count: number;
+  metadata: Metadata;
   data: Affiliate[];
 }

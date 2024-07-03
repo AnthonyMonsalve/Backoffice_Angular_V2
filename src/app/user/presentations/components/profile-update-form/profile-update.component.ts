@@ -16,7 +16,7 @@ import { UserStateService } from '../../../application/services/user-state.servi
   templateUrl: './profile-update.component.html',
 })
 export class ProfileUpdateFormComponent implements OnInit, OnChanges {
-  @Input() user: User | null = null;
+  @Input() user!: User;
   profileForm!: FormGroup;
   submit: boolean = false;
 
@@ -73,7 +73,7 @@ export class ProfileUpdateFormComponent implements OnInit, OnChanges {
             ...this.user,
             profile: { ...this.user?.profile, ...response.profile },
           };
-          this.userStateService.setUser(updatedUser);
+          this.userStateService.setUser(this.user);
         },
         (error) => {
           console.error('Error al actualizar el perfil', error);

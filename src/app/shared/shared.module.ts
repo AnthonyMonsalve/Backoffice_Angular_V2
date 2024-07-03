@@ -4,12 +4,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { PagetitleComponent } from './components/pagetitle/pagetitle.component';
 import { Basic404Component } from './pages/basic404/basic404.component';
+import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
 import { AbbreviateNumberPipe } from './pipes/abbreviate-number.pipe';
 import {} from './shared-routing.module';
 import { WidgetModule } from './widget/widget.module';
 
 @NgModule({
-  declarations: [PagetitleComponent, AbbreviateNumberPipe, Basic404Component],
+  declarations: [
+    PagetitleComponent,
+    AbbreviateNumberPipe,
+    UnauthorizedComponent,
+    Basic404Component,
+  ],
   imports: [CommonModule, WidgetModule, RouterModule],
   exports: [PagetitleComponent, AbbreviateNumberPipe],
 })

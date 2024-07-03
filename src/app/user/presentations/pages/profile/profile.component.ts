@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   blogs!: blogModel[];
   type: string = 'component';
   show: boolean = true;
-  user: User | null = null;
+  user!: User;
 
   constructor(private userStateService: UserStateService) {}
 
@@ -22,7 +22,9 @@ export class ProfileComponent implements OnInit {
     this._fetchData();
 
     this.userStateService.user$.subscribe((user) => {
-      this.user = user;
+      if (user) {
+        this.user = user;
+      }
     });
   }
 

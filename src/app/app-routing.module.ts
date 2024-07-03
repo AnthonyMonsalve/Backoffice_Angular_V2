@@ -5,6 +5,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 
 import { LayoutComponent } from '@shared/layouts/layout.component';
 import { Basic404Component } from '@shared/pages/basic404/basic404.component';
+import { UnauthorizedComponent } from '@shared/pages/unauthorized/unauthorized.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,10 @@ const routes: Routes = [
     path: 'account',
     loadChildren: () =>
       import('./account/account.module').then((m) => m.AccountModule),
+  },
+  {
+    path: 'unauthorized', // Ruta para la página de no autorizado
+    component: UnauthorizedComponent,
   },
   {
     path: '**',

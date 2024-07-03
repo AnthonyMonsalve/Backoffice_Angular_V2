@@ -12,11 +12,13 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { UserRoutingModule } from './user-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { PasswordUpdateFormComponent } from './presentations/components/password-update-form/password-update.component';
 import { ProfileUpdateFormComponent } from './presentations/components/profile-update-form/profile-update.component';
 import { UserActionsComponent } from './presentations/components/user-actions/user-actions.component';
 import { ProfileComponent } from './presentations/pages/profile/profile.component';
 import { UserListComponent } from './presentations/pages/user-list/user-list.component';
+import { UserSettingsComponent } from './presentations/pages/user-settings/user-settings.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { UserListComponent } from './presentations/pages/user-list/user-list.com
     ProfileUpdateFormComponent,
     PasswordUpdateFormComponent,
     UserActionsComponent,
+    UserSettingsComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +39,7 @@ import { UserListComponent } from './presentations/pages/user-list/user-list.com
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgSelectModule,
   ],
   providers: [DecimalPipe],
 })

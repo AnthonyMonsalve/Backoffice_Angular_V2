@@ -14,8 +14,10 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/users/${id}`);
+  getUser(id: string): Observable<any> {
+    return this.http.get<User>(`${this.apiUrl}/api/users/${id}`, {
+      context: checkToken(),
+    });
   }
 
   updateUser(user: any): Observable<any> {
@@ -52,6 +54,16 @@ export class UserService {
 
   getProfile(): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/api/auth/profile-user/`, {
+      context: checkToken(),
+    });
+  }
+
+  // Nuevo método para actualizar el estado y roles de un usuario
+  updateUserStatusAndRoles(
+    id: string,
+    updateData: { isActive: boolean; roles: string[] }
+  ): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}/api/auth/${id}`, updateData, {
       context: checkToken(),
     });
   }

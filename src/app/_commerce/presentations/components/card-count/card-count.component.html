@@ -1,17 +1,19 @@
-<div class="card">
-  <div class="card-body">
-    <div class="d-flex align-items-center">
-      <div class="flex-shrink-0 me-3">
-        <div class="avatar-sm">
-          <div class="avatar-title bg-primary-subtle text-primary rounded-circle font-size-18">
-            <i class="{{ icon }}"></i> <!-- Usar ícono pasado por @Input -->
+<a routerLink="{{ link }}">
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex align-items-center">
+        <div class="flex-shrink-0 me-3">
+          <div class="avatar-sm">
+            <div class="avatar-title bg-primary-subtle text-primary rounded-circle font-size-18">
+              <i class="{{ icon }}"></i> <!-- Usar ícono pasado por @Input -->
+            </div>
           </div>
         </div>
+        <div class="flex-grow-1 overflow-hidden">
+          <p class="mb-1 text-truncate text-muted">{{ title }}</p> <!-- Usar título pasado por @Input -->
+          <h5 class="font-size-16 mb-0">{{ count }}</h5> <!-- Usar contador pasado por @Input -->
+        </div>
       </div>
-      <div class="flex-grow-1 overflow-hidden">
-        <p class="mb-1 text-truncate text-muted">{{ title }}</p> <!-- Usar título pasado por @Input -->
-        <h5 class="font-size-16 mb-0">{{ count }}</h5> <!-- Usar contador pasado por @Input -->
-      </div>
-    </div>
-  </div><!-- end card body -->
-</div><!-- end card -->
+    </div><!-- end card body -->
+  </div><!-- end card -->
+</a>

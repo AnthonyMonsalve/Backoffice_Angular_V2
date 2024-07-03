@@ -44,8 +44,14 @@ export class MerchantService {
     );
   }
 
-  getListAffiliates(): Observable<AffiliateList> {
-    const params = new HttpParams().set('origen', 'Merchant');
+  getListAffiliates(
+    page: number = 1,
+    limit: number = 10
+  ): Observable<AffiliateList> {
+    const params = new HttpParams()
+      .set('search', 'Merchant')
+      .set('page', page.toString())
+      .set('limit', limit.toString());
     return this.http.get<AffiliateList>(`${this.apiUrl}/api/affiliates/list`, {
       context: checkToken(),
       params,

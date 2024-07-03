@@ -383,8 +383,10 @@
                     <img class="rounded-circle header-profile-user" src="assets/images/users/avatar.png" alt="Avatar">
                     }
                     <span class="ms-2 d-none d-sm-block user-item-desc">
-                        <span class="user-name">{{user?.profile?.firstName}} {{user?.profile?.lastName}}</span>
-                        <span class="user-sub-title">{{user?.roles}}</span>
+                        <span class="user-name mb-1">{{user?.profile?.firstName}} {{user?.profile?.lastName}}</span>
+                        <span *ngFor="let role of user?.roles" class="badge badge-secondary-subtle me-1 p-1">
+                            {{role}}
+                        </span>
                     </span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end pt-0" ngbDropdownMenu>

@@ -7,7 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CardCountComponent implements OnInit {
   @Input() title: string = ''; // Título para la tarjeta
   @Input() icon: string = ''; // Ícono para mostrar
-  @Input() count: number = 0; // Contador para mostrar
+  @Input() count: number = 0;
+  @Input() link: string = '/'; // Contador para mostrar
 
   constructor() {}
 

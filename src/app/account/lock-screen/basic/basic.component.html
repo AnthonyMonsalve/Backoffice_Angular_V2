@@ -13,13 +13,15 @@
                             </a>
                         </div>
                         <div class="user-thumb mb-4 mb-md-5">
-                            @if(user?.profile?.avatar){
-                            <img class="rounded-circle header-profile-user" src={{user?.profile?.avatar}} alt="Avatar">
+                            @if(currentUser?.profile?.avatar){
+                            <img class="rounded-circle header-profile-user" src={{currentUser?.profile?.avatar}}
+                                alt="Avatar">
                             }@else{
                             <img class="rounded-circle header-profile-user" src="assets/images/users/avatar.png"
                                 alt="Avatar">
                             }
-                            <h5 class="font-size-16 mt-3">{{user?.profile?.firstName}} {{user?.profile?.lastName}}</h5>
+                            <h5 class="font-size-16 mt-3">{{currentUser?.profile?.firstName}}
+                                {{currentUser?.profile?.lastName}}</h5>
                         </div>
                         <form [formGroup]="lockscreenForm" (ngSubmit)="onSubmit()">
 

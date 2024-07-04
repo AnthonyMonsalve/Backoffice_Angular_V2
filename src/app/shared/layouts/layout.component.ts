@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 
+import { User } from 'src/app/core/models/auth.models';
 import { AuthenticationService } from '../../core/services/auth.service';
 import { EventService } from '../../core/services/event.service';
 import {
@@ -31,6 +32,7 @@ export class LayoutComponent implements OnInit {
   topbar!: string;
   sidebarcolor!: string;
   sidebarsize!: string;
+  currentUser: User | null = null;
 
   constructor(
     private eventService: EventService,
@@ -85,7 +87,7 @@ export class LayoutComponent implements OnInit {
       this.SidebarColor(this.sidebarcolor);
     });
 
-    this.authService.currentUser().subscribe(() => {});
+    this.authService.currentUser.subscribe((user) => (this.currentUser = user));
   }
 
   /**

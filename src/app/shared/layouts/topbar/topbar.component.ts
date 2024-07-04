@@ -25,7 +25,7 @@ export class TopbarComponent implements OnInit {
   cookieValue: any;
   countryName: any;
   valueset: any;
-  user: User | null = null;
+  currentUser: User | null = null;
 
   @Output() mobileMenuButtonClicked = new EventEmitter();
 
@@ -63,9 +63,7 @@ export class TopbarComponent implements OnInit {
       this.flagvalue = val.map((element) => element.flag);
     }
 
-    this.authService.user$.subscribe((user) => {
-      this.user = user;
-    });
+    this.authService.currentUser.subscribe((user) => (this.currentUser = user));
   }
 
   /***

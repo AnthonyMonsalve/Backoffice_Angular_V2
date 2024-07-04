@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserStateService } from '@user/application/services/user-state.service';
+import { CanActivate, Router } from '@angular/router';
+import { AuthenticationService } from '@services/auth.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AdminGuard {
+export class AdminGuard implements CanActivate {
   constructor(
-    private userStateService: UserStateService,
+    private authService: AuthenticationService,
     private router: Router
   ) {}
 
   canActivate(): Observable<boolean> {
-    return this.userStateService.user$.pipe(
+    return this.authService.currentUser.pipe(
       map((user) => {
         if (user && user.roles.includes('ADMIN')) {
           return true;
         } else {
-          this.router.navigate(['/unauthorized']); // Redirigir a una página de no autorizado
+          this.router.navigate(['/unauthorized']); // Redirige a una página de acceso denegado
           return false;
         }
       })

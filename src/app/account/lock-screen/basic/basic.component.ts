@@ -22,7 +22,7 @@ export class BasicComponent implements OnInit {
   year: number = new Date().getFullYear();
   submitted = false;
   lockscreenForm!: UntypedFormGroup;
-  user: User | null = null;
+  currentUser: User | null = null;
 
   constructor(
     private router: Router,
@@ -38,11 +38,7 @@ export class BasicComponent implements OnInit {
       password: ['', Validators.required],
     });
 
-    this.authService.currentUser().subscribe(() => {});
-
-    this.authService.user$.subscribe((user) => {
-      this.user = user;
-    });
+    this.authService.currentUser.subscribe((user) => (this.currentUser = user));
   }
 
   // convenience getter for easy access to form fields

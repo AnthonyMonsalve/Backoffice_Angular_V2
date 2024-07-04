@@ -7,7 +7,6 @@ import { User } from '../../../core/models/auth.models';
 import { AuthenticationService } from '../../../core/services/auth.service';
 import { LanguageService } from '../../../core/services/language.service';
 
-import { UserStateService } from '../../../user/application/services/user-state.service'; // Importar UserStateService
 import { LAYOUT_MODE } from '../layouts.model';
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
@@ -27,7 +26,7 @@ export class HorizontaltopbarComponent implements OnInit {
   cookieValue: any;
   countryName: any;
   valueset: any;
-  user: User | null = null;
+  currentUser: User | null = null;
 
   listLang = [
     { text: 'Spanish', flag: 'assets/images/flags/spain.jpg', lang: 'es' },
@@ -45,8 +44,7 @@ export class HorizontaltopbarComponent implements OnInit {
     public translate: TranslateService,
     public languageService: LanguageService,
     public _cookiesService: CookieService,
-    private authService: AuthenticationService,
-    private userStateService: UserStateService // Inyectar UserStateService
+    private authService: AuthenticationService
   ) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -77,9 +75,7 @@ export class HorizontaltopbarComponent implements OnInit {
       this.flagvalue = val.map((element) => element.flag);
     }
 
-    this.userStateService.user$.subscribe((user) => {
-      this.user = user;
-    });
+    this.authService.currentUser.subscribe((user) => (this.currentUser = user));
   }
 
   initialize(): void {

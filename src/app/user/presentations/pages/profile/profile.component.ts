@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '@services/auth.service';
 import { User } from 'src/app/core/models/auth.models';
-import { UserStateService } from '../../../application/services/user-state.service';
 import { blogs, slides } from './data';
 import { blogModel, slideModel } from './profile.model';
 
@@ -14,18 +14,13 @@ export class ProfileComponent implements OnInit {
   blogs!: blogModel[];
   type: string = 'component';
   show: boolean = true;
-  user!: User;
+  currentUser: User | null = null;
 
-  constructor(private userStateService: UserStateService) {}
+  constructor(private authService: AuthenticationService) {}
 
   ngOnInit(): void {
     this._fetchData();
-
-    this.userStateService.user$.subscribe((user) => {
-      if (user) {
-        this.user = user;
-      }
-    });
+    this.authService.currentUser.subscribe((user) => (this.currentUser = user));
   }
 
   private _fetchData() {

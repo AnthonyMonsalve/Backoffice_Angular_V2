@@ -245,8 +245,8 @@
                         <a href="" class="text-reset notification-item">
                             <div class="d-flex border-bottom align-items-start">
                                 <div class="flex-shrink-0">
-                                    @if(user?.profile?.avatar){
-                                    <img class="me-3 rounded-circle avatar-sm" src={{user?.profile?.avatar}}
+                                    @if(currentUser?.profile?.avatar){
+                                    <img class="me-3 rounded-circle avatar-sm" src={{currentUser?.profile?.avatar}}
                                         alt="Avatar">
                                     }@else{
                                     <img class="me-3 rounded-circle avatar-sm" src="assets/images/users/avatar.png"
@@ -316,8 +316,8 @@
                         <a href="" class="text-reset notification-item">
                             <div class="d-flex border-bottom align-items-start">
                                 <div class="flex-shrink-0">
-                                    @if(user?.profile?.avatar){
-                                    <img class="me-3 rounded-circle avatar-sm" src={{user?.profile?.avatar}}
+                                    @if(currentUser?.profile?.avatar){
+                                    <img class="me-3 rounded-circle avatar-sm" src={{currentUser?.profile?.avatar}}
                                         alt="Avatar">
                                     }@else{
                                     <img class="me-3 rounded-circle avatar-sm" src="assets/images/users/avatar.png"
@@ -358,22 +358,24 @@
                 <button type="button" class="btn header-item user text-start d-flex align-items-center"
                     id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                     ngbDropdownToggle>
-                    @if(user?.profile?.avatar){
-                    <img class="rounded-circle header-profile-user" src={{user?.profile?.avatar}} alt="Avatar">
+                    @if(currentUser?.profile?.avatar){
+                    <img class="rounded-circle header-profile-user" src={{currentUser?.profile?.avatar}} alt="Avatar">
                     }@else{
                     <img class="rounded-circle header-profile-user" src="assets/images/users/avatar.png" alt="Avatar">
                     }
                     <span class="ms-2 d-none d-sm-block user-item-desc">
-                        <span class="user-name">{{user?.profile?.firstName}} {{user?.profile?.lastName}}</span>
-                        <span *ngFor="let role of user?.roles" class="badge badge-secondary-subtle me-1 p-1">
+                        <span class="user-name">{{currentUser?.profile?.firstName}}
+                            {{currentUser?.profile?.lastName}}</span>
+                        <span *ngFor="let role of currentUser?.roles" class="badge badge-secondary-subtle me-1 p-1">
                             {{role}}
                         </span>
                     </span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end pt-0" ngbDropdownMenu>
                     <div class="p-3 bg-primary border-bottom">
-                        <h6 class="mb-0 text-white">{{user?.profile?.firstName}} {{user?.profile?.lastName}}</h6>
-                        <p class="mb-0 font-size-11 text-white-50 fw-semibold">{{user?.email}}</p>
+                        <h6 class="mb-0 text-white">{{currentUser?.profile?.firstName}}
+                            {{currentUser?.profile?.lastName}}</h6>
+                        <p class="mb-0 font-size-11 text-white-50 fw-semibold">{{currentUser?.email}}</p>
                     </div>
                     <a class="dropdown-item" routerLink="/user/profile"><i
                             class="mdi mdi-account-circle text-muted font-size-16 align-middle me-1"></i> <span

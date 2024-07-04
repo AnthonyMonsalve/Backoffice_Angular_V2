@@ -3,8 +3,7 @@
 <!-- end page title -->
 
 <div class="row">
-    @if(user && user.profile){
-    <div class="col-xxl-3 col-lg-4">
+    <div *ngIf="user && user.profile" class="col-xxl-3 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <div class="profile-bg position-relative overflow-hidden rounded-top" style="height: 100px;">
@@ -13,36 +12,31 @@
                 <div class="text-center">
                     <div class="position-relative d-inline-block mx-auto mt-n5 mb-4">
                         <div class="avatar-lg">
-                            @if(user.profile.avatar){
-                            <img class="rounded-circle img-thumbnail" src={{user.profile.avatar}} alt="Avatar">
-                            }@else{
-                            <img class="rounded-circle img-thumbnail" src="assets/images/users/avatar.png" alt="Avatar">
-                            }
+                            <img class="rounded-circle img-thumbnail" *ngIf="user.profile.avatar"
+                                [src]="user.profile.avatar" alt="Avatar">
+                            <img class="rounded-circle img-thumbnail" *ngIf="!user.profile.avatar"
+                                src="assets/images/users/avatar.png" alt="Avatar">
                         </div>
                     </div>
-
-                    <h5 class="font-size-16 mb-1">{{user.profile.firstName}} {{user.profile.lastName}}</h5>
+                    <h5 class="font-size-16 mb-1">{{ user.profile.firstName }} {{ user.profile.lastName }}</h5>
                 </div>
                 <hr class="my-4">
                 <div>
                     <div class="mt-4">
                         <p class="text-muted mb-1">Name :</p>
-                        <h5 class="font-size-14 text-truncate">{{user.profile.firstName}} {{user.profile.lastName}}
+                        <h5 class="font-size-14 text-truncate">{{ user.profile.firstName }} {{ user.profile.lastName }}
                         </h5>
                     </div>
-
                     <div class="mt-4">
                         <p class="text-muted mb-1">E-mail :</p>
-                        <h5 class="font-size-14 text-truncate">{{user.email}}</h5>
+                        <h5 class="font-size-14 text-truncate">{{ user.email }}</h5>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    }
 
-    @if(user && user.roles){
-    <div class="col-xxl-9 col-lg-8">
+    <div *ngIf="user && user.roles" class="col-xxl-9 col-lg-8">
         <div class="card">
             <div class="card-body">
                 <form (ngSubmit)="onSubmit()">
@@ -61,11 +55,15 @@
                         </div>
                         <div class="card-body">
                             <div>
-                                <div>
-                                    <label for="choices-multiple-role-input" class="form-label">Roles</label>
-                                    <ng-select [items]="roleOptions" [multiple]="true" [(ngModel)]="user.roles"
-                                        name="roles"></ng-select>
-                                </div>
+                                <label for="choices-multiple-role-input" class="form-label">Roles</label>
+                                <ng-select [items]="roleOptions" [multiple]="true" [(ngModel)]="user.roles" name="roles"
+                                    [closeOnSelect]="false" bindLabel="name" bindValue="name">
+                                    <ng-template ng-option-tmp let-item="item">
+                                        <div [class.disabled]="isRoleDisabled(item.name)">
+                                            {{ item.name }}
+                                        </div>
+                                    </ng-template>
+                                </ng-select>
                             </div>
                         </div>
                         <div class="card-header d-flex align-items-center">
@@ -97,5 +95,4 @@
             </div>
         </div>
     </div>
-    }
 </div>

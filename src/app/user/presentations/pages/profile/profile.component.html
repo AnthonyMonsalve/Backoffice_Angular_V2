@@ -17,12 +17,13 @@
         <div class="card mt-n5">
             <div class="card-body text-center">
                 <div class="avatar-xl mx-auto mb-4">
-                    <img *ngIf="user.profile.avatar" class="rounded-circle img-thumbnail" [src]="user.profile.avatar"
-                        alt="Avatar">
-                    <img *ngIf="!user.profile.avatar" class="rounded-circle img-thumbnail"
-                        src="assets/images/users/avatar.png" alt="Avatar">
+                    @if(currentUser?.profile?.avatar){
+                    <img class="rounded-circle img-thumbnail" [src]="currentUser?.profile?.avatar" alt="Avatar">
+                    }@else{
+                    <img class="rounded-circle img-thumbnail" src="assets/images/users/avatar.png" alt="Avatar">
+                    }
                 </div>
-                <h5 class="mb-1">{{user.profile.firstName}} {{user.profile.lastName}}</h5>
+                <h5 class="mb-1">{{currentUser?.profile?.firstName}} {{currentUser?.profile?.lastName}}</h5>
             </div>
         </div>
 
@@ -30,7 +31,7 @@
             <div class="card-body">
                 <h5 class="card-title mb-4">Roles</h5>
                 <div class="d-flex flex-wrap gap-2 font-size-16">
-                    <span *ngFor="let role of user?.roles"
+                    <span *ngFor="let role of currentUser?.roles"
                         class="badge font-size-13 p-2 badge-secondary-subtle me-1 p-1">
                         {{role}}
                     </span>
@@ -42,7 +43,7 @@
 
     <div class="col-xl-4 col-md-6 col-sm-12">
         <div>
-            <app-profile-update-form [user]="user"></app-profile-update-form>
+            <app-profile-update-form></app-profile-update-form>
         </div>
     </div>
     <div class="col-xl-4 col-md-6 col-sm-12">

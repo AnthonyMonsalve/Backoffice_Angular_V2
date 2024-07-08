@@ -17,7 +17,7 @@ export class MerchantService {
   constructor(private http: HttpClient) {}
 
   getOverviewTerminalsStatus(): Observable<Overview> {
-    const params = new HttpParams().set('origen', 'Merchant');
+    const params = new HttpParams().set('search', 'Merchant');
     return this.http.get<Overview>(
       `${this.apiUrl}/api/terminal-states/overview`,
       {

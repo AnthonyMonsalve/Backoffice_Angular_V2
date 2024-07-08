@@ -7,6 +7,7 @@ export class Affiliate {
   idMerchant: string;
   diasDiferido: number;
   idAffiliateMaster: string;
+  nameAffiliateMaster: string;
   idBank: number;
   affiliateMasterSK: number;
   origen: string;
@@ -21,6 +22,7 @@ export class Affiliate {
     idMerchant: string,
     diasDiferido: number,
     idAffiliateMaster: string,
+    nameAffiliateMaster: string,
     idBank: number,
     affiliateMasterSK: number,
     origen: string,
@@ -34,6 +36,7 @@ export class Affiliate {
     this.idMerchant = idMerchant.toLowerCase();
     this.diasDiferido = diasDiferido;
     this.idAffiliateMaster = idAffiliateMaster.toLowerCase();
+    this.nameAffiliateMaster = nameAffiliateMaster.toLowerCase();
     this.idBank = idBank;
     this.affiliateMasterSK = affiliateMasterSK;
     this.origen = origen.toLowerCase();

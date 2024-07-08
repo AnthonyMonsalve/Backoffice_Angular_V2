@@ -12,6 +12,7 @@ export class AffiliateMaster {
   updateDate: Date;
   status: number;
   origen: string;
+  numAffiliates: number;
 
   constructor(
     affiliateMasterSK: number,
@@ -26,7 +27,8 @@ export class AffiliateMaster {
     chargeEnable: number,
     updateDate: Date,
     status: number,
-    origen: string
+    origen: string,
+    numAffiliates: number
   ) {
     this.affiliateMasterSK = affiliateMasterSK;
     this.idAffiliateMaster = idAffiliateMaster;
@@ -41,5 +43,6 @@ export class AffiliateMaster {
     this.updateDate = updateDate;
     this.status = status;
     this.origen = origen;
+    this.numAffiliates = numAffiliates;
   }
 }

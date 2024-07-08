@@ -12,7 +12,8 @@ export class AffiliateDetailComponent implements OnInit {
 
   breadCrumbItems: Array<{}> = [
     { label: 'Insta Comercio' },
-    { label: 'Afiliados', active: true },
+    { label: 'Afiliados' },
+    { label: 'Detalle', active: true },
   ];
 
   constructor(

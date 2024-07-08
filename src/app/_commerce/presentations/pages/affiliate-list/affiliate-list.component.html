@@ -16,6 +16,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
+                                                <th>Commercio</th>
                                                 <th>Email</th>
                                                 <th>Member since</th>
                                                 <th style="width: 80px; min-width: 80px;">Action</th>
@@ -26,6 +27,11 @@
                                                 <td>
                                                     <a [routerLink]="['/commerce/affiliate-detail', affiliate.affiliatesSK]" class="text-body fw-medium">
                                                         {{affiliate.name}}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a routerLink="/pages/profile" class="text-body fw-medium">
+                                                        {{affiliate.nameAffiliateMaster | titlecase}}
                                                     </a>
                                                 </td>
                                                 <td>

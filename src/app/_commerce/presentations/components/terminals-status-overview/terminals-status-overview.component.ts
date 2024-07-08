@@ -26,10 +26,13 @@ export class TerminalsStatusOverviewComponent implements OnInit {
   }
 
   private updateChartData(data: Overview): void {
-    this.donutChart.series = [data.activeCount, data.inactiveCount];
+    this.donutChart.series = [
+      data.terminalActiveCount,
+      data.terminalInactiveCount,
+    ];
     this.donutChart.labels = ['Activos', 'Inactivos'];
     this.donutChart.colors = ['#038edc', '#263375'];
-    this.countTerminals = data.count;
+    this.countTerminals = data.terminalCount;
   }
 
   private getInitialDonutChartConfig(): ChartType {

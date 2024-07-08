@@ -32,7 +32,7 @@ const routes: Routes = [
     path: 'commerce-detail/:sk',
     title: 'Commerce Detail',
     component: AffiliateMasterDetailComponent,
-  }
+  },
 ];
 
 @NgModule({

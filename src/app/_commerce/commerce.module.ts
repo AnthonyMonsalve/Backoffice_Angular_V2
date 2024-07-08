@@ -17,12 +17,16 @@ import { ClosuresDataChartComponent } from './presentations/components/closures-
 import { AffiliateListComponent } from './presentations/pages/affiliate-list/affiliate-list.component';
 import { CommerceListComponent } from './presentations/pages/commerce-list/commerce-list.component';
 import { SummaryCommerceComponent } from './presentations/pages/summary/summary.component';
+import { AffiliateDetailComponent } from './presentations/pages/affiliate-detail/affiliate-detail.component';
+import { AffiliateMasterDetailComponent } from './presentations/pages/commerce-detail/commerce-detail.component';
 
 @NgModule({
   declarations: [
     SummaryCommerceComponent,
     CommerceListComponent,
     AffiliateListComponent,
+    AffiliateDetailComponent,
+    AffiliateMasterDetailComponent,
     TerminalsStatusOverviewComponent,
     CardCountComponent,
     ClosuresDataChartComponent,

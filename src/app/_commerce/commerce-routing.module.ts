@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AffiliateListComponent } from './presentations/pages/affiliate-list/affiliate-list.component';
 import { CommerceListComponent } from './presentations/pages/commerce-list/commerce-list.component';
 import { SummaryCommerceComponent } from './presentations/pages/summary/summary.component';
+import { AffiliateDetailComponent } from './presentations/pages/affiliate-detail/affiliate-detail.component';
+import { AffiliateMasterDetailComponent } from './presentations/pages/commerce-detail/commerce-detail.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,16 @@ const routes: Routes = [
     title: 'Affiliate List',
     component: AffiliateListComponent,
   },
+  {
+    path: 'affiliate-detail/:sk',
+    title: 'Affiliate Detail',
+    component: AffiliateDetailComponent,
+  },
+  {
+    path: 'commerce-detail/:sk',
+    title: 'Commerce Detail',
+    component: AffiliateMasterDetailComponent,
+  }
 ];
 
 @NgModule({

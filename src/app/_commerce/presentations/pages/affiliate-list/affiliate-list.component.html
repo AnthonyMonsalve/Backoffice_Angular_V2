@@ -24,7 +24,7 @@
                                         <tbody>
                                             <tr *ngFor="let affiliate of affiliates">
                                                 <td>
-                                                    <a routerLink="/pages/profile" class="text-body fw-medium">
+                                                    <a [routerLink]="['/commerce/affiliate-detail', affiliate.affiliatesSK]" class="text-body fw-medium">
                                                         {{affiliate.name}}
                                                     </a>
                                                 </td>

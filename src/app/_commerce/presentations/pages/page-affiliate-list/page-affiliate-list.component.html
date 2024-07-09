@@ -6,7 +6,9 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <app-affiliate-list [affiliates]="affiliates" [total]="total" [page]="page" [limit]="limit"
+                <app-affiliate-list [TitleNotFound]="'Cargando afiliaciones...'"
+                    [MessageNotFound]="'No se pudieron obtener las afiliaciones. Si crees que esto es un error, por favor, actualiza la página o contacta al soporte.'"
+                    [affiliates]="affiliates" [total]="total" [page]="page" [limit]="limit"
                     (pageChange)="onPageChange($event)">
                 </app-affiliate-list>
             </div><!-- end card body -->

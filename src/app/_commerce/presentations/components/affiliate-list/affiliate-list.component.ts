@@ -17,6 +17,8 @@ export class AffiliateListComponent implements OnChanges {
   @Input() total!: number;
   @Input() page!: number;
   @Input() limit!: number;
+  @Input() TitleNotFound!: string;
+  @Input() MessageNotFound!: string;
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
 
   ngOnChanges(changes: SimpleChanges): void {

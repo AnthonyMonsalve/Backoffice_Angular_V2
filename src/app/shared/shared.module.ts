@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
+import { CardMessageComponent } from './components/card-message/card-message.component';
 import { PagetitleComponent } from './components/pagetitle/pagetitle.component';
 import { PaginationListComponent } from './components/pagination-list/pagination-list.component';
 import { Basic404Component } from './pages/basic404/basic404.component';
@@ -14,11 +15,17 @@ import { WidgetModule } from './widget/widget.module';
   declarations: [
     PagetitleComponent,
     PaginationListComponent,
+    CardMessageComponent,
     AbbreviateNumberPipe,
     UnauthorizedComponent,
     Basic404Component,
   ],
   imports: [CommonModule, WidgetModule, RouterModule],
-  exports: [PagetitleComponent, PaginationListComponent, AbbreviateNumberPipe],
+  exports: [
+    PagetitleComponent,
+    PaginationListComponent,
+    CardMessageComponent,
+    AbbreviateNumberPipe,
+  ],
 })
 export class SharedModule {}

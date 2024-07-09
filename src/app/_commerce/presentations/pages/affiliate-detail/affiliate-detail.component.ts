@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '@user/application/services/user.service';
+import { AffiliateService } from '@services/affiliate.service';
 import { Affiliate } from 'src/app/_commerce/domain/models/affiliate.model';
 
 @Component({
@@ -18,20 +18,18 @@ export class AffiliateDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService
+    private affiliateService: AffiliateService
   ) {}
 
   ngOnInit(): void {
-    const affiliateId = this.route.snapshot.paramMap.get('sk');
+    const affiliateSK = this.route.snapshot.paramMap.get('sk');
 
-    if (affiliateId) {
-      this.userService
-        .getUser(affiliateId)
+    if (affiliateSK) {
+      this.affiliateService
+        .getAffiliate(affiliateSK)
         .subscribe((affiliate: Affiliate) => {
           this.affiliate = affiliate;
         });
-
-      console.log(affiliateId);
     }
   }
 }

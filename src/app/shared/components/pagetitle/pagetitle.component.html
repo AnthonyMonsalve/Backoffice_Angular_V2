@@ -2,7 +2,14 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-flex align-items-center justify-content-between">
+            @if(superTitle){
+            <div>
+                <h6 class="mb-1">{{superTitle}}</h6>
+                <h5 class="mb-0">{{title}}</h5>
+            </div>
+            }@else {
             <h4 class="mb-0">{{title}}</h4>
+            }
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">

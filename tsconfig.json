@@ -25,7 +25,8 @@
       "@services/*": ["./src/app/core/services/*"],
       "@shared/*": ["./src/app/shared/*"],
       "@user/*": ["./src/app/user/*"],
-      "@commerce/*": ["./src/app/commerce/*"]
+      "@commerce/*": ["./src/app/_commerce/*"],
+      "@core/*": ["./src/app/core/*"]
     },
     "useDefineForClassFields": false
   },

@@ -25,8 +25,9 @@
                                         <tbody>
                                             <tr *ngFor="let commerce of commerces">
                                                 <td>
-                                                    <a [routerLink]="['/commerce/commerce-detail', commerce.affiliateMasterSK]" class="text-body fw-medium">
-                                                        {{commerce.nombreComercial}}
+                                                    <a [routerLink]="['/commerce/commerce-detail', commerce.affiliateMasterSK]"
+                                                        class="text-body fw-medium">
+                                                        {{commerce.nombreComercial | titlecase}}
                                                     </a>
                                                 </td>
                                                 <td class="text-center">
@@ -72,9 +73,9 @@
                                     <!-- Pagination -->
                                     <div class="col-sm-12 col-md-5">
                                         <div class="text-md-right float-md-end pagination-rounded">
-                                            <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="limit"
-                                                (pageChange)="fetchCommerces()">
-                                            </ngb-pagination>
+                                            <app-pagination-list [total]="total" [page]="page" [limit]="limit"
+                                                (pageChange)="onPageChange($event)">
+                                            </app-pagination-list>
                                         </div>
                                     </div>
                                     <!-- End Pagination -->

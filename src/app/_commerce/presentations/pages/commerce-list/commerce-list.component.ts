@@ -35,4 +35,9 @@ export class CommerceListComponent implements OnInit {
         this.lastPage = data.metadata.lastPage;
       });
   }
+
+  onPageChange(newPage: number): void {
+    this.page = newPage;
+    this.fetchCommerces();
+  }
 }

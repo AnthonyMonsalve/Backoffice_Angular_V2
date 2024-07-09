@@ -1,0 +1,24 @@
+.pagination-container {
+  text-align: right;
+}
+
+.pagination {
+  display: inline-flex;
+  list-style-type: none;
+  padding: 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  cursor: pointer;
+  outline: none;
+  user-select: none
+}
+
+
+.page-item.active .page-link {
+  pointer-events: none;
+}

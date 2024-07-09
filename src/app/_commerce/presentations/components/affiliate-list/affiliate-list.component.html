@@ -1,0 +1,72 @@
+@if (affiliates.length === 0){
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card mb-0">
+      <div class="card-body">
+        <div class="text-center">
+          <img src="assets/images/empty.svg" alt="" height="90">
+          <h3>Sin afiliaciones asociadas</h3>
+          <p class="text-muted w-75 mx-auto">Este comercio no tiene afiliaciones asociadas</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+}@else {<div class="table-responsive datatables">
+  <table class="table align-middle table-nowrap table-check">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Commercio</th>
+        <th>Email</th>
+        <th>Member since</th>
+        <th style="width: 80px; min-width: 80px;">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let affiliate of affiliates">
+        <td>
+          <a [routerLink]="['/commerce/affiliate-detail', affiliate.affiliatesSK]" class="text-body fw-medium">
+            {{affiliate.name}}
+          </a>
+        </td>
+        <td>
+          <a routerLink="/pages/profile" class="text-body fw-medium">
+            {{affiliate.nameAffiliateMaster | titlecase}}
+          </a>
+        </td>
+        <td>
+          {{affiliate.updateDate | date}}
+        </td>
+        <td>
+          {{affiliate.created | date}}
+        </td>
+        <td>
+          <div class="dropdown" ngbDropdown>
+            <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false" ngbDropdownToggle>
+              <i class="uil uil-ellipsis-h"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+              <li><a class="dropdown-item" href="javascript:void(0);">Edit</a></li>
+              <li><a class="dropdown-item" href="javascript:void(0);">Print</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="row justify-content-md-between align-items-md-center mt-2">
+  <div class="col-sm-12 col-md-5">
+    <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+      Showing {{page}} to {{limit}} of {{total}} entries
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-5">
+    <div class="text-md-right float-md-end pagination-rounded">
+      <app-pagination-list [total]="total" [page]="page" [limit]="limit" (pageChange)="onPageChange($event)">
+      </app-pagination-list>
+    </div>
+  </div>
+</div>}

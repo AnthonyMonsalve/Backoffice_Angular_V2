@@ -1,0 +1,8 @@
+<div class="pagination-container">
+  <ul class="pagination">
+    <li class="page-item" *ngFor="let p of pages" [class.active]="p === page">
+      <a class="page-link" (click)="goToPage(p)" *ngIf="p > 0">{{ p }}</a>
+      <span class="page-link" *ngIf="p === -1">...</span>
+    </li>
+  </ul>
+</div>

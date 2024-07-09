@@ -5,9 +5,9 @@ import { Affiliate } from 'src/app/_commerce/domain/models/affiliate.model';
 
 @Component({
   selector: 'app-user-list',
-  templateUrl: './affiliate-list.component.html',
+  templateUrl: './page-affiliate-list.component.html',
 })
-export class AffiliateListComponent implements OnInit {
+export class PageAffiliateListComponent implements OnInit {
   affiliates: Affiliate[] = [];
   breadCrumbItems: Array<{}> = [
     { label: 'Insta Comercio' },
@@ -15,9 +15,8 @@ export class AffiliateListComponent implements OnInit {
   ];
   order: string = 'ASC';
   page: number = 1;
-  limit: number = 20;
+  limit: number = 10;
   total: number = 0;
-  lastPage: number = 1;
 
   constructor(private merchantService: MerchantService) {}
 
@@ -32,7 +31,11 @@ export class AffiliateListComponent implements OnInit {
         this.affiliates = data.data;
         this.total = data.metadata.total;
         this.page = data.metadata.page;
-        this.lastPage = data.metadata.lastPage;
       });
+  }
+
+  onPageChange(newPage: number): void {
+    this.page = newPage;
+    this.fetchCommerces();
   }
 }

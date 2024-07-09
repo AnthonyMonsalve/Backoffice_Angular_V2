@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { PagetitleComponent } from './components/pagetitle/pagetitle.component';
+import { PaginationListComponent } from './components/pagination-list/pagination-list.component';
 import { Basic404Component } from './pages/basic404/basic404.component';
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
 import { AbbreviateNumberPipe } from './pipes/abbreviate-number.pipe';
@@ -12,11 +13,12 @@ import { WidgetModule } from './widget/widget.module';
 @NgModule({
   declarations: [
     PagetitleComponent,
+    PaginationListComponent,
     AbbreviateNumberPipe,
     UnauthorizedComponent,
     Basic404Component,
   ],
   imports: [CommonModule, WidgetModule, RouterModule],
-  exports: [PagetitleComponent, AbbreviateNumberPipe],
+  exports: [PagetitleComponent, PaginationListComponent, AbbreviateNumberPipe],
 })
 export class SharedModule {}

@@ -9,7 +9,7 @@ export class CardTerminalComponent {
   @Input() terminal!: Terminal;
 
   getStatusClass(terminal: Terminal): string {
-    if (terminal.Active && terminal.Available) {
+    if (terminal.Active) {
       return 'bg-primary-subtle text-primary';
     }
     return 'bg-secondary-subtle text-secondary';

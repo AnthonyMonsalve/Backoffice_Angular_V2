@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
 
-import { User } from '../../../core/models/auth.models';
-import { AuthenticationService } from '../../../core/services/auth.service';
+import { User } from '@core/models/auth.models';
+import { AuthenticationService } from '@core/services/auth.service';
 
-import { LanguageService } from '../../../core/services/language.service';
+import { LanguageService } from '@core/services/language.service';
 
 @Component({
   selector: 'app-topbar',

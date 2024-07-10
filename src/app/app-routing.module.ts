@@ -10,7 +10,7 @@ import { UnauthorizedComponent } from '@shared/pages/unauthorized/unauthorized.c
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/reports/dashboard',
+    redirectTo: '/commerce/summary',
     pathMatch: 'full',
   },
   {

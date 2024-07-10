@@ -1,5 +1,5 @@
-import { AffiliateMaster } from '../../domain/models/affiliate-master.model';
-import { Metadata } from '../../domain/models/metadata.model';
+import { AffiliateMaster } from '@commerce/domain/models/affiliate-master.model';
+import { Metadata } from '@commerce/domain/models/metadata.model';
 
 export interface AffiliateMasterList {
   metadata: Metadata;

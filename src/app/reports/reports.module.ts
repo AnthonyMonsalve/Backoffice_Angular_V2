@@ -11,14 +11,10 @@ import { SimplebarAngularModule } from 'simplebar-angular';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 import { SharedModule } from '@shared/shared.module';
-import { ReportService } from './applications/services/report.service';
-import { ReportImpRepository } from './infrastructures/repositories/report.imp.repository';
-import { TerminalActivityComponent } from './presentations/components/terminal-activity/terminal-activity.component';
-import { DashboardReportComponent } from './presentations/pages/dashboard/dashboard.component';
 import { ReportsRoutingModule } from './reports-routing.module';
 
 @NgModule({
-  declarations: [DashboardReportComponent, TerminalActivityComponent],
+  declarations: [],
   imports: [
     CommonModule,
     SharedModule,
@@ -28,12 +24,6 @@ import { ReportsRoutingModule } from './reports-routing.module';
     SimplebarAngularModule,
     NgbAccordionModule,
   ],
-  providers: [
-    {
-      provide: 'ReportRepeeositoryInterface',
-      useClass: ReportImpRepository,
-    },
-    ReportService,
-  ],
+  providers: [],
 })
 export class ReportsModule {}

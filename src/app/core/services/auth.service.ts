@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { checkToken } from '@core/helpers/jwt.interceptor';
+import { TokenService } from '@core/services/token.service';
 import { environment_dev } from '@environments/environment.dev';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { checkToken } from '../../core/helpers/jwt.interceptor';
-import { TokenService } from '../../core/services/token.service';
 import { ResponseLogin } from '../interfaces/auth.interface';
 import { User } from '../models/auth.models';
 

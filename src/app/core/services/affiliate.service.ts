@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AffiliateList } from '@commerce/application/interfaces/affiliate-list.interface';
 import { Affiliate } from '@commerce/domain/models/affiliate.model';
 import { checkToken } from '@core/helpers/jwt.interceptor';
+import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
 import { environment_dev } from '@environments/environment.dev';
 import { Observable } from 'rxjs';
 

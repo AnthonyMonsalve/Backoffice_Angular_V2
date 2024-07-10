@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AffiliateList } from '@commerce/application/interfaces/affiliate-list.interface';
 import { AffiliateMaster } from '@commerce/domain/models/affiliate-master.model';
+import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
 import { AffiliateMasterService } from '@services/affiliate-master.service';
 import { AffiliateService } from '@services/affiliate.service';
 import { Affiliate } from 'src/app/_commerce/domain/models/affiliate.model';

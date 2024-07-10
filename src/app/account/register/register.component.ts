@@ -6,11 +6,11 @@ import {
 } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import { AuthenticationService } from '@core/services/auth.service';
+import { UserProfileService } from '@core/services/user.service';
 import { LAYOUT_MODE } from '@shared/layouts/layouts.model';
 import { User } from 'src/app/core/models/auth.models';
 import { RequestStatus } from 'src/app/core/models/request-status.model';
-import { AuthenticationService } from '../../core/services/auth.service';
-import { UserProfileService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-register',

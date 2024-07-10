@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AffiliateList } from 'src/app/_commerce/application/interfaces/affiliate-list.interface';
+import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
 import { MerchantService } from 'src/app/_commerce/application/services/data-merchant.service';
 import { Affiliate } from 'src/app/_commerce/domain/models/affiliate.model';
 

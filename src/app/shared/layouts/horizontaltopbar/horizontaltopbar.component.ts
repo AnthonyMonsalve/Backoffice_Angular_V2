@@ -1,11 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
+import { User } from '@core/models/auth.models';
+import { AuthenticationService } from '@core/services/auth.service';
+import { LanguageService } from '@core/services/language.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CookieService } from 'ngx-cookie-service';
-import { User } from '../../../core/models/auth.models';
-import { AuthenticationService } from '../../../core/services/auth.service';
-import { LanguageService } from '../../../core/services/language.service';
 
 import { LAYOUT_MODE } from '../layouts.model';
 import { MENU } from './menu';

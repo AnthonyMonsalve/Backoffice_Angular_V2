@@ -6,9 +6,9 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { RequestStatus } from '@core/models/request-status.model';
+import { AuthenticationService } from '@core/services/auth.service';
 import { LAYOUT_MODE } from '@shared/layouts/layouts.model';
-import { RequestStatus } from '../../core/models/request-status.model';
-import { AuthenticationService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',

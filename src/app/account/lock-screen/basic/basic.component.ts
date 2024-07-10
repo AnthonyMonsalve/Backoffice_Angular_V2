@@ -5,8 +5,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from '@core/models/auth.models';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
-import { User } from '../../../core/models/auth.models';
 
 @Component({
   selector: 'app-basic',

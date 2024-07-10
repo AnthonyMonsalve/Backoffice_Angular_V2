@@ -7,11 +7,11 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'app-pagination-list',
-  templateUrl: './pagination-list.component.html',
-  styleUrls: ['./pagination-list.component.scss'],
+  selector: 'app-table-pagination',
+  templateUrl: './table-pagination.component.html',
+  styleUrls: ['./table-pagination.component.scss'],
 })
-export class PaginationListComponent implements OnChanges {
+export class TablePaginationComponent implements OnChanges {
   @Input() total: number = 0;
   @Input() page: number = 1;
   @Input() limit: number = 10;

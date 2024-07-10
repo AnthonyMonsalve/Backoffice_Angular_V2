@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartType } from 'src/app/_commerce/domain/models/chart.model';
 import {
   ChartData,
   ChartOverviewData,
-} from '../../../application/interfaces/chart.interface';
-import { ChartDataService } from '../../../application/services/chart-data.service';
+} from '@commerce/application/interfaces/chart.interface';
+import { ChartDataService } from '@commerce/application/services/chart-data.service';
+import { ChartType } from '@commerce/domain/models/chart.model';
 
 @Component({
   selector: 'closures-data-chart',

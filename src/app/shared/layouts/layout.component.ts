@@ -1,8 +1,8 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 
+import { AuthenticationService } from '@core/services/auth.service';
+import { EventService } from '@core/services/event.service';
 import { User } from 'src/app/core/models/auth.models';
-import { AuthenticationService } from '../../core/services/auth.service';
-import { EventService } from '../../core/services/event.service';
 import {
   LAYOUT_HORIZONTAL,
   LAYOUT_MODE,

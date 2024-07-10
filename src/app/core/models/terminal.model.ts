@@ -3,6 +3,8 @@ export class Terminal {
   Terminal: string;
   IdAffiliate: string | null;
   IdBank: number;
+  BankSK: number;
+  BankSmallName: string;
   Active: boolean;
   InUse: boolean;
   OnClosure: boolean;
@@ -17,6 +19,8 @@ export class Terminal {
     Terminal: string,
     IdAffiliate: string | null,
     IdBank: number,
+    BankSK: number,
+    BankSmallName: string,
     Active: boolean,
     InUse: boolean,
     OnClosure: boolean,
@@ -30,6 +34,8 @@ export class Terminal {
     this.Terminal = Terminal;
     this.IdAffiliate = IdAffiliate;
     this.IdBank = IdBank;
+    this.BankSK = BankSK;
+    this.BankSmallName = BankSmallName;
     this.Active = Active;
     this.InUse = InUse;
     this.OnClosure = OnClosure;

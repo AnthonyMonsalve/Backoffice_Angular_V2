@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Overview } from 'src/app/_commerce/application/interfaces/overview.interface';
-import { ChartType } from 'src/app/_commerce/domain/models/chart.model';
-import { ChartTerminalStatusService } from '../../../application/services/chart-terminal-status.service';
+import { Overview } from '@commerce/application/interfaces/overview.interface';
+import { ChartTerminalStatusService } from '@commerce/application/services/chart-terminal-status.service';
+import { ChartType } from '@commerce/domain/models/chart.model';
 
 @Component({
   selector: 'terminal-status-overview',

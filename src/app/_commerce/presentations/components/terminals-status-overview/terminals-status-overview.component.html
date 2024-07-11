@@ -5,20 +5,21 @@
         <h5 class="card-title mb-4 text-center">Terminales</h5>
       </div>
     </div>
-    @if(donutChart.series && donutChart.series.length > 0){
-    <apx-chart class="apex-charts" [chart]="donutChart.chart" [plotOptions]="donutChart.plotOptions"
-      [dataLabels]="donutChart.dataLabels" [series]="donutChart.series" [labels]="donutChart.labels"
-      [colors]="donutChart.colors" [legend]="donutChart.legend">
-    </apx-chart>
-    <div class="row mb-0 mt-3">
-      <div class="col-12 text-center">
-        <p class="text-muted mb-2">Cantidad total de terminales</p>
-        <h5>{{countTerminals | number}}</h5>
+    <div *ngIf="donutChart.series && donutChart.series.length > 0; else loading">
+      <apx-chart class="apex-charts" [chart]="donutChart.chart" [plotOptions]="donutChart.plotOptions"
+        [dataLabels]="donutChart.dataLabels" [series]="donutChart.series" [labels]="donutChart.labels"
+        [colors]="donutChart.colors" [legend]="donutChart.legend">
+      </apx-chart>
+      <div class="row mb-0 mt-3">
+        <div class="col-12 text-center">
+          <p class="text-muted mb-2">Cantidad total de terminales</p>
+          <h5>{{countTerminals | number}}</h5>
+        </div>
       </div>
     </div>
-    }@else{
-    <div class="text-center">Loading...</div>
-    }
+    <ng-template #loading>
+      <div class="text-center">Loading...</div>
+    </ng-template>
   </div>
   <!-- end card body -->
 </div>

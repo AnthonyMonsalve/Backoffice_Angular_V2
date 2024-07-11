@@ -6,7 +6,6 @@ import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
 import { environment_dev } from '@environments/environment.dev';
 import { Observable } from 'rxjs';
 import { AffiliateMasterList } from '../interfaces/affiliate-master-list.interface';
-import { Overview } from '../interfaces/overview.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -15,17 +14,6 @@ export class MerchantService {
   apiUrl = environment_dev.API_URL;
 
   constructor(private http: HttpClient) {}
-
-  getOverviewTerminalsStatus(): Observable<Overview> {
-    const params = new HttpParams().set('search', 'Merchant');
-    return this.http.get<Overview>(
-      `${this.apiUrl}/api/terminal-states/overview`,
-      {
-        context: checkToken(),
-        params,
-      }
-    );
-  }
 
   getListAffiliatesMaster(
     page: number = 1,

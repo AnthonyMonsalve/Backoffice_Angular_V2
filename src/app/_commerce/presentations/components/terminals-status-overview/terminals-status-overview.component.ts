@@ -1,38 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { Overview } from '@commerce/application/interfaces/overview.interface';
-import { ChartTerminalStatusService } from '@commerce/application/services/chart-terminal-status.service';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
 import { ChartType } from '@commerce/domain/models/chart.model';
 
 @Component({
   selector: 'terminal-status-overview',
   templateUrl: './terminals-status-overview.component.html',
 })
-export class TerminalsStatusOverviewComponent implements OnInit {
+export class TerminalsStatusOverviewComponent implements OnInit, OnChanges {
+  @Input() overviewData: OverviewTerminals | null = null;
   donutChart: ChartType = this.getInitialDonutChartConfig();
   countTerminals = 0;
 
-  constructor(private ChartTerminalStatusService: ChartTerminalStatusService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.fetchChartData();
+    if (this.overviewData) {
+      this.updateChartData(this.overviewData);
+    }
   }
 
-  private fetchChartData(): void {
-    this.ChartTerminalStatusService.getTerminalsStatusOverview().subscribe({
-      next: (data) => this.updateChartData(data),
-      error: (error) => console.error('Error fetching chart data', error),
-      complete: () => console.log('Fetching complete'),
-    });
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.overviewData && changes.overviewData.currentValue) {
+      this.updateChartData(changes.overviewData.currentValue);
+    }
   }
 
-  private updateChartData(data: Overview): void {
+  private updateChartData(data: OverviewTerminals): void {
     this.donutChart.series = [
-      data.terminalActiveCount,
-      data.terminalInactiveCount,
+      data.terminals.terminalActiveCount,
+      data.terminals.terminalInactiveCount,
     ];
     this.donutChart.labels = ['Activos', 'Inactivos'];
     this.donutChart.colors = ['#038edc', '#263375'];
-    this.countTerminals = data.terminalCount;
+    this.countTerminals = data.terminals.terminalCount;
   }
 
   private getInitialDonutChartConfig(): ChartType {

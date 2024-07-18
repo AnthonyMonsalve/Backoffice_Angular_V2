@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { checkToken } from '@core/helpers/jwt.interceptor';
 import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
 import { environment_dev } from '@environments/environment.dev';
+import { FactClosureService } from '@services/fact-closure.service';
 import { Observable } from 'rxjs';
 import { AffiliateMasterList } from '../interfaces/affiliate-master-list.interface';
 
@@ -13,7 +14,10 @@ import { AffiliateMasterList } from '../interfaces/affiliate-master-list.interfa
 export class MerchantService {
   apiUrl = environment_dev.API_URL;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private factClosureService: FactClosureService
+  ) {}
 
   getListAffiliatesMaster(
     page: number = 1,
@@ -51,17 +55,36 @@ export class MerchantService {
     startDate: string,
     endDate: string
   ): Observable<any> {
-    const params = new HttpParams()
-      .set('startDate', startDate)
-      .set('endDate', endDate)
-      .set('origen', 'Merchant');
+    return this.factClosureService.getAmountDayBetweenTwoDates(
+      startDate,
+      endDate,
+      'Merchant'
+    );
+  }
 
-    return this.http.get(
-      `${this.apiUrl}/api/closures/date-range-daily-amount`,
-      {
-        context: checkToken(),
-        params,
-      }
+  // Nuevo método para obtener la cantidad diaria entre dos fechas
+  getAmountDayAffiliateBetweenTwoDates(
+    startDate: string,
+    endDate: string,
+    affiliateSK: string
+  ): Observable<any> {
+    return this.factClosureService.getAmountDayAffiliateBetweenTwoDates(
+      startDate,
+      endDate,
+      affiliateSK
+    );
+  }
+
+  // Nuevo método para obtener la cantidad diaria entre dos fechas
+  getAmountDayAffiliateMasterBetweenTwoDates(
+    startDate: string,
+    endDate: string,
+    affiliateMasterSK: string
+  ): Observable<any> {
+    return this.factClosureService.getAmountDayAffiliateMasterBetweenTwoDates(
+      startDate,
+      endDate,
+      affiliateMasterSK
     );
   }
 
@@ -78,5 +101,41 @@ export class MerchantService {
       context: checkToken(),
       params,
     });
+  }
+
+  getAmountAffiliateBetweenTwoDates(
+    startDate: string,
+    endDate: string,
+    affiliateSK: string
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('startDate', startDate)
+      .set('endDate', endDate);
+
+    return this.http.get(
+      `${this.apiUrl}/api/closures/date-range-amount/affiliate/${affiliateSK}`,
+      {
+        context: checkToken(),
+        params,
+      }
+    );
+  }
+
+  getAmountAffiliateMasterBetweenTwoDates(
+    startDate: string,
+    endDate: string,
+    affiliateMasterSK: string
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('startDate', startDate)
+      .set('endDate', endDate);
+
+    return this.http.get(
+      `${this.apiUrl}/api/closures/date-range-amount/affiliate-master/${affiliateMasterSK}`,
+      {
+        context: checkToken(),
+        params,
+      }
+    );
   }
 }

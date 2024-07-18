@@ -1,6 +1,11 @@
 <!-- start page title -->
 <app-pagetitle superTitle="{{affiliate?.nameAffiliateMaster | titlecase}}" title="{{affiliate?.name | titlecase}}"
+  superTitleLink="/commerce/commerce-detail/{{affiliate?.affiliateMasterSK}}"
   [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<div class="row">
+  <closures-data-chart [chartData]="chartData" [chartOverviewData]="chartOverviewData">
+  </closures-data-chart>
+</div>
 <div class="row">
   <div class="col-xl-3 col-md-3 col-sm-4">
     <terminal-status-overview [overviewData]="overviewTerminalData"></terminal-status-overview>

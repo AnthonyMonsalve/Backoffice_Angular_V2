@@ -16,6 +16,7 @@
     <terminal-status-overview [overviewData]="overviewTerminalData"></terminal-status-overview>
   </div>
   <div class="col-xl-9 col-md-9 col-sm-8">
-    <closures-data-chart></closures-data-chart>
+    <closures-data-chart [chartData]="chartData" [chartOverviewData]="chartOverviewData">
+    </closures-data-chart>
   </div>
 </div>

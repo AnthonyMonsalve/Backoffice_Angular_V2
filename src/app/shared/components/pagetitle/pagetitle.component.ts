@@ -16,6 +16,7 @@ export class PagetitleComponent implements OnInit {
     label?: string;
   }>;
   @Input() superTitle: string | undefined; // Super título opcional
+  @Input() superTitleLink: string | undefined; // Enlace opcional para el super título
 
   @Input() title: string | undefined;
 

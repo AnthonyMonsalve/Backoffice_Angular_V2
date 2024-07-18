@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  ChartData,
+  ChartOverviewData,
+} from '@commerce/application/interfaces/chart.interface';
 import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
 import { ChartTerminalStatusService } from '@commerce/application/services/chart-terminal-status.service';
 import { MerchantService } from 'src/app/_commerce/application/services/data-merchant.service';
@@ -11,13 +15,14 @@ import { MerchantService } from 'src/app/_commerce/application/services/data-mer
 export class SummaryCommerceComponent implements OnInit {
   breadCrumbItems!: Array<{}>;
   overviewTerminalData: OverviewTerminals | null = null;
-
+  chartData: ChartData | null = null;
+  chartOverviewData: ChartOverviewData | null = null;
   totalAffiliatesMaster: number = 0; // Inicializa la variable aquí
   totalAffiliates: number = 0; // Inicializa la variable aquí
 
   constructor(
-    private merchantService: MerchantService,
-    private chartTerminalStatusService: ChartTerminalStatusService
+    private chartTerminalStatusService: ChartTerminalStatusService,
+    private merchantService: MerchantService
   ) {}
 
   ngOnInit(): void {
@@ -28,6 +33,7 @@ export class SummaryCommerceComponent implements OnInit {
     this.fetchAffiliatesMasterData();
     this.fetchAffiliateData();
     this.fetchOverviewTerminals();
+    this.fetchDataChartOverview('2022-05-15', '2022-06-15');
   }
 
   private fetchAffiliatesMasterData(): void {
@@ -61,5 +67,24 @@ export class SummaryCommerceComponent implements OnInit {
       error: (error) => console.error('Error fetching overview data', error),
       complete: () => console.log('Fetching complete'),
     });
+  }
+
+  private fetchDataChartOverview(startDate: string, endDate: string): void {
+    this.merchantService
+      .getAmountDayBetweenTwoDates(startDate, endDate)
+      .subscribe({
+        next: (data) => (this.chartData = data),
+        error: (error) => console.error('Error fetching chart data', error),
+        complete: () => console.log('Fetching complete'),
+      });
+
+    this.merchantService
+      .getAmountBetweenTwoDates(startDate, endDate)
+      .subscribe({
+        next: (data) => (this.chartOverviewData = data),
+        error: (error) =>
+          console.error('Error fetching chart overview data', error),
+        complete: () => console.log('Fetching complete'),
+      });
   }
 }

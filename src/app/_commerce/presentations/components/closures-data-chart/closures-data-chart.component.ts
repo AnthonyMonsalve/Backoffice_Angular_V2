@@ -1,41 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import {
   ChartData,
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
-import { ChartDataService } from '@commerce/application/services/chart-data.service';
 import { ChartType } from '@commerce/domain/models/chart.model';
 
 @Component({
   selector: 'closures-data-chart',
   templateUrl: './closures-data-chart.component.html',
 })
-export class ClosuresDataChartComponent implements OnInit {
+export class ClosuresDataChartComponent implements OnInit, OnChanges {
+  @Input() chartData: ChartData | null = null;
+  @Input() chartOverviewData: ChartOverviewData | null = null;
+
   analyticsChart: ChartType = this.getInitialChartConfig();
   totalAmmount: number = 0;
   countClosures: number = 0;
   totalQTY: number = 0;
 
-  constructor(private chartDataService: ChartDataService) {}
-
   ngOnInit(): void {
-    this.fetchChartData('2020-05-15', '2020-05-30');
+    if (this.chartData) {
+      this.updateChartData(this.chartData);
+    }
+    if (this.chartOverviewData) {
+      this.updateChartOverviewData(this.chartOverviewData);
+    }
   }
 
-  private fetchChartData(startDate: string, endDate: string): void {
-    this.chartDataService.fetchChartData(startDate, endDate).subscribe({
-      next: (data) => this.updateChartData(data),
-      error: (error) => console.error('Error fetching chart data', error),
-      complete: () =>
-        console.log('getAmountDayBetweenTwoDates fetching complete'),
-    });
-
-    this.chartDataService.fetchChartOverviewData(startDate, endDate).subscribe({
-      next: (data) => this.updateChartOverviewData(data),
-      error: (error) =>
-        console.error('Error fetching chart overview data', error),
-      complete: () => console.log('getAmountBetweenTwoDates fetching complete'),
-    });
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.chartData && changes.chartData.currentValue) {
+      this.updateChartData(changes.chartData.currentValue);
+    }
+    if (changes.chartOverviewData && changes.chartOverviewData.currentValue) {
+      this.updateChartOverviewData(changes.chartOverviewData.currentValue);
+    }
   }
 
   private updateChartData(data: ChartData): void {

@@ -5,11 +5,18 @@
   <table class="table align-middle table-nowrap table-check">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Commercio</th>
-        <th>Email</th>
-        <th>Member since</th>
-        <th style="width: 80px; min-width: 80px;">Action</th>
+        <th (click)="changeSort('name')"
+          [ngClass]="{'asc': sort === 'name' && order === 'ASC', 'desc': sort === 'name' && order === 'DESC'}">
+          Name</th>
+        <th (click)="changeSort('nameAffiliateMaster')"
+          [ngClass]="{'asc': sort === 'nameAffiliateMaster' && order === 'ASC', 'desc': sort === 'nameAffiliateMaster' && order === 'DESC'}">
+          Commercio</th>
+        <th (click)="changeSort('updateDate')"
+          [ngClass]="{'asc': sort === 'updateDate' && order === 'ASC', 'desc': sort === 'updateDate' && order === 'DESC'}">
+          Email</th>
+        <th (click)="changeSort('created')"
+          [ngClass]="{'asc': sort === 'created' && order === 'ASC', 'desc': sort === 'created' && order === 'DESC'}">
+          Member since</th>
       </tr>
     </thead>
     <tbody>
@@ -30,7 +37,7 @@
         <td>
           {{affiliate.created | date}}
         </td>
-        <td>
+        <!-- <td>
           <div class="dropdown" ngbDropdown>
             <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
               aria-expanded="false" ngbDropdownToggle>
@@ -41,7 +48,7 @@
               <li><a class="dropdown-item" href="javascript:void(0);">Print</a></li>
             </ul>
           </div>
-        </td>
+        </td> -->
       </tr>
     </tbody>
   </table>

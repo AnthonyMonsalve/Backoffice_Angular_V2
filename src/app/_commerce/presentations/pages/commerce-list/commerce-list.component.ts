@@ -14,6 +14,7 @@ export class CommerceListComponent implements OnInit {
     { label: 'Listado de comercios', active: true },
   ];
   order: string = 'ASC';
+  sort: string = 'nombreComercial';
   page: number = 1;
   limit: number = 10;
   total: number = 0;
@@ -27,7 +28,7 @@ export class CommerceListComponent implements OnInit {
 
   fetchCommerces(): void {
     this.merchantService
-      .getListAffiliatesMaster(this.page, this.limit)
+      .getListAffiliatesMaster(this.page, this.limit, this.sort, this.order)
       .subscribe((data: AffiliateMasterList) => {
         this.commerces = data.data;
         this.total = data.metadata.total;
@@ -38,6 +39,22 @@ export class CommerceListComponent implements OnInit {
 
   onPageChange(newPage: number): void {
     this.page = newPage;
+    this.fetchCommerces();
+  }
+
+  onLimitChange(newLimit: number): void {
+    this.limit = newLimit;
+    this.page = 1; // Reset to first page
+    this.fetchCommerces();
+  }
+
+  changeSort(column: string): void {
+    if (this.sort === column) {
+      this.order = this.order === 'ASC' ? 'DESC' : 'ASC';
+    } else {
+      this.sort = column;
+      this.order = 'ASC';
+    }
     this.fetchCommerces();
   }
 }

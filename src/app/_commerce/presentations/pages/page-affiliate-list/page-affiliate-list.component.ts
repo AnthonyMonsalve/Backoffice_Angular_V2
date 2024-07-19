@@ -17,6 +17,7 @@ export class PageAffiliateListComponent implements OnInit {
   page: number = 1;
   limit: number = 10;
   total: number = 0;
+  sort: string = 'name';
 
   constructor(private merchantService: MerchantService) {}
 
@@ -26,7 +27,7 @@ export class PageAffiliateListComponent implements OnInit {
 
   fetchCommerces(): void {
     this.merchantService
-      .getListAffiliates(this.page, this.limit)
+      .getListAffiliates(this.page, this.limit, this.sort, this.order)
       .subscribe((data: AffiliateList) => {
         this.affiliates = data.data;
         this.total = data.metadata.total;
@@ -36,6 +37,19 @@ export class PageAffiliateListComponent implements OnInit {
 
   onPageChange(newPage: number): void {
     this.page = newPage;
+    this.fetchCommerces();
+  }
+
+  onLimitChange(newLimit: number): void {
+    this.limit = newLimit;
+    this.page = 1; // Reset to first page
+    this.fetchCommerces();
+  }
+
+  receiveSortOrder(sortOrder: any): void {
+    this.sort = sortOrder.sort;
+    this.order = sortOrder.order;
+    console.log(sortOrder);
     this.fetchCommerces();
   }
 }

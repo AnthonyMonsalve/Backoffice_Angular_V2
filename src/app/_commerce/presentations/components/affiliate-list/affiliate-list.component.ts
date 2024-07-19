@@ -20,6 +20,10 @@ export class AffiliateListComponent implements OnChanges {
   @Input() TitleNotFound!: string;
   @Input() MessageNotFound!: string;
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output() sortOrderEmitter: EventEmitter<any> = new EventEmitter<any>();
+
+  sort: string = 'name';
+  order: string = 'ASC';
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.total || changes.page || changes.limit) {
@@ -33,5 +37,21 @@ export class AffiliateListComponent implements OnChanges {
 
   onPageChange(newPage: number): void {
     this.pageChange.emit(newPage);
+  }
+
+  changeSort(column: string): void {
+    if (this.sort === column) {
+      this.order = this.order === 'ASC' ? 'DESC' : 'ASC';
+    } else {
+      this.sort = column;
+      this.order = 'ASC';
+    }
+
+    const sortOrder = {
+      sort: this.sort,
+      order: this.order,
+    };
+
+    this.sortOrderEmitter.emit(sortOrder);
   }
 }

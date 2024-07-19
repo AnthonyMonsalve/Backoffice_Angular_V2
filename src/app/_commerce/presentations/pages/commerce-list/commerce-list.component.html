@@ -6,6 +6,21 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
+                <div class="row mb-md-2">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="tickets-table_length">
+                            <label class="d-inline-flex align-items-center">Show
+                                <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
+                                    [(ngModel)]="limit" (ngModelChange)="onLimitChange($event)"
+                                    class="form-control form-control-sm mx-2">
+                                    <option [ngValue]="10">10</option>
+                                    <option [ngValue]="25">25</option>
+                                    <option [ngValue]="50">50</option>
+                                    <option [ngValue]="100">100</option>
+                                </select> entries</label>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="border_none">
@@ -15,11 +30,20 @@
                                     <table class="table align-middle table-nowrap table-check">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Afiliaciones bancarias</th>
-                                                <th>Email</th>
-                                                <th>Member since</th>
-                                                <th style="width: 80px; min-width: 80px;">Action</th>
+                                                <th (click)="changeSort('nombreComercial')"
+                                                    [ngClass]="{'asc': sort === 'nombreComercial' && order === 'ASC', 'desc': sort === 'nombreComercial' && order === 'DESC'}">
+                                                    Name
+                                                </th>
+                                                <th (click)="changeSort('numAffiliates')"
+                                                    [ngClass]="{'asc': sort === 'numAffiliates' && order === 'ASC', 'desc': sort === 'numAffiliates' && order === 'DESC'}">
+                                                    Afiliaciones bancarias</th>
+                                                <th (click)="changeSort('email')"
+                                                    [ngClass]="{'asc': sort === 'email' && order === 'ASC', 'desc': sort === 'email' && order === 'DESC'}">
+                                                    Email</th>
+                                                <th (click)="changeSort('created')"
+                                                    [ngClass]="{'asc': sort === 'created' && order === 'ASC', 'desc': sort === 'created' && order === 'DESC'}">
+                                                    Member since</th>
+
                                             </tr><!-- end tr -->
                                         </thead><!-- end thead -->
                                         <tbody>
@@ -31,9 +55,7 @@
                                                     </a>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a routerLink="/pages/profile" class="text-body fw-medium">
-                                                        {{commerce.numAffiliates}}
-                                                    </a>
+                                                    {{commerce.numAffiliates}}
                                                 </td>
                                                 <td>
                                                     {{commerce.email}}
@@ -41,7 +63,7 @@
                                                 <td>
                                                     {{commerce.created | date}}
                                                 </td>
-                                                <td>
+                                                <!-- <td>
                                                     <div class="dropdown" ngbDropdown>
                                                         <button class="btn btn-light btn-sm dropdown-toggle"
                                                             type="button" data-bs-toggle="dropdown"
@@ -56,7 +78,7 @@
 
                                                         </ul>
                                                     </div>
-                                                </td>
+                                                </td> -->
                                             </tr>
                                         </tbody>
 

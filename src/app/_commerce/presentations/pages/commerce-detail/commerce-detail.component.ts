@@ -29,6 +29,7 @@ export class AffiliateMasterDetailComponent implements OnInit {
     { label: 'Listado de afiliados', active: true },
   ];
   order: string = 'ASC';
+  sort: string = 'name';
   page: number = 1;
   limit: number = 5;
   total: number = 0;
@@ -70,7 +71,13 @@ export class AffiliateMasterDetailComponent implements OnInit {
 
   fetchAffiliates(): void {
     this.affiliateService
-      .getAffiliatesByAfflMaster(this.affiliateMasterSk, this.page, this.limit)
+      .getAffiliatesByAfflMaster(
+        this.affiliateMasterSk,
+        this.page,
+        this.limit,
+        this.sort,
+        this.order
+      )
       .subscribe((data: AffiliateList) => {
         this.affiliates = data.data;
         this.total = data.metadata.total;
@@ -122,5 +129,12 @@ export class AffiliateMasterDetailComponent implements OnInit {
         error: (error) => console.error('Error fetching overview data', error),
         complete: () => console.log('Fetching complete'),
       });
+  }
+
+  receiveSortOrder(sortOrder: any): void {
+    this.sort = sortOrder.sort;
+    this.order = sortOrder.order;
+    console.log(sortOrder);
+    this.fetchAffiliates();
   }
 }

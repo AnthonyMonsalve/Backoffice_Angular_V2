@@ -17,9 +17,15 @@ export class AffiliateService {
   getAffiliatesByAfflMaster(
     afflMasterSK: string | null = null,
     page: number = 1,
-    limit: number = 10
+    limit: number = 10,
+    sort: string = 'name',
+    order: string = 'ASC'
   ): Observable<AffiliateList> {
-    const params = new HttpParams().set('page', page).set('limit', limit);
+    const params = new HttpParams()
+      .set('page', page)
+      .set('limit', limit)
+      .set('sort', sort)
+      .set('order', order);
     return this.http.get<AffiliateList>(
       `${this.apiUrl}/api/affiliates/master/${afflMasterSK}`,
       {

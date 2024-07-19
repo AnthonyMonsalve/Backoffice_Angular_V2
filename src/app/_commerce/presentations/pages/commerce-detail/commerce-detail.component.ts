@@ -4,11 +4,13 @@ import {
   ChartData,
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
+import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
 import { MerchantService } from '@commerce/application/services/data-merchant.service';
 import { AffiliateMaster } from '@commerce/domain/models/affiliate-master.model';
 import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
 import { AffiliateMasterService } from '@services/affiliate-master.service';
 import { AffiliateService } from '@services/affiliate.service';
+import { TerminalService } from '@services/terminal.service';
 import { Affiliate } from 'src/app/_commerce/domain/models/affiliate.model';
 
 @Component({
@@ -18,8 +20,9 @@ import { Affiliate } from 'src/app/_commerce/domain/models/affiliate.model';
 export class AffiliateMasterDetailComponent implements OnInit {
   affiliates: Affiliate[] = [];
   affiliateMaster: AffiliateMaster | null = null;
-  chartData: ChartData | null = null;
+  chartData!: ChartData;
   chartOverviewData: ChartOverviewData | null = null;
+  overviewTerminalData: OverviewTerminals | null = null;
 
   breadCrumbItems: Array<{}> = [
     { label: 'Insta Comercio' },
@@ -35,7 +38,8 @@ export class AffiliateMasterDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private affiliateService: AffiliateService,
     private merchantService: MerchantService,
-    private affiliateMasterService: AffiliateMasterService
+    private affiliateMasterService: AffiliateMasterService,
+    private terminalService: TerminalService
   ) {
     // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
     const affiliateSK = this.route.snapshot.paramMap.get('sk');
@@ -53,6 +57,7 @@ export class AffiliateMasterDetailComponent implements OnInit {
       '2022-06-15',
       this.affiliateMasterSk
     );
+    this.fetchOverviewTerminals();
   }
 
   fetchAfflMaster(): void {
@@ -105,6 +110,16 @@ export class AffiliateMasterDetailComponent implements OnInit {
         next: (data) => (this.chartOverviewData = data),
         error: (error) =>
           console.error('Error fetching chart overview data', error),
+        complete: () => console.log('Fetching complete'),
+      });
+  }
+
+  private fetchOverviewTerminals(): void {
+    this.terminalService
+      .getOverviewAffiliateMasterTerminals(this.affiliateMasterSk)
+      .subscribe({
+        next: (data) => (this.overviewTerminalData = data),
+        error: (error) => console.error('Error fetching overview data', error),
         complete: () => console.log('Fetching complete'),
       });
   }

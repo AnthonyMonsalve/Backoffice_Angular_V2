@@ -12,5 +12,12 @@
   </div>
   <div class="col-xl-9 col-md-9 col-sm-8">
     <app-group-of-terminals [terminals]="terminals"></app-group-of-terminals>
+    @if(totalTerminals > limitPageTerminals){
+    <div class="text-center mt-2">
+      <ngb-pagination [collectionSize]="totalTerminals" [(page)]="pageTerminals" [pageSize]="limitPageTerminals"
+        (pageChange)="onPageChange($event)"></ngb-pagination>
+    </div>
+    <!-- Pagination -->
+    }
   </div>
 </div>

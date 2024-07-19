@@ -44,13 +44,13 @@ export class TerminalsStatusOverviewComponent implements OnInit, OnChanges {
   private getInitialDonutChartConfig(): ChartType {
     return {
       chart: {
-        height: 245,
+        height: 300,
         type: 'donut',
       },
       plotOptions: {
         pie: {
           donut: {
-            size: '60%',
+            size: '70%',
           },
         },
       },

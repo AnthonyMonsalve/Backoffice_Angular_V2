@@ -1,6 +1,6 @@
 <div class="card card-h-100">
   <div class="card-body">
-    <div class="float-end">
+    <div class="float-end d-flex align-items-center">
       <div class="dropdown" ngbDropdown placement="bottom-right">
         <a class="dropdown-toggle text-reset" href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false" ngbDropdownToggle>
@@ -14,6 +14,7 @@
           <a class="dropdown-item" href="javascript:void(0);">Today</a>
         </div>
       </div>
+
     </div>
     <h4 class="card-title mb-4">Sales Analytics</h4>
 
@@ -39,7 +40,7 @@
 
     <div class="">
       @if(analyticsChart.series && analyticsChart.series.length > 0){
-      <apx-chart dir="ltr" class="apex-charts" [chart]="analyticsChart.chart" [series]="analyticsChart.series"
+      <apx-chart #chart dir="ltr" class="apex-charts" [chart]="analyticsChart.chart" [series]="analyticsChart.series"
         [legend]="analyticsChart.legend" [stroke]="analyticsChart.stroke" [colors]="analyticsChart.colors"
         [fill]="analyticsChart.fill" [dataLabels]="analyticsChart.dataLabels" [xaxis]="analyticsChart.xaxis"
         [markers]="analyticsChart.markers" [plotOptions]="analyticsChart.plotOptions" [yaxis]="analyticsChart.yaxis"

@@ -5,7 +5,6 @@ import {
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
 import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
-import { ChartTerminalStatusService } from '@commerce/application/services/chart-terminal-status.service';
 import { MerchantService } from '@commerce/application/services/data-merchant.service';
 import { TerminalList } from '@core/interfaces/terminals-list.interface';
 import { Terminal } from '@core/models/terminal.model';
@@ -21,8 +20,11 @@ export class AffiliateDetailComponent implements OnInit {
   affiliate: Affiliate | null = null;
   terminals: Terminal[] = [];
   overviewTerminalData: OverviewTerminals | null = null;
-  chartData: ChartData | null = null;
+  chartData!: ChartData;
   chartOverviewData: ChartOverviewData | null = null;
+  limitPageTerminals = 9;
+  pageTerminals = 1;
+  totalTerminals = 0;
 
   affiliateSK: string;
 
@@ -36,7 +38,6 @@ export class AffiliateDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private affiliateService: AffiliateService,
     private terminalService: TerminalService,
-    private chartTerminalStatusService: ChartTerminalStatusService,
     private merchantService: MerchantService
   ) {
     // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
@@ -64,20 +65,26 @@ export class AffiliateDetailComponent implements OnInit {
 
   fetchAffiliateTerminal(): void {
     this.terminalService
-      .getTerminalsByAffiliate(this.affiliateSK)
+      .getTerminalsByAffiliate(
+        this.affiliateSK,
+        this.limitPageTerminals,
+        this.pageTerminals
+      )
       .subscribe((terminals: TerminalList) => {
         this.terminals = terminals.data;
-        console.log(this.terminals);
+        this.totalTerminals = terminals.metadata.total; // Suponiendo que el servicio devuelve el total de terminales
+        console.log(this.terminals, this.pageTerminals);
       });
   }
 
+  onPageChange(newPage: number): void {
+    this.pageTerminals = newPage;
+    this.fetchAffiliateTerminal();
+  }
+
   private fetchOverviewTerminals(): void {
-    const search = this.affiliateSK;
-    if (!search) {
-      return;
-    }
-    this.chartTerminalStatusService
-      .getOverviewAffiliateTerminals(search)
+    this.terminalService
+      .getOverviewAffiliateTerminals(this.affiliateSK)
       .subscribe({
         next: (data) => (this.overviewTerminalData = data),
         error: (error) => console.error('Error fetching overview data', error),

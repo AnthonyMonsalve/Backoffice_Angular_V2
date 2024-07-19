@@ -15,12 +15,19 @@ export class TerminalService {
   constructor(private http: HttpClient) {}
 
   getTerminalsByAffiliate(
-    affiliateSK: string | null = null
+    affiliateSK: string | null = null,
+    limit: number = 9,
+    page: number = 1
   ): Observable<TerminalList> {
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('page', page.toString());
+
     return this.http.get<TerminalList>(
       `${this.apiUrl}/api/terminals/affiliate/${affiliateSK}`,
       {
         context: checkToken(),
+        params,
       }
     );
   }
@@ -44,7 +51,18 @@ export class TerminalService {
     affiliateSK: string | null = null
   ): Observable<OverviewTerminals> {
     return this.http.get<OverviewTerminals>(
-      `${this.apiUrl}/api/terminal-states/terminal-state-affiliate/${affiliateSK}`,
+      `${this.apiUrl}/api/terminal-states/affiliate/${affiliateSK}`,
+      {
+        context: checkToken(),
+      }
+    );
+  }
+
+  getOverviewAffiliateMasterTerminals(
+    affiliateMasterSK: string | null = null
+  ): Observable<OverviewTerminals> {
+    return this.http.get<OverviewTerminals>(
+      `${this.apiUrl}/api/terminal-states/affiliate-master/${affiliateMasterSK}`,
       {
         context: checkToken(),
       }

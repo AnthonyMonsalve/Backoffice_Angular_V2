@@ -1,28 +1,36 @@
 import {
+  AfterViewInit,
   Component,
   Input,
   OnChanges,
   OnInit,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import {
   ChartData,
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
 import { ChartType } from '@commerce/domain/models/chart.model';
+import { ChartComponent } from 'ng-apexcharts';
 
 @Component({
   selector: 'closures-data-chart',
   templateUrl: './closures-data-chart.component.html',
 })
-export class ClosuresDataChartComponent implements OnInit, OnChanges {
-  @Input() chartData: ChartData | null = null;
+export class ClosuresDataChartComponent
+  implements OnInit, OnChanges, AfterViewInit
+{
+  @Input() chartData!: ChartData;
   @Input() chartOverviewData: ChartOverviewData | null = null;
+
+  @ViewChild('chart') chart!: ChartComponent;
 
   analyticsChart: ChartType = this.getInitialChartConfig();
   totalAmmount: number = 0;
   countClosures: number = 0;
   totalQTY: number = 0;
+  zoomed: boolean = false;
 
   ngOnInit(): void {
     if (this.chartData) {
@@ -40,6 +48,10 @@ export class ClosuresDataChartComponent implements OnInit, OnChanges {
     if (changes.chartOverviewData && changes.chartOverviewData.currentValue) {
       this.updateChartOverviewData(changes.chartOverviewData.currentValue);
     }
+  }
+
+  ngAfterViewInit(): void {
+    // No es necesario agregar el listener aquí porque lo haremos en la configuración del gráfico
   }
 
   private updateChartData(data: ChartData): void {
@@ -94,8 +106,23 @@ export class ClosuresDataChartComponent implements OnInit, OnChanges {
         height: 332,
         type: 'line',
         stacked: false,
-        offsetY: -5,
-        toolbar: { show: false },
+        offsetY: 20,
+        toolbar: {
+          show: true,
+          tools: {
+            zoom: true,
+            zoomin: true,
+            zoomout: true,
+            pan: true,
+            reset: true,
+          },
+          autoSelected: 'zoom',
+        },
+        events: {
+          zoomed: () => {
+            this.zoomed = true;
+          },
+        },
       },
       stroke: { width: [0, 2, 2], curve: 'smooth' },
       plotOptions: { bar: { columnWidth: '40%' } },

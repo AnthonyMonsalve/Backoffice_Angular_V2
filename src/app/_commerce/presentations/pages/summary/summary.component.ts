@@ -4,7 +4,7 @@ import {
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
 import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
-import { ChartTerminalStatusService } from '@commerce/application/services/chart-terminal-status.service';
+import { TerminalService } from '@services/terminal.service';
 import { MerchantService } from 'src/app/_commerce/application/services/data-merchant.service';
 
 @Component({
@@ -15,13 +15,13 @@ import { MerchantService } from 'src/app/_commerce/application/services/data-mer
 export class SummaryCommerceComponent implements OnInit {
   breadCrumbItems!: Array<{}>;
   overviewTerminalData: OverviewTerminals | null = null;
-  chartData: ChartData | null = null;
+  chartData!: ChartData;
   chartOverviewData: ChartOverviewData | null = null;
   totalAffiliatesMaster: number = 0; // Inicializa la variable aquí
   totalAffiliates: number = 0; // Inicializa la variable aquí
 
   constructor(
-    private chartTerminalStatusService: ChartTerminalStatusService,
+    private terminalService: TerminalService,
     private merchantService: MerchantService
   ) {}
 
@@ -62,7 +62,7 @@ export class SummaryCommerceComponent implements OnInit {
 
   private fetchOverviewTerminals(): void {
     const search = 'Merchant';
-    this.chartTerminalStatusService.getOverviewTerminals(search).subscribe({
+    this.terminalService.getOverviewTerminals(search).subscribe({
       next: (data) => (this.overviewTerminalData = data),
       error: (error) => console.error('Error fetching overview data', error),
       complete: () => console.log('Fetching complete'),

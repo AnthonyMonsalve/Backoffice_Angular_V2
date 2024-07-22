@@ -6,12 +6,12 @@ import {
 } from '@commerce/application/interfaces/chart.interface';
 import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
 import { MerchantService } from '@commerce/application/services/data-merchant.service';
-import { AffiliateMaster } from '@commerce/domain/models/affiliate-master.model';
+import { AffiliateMaster } from '@core/models/affiliate-master.model';
 import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
 import { AffiliateMasterService } from '@services/affiliate-master.service';
 import { AffiliateService } from '@services/affiliate.service';
 import { TerminalService } from '@services/terminal.service';
-import { Affiliate } from 'src/app/_commerce/domain/models/affiliate.model';
+import { Affiliate } from '@core/models/affiliate.model';
 
 @Component({
   selector: 'app-affiliate-master-detail',

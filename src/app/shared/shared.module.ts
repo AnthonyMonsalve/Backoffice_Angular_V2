@@ -12,6 +12,7 @@ import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.compone
 import { AbbreviateNumberPipe } from './pipes/abbreviate-number.pipe';
 import {} from './shared-routing.module';
 import { WidgetModule } from './widget/widget.module';
+import { NumberToDatePipe } from './pipes/timeId-to-date.pipe';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { WidgetModule } from './widget/widget.module';
     UnauthorizedComponent,
     Basic404Component,
     GroupOfTerminalsComponent,
+    NumberToDatePipe,
   ],
   imports: [CommonModule, WidgetModule, RouterModule],
   exports: [
@@ -31,6 +33,7 @@ import { WidgetModule } from './widget/widget.module';
     GroupOfTerminalsComponent,
     CardMessageComponent,
     AbbreviateNumberPipe,
+    NumberToDatePipe,
   ],
 })
 export class SharedModule {}

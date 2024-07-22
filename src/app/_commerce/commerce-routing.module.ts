@@ -6,6 +6,7 @@ import { AffiliateMasterDetailComponent } from './presentations/pages/commerce-d
 import { CommerceListComponent } from './presentations/pages/commerce-list/commerce-list.component';
 import { PageAffiliateListComponent } from './presentations/pages/page-affiliate-list/page-affiliate-list.component';
 import { SummaryCommerceComponent } from './presentations/pages/summary/summary.component';
+import { TerminalDetailComponent } from './presentations/pages/terminal-detail/terminal-detail.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,11 @@ const routes: Routes = [
     path: 'commerce-detail/:sk',
     title: 'Commerce Detail',
     component: AffiliateMasterDetailComponent,
+  },
+  {
+    path: 'terminal-detail/:sk',
+    title: 'Terminal Detail',
+    component: TerminalDetailComponent,
   },
 ];
 

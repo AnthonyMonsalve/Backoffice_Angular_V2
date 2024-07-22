@@ -10,7 +10,7 @@ import { TerminalList } from '@core/interfaces/terminals-list.interface';
 import { Terminal } from '@core/models/terminal.model';
 import { AffiliateService } from '@services/affiliate.service';
 import { TerminalService } from '@services/terminal.service';
-import { Affiliate } from 'src/app/_commerce/domain/models/affiliate.model';
+import { Affiliate } from '@core/models/affiliate.model';
 
 @Component({
   selector: 'app-affiliate-detail',

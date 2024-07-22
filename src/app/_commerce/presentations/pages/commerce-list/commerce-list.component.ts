@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AffiliateMasterList } from 'src/app/_commerce/application/interfaces/affiliate-master-list.interface';
 import { MerchantService } from 'src/app/_commerce/application/services/data-merchant.service';
-import { AffiliateMaster } from 'src/app/_commerce/domain/models/affiliate-master.model';
+import { AffiliateMaster } from '@core/models/affiliate-master.model';
 
 @Component({
   selector: 'app-user-list',

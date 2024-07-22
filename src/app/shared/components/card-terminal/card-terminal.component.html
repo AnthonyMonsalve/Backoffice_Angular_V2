@@ -1,27 +1,35 @@
-<div class="card">
-  <div class="card-body">
-    <div class="d-flex align-items-center">
-      <div class="flex-shrink-0 me-3">
-        <div class="avatar-sm">
-          <div class="avatar-title rounded-circle font-size-17" [ngClass]="getStatusClass(terminal)">
-            <i class="fas fa-mobile-alt"></i>
+<a [routerLink]="['/commerce/terminal-detail', terminal.TerminalSK]">
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex align-items-center">
+        <div class="flex-shrink-0 me-3">
+          <div class="avatar-sm">
+            <div
+              class="avatar-title rounded-circle font-size-17"
+              [ngClass]="getStatusClass(terminal)"
+            >
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-grow-1 overflow-hidden">
+          <p class="mb-1 text-truncate text-muted">Terminal</p>
+          <h5 class="font-size-16 mb-0">{{ terminal.Terminal }}</h5>
+          <div class="status">
+            <span *ngIf="terminal.Active && terminal.Available"
+              >Disponible</span
+            >
+            <span *ngIf="terminal.Active && terminal.InUse">En uso</span>
+            <span *ngIf="terminal.OnClosure">En cierre</span>
+            <span *ngIf="!terminal.Active">Inactivo</span>
+          </div>
+          <div class="bank">
+            <span>{{ terminal.BankSmallName }}</span>
           </div>
         </div>
       </div>
-
-      <div class="flex-grow-1 overflow-hidden">
-        <p class="mb-1 text-truncate text-muted">Terminal</p>
-        <h5 class="font-size-16 mb-0">{{terminal.Terminal}}</h5>
-        <div class="status">
-          <span *ngIf="terminal.Active && terminal.Available">Disponible</span>
-          <span *ngIf="terminal.Active && terminal.InUse">En uso</span>
-          <span *ngIf="terminal.OnClosure">En cierre</span>
-          <span *ngIf="!terminal.Active">Inactivo</span>
-        </div>
-        <div class="bank">
-          <span>{{terminal.BankSmallName}}</span>
-        </div>
-      </div>
     </div>
-  </div><!-- end card body -->
-</div>
+    <!-- end card body -->
+  </div>
+</a>

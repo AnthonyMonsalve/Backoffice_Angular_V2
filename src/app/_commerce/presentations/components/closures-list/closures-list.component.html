@@ -1,0 +1,148 @@
+@if (closures.length === 0){
+<app-card-message [title]="TitleNotFound" [message]="MessageNotFound">
+</app-card-message>
+}@else {
+<div class="table-responsive datatables">
+  <table class="table align-middle table-nowrap table-check">
+    <thead>
+      <tr>
+        <th
+          (click)="changeSort('timeId')"
+          [ngClass]="{
+            asc: sort === 'timeId' && order === 'ASC',
+            desc: sort === 'timeId' && order === 'DESC'
+          }"
+        >
+          Fecha de cierre
+        </th>
+        <th
+          (click)="changeSort('qty')"
+          [ngClass]="{
+            asc: sort === 'qty' && order === 'ASC',
+            desc: sort === 'qty' && order === 'DESC'
+          }"
+        >
+          Transacciones
+        </th>
+        <th
+          (click)="changeSort('QTY_Valid')"
+          [ngClass]="{
+            asc: sort === 'QTY_Valid' && order === 'ASC',
+            desc: sort === 'QTY_Valid' && order === 'DESC'
+          }"
+        >
+          Transacciones válidas
+        </th>
+        <th
+          (click)="changeSort('Lote')"
+          [ngClass]="{
+            asc: sort === 'Lote' && order === 'ASC',
+            desc: sort === 'Lote' && order === 'DESC'
+          }"
+        >
+          Lote
+        </th>
+        <th
+          (click)="changeSort('Amount_Gross')"
+          [ngClass]="{
+            asc: sort === 'Amount_Gross' && order === 'ASC',
+            desc: sort === 'Amount_Gross' && order === 'DESC'
+          }"
+        >
+          Monto total
+        </th>
+        <th
+          (click)="changeSort('Amount_Net')"
+          [ngClass]="{
+            asc: sort === 'Amount_Net' && order === 'ASC',
+            desc: sort === 'Amount_Net' && order === 'DESC'
+          }"
+        >
+          Monto neto
+        </th>
+        <th
+          (click)="changeSort('Tax_ISLR')"
+          [ngClass]="{
+            asc: sort === 'Tax_ISLR' && order === 'ASC',
+            desc: sort === 'Tax_ISLR' && order === 'DESC'
+          }"
+        >
+          ISLR
+        </th>
+        <th
+          (click)="changeSort('Commision')"
+          [ngClass]="{
+            asc: sort === 'Commision' && order === 'ASC',
+            desc: sort === 'Commision' && order === 'DESC'
+          }"
+        >
+          Comisión Instapago
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let affiliate of closures">
+        <td>
+          {{ affiliate.timeId | numberToDate }}
+        </td>
+        <td>
+          {{ affiliate.qty }}
+        </td>
+        <td>
+          {{ affiliate.qtyValid }}
+        </td>
+        <td>
+          {{ affiliate.lote }}
+        </td>
+        <td>
+          {{ affiliate.amountGross | currency : "Bs. " }}
+        </td>
+        <td>
+          {{ affiliate.amountNet | currency : "Bs. " }}
+        </td>
+        <td>
+          {{ affiliate.taxISLR | currency : "Bs. " }}
+        </td>
+        <td>
+          {{ affiliate.commision | currency : "Bs. " }}
+        </td>
+        <!-- <td>
+          <div class="dropdown" ngbDropdown>
+            <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false" ngbDropdownToggle>
+              <i class="uil uil-ellipsis-h"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+              <li><a class="dropdown-item" href="javascript:void(0);">Edit</a></li>
+              <li><a class="dropdown-item" href="javascript:void(0);">Print</a></li>
+            </ul>
+          </div>
+        </td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="row justify-content-md-between align-items-md-center mt-2">
+  <div class="col-sm-12 col-md-5">
+    <div
+      class="dataTables_info mb-2"
+      id="tickets-table_info"
+      role="status"
+      aria-live="polite"
+    >
+      Showing {{ page }} to {{ limit }} of {{ total }} entries
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-5">
+    <div class="text-md-right float-md-end pagination-rounded">
+      <app-table-pagination
+        [total]="total"
+        [page]="page"
+        [limit]="limit"
+        (pageChange)="onPageChange($event)"
+      >
+      </app-table-pagination>
+    </div>
+  </div>
+</div>
+}

@@ -20,6 +20,8 @@ import { AffiliateMasterDetailComponent } from './presentations/pages/commerce-d
 import { CommerceListComponent } from './presentations/pages/commerce-list/commerce-list.component';
 import { PageAffiliateListComponent } from './presentations/pages/page-affiliate-list/page-affiliate-list.component';
 import { SummaryCommerceComponent } from './presentations/pages/summary/summary.component';
+import { TerminalDetailComponent } from './presentations/pages/terminal-detail/terminal-detail.component';
+import { ClosuresListComponent } from './presentations/components/closures-list/closures-list.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { SummaryCommerceComponent } from './presentations/pages/summary/summary.
     CardCountComponent,
     ClosuresDataChartComponent,
     PageAffiliateListComponent,
+    TerminalDetailComponent,
+    ClosuresListComponent,
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AffiliateMaster } from '@commerce/domain/models/affiliate-master.model';
+import { AffiliateMaster } from '@core/models/affiliate-master.model';
 import { checkToken } from '@core/helpers/jwt.interceptor';
 import { environment_dev } from '@environments/environment.dev';
 import { Observable } from 'rxjs';

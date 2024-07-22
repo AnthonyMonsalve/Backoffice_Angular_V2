@@ -6,14 +6,14 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { Affiliate } from '@core/models/affiliate.model';
+import { Closure } from '@core/models/closure.model';
 
 @Component({
-  selector: 'app-affiliate-list',
-  templateUrl: './affiliate-list.component.html',
+  selector: 'app-closures-list',
+  templateUrl: './closures-list.component.html',
 })
-export class AffiliateListComponent implements OnChanges {
-  @Input() affiliates: Affiliate[] = [];
+export class ClosuresListComponent implements OnChanges {
+  @Input() closures: Closure[] = [];
   @Input() total!: number;
   @Input() page!: number;
   @Input() limit!: number;
@@ -22,8 +22,8 @@ export class AffiliateListComponent implements OnChanges {
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
   @Output() sortOrderEmitter: EventEmitter<any> = new EventEmitter<any>();
 
-  sort: string = 'name';
-  order: string = 'ASC';
+  sort: string = 'TimeId';
+  order: string = 'DESC';
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.total || changes.page || changes.limit) {

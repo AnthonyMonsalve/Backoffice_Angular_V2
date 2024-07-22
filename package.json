@@ -41,6 +41,7 @@
     "angularx-flatpickr": "^7.3.0",
     "apexcharts": "^3.44.0",
     "bootstrap": "5.3.2",
+    "date-fns": "^3.6.0",
     "firebase": "^10.6.0",
     "flatpickr": "^4.6.13",
     "jquery": "^3.7.1",

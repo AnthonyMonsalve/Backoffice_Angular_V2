@@ -11,20 +11,28 @@ import { Terminal } from '@core/models/terminal.model';
 import { AffiliateService } from '@services/affiliate.service';
 import { TerminalService } from '@services/terminal.service';
 import { Affiliate } from '@core/models/affiliate.model';
+import { FactClosureService } from '@services/fact-closure.service';
+import { Closure } from '@core/models/closure.model';
 
 @Component({
   selector: 'app-affiliate-detail',
   templateUrl: './affiliate-detail.component.html',
 })
 export class AffiliateDetailComponent implements OnInit {
-  affiliate!: Affiliate;
+  affiliate: Affiliate | null = null;
   terminals: Terminal[] = [];
+  factClosures: Closure[] = [];
   overviewTerminalData: OverviewTerminals | null = null;
   chartData!: ChartData;
   chartOverviewData: ChartOverviewData | null = null;
   limitPageTerminals = 9;
   pageTerminals = 1;
   totalTerminals = 0;
+  limitPageClosures = 5;
+  pageClosures = 1;
+  totalClosures = 0;
+  sortClosures = 'TimeId';
+  orderClosures = 'DESC';
 
   affiliateSK: string;
 
@@ -38,7 +46,8 @@ export class AffiliateDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private affiliateService: AffiliateService,
     private terminalService: TerminalService,
-    private merchantService: MerchantService
+    private merchantService: MerchantService,
+    private factClosureService: FactClosureService
   ) {
     // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
     const affiliateSK = this.route.snapshot.paramMap.get('sk');
@@ -53,6 +62,7 @@ export class AffiliateDetailComponent implements OnInit {
     this.fetchAffiliateTerminal();
     this.fetchOverviewTerminals();
     this.fetchDataChartOverview('2022-05-15', '2022-06-15', this.affiliateSK);
+    this.fetchClosuresAffiliate();
   }
 
   fetchAffiliate(): void {
@@ -113,5 +123,44 @@ export class AffiliateDetailComponent implements OnInit {
           console.error('Error fetching chart overview data', error),
         complete: () => console.log('Fetching complete'),
       });
+  }
+
+  private fetchClosuresAffiliate(): void {
+    if (!this.affiliateSK) return;
+
+    this.factClosureService
+      .getClosuresByAffiliateSK(
+        this.affiliateSK,
+        this.limitPageClosures,
+        this.pageClosures,
+        this.sortClosures,
+        this.orderClosures
+      )
+      .subscribe({
+        next: (data) => (
+          (this.factClosures = data.closures),
+          (this.totalClosures = data.metadata.total),
+          (this.pageClosures = data.metadata.page)
+        ),
+        error: (error) => console.error('Error fetching data', error),
+        complete: () => console.log('Fetching complete'),
+      });
+  }
+
+  receiveSortOrder(sortOrder: any): void {
+    this.sortClosures = sortOrder.sort;
+    this.orderClosures = sortOrder.order;
+    this.fetchClosuresAffiliate();
+  }
+
+  onPageClosureChange(newPage: number): void {
+    this.pageClosures = newPage;
+    this.fetchClosuresAffiliate();
+  }
+
+  onLimitClosureChange(newLimit: number): void {
+    this.limitPageClosures = newLimit;
+    this.pageClosures = 1; // Reset to first page
+    this.fetchClosuresAffiliate();
   }
 }

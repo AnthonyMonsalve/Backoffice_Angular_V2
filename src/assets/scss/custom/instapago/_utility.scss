@@ -8,11 +8,15 @@
 }
 
 .bg-secondary-instapago {
-  background-color: #217E87 !important; // Valor hexadecimal directo, considera usar una variable
+  background-color: #217e87 !important; // Valor hexadecimal directo, considera usar una variable
 }
 
 .bg-orange-instapago {
   background-color: $instapago-orange !important;
+}
+
+.bg-gray-transparent {
+  background: rgb(221 221 221 / 20%);
 }
 
 // Color de texto
@@ -25,7 +29,10 @@
 }
 
 .avatar-instapago-color {
-  background-color: rgba($instapago-purpleblue, 0.30) !important; // Aunque modifica el fondo, está más relacionado con la configuración de color del texto/avatar
+  background-color: rgba(
+    $instapago-purpleblue,
+    0.3
+  ) !important; // Aunque modifica el fondo, está más relacionado con la configuración de color del texto/avatar
   color: $instapago-purpleblue !important;
 }
 

@@ -89,4 +89,26 @@ export class FactClosureService {
       }
     );
   }
+
+  getClosuresByAffiliateSK(
+    affiliateSK: string | null = null,
+    limit: number = 10,
+    page: number = 1,
+    sort: string = 'TimeId',
+    order: string = 'DESC'
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('page', page.toString())
+      .set('sort', sort)
+      .set('order', order);
+
+    return this.http.get<any>(
+      `${this.apiUrl}/api/closures-history/closures-affiliate-sk/${affiliateSK}`,
+      {
+        context: checkToken(),
+        params,
+      }
+    );
+  }
 }

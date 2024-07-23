@@ -37,31 +37,31 @@ export class TerminalDetailComponent implements OnInit {
     private affiliateService: AffiliateService,
     private terminalService: TerminalService
   ) {
-     // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
-     const terminalSK = this.route.snapshot.paramMap.get('terminalSK');
-     if (!terminalSK) {
-       throw new Error('terminalSK is required');
-     }
-     this.terminalSK = terminalSK;
-     console.log(terminalSK, 'terminal');
+    // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
+    const terminalSK = this.route.snapshot.paramMap.get('terminalSK');
+    if (!terminalSK) {
+      throw new Error('terminalSK is required');
+    }
+    this.terminalSK = terminalSK;
+    console.log(terminalSK, 'terminal');
 
-     // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
-     const affiliateSK = this.route.snapshot.paramMap.get('affiliateSK');
-     if (!affiliateSK) {
-       throw new Error('affiliateSK is required');
-     }
-     this.affiliateSK = affiliateSK;
+    // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
+    const affiliateSK = this.route.snapshot.paramMap.get('affiliateSK');
+    if (!affiliateSK) {
+      throw new Error('affiliateSK is required');
+    }
+    this.affiliateSK = affiliateSK;
 
-     console.log(affiliateSK, 'affiliate');
+    console.log(affiliateSK, 'affiliate');
   }
 
   ngOnInit(): void {
-    this.fetchDataTerminalDetail();
+    this.fetchClosuresTerminal();
     this.fetchAffiliate();
     this.fetchTerminal();
   }
 
-  fetchDataTerminalDetail(): void {
+  fetchClosuresTerminal(): void {
     if (!this.terminalSK) return;
 
     this.factClosureService
@@ -86,18 +86,18 @@ export class TerminalDetailComponent implements OnInit {
   receiveSortOrder(sortOrder: any): void {
     this.sortClosures = sortOrder.sort;
     this.orderClosures = sortOrder.order;
-    this.fetchDataTerminalDetail();
+    this.fetchClosuresTerminal();
   }
 
   onPageChange(newPage: number): void {
     this.pageClosures = newPage;
-    this.fetchDataTerminalDetail();
+    this.fetchClosuresTerminal();
   }
 
   onLimitChange(newLimit: number): void {
     this.limitPageClosures = newLimit;
     this.pageClosures = 1; // Reset to first page
-    this.fetchDataTerminalDetail();
+    this.fetchClosuresTerminal();
   }
 
   fetchAffiliate(): void {

@@ -1,23 +1,88 @@
 <!-- start page title -->
-<app-pagetitle superTitle="{{affiliate.nameAffiliateMaster | titlecase}}" title="{{affiliate.name | titlecase}}"
-  superTitleLink="/commerce/commerce-detail/{{affiliate.affiliateMasterSK}}"
-  [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<app-pagetitle
+  superTitle="{{ affiliate?.nameAffiliateMaster | titlecase }}"
+  title="{{ affiliate?.name | titlecase }}"
+  superTitleLink="/commerce/commerce-detail/{{ affiliate?.affiliateMasterSK }}"
+  [breadcrumbItems]="breadCrumbItems"
+></app-pagetitle>
 <div class="row">
-  <closures-data-chart [chartData]="chartData" [chartOverviewData]="chartOverviewData">
+  <closures-data-chart
+    [chartData]="chartData"
+    [chartOverviewData]="chartOverviewData"
+  >
   </closures-data-chart>
 </div>
 <div class="row">
   <div class="col-xl-3 col-md-3 col-sm-4">
-    <terminal-status-overview [overviewData]="overviewTerminalData"></terminal-status-overview>
+    <terminal-status-overview
+      [overviewData]="overviewTerminalData"
+    ></terminal-status-overview>
   </div>
   <div class="col-xl-9 col-md-9 col-sm-8">
-    <app-group-of-terminals [terminals]="terminals" [affiliate]="affiliate"></app-group-of-terminals>
-    @if(totalTerminals > limitPageTerminals){
-    <div class="text-center mt-2">
-      <ngb-pagination [collectionSize]="totalTerminals" [(page)]="pageTerminals" [pageSize]="limitPageTerminals"
-        (pageChange)="onPageChange($event)"></ngb-pagination>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card p-3 pb-1 bg-gray-transparent">
+          @if(terminals && affiliate){
+          <app-group-of-terminals
+            [terminals]="terminals"
+            [affiliate]="affiliate"
+          ></app-group-of-terminals>
+          } @if(totalTerminals > limitPageTerminals){
+          <div class="text-center m-0">
+            <ngb-pagination
+              [collectionSize]="totalTerminals"
+              [(page)]="pageTerminals"
+              [pageSize]="limitPageTerminals"
+              (pageChange)="onPageChange($event)"
+            ></ngb-pagination>
+          </div>
+          <!-- Pagination -->
+          }
+        </div>
+      </div>
     </div>
-    <!-- Pagination -->
-    }
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row mb-md-2">
+          <div class="col-sm-12 col-md-6">
+            <div class="dataTables_length" id="tickets-table_length">
+              <label class="d-inline-flex align-items-center"
+                >Show
+                <select
+                  name="tickets-table_length"
+                  aria-controls="tickets-table"
+                  name="pageSize"
+                  [(ngModel)]="limitPageClosures"
+                  (ngModelChange)="onLimitClosureChange($event)"
+                  class="form-control form-control-sm mx-2"
+                >
+                  <option [ngValue]="5">5</option>
+                  <option [ngValue]="10">10</option>
+                  <option [ngValue]="25">25</option>
+                  <option [ngValue]="50">50</option>
+                  <option [ngValue]="100">100</option>
+                </select>
+                closures</label
+              >
+            </div>
+          </div>
+        </div>
+        <app-closures-list
+          (sortOrderEmitter)="receiveSortOrder($event)"
+          [TitleNotFound]="'No se encontraron cirres'"
+          [MessageNotFound]="'Este affiliado no tiene cierres asociados'"
+          [closures]="factClosures"
+          [total]="totalClosures"
+          [page]="pageClosures"
+          [limit]="limitPageClosures"
+          (pageChange)="onPageClosureChange($event)"
+        >
+        </app-closures-list>
+      </div>
+    </div>
   </div>
 </div>

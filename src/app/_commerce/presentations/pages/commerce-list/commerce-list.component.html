@@ -20,6 +20,15 @@
                                 </select> entries</label>
                         </div>
                     </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div id="tickets-table_filter" class="dataTables_filter text-md-end">
+                            <label class="d-inline-flex align-items-center">Search:
+                                <input type="text" name="searchTerm" class="form-control form-control-sm ms-2"
+                                    [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange($event)"
+                                    aria-controls="tickets-table">
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -40,6 +49,9 @@
                                                 <th (click)="changeSort('email')"
                                                     [ngClass]="{'asc': sort === 'email' && order === 'ASC', 'desc': sort === 'email' && order === 'DESC'}">
                                                     Email</th>
+                                                <th (click)="changeSort('address')"
+                                                    [ngClass]="{'asc': sort === 'address' && order === 'ASC', 'desc': sort === 'address' && order === 'DESC'}">
+                                                    Dirección</th>
                                                 <th (click)="changeSort('created')"
                                                     [ngClass]="{'asc': sort === 'created' && order === 'ASC', 'desc': sort === 'created' && order === 'DESC'}">
                                                     Member since</th>
@@ -59,6 +71,9 @@
                                                 </td>
                                                 <td>
                                                     {{commerce.email}}
+                                                </td>
+                                                <td>
+                                                    {{commerce.address}}
                                                 </td>
                                                 <td>
                                                     {{commerce.created | date}}

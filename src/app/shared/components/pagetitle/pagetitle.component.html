@@ -5,21 +5,28 @@
             @if(superTitle){
             <div>
                 @if(superTitle && superTitleLink && superTitleLink != '') {
-                <h6 class="mb-1"><a href="{{superTitleLink}}">{{superTitle}}</a></h6>
-                }@else {
-                <h6 class="mb-1">{{superTitle}}</h6>
+                <h5 class="mb-2"><a href="{{superTitleLink}}">{{superTitle}}</a></h5>
+                }@else if(superTitle) {
+                <h5 class="mb-2">{{superTitle}}</h5>
                 }
-                <h5 class="mb-0">{{title}}</h5>
+
+                <div class="d-flex align-items-center">
+                    <h5 class="mb-0" [ngClass]="{'me-2': bankName}">{{title}}</h5>
+                    @if(bankName){
+                    <app-bank-image-small-name [bankName]="bankName"></app-bank-image-small-name>
+                    }
+                </div>
             </div>
             }@else {
-            <h4 class="mb-0">{{title}}</h4>
+            <h4 class=" mb-0">{{title}}</h4>
             }
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     @for (item of breadcrumbItems; track $index) {
                     <ng-container>
-                        <li class="breadcrumb-item" [ngClass]="{'active': item.active == true}">{{ item.label }}
+                        <li class="breadcrumb-item" [ngClass]="{'active': item.active == true}">{{
+                            item.label }}
                         </li>
                     </ng-container>
                     }

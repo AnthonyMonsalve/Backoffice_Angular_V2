@@ -11,6 +11,9 @@
         <th (click)="changeSort('nameAffiliateMaster')"
           [ngClass]="{'asc': sort === 'nameAffiliateMaster' && order === 'ASC', 'desc': sort === 'nameAffiliateMaster' && order === 'DESC'}">
           Commercio</th>
+        <th (click)="changeSort('bankSmallName')"
+          [ngClass]="{'asc': sort === 'bankSmallName' && order === 'ASC', 'desc': sort === 'bankSmallName' && order === 'DESC'}">
+          Banco</th>
         <th (click)="changeSort('updateDate')"
           [ngClass]="{'asc': sort === 'updateDate' && order === 'ASC', 'desc': sort === 'updateDate' && order === 'DESC'}">
           Email</th>
@@ -30,6 +33,9 @@
           <a routerLink="/commerce/commerce-detail/{{affiliate?.affiliateMasterSK}}" class="text-body fw-medium">
             {{affiliate.nameAffiliateMaster | titlecase}}
           </a>
+        </td>
+        <td>
+          <app-bank-image-small-name [width]="90" [bankName]="affiliate.bankSmallName"></app-bank-image-small-name>
         </td>
         <td>
           {{affiliate.updateDate | date}}

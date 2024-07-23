@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AffiliateMaster } from '@core/models/affiliate-master.model';
 import { AffiliateMasterList } from 'src/app/_commerce/application/interfaces/affiliate-master-list.interface';
 import { MerchantService } from 'src/app/_commerce/application/services/data-merchant.service';
-import { AffiliateMaster } from '@core/models/affiliate-master.model';
 
 @Component({
   selector: 'app-user-list',
@@ -14,6 +14,7 @@ export class CommerceListComponent implements OnInit {
     { label: 'Listado de comercios', active: true },
   ];
   order: string = 'ASC';
+  searchTerm: string = '';
   sort: string = 'nombreComercial';
   page: number = 1;
   limit: number = 10;
@@ -28,7 +29,13 @@ export class CommerceListComponent implements OnInit {
 
   fetchCommerces(): void {
     this.merchantService
-      .getListAffiliatesMaster(this.page, this.limit, this.sort, this.order)
+      .getListAffiliatesMaster(
+        this.page,
+        this.limit,
+        this.sort,
+        this.order,
+        this.searchTerm
+      )
       .subscribe((data: AffiliateMasterList) => {
         this.commerces = data.data;
         this.total = data.metadata.total;
@@ -55,6 +62,12 @@ export class CommerceListComponent implements OnInit {
       this.sort = column;
       this.order = 'ASC';
     }
+    this.fetchCommerces();
+  }
+
+  onSearchChange(searchTerm: string): void {
+    this.searchTerm = searchTerm;
+    this.page = 1; // Reset to first page
     this.fetchCommerces();
   }
 }

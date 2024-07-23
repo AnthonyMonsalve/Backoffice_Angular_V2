@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Affiliate } from '@core/models/affiliate.model';
 import { checkToken } from '@core/helpers/jwt.interceptor';
 import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
+import { Affiliate } from '@core/models/affiliate.model';
 import { environment_dev } from '@environments/environment.dev';
 import { Observable } from 'rxjs';
 
@@ -19,13 +19,15 @@ export class AffiliateService {
     page: number = 1,
     limit: number = 10,
     sort: string = 'name',
-    order: string = 'ASC'
+    order: string = 'ASC',
+    where: string = ''
   ): Observable<AffiliateList> {
     const params = new HttpParams()
       .set('page', page)
       .set('limit', limit)
       .set('sort', sort)
-      .set('order', order);
+      .set('order', order)
+      .set('where', where);
     return this.http.get<AffiliateList>(
       `${this.apiUrl}/api/affiliates/master/${afflMasterSK}`,
       {

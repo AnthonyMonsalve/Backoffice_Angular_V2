@@ -23,14 +23,16 @@ export class MerchantService {
     page: number = 1,
     limit: number = 10,
     sort: string = 'nombreComercial',
-    order: string = 'ASC'
+    order: string = 'ASC',
+    where: string = ''
   ): Observable<AffiliateMasterList> {
     const params = new HttpParams()
       .set('search', 'Merchant')
       .set('page', page.toString())
       .set('limit', limit.toString())
       .set('sort', sort)
-      .set('order', order);
+      .set('order', order)
+      .set('where', where);
     return this.http.get<AffiliateMasterList>(
       `${this.apiUrl}/api/affiliates-master/list`,
       {
@@ -44,14 +46,16 @@ export class MerchantService {
     page: number = 1,
     limit: number = 10,
     sort: string = 'nombreComercial',
-    order: string = 'ASC'
+    order: string = 'ASC',
+    where: string = ''
   ): Observable<AffiliateList> {
     const params = new HttpParams()
       .set('search', 'Merchant')
       .set('page', page.toString())
       .set('limit', limit.toString())
       .set('sort', sort)
-      .set('order', order);
+      .set('order', order)
+      .set('where', where);
     return this.http.get<AffiliateList>(`${this.apiUrl}/api/affiliates/list`, {
       context: checkToken(),
       params,

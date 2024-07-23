@@ -1,7 +1,7 @@
 <app-pagetitle title="{{affiliateMaster?.nombreComercial | titlecase}}"
   [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 
-@if(affiliates.length > 0){
+@if(chartOverviewData?.totalAmount){
 <div class="row">
   <div class="col-xl-3 col-md-3 col-sm-4">
     <terminal-status-overview [overviewData]="overviewTerminalData"></terminal-status-overview>
@@ -16,6 +16,17 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
+        <div class="row mb-md-2">
+          <div class="col-sm-12 col-md-12">
+            <div id="tickets-table_filter" class="dataTables_filter text-md-end">
+              <label class="d-inline-flex align-items-center">Search:
+                <input type="text" name="searchTerm" class="form-control form-control-sm ms-2" [(ngModel)]="searchTerm"
+                  (ngModelChange)="onSearchChange($event)" aria-controls="tickets-table">
+              </label>
+            </div>
+          </div>
+        </div>
+
         <app-affiliate-list (sortOrderEmitter)="receiveSortOrder($event)"
           [TitleNotFound]="'No se encontraron afiliaciones asociadas'"
           [MessageNotFound]="'Este comercio no tiene afiliaciones asociadas'" [affiliates]="affiliates" [total]="total"

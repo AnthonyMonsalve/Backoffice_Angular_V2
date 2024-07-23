@@ -6,12 +6,12 @@ import {
 } from '@commerce/application/interfaces/chart.interface';
 import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
 import { MerchantService } from '@commerce/application/services/data-merchant.service';
-import { AffiliateMaster } from '@core/models/affiliate-master.model';
 import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
+import { AffiliateMaster } from '@core/models/affiliate-master.model';
+import { Affiliate } from '@core/models/affiliate.model';
 import { AffiliateMasterService } from '@services/affiliate-master.service';
 import { AffiliateService } from '@services/affiliate.service';
 import { TerminalService } from '@services/terminal.service';
-import { Affiliate } from '@core/models/affiliate.model';
 
 @Component({
   selector: 'app-affiliate-master-detail',
@@ -33,6 +33,7 @@ export class AffiliateMasterDetailComponent implements OnInit {
   page: number = 1;
   limit: number = 5;
   total: number = 0;
+  searchTerm: string = '';
   affiliateMasterSk: string;
 
   constructor(
@@ -76,7 +77,8 @@ export class AffiliateMasterDetailComponent implements OnInit {
         this.page,
         this.limit,
         this.sort,
-        this.order
+        this.order,
+        this.searchTerm
       )
       .subscribe((data: AffiliateList) => {
         this.affiliates = data.data;
@@ -135,6 +137,12 @@ export class AffiliateMasterDetailComponent implements OnInit {
     this.sort = sortOrder.sort;
     this.order = sortOrder.order;
     console.log(sortOrder);
+    this.fetchAffiliates();
+  }
+
+  onSearchChange(searchTerm: string): void {
+    this.searchTerm = searchTerm;
+    this.page = 1; // Reset to first page
     this.fetchAffiliates();
   }
 }

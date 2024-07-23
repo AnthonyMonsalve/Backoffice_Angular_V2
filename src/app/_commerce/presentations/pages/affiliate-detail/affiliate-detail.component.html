@@ -1,6 +1,6 @@
 <!-- start page title -->
-<app-pagetitle superTitle="{{affiliate?.nameAffiliateMaster | titlecase}}" title="{{affiliate?.name | titlecase}}"
-  superTitleLink="/commerce/commerce-detail/{{affiliate?.affiliateMasterSK}}"
+<app-pagetitle superTitle="{{affiliate.nameAffiliateMaster | titlecase}}" title="{{affiliate.name | titlecase}}"
+  superTitleLink="/commerce/commerce-detail/{{affiliate.affiliateMasterSK}}"
   [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 <div class="row">
   <closures-data-chart [chartData]="chartData" [chartOverviewData]="chartOverviewData">
@@ -11,7 +11,7 @@
     <terminal-status-overview [overviewData]="overviewTerminalData"></terminal-status-overview>
   </div>
   <div class="col-xl-9 col-md-9 col-sm-8">
-    <app-group-of-terminals [terminals]="terminals"></app-group-of-terminals>
+    <app-group-of-terminals [terminals]="terminals" [affiliate]="affiliate"></app-group-of-terminals>
     @if(totalTerminals > limitPageTerminals){
     <div class="text-center mt-2">
       <ngb-pagination [collectionSize]="totalTerminals" [(page)]="pageTerminals" [pageSize]="limitPageTerminals"

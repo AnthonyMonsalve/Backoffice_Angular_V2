@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Affiliate } from '@core/models/affiliate.model';
 import { Terminal } from '@core/models/terminal.model';
 
 @Component({
@@ -7,6 +8,7 @@ import { Terminal } from '@core/models/terminal.model';
 })
 export class GroupOfTerminalsComponent {
   @Input() terminals!: Terminal[];
+  @Input() affiliate!: Affiliate;
 
   constructor() {}
 }

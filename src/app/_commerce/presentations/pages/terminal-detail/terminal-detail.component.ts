@@ -4,6 +4,8 @@ import { Closure } from '@core/models/closure.model';
 import { Affiliate } from '@core/models/affiliate.model';
 import { Terminal } from '@core/models/terminal.model';
 import { FactClosureService } from '@services/fact-closure.service';
+import { AffiliateService } from '@services/affiliate.service';
+import { TerminalService } from '@services/terminal.service';
 
 @Component({
   selector: 'app-terminal-detail',
@@ -19,7 +21,8 @@ export class TerminalDetailComponent implements OnInit {
   sortClosures = 'TimeId';
   orderClosures = 'DESC';
 
-  terminalSK: string;
+  terminalSK!: string;
+  affiliateSK!: string;
 
   breadCrumbItems: Array<{}> = [
     { label: 'Insta Comercio' },
@@ -30,21 +33,37 @@ export class TerminalDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private factClosureService: FactClosureService
+    private factClosureService: FactClosureService,
+    private affiliateService: AffiliateService,
+    private terminalService: TerminalService
   ) {
-    // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
-    const terminalSK = this.route.snapshot.paramMap.get('sk');
-    if (!terminalSK) {
-      throw new Error('terminalSK is required');
-    }
-    this.terminalSK = terminalSK;
+     // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
+     const terminalSK = this.route.snapshot.paramMap.get('terminalSK');
+     if (!terminalSK) {
+       throw new Error('terminalSK is required');
+     }
+     this.terminalSK = terminalSK;
+     console.log(terminalSK, 'terminal');
+
+     // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
+     const affiliateSK = this.route.snapshot.paramMap.get('affiliateSK');
+     if (!affiliateSK) {
+       throw new Error('affiliateSK is required');
+     }
+     this.affiliateSK = affiliateSK;
+
+     console.log(affiliateSK, 'affiliate');
   }
 
   ngOnInit(): void {
-    this.fetchDataTerminalDetal();
+    this.fetchDataTerminalDetail();
+    this.fetchAffiliate();
+    this.fetchTerminal();
   }
 
-  fetchDataTerminalDetal(): void {
+  fetchDataTerminalDetail(): void {
+    if (!this.terminalSK) return;
+
     this.factClosureService
       .getClosuresByTerminalSK(
         this.terminalSK,
@@ -55,11 +74,9 @@ export class TerminalDetailComponent implements OnInit {
       )
       .subscribe({
         next: (data) => (
-          (this.affiliate = data.affiliate),
-          (this.terminal = data.terminal),
-          (this.factClosures = data.data.closures),
-          (this.totalClosures = data.data.metadata.total),
-          (this.pageClosures = data.data.metadata.page)
+          (this.factClosures = data.closures),
+          (this.totalClosures = data.metadata.total),
+          (this.pageClosures = data.metadata.page)
         ),
         error: (error) => console.error('Error fetching data', error),
         complete: () => console.log('Fetching complete'),
@@ -69,17 +86,33 @@ export class TerminalDetailComponent implements OnInit {
   receiveSortOrder(sortOrder: any): void {
     this.sortClosures = sortOrder.sort;
     this.orderClosures = sortOrder.order;
-    this.fetchDataTerminalDetal();
+    this.fetchDataTerminalDetail();
   }
 
   onPageChange(newPage: number): void {
     this.pageClosures = newPage;
-    this.fetchDataTerminalDetal();
+    this.fetchDataTerminalDetail();
   }
 
   onLimitChange(newLimit: number): void {
     this.limitPageClosures = newLimit;
     this.pageClosures = 1; // Reset to first page
-    this.fetchDataTerminalDetal();
+    this.fetchDataTerminalDetail();
+  }
+
+  fetchAffiliate(): void {
+    this.affiliateService
+      .getAffiliate(this.affiliateSK)
+      .subscribe((affiliate: Affiliate) => {
+        this.affiliate = affiliate;
+      });
+  }
+
+  fetchTerminal(): void {
+    this.terminalService
+      .getOneTerminal(this.terminalSK)
+      .subscribe((terminal: Terminal) => {
+        this.terminal = terminal;
+      });
   }
 }

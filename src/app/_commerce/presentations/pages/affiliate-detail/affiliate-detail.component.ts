@@ -17,7 +17,7 @@ import { Affiliate } from '@core/models/affiliate.model';
   templateUrl: './affiliate-detail.component.html',
 })
 export class AffiliateDetailComponent implements OnInit {
-  affiliate: Affiliate | null = null;
+  affiliate!: Affiliate;
   terminals: Terminal[] = [];
   overviewTerminalData: OverviewTerminals | null = null;
   chartData!: ChartData;

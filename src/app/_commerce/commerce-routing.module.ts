@@ -35,7 +35,7 @@ const routes: Routes = [
     component: AffiliateMasterDetailComponent,
   },
   {
-    path: 'terminal-detail/:sk',
+    path: 'terminal-detail/:affiliateSK/:terminalSK',
     title: 'Terminal Detail',
     component: TerminalDetailComponent,
   },

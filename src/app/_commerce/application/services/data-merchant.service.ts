@@ -115,6 +115,24 @@ export class MerchantService {
     });
   }
 
+  getBanksAmountBetweenTwoDates(
+    startDate: string,
+    endDate: string
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('startDate', startDate)
+      .set('endDate', endDate)
+      .set('origen', 'Merchant');
+
+    return this.http.get(
+      `${this.apiUrl}/api/closures/date-range-banks-amount`,
+      {
+        context: checkToken(),
+        params,
+      }
+    );
+  }
+
   getAmountAffiliateBetweenTwoDates(
     startDate: string,
     endDate: string,

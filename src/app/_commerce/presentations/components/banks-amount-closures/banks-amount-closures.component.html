@@ -1,0 +1,25 @@
+<div class="card card-h-100">
+  <div class="card-body">
+    <div class="d-flex align-items-start">
+      <div class="flex-grow-1">
+        <h5 class="card-title mb-4 text-center">Monto procesado por banco</h5>
+      </div>
+    </div>
+    <div *ngIf="barChart.series && barChart.series.length > 0; else loading">
+      <apx-chart #chart [series]="barChart.series" [chart]="barChart.chart" [xaxis]="barChart.xaxis"
+        [colors]="barChart.colors" [plotOptions]="barChart.plotOptions" [dataLabels]="barChart.dataLabels"
+        [legend]="barChart.legend"></apx-chart>
+      <div class="row mb-0 mt-3">
+        <div class="col-12 text-center">
+          <p class="text-muted mb-2">Monto total procesado</p>
+          <h5>Bs. {{totalAmount | abbreviateNumber}}</h5>
+        </div>
+      </div>
+    </div>
+    <ng-template #loading>
+      <div class="text-center">Loading...</div>
+    </ng-template>
+  </div>
+  <!-- end card body -->
+</div>
+<!-- end card -->

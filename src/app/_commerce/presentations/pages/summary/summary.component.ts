@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { BankClosuresReport } from '@commerce/application/interfaces/banks-total-amount.interface';
 import {
-  ChartData,
+  ChartClosureData,
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
 import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
@@ -17,7 +18,8 @@ import { MerchantService } from 'src/app/_commerce/application/services/data-mer
 export class SummaryCommerceComponent implements OnInit {
   breadCrumbItems!: Array<{}>;
   overviewTerminalData: OverviewTerminals | null = null;
-  chartData!: ChartData;
+  bankClosuresReport: BankClosuresReport | null = null;
+  chartData!: ChartClosureData;
   chartOverviewData: ChartOverviewData | null = null;
   totalAffiliatesMaster: number = 0; // Inicializa la variable aquí
   totalAffiliates: number = 0; // Inicializa la variable aquí
@@ -41,6 +43,7 @@ export class SummaryCommerceComponent implements OnInit {
     const { startDate, endDate } =
       this.dateRangeService.getDateRange(MONTHLY_SORT);
     this.fetchDataChartOverview(startDate, endDate);
+    this.fetchBanksTotalClosures('2024-04-28', '2024-05-01');
   }
 
   private fetchAffiliatesMasterData(): void {
@@ -76,6 +79,19 @@ export class SummaryCommerceComponent implements OnInit {
         this.showErrorModal = true;
       },
     });
+  }
+
+  private fetchBanksTotalClosures(startDate: string, endDate: string): void {
+    const search = 'Merchant';
+    this.merchantService
+      .getBanksAmountBetweenTwoDates(startDate, endDate)
+      .subscribe({
+        next: (data) => (this.bankClosuresReport = data),
+        error: (error) => {
+          console.error('Error fetching overview data', error);
+          this.showErrorModal = true;
+        },
+      });
   }
 
   private fetchDataChartOverview(startDate: string, endDate: string): void {

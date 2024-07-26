@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
-  ChartData,
+  ChartClosureData,
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
 import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
@@ -25,7 +25,7 @@ export class AffiliateDetailComponent implements OnInit {
   terminals: Terminal[] = [];
   factClosures: Closure[] = [];
   overviewTerminalData: OverviewTerminals | null = null;
-  chartData!: ChartData;
+  chartData!: ChartClosureData;
   chartOverviewData: ChartOverviewData | null = null;
   limitPageTerminals = 9;
   pageTerminals = 1;

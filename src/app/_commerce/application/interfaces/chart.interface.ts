@@ -9,7 +9,7 @@ export interface Closure {
   };
 }
 
-export interface ChartData {
+export interface ChartClosureData {
   closures: Closure[];
 }
 

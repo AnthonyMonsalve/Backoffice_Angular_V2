@@ -10,7 +10,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import {
-  ChartData,
+  ChartClosureData,
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
 import { ChartType } from '@commerce/domain/models/chart.model';
@@ -30,7 +30,7 @@ import { ChartComponent } from 'ng-apexcharts';
 export class ClosuresDataChartComponent
   implements OnInit, OnChanges, AfterViewInit
 {
-  @Input() chartData!: ChartData;
+  @Input() chartData!: ChartClosureData;
   @Input() chartOverviewData: ChartOverviewData | null = null;
   @Output() sortByChange = new EventEmitter<string>();
 
@@ -73,7 +73,7 @@ export class ClosuresDataChartComponent
     // No es necesario agregar el listener aquí porque lo haremos en la configuración del gráfico
   }
 
-  private updateChartData(data: ChartData): void {
+  private updateChartData(data: ChartClosureData): void {
     try {
       const labels = data.closures.map((closure) => closure.date.dateTime);
       const totalAmountData = data.closures.map(

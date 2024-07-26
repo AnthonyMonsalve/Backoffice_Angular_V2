@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
-  ChartData,
+  ChartClosureData,
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
 import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
@@ -22,7 +22,7 @@ import { TerminalService } from '@services/terminal.service';
 export class AffiliateMasterDetailComponent implements OnInit {
   affiliates: Affiliate[] = [];
   affiliateMaster: AffiliateMaster | null = null;
-  chartData!: ChartData;
+  chartData!: ChartClosureData;
   chartOverviewData: ChartOverviewData | null = null;
   overviewTerminalData: OverviewTerminals | null = null;
   customRangeChartActive: boolean = false;

@@ -4,6 +4,8 @@ import {
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
 import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
+import { MONTHLY_SORT } from '@core/utils/constants';
+import { DateRangeService } from '@services/date-range.service';
 import { TerminalService } from '@services/terminal.service';
 import { MerchantService } from 'src/app/_commerce/application/services/data-merchant.service';
 
@@ -22,7 +24,8 @@ export class SummaryCommerceComponent implements OnInit {
 
   constructor(
     private terminalService: TerminalService,
-    private merchantService: MerchantService
+    private merchantService: MerchantService,
+    private dateRangeService: DateRangeService
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +36,9 @@ export class SummaryCommerceComponent implements OnInit {
     this.fetchAffiliatesMasterData();
     this.fetchAffiliateData();
     this.fetchOverviewTerminals();
-    this.fetchDataChartOverview('2022-05-15', '2022-06-15');
+    const { startDate, endDate } =
+      this.dateRangeService.getDateRange(MONTHLY_SORT);
+    this.fetchDataChartOverview(startDate, endDate);
   }
 
   private fetchAffiliatesMasterData(): void {
@@ -86,5 +91,10 @@ export class SummaryCommerceComponent implements OnInit {
           console.error('Error fetching chart overview data', error),
         complete: () => console.log('Fetching complete'),
       });
+  }
+
+  onSortByChange(sortBy: string): void {
+    const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
+    this.fetchDataChartOverview(startDate, endDate);
   }
 }

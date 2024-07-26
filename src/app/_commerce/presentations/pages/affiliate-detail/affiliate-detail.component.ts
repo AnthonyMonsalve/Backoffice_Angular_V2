@@ -13,6 +13,8 @@ import { TerminalService } from '@services/terminal.service';
 import { Affiliate } from '@core/models/affiliate.model';
 import { FactClosureService } from '@services/fact-closure.service';
 import { Closure } from '@core/models/closure.model';
+import { DateRangeService } from '@services/date-range.service';
+import { MONTHLY_SORT } from '@core/utils/constants';
 
 @Component({
   selector: 'app-affiliate-detail',
@@ -47,7 +49,8 @@ export class AffiliateDetailComponent implements OnInit {
     private affiliateService: AffiliateService,
     private terminalService: TerminalService,
     private merchantService: MerchantService,
-    private factClosureService: FactClosureService
+    private factClosureService: FactClosureService,
+    private dateRangeService: DateRangeService
   ) {
     // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
     const affiliateSK = this.route.snapshot.paramMap.get('sk');
@@ -61,7 +64,9 @@ export class AffiliateDetailComponent implements OnInit {
     this.fetchAffiliate();
     this.fetchAffiliateTerminal();
     this.fetchOverviewTerminals();
-    this.fetchDataChartOverview('2022-05-15', '2022-06-15', this.affiliateSK);
+    const { startDate, endDate } =
+      this.dateRangeService.getDateRange(MONTHLY_SORT);
+    this.fetchDataChartOverview(startDate, endDate, this.affiliateSK);
     this.fetchClosuresAffiliate();
   }
 
@@ -162,5 +167,10 @@ export class AffiliateDetailComponent implements OnInit {
     this.limitPageClosures = newLimit;
     this.pageClosures = 1; // Reset to first page
     this.fetchClosuresAffiliate();
+  }
+
+  onSortByChange(sortBy: string): void {
+    const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
+    this.fetchDataChartOverview(startDate, endDate, this.affiliateSK);
   }
 }

@@ -1,9 +1,11 @@
 import {
   AfterViewInit,
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
@@ -12,6 +14,12 @@ import {
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
 import { ChartType } from '@commerce/domain/models/chart.model';
+import {
+  MONTHLY_SORT,
+  SEMESTER_SORT,
+  WEEKLY_SORT,
+  YEARLY_SORT,
+} from '@core/utils/constants';
 import { ChartComponent } from 'ng-apexcharts';
 
 @Component({
@@ -23,6 +31,7 @@ export class ClosuresDataChartComponent
 {
   @Input() chartData!: ChartData;
   @Input() chartOverviewData: ChartOverviewData | null = null;
+  @Output() sortByChange = new EventEmitter<string>();
 
   @ViewChild('chart') chart!: ChartComponent;
 
@@ -31,6 +40,12 @@ export class ClosuresDataChartComponent
   countClosures: number = 0;
   totalQTY: number = 0;
   zoomed: boolean = false;
+  currentSortBy: string = MONTHLY_SORT;
+
+  WEEKLY = WEEKLY_SORT;
+  YEARLY = YEARLY_SORT;
+  MONTHLY = MONTHLY_SORT;
+  SEMESTER = SEMESTER_SORT;
 
   ngOnInit(): void {
     if (this.chartData) {
@@ -188,5 +203,10 @@ export class ClosuresDataChartComponent
         padding: { bottom: 15 },
       },
     };
+  }
+
+  updateSortBy(period: string): void {
+    this.currentSortBy = period.charAt(0).toUpperCase() + period.slice(1);
+    this.sortByChange.emit(this.currentSortBy);
   }
 }

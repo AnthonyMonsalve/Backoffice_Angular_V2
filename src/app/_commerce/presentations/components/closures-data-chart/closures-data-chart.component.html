@@ -2,15 +2,24 @@
   <div class="card-body">
     <div class="float-end d-flex align-items-center">
       <div class="dropdown" ngbDropdown>
-        <a class="dropdown-toggle btn btn-light btn-sm" href="javascript:void(0);" data-bs-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false" ngbDropdownToggle><span class="text-muted">Monthly<i
-              class="mdi mdi-chevron-down ms-1"></i></span>
-        </a>
-
+        <button class="btn btn-light btn-sm dropdown-toggle" ngbDropdownToggle>
+          <span class="text-muted"
+            >{{ currentSortBy }}<i class="mdi mdi-chevron-down ms-1"></i
+          ></span>
+        </button>
         <div class="dropdown-menu" ngbDropdownMenu>
-          <a class="dropdown-item" href="javascript:void(0);">Monthly</a>
-          <a class="dropdown-item" href="javascript:void(0);">Yearly</a>
-          <a class="dropdown-item" href="javascript:void(0);">Weekly</a>
+          <button class="dropdown-item" (click)="updateSortBy(WEEKLY)">
+            {{ WEEKLY }}
+          </button>
+          <button class="dropdown-item" (click)="updateSortBy(MONTHLY)">
+            {{ MONTHLY }}
+          </button>
+          <button class="dropdown-item" (click)="updateSortBy(SEMESTER)">
+            {{ SEMESTER }}
+          </button>
+          <button class="dropdown-item" (click)="updateSortBy(YEARLY)">
+            {{ YEARLY }}
+          </button>
         </div>
       </div>
     </div>
@@ -19,18 +28,32 @@
     <div class="mt-1">
       <ul class="list-inline main-chart mb-0 text-center">
         <li class="list-inline-item chart-border-left me-1 border-0">
-          <h3 class="text-primary"><span data-plugin="counterup">Bs. {{totalAmmount | abbreviateNumber}}</span><span
-              class="text-muted d-inline-block fw-normal font-size-15 ms-2">Total Amount</span>
+          <h3 class="text-primary">
+            <span data-plugin="counterup"
+              >Bs. {{ totalAmmount | abbreviateNumber }}</span
+            ><span class="text-muted d-inline-block fw-normal font-size-15 ms-2"
+              >Total Amount</span
+            >
           </h3>
         </li>
         <li class="list-inline-item chart-border-left me-1">
-          <h3><span data-plugin="counterup">{{countClosures == 0 ? 0 : countClosures | abbreviateNumber}}</span><span
-              class="text-muted d-inline-block fw-normal font-size-15 ms-2">Closures</span>
+          <h3>
+            <span data-plugin="counterup">{{
+              countClosures == 0 ? 0 : (countClosures | abbreviateNumber)
+            }}</span
+            ><span class="text-muted d-inline-block fw-normal font-size-15 ms-2"
+              >Closures</span
+            >
           </h3>
         </li>
         <li class="list-inline-item chart-border-left me-1">
-          <h3><span data-plugin="counterup">{{totalQTY == 0 ? 0 : totalQTY | abbreviateNumber}}</span><span
-              class="text-muted d-inline-block fw-normal font-size-15 ms-2">Transactions</span>
+          <h3>
+            <span data-plugin="counterup">{{
+              totalQTY == 0 ? 0 : (totalQTY | abbreviateNumber)
+            }}</span
+            ><span class="text-muted d-inline-block fw-normal font-size-15 ms-2"
+              >Transactions</span
+            >
           </h3>
         </li>
       </ul>
@@ -38,15 +61,30 @@
 
     <div class="">
       @if(analyticsChart.series && analyticsChart.series.length > 0){
-      <apx-chart #chart dir="ltr" class="apex-charts" [chart]="analyticsChart.chart" [series]="analyticsChart.series"
-        [legend]="analyticsChart.legend" [stroke]="analyticsChart.stroke" [colors]="analyticsChart.colors"
-        [fill]="analyticsChart.fill" [dataLabels]="analyticsChart.dataLabels" [xaxis]="analyticsChart.xaxis"
-        [markers]="analyticsChart.markers" [plotOptions]="analyticsChart.plotOptions" [yaxis]="analyticsChart.yaxis"
-        [tooltip]="analyticsChart.tooltip" [grid]="analyticsChart.grid" [labels]="analyticsChart.labels">
+      <apx-chart
+        #chart
+        dir="ltr"
+        class="apex-charts"
+        [chart]="analyticsChart.chart"
+        [series]="analyticsChart.series"
+        [legend]="analyticsChart.legend"
+        [stroke]="analyticsChart.stroke"
+        [colors]="analyticsChart.colors"
+        [fill]="analyticsChart.fill"
+        [dataLabels]="analyticsChart.dataLabels"
+        [xaxis]="analyticsChart.xaxis"
+        [markers]="analyticsChart.markers"
+        [plotOptions]="analyticsChart.plotOptions"
+        [yaxis]="analyticsChart.yaxis"
+        [tooltip]="analyticsChart.tooltip"
+        [grid]="analyticsChart.grid"
+        [labels]="analyticsChart.labels"
+      >
       </apx-chart>
       }@else {
       <div class="text-center">Loading...</div>
       }
     </div>
-  </div> <!-- end card-body-->
+  </div>
+  <!-- end card-body-->
 </div>

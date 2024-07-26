@@ -9,8 +9,10 @@ import { MerchantService } from '@commerce/application/services/data-merchant.se
 import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
 import { AffiliateMaster } from '@core/models/affiliate-master.model';
 import { Affiliate } from '@core/models/affiliate.model';
+import { MONTHLY_SORT } from '@core/utils/constants';
 import { AffiliateMasterService } from '@services/affiliate-master.service';
 import { AffiliateService } from '@services/affiliate.service';
+import { DateRangeService } from '@services/date-range.service';
 import { TerminalService } from '@services/terminal.service';
 
 @Component({
@@ -41,7 +43,8 @@ export class AffiliateMasterDetailComponent implements OnInit {
     private affiliateService: AffiliateService,
     private merchantService: MerchantService,
     private affiliateMasterService: AffiliateMasterService,
-    private terminalService: TerminalService
+    private terminalService: TerminalService,
+    private dateRangeService: DateRangeService
   ) {
     // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
     const affiliateSK = this.route.snapshot.paramMap.get('sk');
@@ -54,11 +57,9 @@ export class AffiliateMasterDetailComponent implements OnInit {
   ngOnInit(): void {
     this.fetchAffiliates();
     this.fetchAfflMaster();
-    this.fetchDataChartOverview(
-      '2022-05-15',
-      '2022-06-15',
-      this.affiliateMasterSk
-    );
+    const { startDate, endDate } =
+      this.dateRangeService.getDateRange(MONTHLY_SORT);
+    this.fetchDataChartOverview(startDate, endDate, this.affiliateMasterSk);
     this.fetchOverviewTerminals();
   }
 
@@ -144,5 +145,10 @@ export class AffiliateMasterDetailComponent implements OnInit {
     this.searchTerm = searchTerm;
     this.page = 1; // Reset to first page
     this.fetchAffiliates();
+  }
+
+  onSortByChange(sortBy: string): void {
+    const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
+    this.fetchDataChartOverview(startDate, endDate, this.affiliateMasterSk);
   }
 }

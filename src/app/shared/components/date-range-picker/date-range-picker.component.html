@@ -1,0 +1,7 @@
+<div class="mb-3 justify-content-end" [ngStyle]="{'display': customRangeChartActive ? 'flex' : 'none'}">
+  <input #dateRangePicker class="form-control flatpickr-input bg-white text-center font-size-15 border-2"
+    style="max-width: 250px;" type="text" placeholder="Establecer rango de fecha" mwlFlatpickr mode="range">
+  <button class="btn btn-primary-instapago btn-sm ms-1" (click)="onEstablecer()">
+    Establecer <i class="fa fa-angle-right"></i>
+  </button>
+</div>

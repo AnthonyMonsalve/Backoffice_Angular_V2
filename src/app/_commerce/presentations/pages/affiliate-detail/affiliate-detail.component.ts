@@ -7,14 +7,14 @@ import {
 import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
 import { MerchantService } from '@commerce/application/services/data-merchant.service';
 import { TerminalList } from '@core/interfaces/terminals-list.interface';
-import { Terminal } from '@core/models/terminal.model';
-import { AffiliateService } from '@services/affiliate.service';
-import { TerminalService } from '@services/terminal.service';
 import { Affiliate } from '@core/models/affiliate.model';
-import { FactClosureService } from '@services/fact-closure.service';
 import { Closure } from '@core/models/closure.model';
+import { Terminal } from '@core/models/terminal.model';
+import { CUSTOM_SORT, MONTHLY_SORT } from '@core/utils/constants';
+import { AffiliateService } from '@services/affiliate.service';
 import { DateRangeService } from '@services/date-range.service';
-import { MONTHLY_SORT } from '@core/utils/constants';
+import { FactClosureService } from '@services/fact-closure.service';
+import { TerminalService } from '@services/terminal.service';
 
 @Component({
   selector: 'app-affiliate-detail',
@@ -35,6 +35,7 @@ export class AffiliateDetailComponent implements OnInit {
   totalClosures = 0;
   sortClosures = 'TimeId';
   orderClosures = 'DESC';
+  customRangeChartActive: boolean = false;
 
   affiliateSK: string;
 
@@ -170,7 +171,19 @@ export class AffiliateDetailComponent implements OnInit {
   }
 
   onSortByChange(sortBy: string): void {
+    if (sortBy === CUSTOM_SORT) {
+      this.customRangeChartActive = true;
+      return;
+    } else {
+      this.customRangeChartActive = false;
+    }
+
     const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
+    this.fetchDataChartOverview(startDate, endDate, this.affiliateSK);
+  }
+
+  handleDateRange(dateRange: string): void {
+    const [startDate, endDate] = dateRange.split(' to ');
     this.fetchDataChartOverview(startDate, endDate, this.affiliateSK);
   }
 }

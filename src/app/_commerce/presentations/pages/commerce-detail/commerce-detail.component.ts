@@ -9,7 +9,7 @@ import { MerchantService } from '@commerce/application/services/data-merchant.se
 import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
 import { AffiliateMaster } from '@core/models/affiliate-master.model';
 import { Affiliate } from '@core/models/affiliate.model';
-import { MONTHLY_SORT } from '@core/utils/constants';
+import { CUSTOM_SORT, MONTHLY_SORT } from '@core/utils/constants';
 import { AffiliateMasterService } from '@services/affiliate-master.service';
 import { AffiliateService } from '@services/affiliate.service';
 import { DateRangeService } from '@services/date-range.service';
@@ -25,6 +25,7 @@ export class AffiliateMasterDetailComponent implements OnInit {
   chartData!: ChartData;
   chartOverviewData: ChartOverviewData | null = null;
   overviewTerminalData: OverviewTerminals | null = null;
+  customRangeChartActive: boolean = false;
 
   breadCrumbItems: Array<{}> = [
     { label: 'Insta Comercio' },
@@ -148,7 +149,19 @@ export class AffiliateMasterDetailComponent implements OnInit {
   }
 
   onSortByChange(sortBy: string): void {
+    if (sortBy === CUSTOM_SORT) {
+      this.customRangeChartActive = true;
+      return;
+    } else {
+      this.customRangeChartActive = false;
+    }
+
     const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
+    this.fetchDataChartOverview(startDate, endDate, this.affiliateMasterSk);
+  }
+
+  handleDateRange(dateRange: string): void {
+    const [startDate, endDate] = dateRange.split(' to ');
     this.fetchDataChartOverview(startDate, endDate, this.affiliateMasterSk);
   }
 }

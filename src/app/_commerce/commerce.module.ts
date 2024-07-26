@@ -14,6 +14,7 @@ import { CardCountComponent } from './presentations/components/card-count/card-c
 import { TerminalsStatusOverviewComponent } from './presentations/components/terminals-status-overview/terminals-status-overview.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FlatpickrModule } from 'angularx-flatpickr';
 import { AffiliateListComponent } from './presentations/components/affiliate-list/affiliate-list.component';
 import { ClosuresDataChartComponent } from './presentations/components/closures-data-chart/closures-data-chart.component';
 import { ClosuresListComponent } from './presentations/components/closures-list/closures-list.component';
@@ -47,6 +48,7 @@ import { TerminalDetailComponent } from './presentations/pages/terminal-detail/t
     NgbTypeaheadModule,
     FormsModule,
     NgbModule,
+    FlatpickrModule.forRoot(),
   ],
   providers: [DecimalPipe],
 })

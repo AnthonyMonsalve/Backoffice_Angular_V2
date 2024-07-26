@@ -15,6 +15,7 @@ import {
 } from '@commerce/application/interfaces/chart.interface';
 import { ChartType } from '@commerce/domain/models/chart.model';
 import {
+  CUSTOM_SORT,
   MONTHLY_SORT,
   SEMESTER_SORT,
   WEEKLY_SORT,
@@ -41,11 +42,14 @@ export class ClosuresDataChartComponent
   totalQTY: number = 0;
   zoomed: boolean = false;
   currentSortBy: string = MONTHLY_SORT;
+  loading: boolean = true;
+  error: boolean = false;
 
   WEEKLY = WEEKLY_SORT;
   YEARLY = YEARLY_SORT;
   MONTHLY = MONTHLY_SORT;
   SEMESTER = SEMESTER_SORT;
+  CUSTOM = CUSTOM_SORT;
 
   ngOnInit(): void {
     if (this.chartData) {
@@ -70,38 +74,53 @@ export class ClosuresDataChartComponent
   }
 
   private updateChartData(data: ChartData): void {
-    const labels = data.closures.map((closure) => closure.date.dateTime);
-    const totalAmountData = data.closures.map(
-      (closure) => closure.closure.totalGross
-    );
-    const transactionQuantityData = data.closures.map(
-      (closure) => closure.closure.total_txn
-    );
-    const closuresData = data.closures.map(
-      (closure) => closure.closure.qty_closures
-    );
+    try {
+      const labels = data.closures.map((closure) => closure.date.dateTime);
+      const totalAmountData = data.closures.map(
+        (closure) => closure.closure.totalGross
+      );
+      const transactionQuantityData = data.closures.map(
+        (closure) => closure.closure.total_txn
+      );
+      const closuresData = data.closures.map(
+        (closure) => closure.closure.qty_closures
+      );
 
-    this.analyticsChart = {
-      ...this.analyticsChart,
-      labels,
-      series: [
-        {
-          name: 'Total Amount',
-          type: 'column',
-          data: totalAmountData,
-        },
-        {
-          name: 'Closures',
-          type: 'line',
-          data: closuresData,
-        },
-        {
-          name: 'Transaction Quantity',
-          type: 'line',
-          data: transactionQuantityData,
-        },
-      ],
-    };
+      // Verifica si hay datos válidos
+      const hasValidData =
+        totalAmountData.some((value) => value !== 0) ||
+        transactionQuantityData.some((value) => value !== 0) ||
+        closuresData.some((value) => value !== 0);
+
+      this.analyticsChart = {
+        ...this.analyticsChart,
+        labels,
+        series: hasValidData
+          ? [
+              {
+                name: 'Total Amount',
+                type: 'column',
+                data: totalAmountData,
+              },
+              {
+                name: 'Closures',
+                type: 'line',
+                data: closuresData,
+              },
+              {
+                name: 'Transaction Quantity',
+                type: 'line',
+                data: transactionQuantityData,
+              },
+            ]
+          : [],
+      };
+
+      this.loading = false;
+    } catch (error) {
+      this.error = true;
+      this.loading = false;
+    }
   }
 
   private updateChartOverviewData(data: ChartOverviewData): void {

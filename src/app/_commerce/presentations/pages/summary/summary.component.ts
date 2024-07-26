@@ -4,7 +4,7 @@ import {
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
 import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
-import { MONTHLY_SORT } from '@core/utils/constants';
+import { CUSTOM_SORT, MONTHLY_SORT } from '@core/utils/constants';
 import { DateRangeService } from '@services/date-range.service';
 import { TerminalService } from '@services/terminal.service';
 import { MerchantService } from 'src/app/_commerce/application/services/data-merchant.service';
@@ -21,6 +21,8 @@ export class SummaryCommerceComponent implements OnInit {
   chartOverviewData: ChartOverviewData | null = null;
   totalAffiliatesMaster: number = 0; // Inicializa la variable aquí
   totalAffiliates: number = 0; // Inicializa la variable aquí
+  customRangeChartActive: boolean = false;
+  showErrorModal: boolean = false;
 
   constructor(
     private terminalService: TerminalService,
@@ -48,7 +50,7 @@ export class SummaryCommerceComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching affiliates data', error);
-        // Considera manejar el error mostrando un mensaje al usuario
+        this.showErrorModal = true;
       }
     );
   }
@@ -60,7 +62,7 @@ export class SummaryCommerceComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching affiliates data', error);
-        // Considera manejar el error mostrando un mensaje al usuario
+        this.showErrorModal = true;
       }
     );
   }
@@ -69,8 +71,10 @@ export class SummaryCommerceComponent implements OnInit {
     const search = 'Merchant';
     this.terminalService.getOverviewTerminals(search).subscribe({
       next: (data) => (this.overviewTerminalData = data),
-      error: (error) => console.error('Error fetching overview data', error),
-      complete: () => console.log('Fetching complete'),
+      error: (error) => {
+        console.error('Error fetching overview data', error);
+        this.showErrorModal = true;
+      },
     });
   }
 
@@ -79,22 +83,41 @@ export class SummaryCommerceComponent implements OnInit {
       .getAmountDayBetweenTwoDates(startDate, endDate)
       .subscribe({
         next: (data) => (this.chartData = data),
-        error: (error) => console.error('Error fetching chart data', error),
-        complete: () => console.log('Fetching complete'),
+        error: (error) => {
+          console.error('Error fetching chart data', error);
+          this.showErrorModal = true;
+        },
       });
 
     this.merchantService
       .getAmountBetweenTwoDates(startDate, endDate)
       .subscribe({
         next: (data) => (this.chartOverviewData = data),
-        error: (error) =>
-          console.error('Error fetching chart overview data', error),
+        error: (error) => {
+          console.error('Error fetching chart overview data', error);
+          this.showErrorModal = true;
+        },
         complete: () => console.log('Fetching complete'),
       });
   }
 
   onSortByChange(sortBy: string): void {
+    if (sortBy === CUSTOM_SORT) {
+      this.customRangeChartActive = true;
+      return;
+    } else {
+      this.customRangeChartActive = false;
+    }
     const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
     this.fetchDataChartOverview(startDate, endDate);
+  }
+
+  handleDateRange(dateRange: string): void {
+    const [startDate, endDate] = dateRange.split(' to ');
+    this.fetchDataChartOverview(startDate, endDate);
+  }
+
+  closeModal(): void {
+    this.showErrorModal = false;
   }
 }

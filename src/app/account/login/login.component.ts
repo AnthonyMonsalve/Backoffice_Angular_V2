@@ -47,11 +47,8 @@ export class LoginComponent implements OnInit {
     }
     //Validation Set
     this.loginForm = this.formBuilder.group({
-      email: [
-        '22anthony.monsalve@gmail.com',
-        [Validators.required, Validators.email],
-      ],
-      password: ['Maxtoto2020.', [Validators.required]],
+      email: ['johndoe@google.com', [Validators.required, Validators.email]],
+      password: ['Password123.', [Validators.required]],
     });
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';

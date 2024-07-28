@@ -1,7 +1,25 @@
-<div class="mb-3 justify-content-end" [ngStyle]="{'display': customRangeChartActive ? 'flex' : 'none'}">
-  <input #dateRangePicker class="form-control flatpickr-input bg-white text-center font-size-15 border-2"
-    style="max-width: 250px;" type="text" placeholder="Establecer rango de fecha" mwlFlatpickr mode="range">
-  <button class="btn btn-primary-instapago btn-sm ms-1" (click)="onEstablecer()">
-    Establecer <i class="fa fa-angle-right"></i>
-  </button>
+<div class="card bg-transparent border-0">
+  <div class="card-body py-2 px-0">
+    <p class="mb-2 text-truncate fw-600">Establecer rango de fecha</p>
+    <div class="m-0 p-0 d-flex justify-content-end">
+      <input
+        #dateRangePicker
+        class="form-control flatpickr-input bg-white font-size-13 border-2"
+        style="width: 70%"
+        type="text"
+        placeholder="Rango de fecha"
+        mwlFlatpickr
+        mode="range"
+      />
+      <button
+        class="btn btn-primary-instapago btn-sm ms-1"
+        (click)="onEstablecer()"
+        style="width: 30%"
+      >
+        Establecer <i class="fa fa-angle-right ms-1"></i>
+      </button>
+    </div>
+  </div>
+  <!-- end card body -->
 </div>
+<!-- end card -->

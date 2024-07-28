@@ -5,7 +5,7 @@ import {
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
 import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
-import { CUSTOM_SORT, MONTHLY_SORT } from '@core/utils/constants';
+import { MONTHLY_SORT } from '@core/utils/constants';
 import { DateRangeService } from '@services/date-range.service';
 import { TerminalService } from '@services/terminal.service';
 import { MerchantService } from 'src/app/_commerce/application/services/data-merchant.service';
@@ -25,6 +25,8 @@ export class SummaryCommerceComponent implements OnInit {
   totalAffiliates: number = 0; // Inicializa la variable aquí
   customRangeChartActive: boolean = false;
   showErrorModal: boolean = false;
+  customRangeActive: boolean = false;
+  customBankRangeActive: boolean = true;
 
   constructor(
     private terminalService: TerminalService,
@@ -43,7 +45,7 @@ export class SummaryCommerceComponent implements OnInit {
     const { startDate, endDate } =
       this.dateRangeService.getDateRange(MONTHLY_SORT);
     this.fetchDataChartOverview(startDate, endDate);
-    this.fetchBanksTotalClosures('2024-04-28', '2024-05-01');
+    this.fetchBanksTotalClosures(startDate, endDate);
   }
 
   private fetchAffiliatesMasterData(): void {
@@ -117,20 +119,27 @@ export class SummaryCommerceComponent implements OnInit {
       });
   }
 
+  //Sort independiente para cada cuadro
+  onSortBandkByChange(sortBy: string): void {
+    this.customBankRangeActive = false;
+    const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
+    this.fetchBanksTotalClosures(startDate, endDate);
+  }
+
+  //Sort independiente para cada cuadro
   onSortByChange(sortBy: string): void {
-    if (sortBy === CUSTOM_SORT) {
-      this.customRangeChartActive = true;
-      return;
-    } else {
-      this.customRangeChartActive = false;
-    }
+    this.customRangeActive = false;
     const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
     this.fetchDataChartOverview(startDate, endDate);
   }
 
+  //Sort custom global para todos los cuadro
   handleDateRange(dateRange: string): void {
+    this.customRangeActive = true;
+    this.customBankRangeActive = true;
     const [startDate, endDate] = dateRange.split(' to ');
     this.fetchDataChartOverview(startDate, endDate);
+    this.fetchBanksTotalClosures(startDate, endDate);
   }
 
   closeModal(): void {

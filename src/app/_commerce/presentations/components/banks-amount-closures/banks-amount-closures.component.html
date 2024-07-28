@@ -1,18 +1,52 @@
 <div class="card card-h-100">
   <div class="card-body">
-    <div class="d-flex align-items-start">
-      <div class="flex-grow-1">
-        <h5 class="card-title mb-4 text-center">Monto procesado por banco</h5>
+    <div class="float-end d-flex align-items-center">
+      <div class="dropdown" ngbDropdown>
+        <button class="btn btn-light btn-sm dropdown-toggle" ngbDropdownToggle>
+          @if(customRangeActive){
+          <span class="text-muted"
+            >{{ CUSTOM }}<i class="mdi mdi-chevron-down ms-1"></i
+          ></span>
+          }@else{
+          <span class="text-muted"
+            >{{ currentSortBy }}<i class="mdi mdi-chevron-down ms-1"></i
+          ></span>
+          }
+        </button>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button class="dropdown-item" (click)="updateSortBy(WEEKLY)">
+            {{ WEEKLY }}
+          </button>
+          <button class="dropdown-item" (click)="updateSortBy(MONTHLY)">
+            {{ MONTHLY }}
+          </button>
+          <button class="dropdown-item" (click)="updateSortBy(SEMESTER)">
+            {{ SEMESTER }}
+          </button>
+          <button class="dropdown-item" (click)="updateSortBy(YEARLY)">
+            {{ YEARLY }}
+          </button>
+        </div>
       </div>
     </div>
+    <h4 class="card-title mb-4">Monto procesado por banco</h4>
     <div *ngIf="barChart.series && barChart.series.length > 0; else loading">
-      <apx-chart #chart [series]="barChart.series" [chart]="barChart.chart" [xaxis]="barChart.xaxis"
-        [colors]="barChart.colors" [plotOptions]="barChart.plotOptions" [dataLabels]="barChart.dataLabels"
-        [legend]="barChart.legend"></apx-chart>
-      <div class="row mb-0 mt-3">
+      <apx-chart
+        #chart
+        [series]="barChart.series"
+        [chart]="barChart.chart"
+        [xaxis]="barChart.xaxis"
+        [yaxis]="barChart.yaxis"
+        [colors]="barChart.colors"
+        [plotOptions]="barChart.plotOptions"
+        [dataLabels]="barChart.dataLabels"
+        [legend]="barChart.legend"
+        [tooltip]="barChart.tooltip"
+      ></apx-chart>
+      <div class="row mb-0 mt-1">
         <div class="col-12 text-center">
           <p class="text-muted mb-2">Monto total procesado</p>
-          <h5>Bs. {{totalAmount | abbreviateNumber}}</h5>
+          <h5>Bs. {{ totalAmount | abbreviateNumber }}</h5>
         </div>
       </div>
     </div>

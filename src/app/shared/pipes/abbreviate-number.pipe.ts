@@ -1,23 +1,20 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import numbro from 'numbro';
-import esES from 'numbro/dist/languages/es-ES.min';
 
 @Pipe({
   name: 'abbreviateNumber',
 })
 export class AbbreviateNumberPipe implements PipeTransform {
-  constructor() {
-    // Registrar y configurar el idioma español
-    numbro.registerLanguage(esES);
-    numbro.setLanguage('es-ES');
-  }
+  constructor() {}
 
   transform(value: number): string {
-    return numbro(value)
-      .format({
-        average: true,
-        mantissa: 1,
-      })
-      .toUpperCase();
+    if (value >= 1_000_000_000) {
+      return (value / 1_000_000_000).toFixed(1) + 'MM'; // Mil millones
+    } else if (value >= 1_000_000) {
+      return (value / 1_000_000).toFixed(1) + 'M'; // Millones
+    } else if (value >= 1_000) {
+      return (value / 1_000).toFixed(1) + 'k'; // Miles
+    } else {
+      return value.toString();
+    }
   }
 }

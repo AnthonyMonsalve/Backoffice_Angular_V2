@@ -1,31 +1,57 @@
-<app-modal-error [showErrorModal]="showErrorModal" (closeModal)="closeModal()"></app-modal-error>
+<app-modal-error
+  [showErrorModal]="showErrorModal"
+  (closeModal)="closeModal()"
+></app-modal-error>
 <!-- start page title -->
-<app-pagetitle title="Insta Comercio" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<app-pagetitle
+  title="Insta Comercio"
+  [breadcrumbItems]="breadCrumbItems"
+></app-pagetitle>
 <!-- end page title -->
 <div class="row">
   <div class="col-xl-4 col-sm-6">
-    <card-count [title]="'Comercios'" [icon]="'uil uil-shopping-cart-alt'" [count]="totalAffiliatesMaster"
-      [link]="'/commerce/commerces-list'"></card-count>
+    <card-count
+      [title]="'Comercios'"
+      [icon]="'uil uil-shopping-cart-alt'"
+      [count]="totalAffiliatesMaster"
+      [link]="'/commerce/commerces-list'"
+    ></card-count>
   </div>
   <div class="col-xl-4 col-sm-6">
-    <card-count [title]="'Afiliaciones bancarias'" [icon]="'fa fa-university'" [count]="totalAffiliates"
-      [link]="'/commerce/affiliates-list'"></card-count>
+    <card-count
+      [title]="'Afiliaciones bancarias'"
+      [icon]="'fa fa-university'"
+      [count]="totalAffiliates"
+      [link]="'/commerce/affiliates-list'"
+    ></card-count>
+  </div>
+  <div class="col-xl-4 col-sm-6">
+    <app-date-range-picker (dateRangeSet)="handleDateRange($event)">
+    </app-date-range-picker>
   </div>
 </div>
 <div class="row">
   <div class="col-xl-3 col-md-3 col-sm-4">
-    <terminal-status-overview [overviewData]="overviewTerminalData"></terminal-status-overview>
+    <terminal-status-overview
+      [overviewData]="overviewTerminalData"
+    ></terminal-status-overview>
   </div>
   <div class="col-xl-9 col-md-9 col-sm-8">
-    <app-date-range-picker [customRangeChartActive]="customRangeChartActive" (dateRangeSet)="handleDateRange($event)">
-    </app-date-range-picker>
-    <closures-data-chart [chartData]="chartData" [chartOverviewData]="chartOverviewData"
-      (sortByChange)="onSortByChange($event)">
+    <closures-data-chart
+      [customRangeActive]="customRangeActive"
+      [chartData]="chartData"
+      [chartOverviewData]="chartOverviewData"
+      (sortByChange)="onSortByChange($event)"
+    >
     </closures-data-chart>
   </div>
 </div>
 <div class="row">
-  <div class="col-xl-4 col-md-4 col-sm-4">
-    <banks-total-amount-closures [bankClosuresData]="bankClosuresReport"></banks-total-amount-closures>
+  <div class="col-xl-6 col-md-6 col-sm-6">
+    <banks-total-amount-closures
+      [customRangeActive]="customBankRangeActive"
+      [bankClosuresData]="bankClosuresReport"
+      (sortByChange)="onSortBandkByChange($event)"
+    ></banks-total-amount-closures>
   </div>
 </div>

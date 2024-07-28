@@ -1,13 +1,23 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { BankClosuresReport } from '@commerce/application/interfaces/banks-total-amount.interface';
 import { ChartType } from '@commerce/domain/models/chart.model';
+import {
+  MONTHLY_SORT,
+  WEEKLY_SORT,
+  YEARLY_SORT,
+  SEMESTER_SORT,
+  CUSTOM_SORT,
+} from '@core/utils/constants';
+import { NumberAbbreviationService } from '@services/charts-amount-formatter.service';
 import { ChartComponent } from 'ng-apexcharts';
 
 @Component({
@@ -16,11 +26,23 @@ import { ChartComponent } from 'ng-apexcharts';
 })
 export class BanksTotalAmountClosuresComponent implements OnInit, OnChanges {
   @Input() bankClosuresData: BankClosuresReport | null = null;
+  @Input() customRangeActive: boolean = false;
   @ViewChild('chart') chart!: ChartComponent;
+  @Output() sortByChange = new EventEmitter<string>();
+
   barChart: ChartType = this.getInitialBarChartConfig();
   totalAmount = 0;
+  currentSortBy: string = MONTHLY_SORT;
+  loading: boolean = true;
+  error: boolean = false;
 
-  constructor() {}
+  WEEKLY = WEEKLY_SORT;
+  YEARLY = YEARLY_SORT;
+  MONTHLY = MONTHLY_SORT;
+  SEMESTER = SEMESTER_SORT;
+  CUSTOM = CUSTOM_SORT;
+
+  constructor(private numberAbbreviationService: NumberAbbreviationService) {}
 
   ngOnInit(): void {
     if (this.bankClosuresData) {
@@ -50,16 +72,29 @@ export class BanksTotalAmountClosuresComponent implements OnInit, OnChanges {
         categories: labels,
         labels: {
           style: {
-            colors: ['#162253', '#038edc', '#75d5f4', '#f07d31'],
+            colors: [
+              '#162253',
+              '#038EDC',
+              '#5675F0',
+              '#56B7F0',
+              '#2F3F81',
+              '#2F6381',
+            ],
             fontSize: '12px',
           },
+        },
+      },
+      yaxis: {
+        labels: {
+          formatter: (value: number) =>
+            this.numberAbbreviationService.abbreviateNumberInSpanish(value),
         },
       },
     };
 
     // Forzar la actualización del gráfico
     if (this.chart) {
-      this.chart.updateOptions(this.barChart);
+      this.chart.updateOptions(this.barChart, false, true, true);
     }
 
     // Si necesitas también actualizar el totalAmount
@@ -75,13 +110,20 @@ export class BanksTotalAmountClosuresComponent implements OnInit, OnChanges {
         },
       ],
       chart: {
-        height: 350,
+        height: 250,
         type: 'bar',
       },
-      colors: ['#162253', '#038edc', '#75d5f4', '#f07d31'],
+      colors: [
+        '#162253',
+        '#038EDC',
+        '#5675F0',
+        '#56B7F0',
+        '#2F3F81',
+        '#2F6381',
+      ],
       plotOptions: {
         bar: {
-          columnWidth: '50%',
+          columnWidth: '30%',
           distributed: true,
         },
       },
@@ -100,6 +142,22 @@ export class BanksTotalAmountClosuresComponent implements OnInit, OnChanges {
           },
         },
       },
+      yaxis: {
+        labels: {
+          formatter: (value: number) =>
+            this.numberAbbreviationService.abbreviateNumberInSpanish(value),
+        },
+      },
+      tooltip: {
+        y: {
+          formatter: (value: number) => `Bs. ${value.toLocaleString('es-ES')}`,
+        },
+      },
     };
+  }
+
+  updateSortBy(period: string): void {
+    this.currentSortBy = period.charAt(0).toUpperCase() + period.slice(1);
+    this.sortByChange.emit(this.currentSortBy);
   }
 }

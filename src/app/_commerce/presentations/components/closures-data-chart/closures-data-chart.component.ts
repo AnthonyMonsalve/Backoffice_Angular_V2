@@ -21,6 +21,7 @@ import {
   WEEKLY_SORT,
   YEARLY_SORT,
 } from '@core/utils/constants';
+import { NumberAbbreviationService } from '@services/charts-amount-formatter.service';
 import { ChartComponent } from 'ng-apexcharts';
 
 @Component({
@@ -32,6 +33,7 @@ export class ClosuresDataChartComponent
 {
   @Input() chartData!: ChartClosureData;
   @Input() chartOverviewData: ChartOverviewData | null = null;
+  @Input() customRangeActive: boolean = false;
   @Output() sortByChange = new EventEmitter<string>();
 
   @ViewChild('chart') chart!: ChartComponent;
@@ -50,6 +52,8 @@ export class ClosuresDataChartComponent
   MONTHLY = MONTHLY_SORT;
   SEMESTER = SEMESTER_SORT;
   CUSTOM = CUSTOM_SORT;
+
+  constructor(private numberAbbreviationService: NumberAbbreviationService) {}
 
   ngOnInit(): void {
     if (this.chartData) {
@@ -137,7 +141,7 @@ export class ClosuresDataChartComponent
   private getInitialChartConfig(): ChartType {
     return {
       chart: {
-        height: 332,
+        height: 300,
         type: 'line',
         stacked: false,
         offsetY: 20,
@@ -178,11 +182,8 @@ export class ClosuresDataChartComponent
         {
           title: { text: 'Total Amount', style: { fontWeight: 500 } },
           labels: {
-            formatter: (val: any) =>
-              `${val.toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })} Bs`,
+            formatter: (value: number) =>
+              this.numberAbbreviationService.abbreviateNumberInSpanish(value),
           },
         },
         {
@@ -197,10 +198,10 @@ export class ClosuresDataChartComponent
         y: {
           formatter: (y: any, { series, seriesIndex }: any) => {
             if (seriesIndex === 0) {
-              return `${y.toLocaleString(undefined, {
+              return `Bs. ${y.toLocaleString(undefined, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
-              })} Bs`;
+              })}`;
             } else if (seriesIndex === 1) {
               return `${y.toLocaleString(undefined, {
                 minimumFractionDigits: 0,

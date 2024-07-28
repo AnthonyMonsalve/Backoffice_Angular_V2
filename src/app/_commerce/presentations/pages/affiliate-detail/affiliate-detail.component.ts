@@ -171,18 +171,13 @@ export class AffiliateDetailComponent implements OnInit {
   }
 
   onSortByChange(sortBy: string): void {
-    if (sortBy === CUSTOM_SORT) {
-      this.customRangeChartActive = true;
-      return;
-    } else {
-      this.customRangeChartActive = false;
-    }
-
+    this.customRangeChartActive = false;
     const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
     this.fetchDataChartOverview(startDate, endDate, this.affiliateSK);
   }
 
   handleDateRange(dateRange: string): void {
+    this.customRangeChartActive = true;
     const [startDate, endDate] = dateRange.split(' to ');
     this.fetchDataChartOverview(startDate, endDate, this.affiliateSK);
   }

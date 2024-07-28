@@ -7,7 +7,7 @@
   top: 0;
   right: 0;
   left: $sidebar-width;
-  z-index: 100000;
+  z-index: 1000;
   background-color: var(--#{$prefix}header-bg);
   box-shadow: $box-shadow;
 }

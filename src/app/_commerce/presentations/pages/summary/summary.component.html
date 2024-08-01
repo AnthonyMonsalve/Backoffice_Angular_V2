@@ -51,7 +51,14 @@
     <banks-total-amount-closures
       [customRangeActive]="customBankRangeActive"
       [bankClosuresData]="bankClosuresReport"
-      (sortByChange)="onSortBandkByChange($event)"
+      (sortByChange)="onSortBankByChange($event)"
     ></banks-total-amount-closures>
+  </div>
+  <div class="col-xl-4 col-md-4 col-sm-12">
+    <app-top-commerces
+      [customRangeActive]="customTopCommerceRangeActive"
+      [merchants]="affiliateMasterClosure"
+      (sortByChange)="onSortTopCommercesByChange($event)"
+    ></app-top-commerces>
   </div>
 </div>

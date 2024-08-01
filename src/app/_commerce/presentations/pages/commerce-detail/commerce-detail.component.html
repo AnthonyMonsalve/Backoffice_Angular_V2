@@ -1,11 +1,30 @@
 <app-pagetitle
-  title="{{ affiliateMaster?.nombreComercial | titlecase }}"
+  title="{{ affiliateMaster?.nombreComercial | titlecase }} ({{
+    affiliateMaster?.rif | titlecase
+  }})"
   [breadcrumbItems]="breadCrumbItems"
 ></app-pagetitle>
 
 @if(chartOverviewData?.totalAmount){
 <div class="row">
-  <div class="col-xl-8 col-sm-6"></div>
+  <div class="col-xl-8 col-sm-6">
+    <div class="card border-0 shadow-sm">
+      <div class="card-body py-2 px-3">
+        <div class="mb-1">
+          <i class="fas fa-map-marker-alt me-2 text-info-purpleblue"></i>
+          <span class="text-muted">{{ affiliateMaster?.address }}</span>
+        </div>
+        <div class="mb-1">
+          <i class="fas fa-envelope me-2 text-info-purpleblue"></i>
+          <span class="text-muted">{{ affiliateMaster?.email }}</span>
+        </div>
+        <div class="mb-1">
+          <i class="fas fa-phone me-2 text-info-purpleblue"></i>
+          <span class="text-muted">{{ affiliateMaster?.phone }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="col-xl-4 col-sm-6">
     <app-date-range-picker
       [customRangeChartActive]="customRangeChartActive"

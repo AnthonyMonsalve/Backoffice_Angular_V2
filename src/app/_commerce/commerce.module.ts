@@ -25,6 +25,7 @@ import { CommerceListComponent } from './presentations/pages/commerce-list/comme
 import { PageAffiliateListComponent } from './presentations/pages/page-affiliate-list/page-affiliate-list.component';
 import { SummaryCommerceComponent } from './presentations/pages/summary/summary.component';
 import { TerminalDetailComponent } from './presentations/pages/terminal-detail/terminal-detail.component';
+import { TopCommercesComponent } from './presentations/components/top-commerces/top-commerces.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { TerminalDetailComponent } from './presentations/pages/terminal-detail/t
     AffiliateDetailComponent,
     AffiliateMasterDetailComponent,
     TerminalsStatusOverviewComponent,
+    TopCommercesComponent,
     CardCountComponent,
     ClosuresDataChartComponent,
     PageAffiliateListComponent,

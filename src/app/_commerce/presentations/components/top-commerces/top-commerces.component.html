@@ -1,0 +1,73 @@
+<div class="card">
+  <div class="card-body">
+    <div class="float-end d-flex align-items-center">
+      <div class="dropdown" ngbDropdown>
+        <button class="btn btn-light btn-sm dropdown-toggle" ngbDropdownToggle>
+          @if(customRangeActive){
+          <span class="text-muted"
+            >{{ CUSTOM }}<i class="mdi mdi-chevron-down ms-1"></i
+          ></span>
+          }@else{
+          <span class="text-muted"
+            >{{ currentSortBy }}<i class="mdi mdi-chevron-down ms-1"></i
+          ></span>
+          }
+        </button>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button class="dropdown-item" (click)="updateSortBy(WEEKLY)">
+            {{ WEEKLY }}
+          </button>
+          <button class="dropdown-item" (click)="updateSortBy(MONTHLY)">
+            {{ MONTHLY }}
+          </button>
+          <button class="dropdown-item" (click)="updateSortBy(LAST_MONTH)">
+            {{ LAST_MONTH }}
+          </button>
+          <button class="dropdown-item" (click)="updateSortBy(SEMESTER)">
+            {{ SEMESTER }}
+          </button>
+          <button class="dropdown-item" (click)="updateSortBy(YEARLY)">
+            {{ YEARLY }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <h4 class="card-title mb-4">Top Comercios</h4>
+    <ul class="list-group list-group-flush">
+      <li
+        *ngFor="let merchant of merchants; let i = index"
+        class="list-group-item p-0 py-2"
+      >
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <div class="flex-shrink-0 me-2">
+              <div class="avatar-xs-sm">
+                <div
+                  class="avatar-title bg-primary-subtle text-primary rounded-circle font-size-14"
+                >
+                  {{ i + 1 }}
+                </div>
+              </div>
+            </div>
+            <span>
+              <a
+                [routerLink]="[
+                  '/commerce/commerce-detail',
+                  merchant.AffiliateMasterSK
+                ]"
+                class="text-body fw-medium"
+              >
+                {{ merchant.AffiliateMasterName | titlecase }}
+              </a>
+            </span>
+          </div>
+          <span
+            class="badge bg-secondary-subtle font-size-13 p-2 text-info-purpleblue"
+          >
+            Bs. {{ merchant.Closure.TotalAmountGross | abbreviateNumber }}</span
+          >
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

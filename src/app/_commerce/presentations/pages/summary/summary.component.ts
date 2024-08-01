@@ -5,8 +5,10 @@ import {
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
 import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
-import { MONTHLY_SORT } from '@core/utils/constants';
+import { AffiliateMasterClosure } from '@core/interfaces/affiliate-master-closures.interface';
+import { LAST_MONTH_SORT, MONTHLY_SORT } from '@core/utils/constants';
 import { DateRangeService } from '@services/date-range.service';
+import { FactClosureService } from '@services/fact-closure.service';
 import { TerminalService } from '@services/terminal.service';
 import { MerchantService } from 'src/app/_commerce/application/services/data-merchant.service';
 
@@ -19,6 +21,7 @@ export class SummaryCommerceComponent implements OnInit {
   breadCrumbItems!: Array<{}>;
   overviewTerminalData: OverviewTerminals | null = null;
   bankClosuresReport: BankClosuresReport | null = null;
+  affiliateMasterClosure!: AffiliateMasterClosure[];
   chartData!: ChartClosureData;
   chartOverviewData: ChartOverviewData | null = null;
   totalAffiliatesMaster: number = 0; // Inicializa la variable aquí
@@ -26,12 +29,14 @@ export class SummaryCommerceComponent implements OnInit {
   customRangeChartActive: boolean = false;
   showErrorModal: boolean = false;
   customRangeActive: boolean = false;
-  customBankRangeActive: boolean = true;
+  customBankRangeActive: boolean = false;
+  customTopCommerceRangeActive: boolean = false;
 
   constructor(
     private terminalService: TerminalService,
     private merchantService: MerchantService,
-    private dateRangeService: DateRangeService
+    private dateRangeService: DateRangeService,
+    private factService: FactClosureService
   ) {}
 
   ngOnInit(): void {
@@ -43,9 +48,10 @@ export class SummaryCommerceComponent implements OnInit {
     this.fetchAffiliateData();
     this.fetchOverviewTerminals();
     const { startDate, endDate } =
-      this.dateRangeService.getDateRange(MONTHLY_SORT);
+      this.dateRangeService.getDateRange(LAST_MONTH_SORT);
     this.fetchDataChartOverview(startDate, endDate);
     this.fetchBanksTotalClosures(startDate, endDate);
+    this.fetchAffiliatesMasterTotalClosures(startDate, endDate);
   }
 
   private fetchAffiliatesMasterData(): void {
@@ -96,6 +102,25 @@ export class SummaryCommerceComponent implements OnInit {
       });
   }
 
+  private fetchAffiliatesMasterTotalClosures(
+    startDate: string,
+    endDate: string
+  ): void {
+    const search = 'Merchant';
+    this.factService
+      .getAffiliatesMasterTotalAmountDateRange(search, startDate, endDate)
+      .subscribe({
+        next: (data) => {
+          console.log('Data received:', data); // Agrega este console.log para verificar lo recibido
+          this.affiliateMasterClosure = data.affiliatesMasterClosures;
+        },
+        error: (error) => {
+          console.error('Error fetching overview data', error);
+          this.showErrorModal = true;
+        },
+      });
+  }
+
   private fetchDataChartOverview(startDate: string, endDate: string): void {
     this.merchantService
       .getAmountDayBetweenTwoDates(startDate, endDate)
@@ -120,10 +145,16 @@ export class SummaryCommerceComponent implements OnInit {
   }
 
   //Sort independiente para cada cuadro
-  onSortBandkByChange(sortBy: string): void {
+  onSortBankByChange(sortBy: string): void {
     this.customBankRangeActive = false;
     const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
     this.fetchBanksTotalClosures(startDate, endDate);
+  }
+
+  onSortTopCommercesByChange(sortBy: string): void {
+    this.customTopCommerceRangeActive = false;
+    const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
+    this.fetchAffiliatesMasterTotalClosures(startDate, endDate);
   }
 
   //Sort independiente para cada cuadro
@@ -137,9 +168,11 @@ export class SummaryCommerceComponent implements OnInit {
   handleDateRange(dateRange: string): void {
     this.customRangeActive = true;
     this.customBankRangeActive = true;
+    this.customTopCommerceRangeActive = true;
     const [startDate, endDate] = dateRange.split(' to ');
     this.fetchDataChartOverview(startDate, endDate);
     this.fetchBanksTotalClosures(startDate, endDate);
+    this.fetchAffiliatesMasterTotalClosures(startDate, endDate);
   }
 
   closeModal(): void {

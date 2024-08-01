@@ -16,6 +16,7 @@ import {
   YEARLY_SORT,
   SEMESTER_SORT,
   CUSTOM_SORT,
+  LAST_MONTH_SORT,
 } from '@core/utils/constants';
 import { NumberAbbreviationService } from '@services/charts-amount-formatter.service';
 import { ChartComponent } from 'ng-apexcharts';
@@ -41,6 +42,7 @@ export class BanksTotalAmountClosuresComponent implements OnInit, OnChanges {
   MONTHLY = MONTHLY_SORT;
   SEMESTER = SEMESTER_SORT;
   CUSTOM = CUSTOM_SORT;
+  LAST_MONTH = LAST_MONTH_SORT;
 
   constructor(private numberAbbreviationService: NumberAbbreviationService) {}
 

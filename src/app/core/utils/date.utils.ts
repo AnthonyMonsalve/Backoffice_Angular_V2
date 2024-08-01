@@ -58,3 +58,17 @@ export function getSemesterRange(): { startDate: string; endDate: string } {
 
   return { startDate, endDate };
 }
+
+export function getLastMonthRange(): { startDate: string; endDate: string } {
+  const today = new Date();
+  const currentMonth = today.getMonth(); // 0 is January, 11 is December
+  const currentYear = today.getFullYear();
+
+  const startDate = new Date(currentYear, currentMonth - 1, 1); // First day of last month
+  const endDate = new Date(currentYear, currentMonth, 0); // Last day of last month
+
+  return {
+    startDate: startDate.toISOString().split('T')[0],
+    endDate: endDate.toISOString().split('T')[0],
+  };
+}

@@ -4,8 +4,10 @@ import {
   getMonthlyRange,
   getWeeklyRange,
   getSemesterRange,
+  getLastMonthRange,
 } from '../utils/date.utils';
 import {
+  LAST_MONTH_SORT,
   MONTHLY_SORT,
   SEMESTER_SORT,
   WEEKLY_SORT,
@@ -25,6 +27,8 @@ export class DateRangeService {
       return getWeeklyRange();
     } else if (sortBy === SEMESTER_SORT) {
       return getSemesterRange();
+    } else if (sortBy === LAST_MONTH_SORT) {
+      return getLastMonthRange();
     }
     return { startDate: '', endDate: '' }; // Default case, you might want to handle it differently
   }

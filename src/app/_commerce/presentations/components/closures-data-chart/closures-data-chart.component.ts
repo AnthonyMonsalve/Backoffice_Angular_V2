@@ -16,6 +16,7 @@ import {
 import { ChartType } from '@commerce/domain/models/chart.model';
 import {
   CUSTOM_SORT,
+  LAST_MONTH_SORT,
   MONTHLY_SORT,
   SEMESTER_SORT,
   WEEKLY_SORT,
@@ -52,6 +53,7 @@ export class ClosuresDataChartComponent
   MONTHLY = MONTHLY_SORT;
   SEMESTER = SEMESTER_SORT;
   CUSTOM = CUSTOM_SORT;
+  LAST_MONTH = LAST_MONTH_SORT;
 
   constructor(private numberAbbreviationService: NumberAbbreviationService) {}
 

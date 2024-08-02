@@ -44,7 +44,7 @@ export class TerminalsStatusOverviewComponent implements OnInit, OnChanges {
   private getInitialDonutChartConfig(): ChartType {
     return {
       chart: {
-        height: 300,
+        height: 280,
         type: 'donut',
       },
       plotOptions: {

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AffiliateClosure } from '@core/interfaces/affiliate-closures.interface';
 import { AffiliateMasterClosure } from '@core/interfaces/affiliate-master-closures.interface';
-import { AffiliateMasterClosureModel } from '@core/models/affiliate-master-closures.model';
 import {
   CUSTOM_SORT,
   LAST_MONTH_SORT,
@@ -11,12 +11,17 @@ import {
 } from '@core/utils/constants';
 
 @Component({
-  selector: 'app-top-commerces',
-  templateUrl: './top-commerces.component.html',
+  selector: 'app-top-affiliates-from-commerce',
+  templateUrl: './top-affiliates-from-commerce.component.html',
 })
-export class TopCommercesComponent implements OnInit {
-  @Input() merchants!: AffiliateMasterClosure[];
+export class TopAffiliatesFromCommerceComponent implements OnInit {
+  @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
+  @Input() affiliates!: AffiliateClosure[];
   @Input() customRangeActive: boolean = false;
+  @Input() page: number = 0;
+  @Input() limit: number = 0;
+  @Input() total: number = 0;
+
   @Output() sortByChange = new EventEmitter<string>();
 
   currentSortBy: string = MONTHLY_SORT;
@@ -31,6 +36,10 @@ export class TopCommercesComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  onPageChange(newPage: number): void {
+    this.pageChange.emit(newPage);
+  }
 
   updateSortBy(period: string): void {
     this.currentSortBy = period.charAt(0).toUpperCase() + period.slice(1);

@@ -34,12 +34,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-xl-3 col-md-3 col-sm-4">
-    <terminal-status-overview
-      [overviewData]="overviewTerminalData"
-    ></terminal-status-overview>
-  </div>
-  <div class="col-xl-9 col-md-9 col-sm-8">
+  <div class="col-xl-12 col-md-12 col-sm-12">
     <closures-data-chart
       [customRangeActive]="customRangeChartActive"
       [chartData]="chartData"
@@ -47,6 +42,22 @@
       (sortByChange)="onSortByChange($event)"
     >
     </closures-data-chart>
+  </div>
+  <div class="col-xl-4 col-md-12">
+    <terminal-status-overview
+      [overviewData]="overviewTerminalData"
+    ></terminal-status-overview>
+  </div>
+  <div class="col-xl-8 col-md-12">
+    <app-top-affiliates-from-commerce
+      [affiliates]="affiliateClosure"
+      [customRangeActive]="customTopAffiliateRangeActive"
+      (sortByChange)="onSortTopAffiliateByChange($event)"
+      [page]="pageAfflClosure"
+      [limit]="limitAfflClosure"
+      [total]="totalAfflClosure"
+      (pageChange)="onPageAfflChange($event)"
+    ></app-top-affiliates-from-commerce>
   </div>
 </div>
 }

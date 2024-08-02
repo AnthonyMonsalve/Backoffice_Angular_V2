@@ -1,0 +1,97 @@
+<div class="card">
+  <div class="card-body">
+    <div class="float-end d-flex align-items-center">
+      <div class="dropdown" ngbDropdown>
+        <button class="btn btn-light btn-sm dropdown-toggle" ngbDropdownToggle>
+          @if(customRangeActive){
+          <span class="text-muted"
+            >{{ CUSTOM }}<i class="mdi mdi-chevron-down ms-1"></i
+          ></span>
+          }@else{
+          <span class="text-muted"
+            >{{ currentSortBy }}<i class="mdi mdi-chevron-down ms-1"></i
+          ></span>
+          }
+        </button>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button class="dropdown-item" (click)="updateSortBy(WEEKLY)">
+            {{ WEEKLY }}
+          </button>
+          <button class="dropdown-item" (click)="updateSortBy(MONTHLY)">
+            {{ MONTHLY }}
+          </button>
+          <button class="dropdown-item" (click)="updateSortBy(LAST_MONTH)">
+            {{ LAST_MONTH }}
+          </button>
+          <button class="dropdown-item" (click)="updateSortBy(SEMESTER)">
+            {{ SEMESTER }}
+          </button>
+          <button class="dropdown-item" (click)="updateSortBy(YEARLY)">
+            {{ YEARLY }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <h4 class="card-title mb-4">Top afiliaciones</h4>
+    <ul class="list-group list-group-flush">
+      <li
+        *ngFor="let affl of affiliates; let i = index"
+        class="list-group-item p-0 pt-3 pb-2"
+      >
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <div class="flex-shrink-0 me-3">
+              <div class="avatar-xs-sm">
+                <div
+                  class="avatar-title bg-primary-subtle text-primary rounded-circle font-size-14"
+                >
+                  {{ i + 1 + (page - 1) * limit }}
+                </div>
+              </div>
+            </div>
+            <span class="me-3">
+              <a
+                [routerLink]="['/commerce/affiliate-detail/', affl.AffiliateSK]"
+                class="text-body fw-medium"
+              >
+                {{ affl.AffiliateName | titlecase }}
+              </a>
+            </span>
+            <app-bank-image-small-name
+              [width]="100"
+              [bankName]="affl.BankSmallName"
+            ></app-bank-image-small-name>
+          </div>
+          <span
+            class="badge bg-secondary-subtle font-size-13 p-2 text-info-purpleblue"
+          >
+            Bs. {{ affl.Closure.TotalAmountGross | abbreviateNumber }}</span
+          >
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="row justify-content-md-between align-items-md-center mt-2 px-4">
+    <div class="col-sm-12 col-md-5">
+      <div
+        class="dataTables_info mb-2"
+        id="tickets-table_info"
+        role="status"
+        aria-live="polite"
+      >
+        Showing {{ page }} to {{ limit }} of {{ total }} entries
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-5">
+      <div class="text-md-right float-md-end pagination-rounded">
+        <app-table-pagination
+          [total]="total"
+          [page]="page"
+          [limit]="limit"
+          (pageChange)="onPageChange($event)"
+        >
+        </app-table-pagination>
+      </div>
+    </div>
+  </div>
+</div>

@@ -22,6 +22,8 @@ import { AbbreviateNumberPipe } from './pipes/abbreviate-number.pipe';
 import { NumberToDatePipe } from './pipes/timeId-to-date.pipe';
 import {} from './shared-routing.module';
 import { WidgetModule } from './widget/widget.module';
+import { TopAffiliatesFromCommerceComponent } from './components/top-affiliates-from-commerce/top-affiliates-from-commerce.component';
+import { TopCommercesComponent } from './components/top-commerces/top-commerces.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { WidgetModule } from './widget/widget.module';
     BankImageSmallName,
     DateRangePickerComponent,
     ModalErrorComponent,
+    TopAffiliatesFromCommerceComponent,
+    TopCommercesComponent,
   ],
   imports: [
     CommonModule,
@@ -56,7 +60,9 @@ import { WidgetModule } from './widget/widget.module';
     NumberToDatePipe,
     BankImageSmallName,
     DateRangePickerComponent,
+    TopAffiliatesFromCommerceComponent,
     ModalErrorComponent,
+    TopCommercesComponent,
   ],
 })
 export class SharedModule {}

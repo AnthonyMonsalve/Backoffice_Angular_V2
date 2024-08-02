@@ -6,13 +6,20 @@ import {
 } from '@commerce/application/interfaces/chart.interface';
 import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
 import { MerchantService } from '@commerce/application/services/data-merchant.service';
+import { AffiliateClosure } from '@core/interfaces/affiliate-closures.interface';
 import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
 import { AffiliateMaster } from '@core/models/affiliate-master.model';
 import { Affiliate } from '@core/models/affiliate.model';
-import { CUSTOM_SORT, MONTHLY_SORT } from '@core/utils/constants';
+import {
+  CUSTOM_SORT,
+  LAST_MONTH_SORT,
+  MONTHLY_SORT,
+  YEARLY_SORT,
+} from '@core/utils/constants';
 import { AffiliateMasterService } from '@services/affiliate-master.service';
 import { AffiliateService } from '@services/affiliate.service';
 import { DateRangeService } from '@services/date-range.service';
+import { FactClosureService } from '@services/fact-closure.service';
 import { TerminalService } from '@services/terminal.service';
 
 @Component({
@@ -25,6 +32,17 @@ export class AffiliateMasterDetailComponent implements OnInit {
   chartData!: ChartClosureData;
   chartOverviewData: ChartOverviewData | null = null;
   overviewTerminalData: OverviewTerminals | null = null;
+
+  affiliateClosure!: AffiliateClosure[];
+  pageAfflClosure: number = 1;
+  limitAfflClosure: number = 5;
+  totalAfflClosure: number = 0;
+  orderAfflClosure: string = 'DESC';
+  sortAfflClosure: string = 'TotalAmountGross';
+  customTopAffiliateRangeActive: boolean = false;
+  startDateAffl!: string;
+  endDateAffl!: string;
+
   customRangeChartActive: boolean = false;
 
   breadCrumbItems: Array<{}> = [
@@ -45,7 +63,8 @@ export class AffiliateMasterDetailComponent implements OnInit {
     private merchantService: MerchantService,
     private affiliateMasterService: AffiliateMasterService,
     private terminalService: TerminalService,
-    private dateRangeService: DateRangeService
+    private dateRangeService: DateRangeService,
+    private factService: FactClosureService
   ) {
     // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
     const affiliateSK = this.route.snapshot.paramMap.get('sk');
@@ -59,8 +78,13 @@ export class AffiliateMasterDetailComponent implements OnInit {
     this.fetchAffiliates();
     this.fetchAfflMaster();
     const { startDate, endDate } =
-      this.dateRangeService.getDateRange(MONTHLY_SORT);
+      this.dateRangeService.getDateRange(YEARLY_SORT);
+
+    this.startDateAffl = startDate;
+    this.endDateAffl = endDate;
+
     this.fetchDataChartOverview(startDate, endDate, this.affiliateMasterSk);
+    this.fetchTotalsByAffiliatesUnderMaster(startDate, endDate);
     this.fetchOverviewTerminals();
   }
 
@@ -70,6 +94,14 @@ export class AffiliateMasterDetailComponent implements OnInit {
       .subscribe((data: AffiliateMaster) => {
         this.affiliateMaster = data;
       });
+  }
+
+  onSortTopAffiliateByChange(sortBy: string): void {
+    this.customTopAffiliateRangeActive = false;
+    const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
+    this.startDateAffl = startDate;
+    this.endDateAffl = endDate;
+    this.fetchTotalsByAffiliatesUnderMaster(startDate, endDate);
   }
 
   fetchAffiliates(): void {
@@ -92,6 +124,14 @@ export class AffiliateMasterDetailComponent implements OnInit {
   onPageChange(newPage: number): void {
     this.page = newPage;
     this.fetchAffiliates();
+  }
+
+  onPageAfflChange(newPage: number): void {
+    this.pageAfflClosure = newPage;
+    this.fetchTotalsByAffiliatesUnderMaster(
+      this.startDateAffl,
+      this.endDateAffl
+    );
   }
 
   private fetchDataChartOverview(
@@ -130,6 +170,32 @@ export class AffiliateMasterDetailComponent implements OnInit {
       .getOverviewAffiliateMasterTerminals(this.affiliateMasterSk)
       .subscribe({
         next: (data) => (this.overviewTerminalData = data),
+        error: (error) => console.error('Error fetching overview data', error),
+        complete: () => console.log('Fetching complete'),
+      });
+  }
+
+  private fetchTotalsByAffiliatesUnderMaster(
+    startDate: string,
+    endDate: string
+  ): void {
+    this.factService
+      .getTotalsByAffiliatesUnderMaster(
+        this.affiliateMasterSk,
+        startDate,
+        endDate,
+        this.limitAfflClosure,
+        this.pageAfflClosure,
+        this.sortAfflClosure,
+        this.orderAfflClosure
+      )
+      .subscribe({
+        next: (data) => {
+          console.log(data.affiliatesClosures);
+          this.affiliateClosure = data.affiliatesClosures;
+          this.totalAfflClosure = data.metadata.total;
+          this.pageAfflClosure = data.metadata.page;
+        },
         error: (error) => console.error('Error fetching overview data', error),
         complete: () => console.log('Fetching complete'),
       });

@@ -1,47 +1,92 @@
 @if (affiliates.length === 0){
 <app-card-message [title]="TitleNotFound" [message]="MessageNotFound">
 </app-card-message>
-}@else {<div class="table-responsive datatables">
+}@else {
+<div class="table-responsive datatables">
   <table class="table align-middle table-nowrap table-check">
     <thead>
       <tr>
-        <th (click)="changeSort('name')"
-          [ngClass]="{'asc': sort === 'name' && order === 'ASC', 'desc': sort === 'name' && order === 'DESC'}">
-          Name</th>
-        <th (click)="changeSort('nameAffiliateMaster')"
-          [ngClass]="{'asc': sort === 'nameAffiliateMaster' && order === 'ASC', 'desc': sort === 'nameAffiliateMaster' && order === 'DESC'}">
-          Commercio</th>
-        <th (click)="changeSort('bankSmallName')"
-          [ngClass]="{'asc': sort === 'bankSmallName' && order === 'ASC', 'desc': sort === 'bankSmallName' && order === 'DESC'}">
-          Banco</th>
-        <th (click)="changeSort('updateDate')"
-          [ngClass]="{'asc': sort === 'updateDate' && order === 'ASC', 'desc': sort === 'updateDate' && order === 'DESC'}">
-          Email</th>
-        <th (click)="changeSort('created')"
-          [ngClass]="{'asc': sort === 'created' && order === 'ASC', 'desc': sort === 'created' && order === 'DESC'}">
-          Member since</th>
+        <th
+          (click)="changeSort('name')"
+          [ngClass]="{
+            asc: sort === 'name' && order === 'ASC',
+            desc: sort === 'name' && order === 'DESC'
+          }"
+        >
+          Name
+        </th>
+        <th
+          (click)="changeSort('nameAffiliateMaster')"
+          [ngClass]="{
+            asc: sort === 'nameAffiliateMaster' && order === 'ASC',
+            desc: sort === 'nameAffiliateMaster' && order === 'DESC'
+          }"
+        >
+          Commercio
+        </th>
+        <th
+          (click)="changeSort('bankSmallName')"
+          [ngClass]="{
+            asc: sort === 'bankSmallName' && order === 'ASC',
+            desc: sort === 'bankSmallName' && order === 'DESC'
+          }"
+        >
+          Banco
+        </th>
+        <th
+          (click)="changeSort('updateDate')"
+          [ngClass]="{
+            asc: sort === 'updateDate' && order === 'ASC',
+            desc: sort === 'updateDate' && order === 'DESC'
+          }"
+        >
+          Email
+        </th>
+        <th
+          (click)="changeSort('created')"
+          [ngClass]="{
+            asc: sort === 'created' && order === 'ASC',
+            desc: sort === 'created' && order === 'DESC'
+          }"
+        >
+          Member since
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let affiliate of affiliates">
         <td>
-          <a [routerLink]="['/commerce/affiliate-detail', affiliate.affiliatesSK]" class="text-body fw-medium">
-            {{affiliate.name}}
+          <a
+            [routerLink]="[
+              '/commerce/affiliate-detail',
+              affiliate.affiliatesSK
+            ]"
+            class="text-body fw-medium"
+          >
+            {{ affiliate.name }}
           </a>
         </td>
         <td>
-          <a routerLink="/commerce/commerce-detail/{{affiliate?.affiliateMasterSK}}" class="text-body fw-medium">
-            {{affiliate.nameAffiliateMaster | titlecase}}
+          <a
+            routerLink="/commerce/commerce-detail/{{
+              affiliate?.affiliateMasterSK
+            }}"
+            class="text-body fw-medium"
+          >
+            {{ affiliate.nameAffiliateMaster | titlecase }}
           </a>
         </td>
         <td>
-          <app-bank-image-small-name [width]="90" [bankName]="affiliate.bankSmallName"></app-bank-image-small-name>
+          <app-bank-image-small-name
+            [width]="90"
+            [bankName]="affiliate.bankSmallName"
+          ></app-bank-image-small-name>
         </td>
         <td>
-          {{affiliate.updateDate | date}}
+          {{ affiliate.updateDate | date }}
         </td>
         <td>
-          {{affiliate.created | date}}
+          {{ affiliate.created | date }}
         </td>
         <!-- <td>
           <div class="dropdown" ngbDropdown>
@@ -61,14 +106,25 @@
 </div>
 <div class="row justify-content-md-between align-items-md-center mt-2">
   <div class="col-sm-12 col-md-5">
-    <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
-      Showing {{page}} to {{limit}} of {{total}} entries
+    <div
+      class="dataTables_info mb-2"
+      id="tickets-table_info"
+      role="status"
+      aria-live="polite"
+    >
+      Showing {{ page }} to {{ limit }} of {{ total }} entries
     </div>
   </div>
   <div class="col-sm-12 col-md-5">
     <div class="text-md-right float-md-end pagination-rounded">
-      <app-table-pagination [total]="total" [page]="page" [limit]="limit" (pageChange)="onPageChange($event)">
+      <app-table-pagination
+        [total]="total"
+        [page]="page"
+        [limit]="limit"
+        (pageChange)="onPageChange($event)"
+      >
       </app-table-pagination>
     </div>
   </div>
-</div>}
+</div>
+}

@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { checkToken } from '@core/helpers/jwt.interceptor';
+import { AffiliateClosuresReportModel } from '@core/models/affiliate-closures.model';
 import { AffiliateMasterClosuresReportModel } from '@core/models/affiliate-master-closures.model';
 import { environment_dev } from '@environments/environment.dev';
 import { Observable } from 'rxjs';
@@ -106,6 +107,32 @@ export class FactClosureService {
 
     return this.http.get<any>(
       `${this.apiUrl}/api/closures-history/closures-affiliate-sk/${affiliateSK}`,
+      {
+        context: checkToken(),
+        params,
+      }
+    );
+  }
+
+  getTotalsByAffiliatesUnderMaster(
+    affiliateMasterSK: string,
+    startDate: string,
+    endDate: string,
+    limit: number = 10,
+    page: number = 1,
+    sort: string = 'TotalAmountGross',
+    order: string = 'DESC'
+  ): Observable<AffiliateClosuresReportModel> {
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('page', page.toString())
+      .set('sort', sort)
+      .set('order', order)
+      .set('endDate', endDate)
+      .set('startDate', startDate);
+
+    return this.http.get<AffiliateClosuresReportModel>(
+      `${this.apiUrl}/api/closures/affiliates/totals-by-date-range/${affiliateMasterSK}`,
       {
         context: checkToken(),
         params,

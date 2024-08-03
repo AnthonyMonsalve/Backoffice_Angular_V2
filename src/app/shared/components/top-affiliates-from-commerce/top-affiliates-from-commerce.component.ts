@@ -16,15 +16,17 @@ import {
 })
 export class TopAffiliatesFromCommerceComponent implements OnInit {
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output() sortByChange = new EventEmitter<string>();
+
   @Input() affiliates!: AffiliateClosure[];
   @Input() customRangeActive: boolean = false;
   @Input() page: number = 0;
   @Input() limit: number = 0;
   @Input() total: number = 0;
+  @Input() defaultSort!: string;
+  @Input() resetDefaultSort: boolean = false;
 
-  @Output() sortByChange = new EventEmitter<string>();
-
-  currentSortBy: string = MONTHLY_SORT;
+  currentSortBy!: string;
 
   WEEKLY = WEEKLY_SORT;
   YEARLY = YEARLY_SORT;
@@ -35,7 +37,15 @@ export class TopAffiliatesFromCommerceComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentSortBy = this.defaultSort;
+  }
+
+  ngOnChanges(): void {
+    if (this.resetDefaultSort) {
+      this.currentSortBy = this.defaultSort;
+    }
+  }
 
   onPageChange(newPage: number): void {
     this.pageChange.emit(newPage);

@@ -15,6 +15,8 @@ import {
 export class DateRangePickerComponent implements OnChanges {
   @Input() customRangeChartActive: boolean = false;
   @Output() dateRangeSet = new EventEmitter<string>();
+  @Output() resetCustomRangeSet = new EventEmitter();
+  resetCustomRange: boolean = false;
 
   @ViewChild('dateRangePicker') dateRangePicker!: ElementRef;
 
@@ -32,5 +34,12 @@ export class DateRangePickerComponent implements OnChanges {
       return;
     }
     this.dateRangeSet.emit(dateRangeValue);
+    this.resetCustomRange = true;
+  }
+
+  onResetCustomRange(): void {
+    this.dateRangePicker.nativeElement.value = '';
+    this.resetCustomRange = false;
+    this.resetCustomRangeSet.emit();
   }
 }

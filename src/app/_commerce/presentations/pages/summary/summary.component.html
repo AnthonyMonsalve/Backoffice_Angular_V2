@@ -26,13 +26,16 @@
     ></card-count>
   </div>
   <div class="col-xl-4 col-sm-6">
-    <app-date-range-picker (dateRangeSet)="handleDateRange($event)">
+    <app-date-range-picker
+      (dateRangeSet)="handleDateRange($event)"
+      (resetCustomRangeSet)="resetCustomRangeSet()"
+    >
     </app-date-range-picker>
   </div>
 </div>
 <div class="row">
   <app-date-range-display
-    [stringDateRange]="stringDateRange"
+    [stringDateRange]="formattedDateRange"
   ></app-date-range-display>
 </div>
 <div class="row">
@@ -47,6 +50,8 @@
       [chartData]="chartData"
       [chartOverviewData]="chartOverviewData"
       (sortByChange)="onSortByChange($event)"
+      [defaultSort]="globalCurrentSortBy"
+      [resetDefaultSort]="resetDefaultSort"
     >
     </closures-data-chart>
   </div>
@@ -57,6 +62,8 @@
       [customRangeActive]="customBankRangeActive"
       [bankClosuresData]="bankClosuresReport"
       (sortByChange)="onSortBankByChange($event)"
+      [defaultSort]="globalCurrentSortBy"
+      [resetDefaultSort]="resetDefaultSort"
     ></banks-total-amount-closures>
   </div>
   <div class="col-xl-4 col-md-4 col-sm-12">
@@ -64,6 +71,8 @@
       [customRangeActive]="customTopCommerceRangeActive"
       [merchants]="affiliateMasterClosure"
       (sortByChange)="onSortTopCommercesByChange($event)"
+      [defaultSort]="globalCurrentSortBy"
+      [resetDefaultSort]="resetDefaultSort"
     ></app-top-commerces>
   </div>
 </div>

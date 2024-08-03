@@ -16,9 +16,11 @@ import {
 export class TopCommercesComponent implements OnInit {
   @Input() merchants!: AffiliateMasterClosure[];
   @Input() customRangeActive: boolean = false;
+  @Input() defaultSort!: string;
+  @Input() resetDefaultSort: boolean = false;
   @Output() sortByChange = new EventEmitter<string>();
 
-  currentSortBy: string = MONTHLY_SORT;
+  currentSortBy!: string;
 
   WEEKLY = WEEKLY_SORT;
   YEARLY = YEARLY_SORT;
@@ -29,7 +31,15 @@ export class TopCommercesComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentSortBy = this.defaultSort;
+  }
+
+  ngOnChanges(): void {
+    if (this.resetDefaultSort) {
+      this.currentSortBy = this.defaultSort;
+    }
+  }
 
   updateSortBy(period: string): void {
     this.currentSortBy = period.charAt(0).toUpperCase() + period.slice(1);

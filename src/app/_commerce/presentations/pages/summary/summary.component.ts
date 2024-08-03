@@ -31,9 +31,11 @@ export class SummaryCommerceComponent implements OnInit {
   customRangeActive: boolean = false;
   customBankRangeActive: boolean = false;
   customTopCommerceRangeActive: boolean = false;
-  startDate!: string;
-  endDate!: string;
-  stringDateRange!: string;
+  startDate: string = '';
+  endDate: string = '';
+  formattedDateRange: string = '';
+  globalCurrentSortBy: string = LAST_MONTH_SORT;
+  resetDefaultSort: boolean = false;
 
   constructor(
     private terminalService: TerminalService,
@@ -43,137 +45,150 @@ export class SummaryCommerceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.initializeBreadcrumb();
+    this.initializeData();
+  }
+
+  private initializeBreadcrumb(): void {
     this.breadCrumbItems = [
       { label: 'Insta Comercio' },
       { label: 'Summary', active: true },
     ];
-    this.fetchAffiliatesMasterData();
-    this.fetchAffiliateData();
-    this.fetchOverviewTerminals();
-    const { startDate, endDate } =
-      this.dateRangeService.getDateRange(LAST_MONTH_SORT);
-
-    this.stringDateRange = this.dateRangeService.getSpanishDateRange(
-      startDate,
-      endDate
-    );
-
-    this.startDate = startDate;
-    this.endDate = startDate;
-
-    this.fetchDataChartOverview(startDate, endDate);
-    this.fetchBanksTotalClosures(startDate, endDate);
-    this.fetchAffiliatesMasterTotalClosures(startDate, endDate);
   }
 
-  private fetchAffiliatesMasterData(): void {
+  private initializeData(): void {
+    this.startDate =
+      this.dateRangeService.getDateRange(LAST_MONTH_SORT).startDate;
+    this.endDate = this.dateRangeService.getDateRange(LAST_MONTH_SORT).endDate;
+
+    this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
+      this.startDate,
+      this.endDate
+    );
+    this.fetchData();
+  }
+
+  private fetchData(): void {
+    this.loadAffiliateMasterData();
+    this.loadAffiliateData();
+    this.loadOverviewTerminals();
+    this.loadChartData();
+    this.loadBankClosures();
+    this.loadAffiliateMasterClosures();
+  }
+
+  private loadAffiliateMasterData(): void {
     this.merchantService.getListAffiliatesMaster().subscribe(
       (data) => {
         this.totalAffiliatesMaster = data.metadata.total; // Asigna el valor recibido a la variable
       },
-      (error) => {
-        console.error('Error fetching affiliates data', error);
-        this.showErrorModal = true;
-      }
+      (error) => this.handleError(error)
     );
   }
 
-  private fetchAffiliateData(): void {
+  private loadAffiliateData(): void {
     this.merchantService.getListAffiliates().subscribe(
       (data) => {
         this.totalAffiliates = data.metadata.total; // Asigna el valor recibido a la variable
       },
-      (error) => {
-        console.error('Error fetching affiliates data', error);
-        this.showErrorModal = true;
-      }
+      (error) => this.handleError(error)
     );
   }
 
-  private fetchOverviewTerminals(): void {
+  private loadOverviewTerminals(): void {
     const search = 'Merchant';
     this.terminalService.getOverviewTerminals(search).subscribe({
       next: (data) => (this.overviewTerminalData = data),
-      error: (error) => {
-        console.error('Error fetching overview data', error);
-        this.showErrorModal = true;
-      },
+      error: (error) => this.handleError(error),
     });
   }
 
-  private fetchBanksTotalClosures(startDate: string, endDate: string): void {
-    const search = 'Merchant';
+  private loadBankClosures(): void {
     this.merchantService
-      .getBanksAmountBetweenTwoDates(startDate, endDate)
+      .getBanksAmountBetweenTwoDates(this.startDate, this.endDate)
       .subscribe({
         next: (data) => (this.bankClosuresReport = data),
-        error: (error) => {
-          console.error('Error fetching overview data', error);
-          this.showErrorModal = true;
-        },
+        error: (error) => this.handleError(error),
       });
   }
 
-  private fetchAffiliatesMasterTotalClosures(
-    startDate: string,
-    endDate: string
-  ): void {
-    const search = 'Merchant';
+  private loadAffiliateMasterClosures(): void {
     this.factService
-      .getAffiliatesMasterTotalAmountDateRange(search, startDate, endDate)
+      .getAffiliatesMasterTotalAmountDateRange(
+        'Merchant',
+        this.startDate,
+        this.endDate
+      )
       .subscribe({
         next: (data) => {
           console.log('Data received:', data); // Agrega este console.log para verificar lo recibido
           this.affiliateMasterClosure = data.affiliatesMasterClosures;
         },
-        error: (error) => {
-          console.error('Error fetching overview data', error);
-          this.showErrorModal = true;
-        },
+        error: (error) => this.handleError(error),
       });
   }
 
-  private fetchDataChartOverview(startDate: string, endDate: string): void {
+  private loadChartData(): void {
     this.merchantService
-      .getAmountDayBetweenTwoDates(startDate, endDate)
+      .getAmountDayBetweenTwoDates(this.startDate, this.endDate)
       .subscribe({
         next: (data) => (this.chartData = data),
-        error: (error) => {
-          console.error('Error fetching chart data', error);
-          this.showErrorModal = true;
-        },
+        error: (error) => this.handleError(error),
       });
 
     this.merchantService
-      .getAmountBetweenTwoDates(startDate, endDate)
+      .getAmountBetweenTwoDates(this.startDate, this.endDate)
       .subscribe({
         next: (data) => (this.chartOverviewData = data),
-        error: (error) => {
-          console.error('Error fetching chart overview data', error);
-          this.showErrorModal = true;
-        },
+        error: (error) => this.handleError(error),
         complete: () => console.log('Fetching complete'),
       });
+  }
+
+  private handleError(error: any): void {
+    console.error('An error occurred:', error);
+    this.showErrorModal = true;
   }
 
   //Sort independiente para cada cuadro
   onSortBankByChange(sortBy: string): void {
     this.customBankRangeActive = false;
-    const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
-    this.fetchBanksTotalClosures(startDate, endDate);
+    this.resetDefaultSort = false;
+    this.updateDateRange(sortBy);
+    this.loadBankClosures();
   }
 
   onSortTopCommercesByChange(sortBy: string): void {
     this.customTopCommerceRangeActive = false;
-    const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
-    this.fetchAffiliatesMasterTotalClosures(startDate, endDate);
+    this.resetDefaultSort = false;
+    this.updateDateRange(sortBy);
+    this.loadAffiliateMasterClosures();
   }
 
   //Sort independiente para cada cuadro
   onSortByChange(sortBy: string): void {
     this.customRangeActive = false;
+    this.resetDefaultSort = false;
+    this.updateDateRange(sortBy);
+    this.loadChartData();
+  }
+
+  private updateDateRange(sortBy: string): void {
     const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
-    this.fetchDataChartOverview(startDate, endDate);
+    this.startDate = startDate;
+    this.endDate = endDate;
+    // this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
+    //   startDate,
+    //   endDate
+    // );
+  }
+
+  resetCustomRangeSet(): void {
+    this.initializeData();
+    this.resetDefaultSort = true;
+    this.customRangeActive = false;
+    this.customTopCommerceRangeActive = false;
+    this.customBankRangeActive = false;
   }
 
   //Sort custom global para todos los cuadro
@@ -185,15 +200,14 @@ export class SummaryCommerceComponent implements OnInit {
 
     this.startDate = startDate;
     this.endDate = endDate;
-
-    this.stringDateRange = this.dateRangeService.getSpanishDateRange(
-      this.startDate,
-      this.endDate
+    this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
+      startDate,
+      endDate
     );
 
-    this.fetchDataChartOverview(startDate, endDate);
-    this.fetchBanksTotalClosures(startDate, endDate);
-    this.fetchAffiliatesMasterTotalClosures(startDate, endDate);
+    this.loadChartData();
+    this.loadBankClosures();
+    this.loadAffiliateMasterClosures();
   }
 
   closeModal(): void {

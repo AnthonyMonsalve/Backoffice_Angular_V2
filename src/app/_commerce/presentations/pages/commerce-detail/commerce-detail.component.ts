@@ -32,7 +32,9 @@ export class AffiliateMasterDetailComponent implements OnInit {
   chartData!: ChartClosureData;
   chartOverviewData: ChartOverviewData | null = null;
   overviewTerminalData: OverviewTerminals | null = null;
-  stringDateRange!: string;
+  formattedDateRange!: string;
+  globalCurrentSortBy: string = LAST_MONTH_SORT;
+  resetDefaultSort: boolean = false;
 
   affiliateClosure!: AffiliateClosure[];
   pageAfflClosure: number = 1;
@@ -41,15 +43,13 @@ export class AffiliateMasterDetailComponent implements OnInit {
   orderAfflClosure: string = 'DESC';
   sortAfflClosure: string = 'TotalAmountGross';
   customTopAffiliateRangeActive: boolean = false;
-  startDateAffl!: string;
-  endDateAffl!: string;
+  showErrorModal: boolean = false;
+  startDate: string = '';
+  endDate: string = '';
 
   customRangeChartActive: boolean = false;
 
-  breadCrumbItems: Array<{}> = [
-    { label: 'Insta Comercio' },
-    { label: 'Listado de afiliados', active: true },
-  ];
+  breadCrumbItems!: Array<{}>;
   order: string = 'ASC';
   sort: string = 'name';
   page: number = 1;
@@ -76,21 +76,34 @@ export class AffiliateMasterDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initializeBreadcrumb();
+    this.initializeData();
+  }
+
+  private initializeBreadcrumb(): void {
+    this.breadCrumbItems = [
+      { label: 'Insta Comercio' },
+      { label: 'Commerce', active: true },
+    ];
+  }
+
+  private initializeData(): void {
+    this.startDate =
+      this.dateRangeService.getDateRange(LAST_MONTH_SORT).startDate;
+    this.endDate = this.dateRangeService.getDateRange(LAST_MONTH_SORT).endDate;
+
+    this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
+      this.startDate,
+      this.endDate
+    );
+    this.fetchData();
+  }
+
+  private fetchData(): void {
     this.fetchAffiliates();
     this.fetchAfflMaster();
-    const { startDate, endDate } =
-      this.dateRangeService.getDateRange(LAST_MONTH_SORT);
-
-    this.stringDateRange = this.dateRangeService.getSpanishDateRange(
-      startDate,
-      endDate
-    );
-
-    this.startDateAffl = startDate;
-    this.endDateAffl = endDate;
-
-    this.fetchDataChartOverview(startDate, endDate, this.affiliateMasterSk);
-    this.fetchTotalsByAffiliatesUnderMaster(startDate, endDate);
+    this.fetchDataChartOverview();
+    this.fetchTotalsByAffiliatesUnderMaster();
     this.fetchOverviewTerminals();
   }
 
@@ -104,10 +117,9 @@ export class AffiliateMasterDetailComponent implements OnInit {
 
   onSortTopAffiliateByChange(sortBy: string): void {
     this.customTopAffiliateRangeActive = false;
-    const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
-    this.startDateAffl = startDate;
-    this.endDateAffl = endDate;
-    this.fetchTotalsByAffiliatesUnderMaster(startDate, endDate);
+    this.resetDefaultSort = false;
+    this.updateDateRange(sortBy);
+    this.fetchTotalsByAffiliatesUnderMaster();
   }
 
   fetchAffiliates(): void {
@@ -134,39 +146,31 @@ export class AffiliateMasterDetailComponent implements OnInit {
 
   onPageAfflChange(newPage: number): void {
     this.pageAfflClosure = newPage;
-    this.fetchTotalsByAffiliatesUnderMaster(
-      this.startDateAffl,
-      this.endDateAffl
-    );
+    this.fetchTotalsByAffiliatesUnderMaster();
   }
 
-  private fetchDataChartOverview(
-    startDate: string,
-    endDate: string,
-    affiliateMasterSK: string
-  ): void {
+  private fetchDataChartOverview(): void {
     this.merchantService
       .getAmountDayAffiliateMasterBetweenTwoDates(
-        startDate,
-        endDate,
-        affiliateMasterSK
+        this.startDate,
+        this.endDate,
+        this.affiliateMasterSk
       )
       .subscribe({
         next: (data) => (this.chartData = data),
-        error: (error) => console.error('Error fetching chart data', error),
+        error: (error) => this.handleError(error),
         complete: () => console.log('Fetching complete'),
       });
 
     this.merchantService
       .getAmountAffiliateMasterBetweenTwoDates(
-        startDate,
-        endDate,
-        affiliateMasterSK
+        this.startDate,
+        this.endDate,
+        this.affiliateMasterSk
       )
       .subscribe({
         next: (data) => (this.chartOverviewData = data),
-        error: (error) =>
-          console.error('Error fetching chart overview data', error),
+        error: (error) => this.handleError(error),
         complete: () => console.log('Fetching complete'),
       });
   }
@@ -176,20 +180,17 @@ export class AffiliateMasterDetailComponent implements OnInit {
       .getOverviewAffiliateMasterTerminals(this.affiliateMasterSk)
       .subscribe({
         next: (data) => (this.overviewTerminalData = data),
-        error: (error) => console.error('Error fetching overview data', error),
+        error: (error) => this.handleError(error),
         complete: () => console.log('Fetching complete'),
       });
   }
 
-  private fetchTotalsByAffiliatesUnderMaster(
-    startDate: string,
-    endDate: string
-  ): void {
+  private fetchTotalsByAffiliatesUnderMaster(): void {
     this.factService
       .getTotalsByAffiliatesUnderMaster(
         this.affiliateMasterSk,
-        startDate,
-        endDate,
+        this.startDate,
+        this.endDate,
         this.limitAfflClosure,
         this.pageAfflClosure,
         this.sortAfflClosure,
@@ -202,9 +203,14 @@ export class AffiliateMasterDetailComponent implements OnInit {
           this.totalAfflClosure = data.metadata.total;
           this.pageAfflClosure = data.metadata.page;
         },
-        error: (error) => console.error('Error fetching overview data', error),
+        error: (error) => this.handleError(error),
         complete: () => console.log('Fetching complete'),
       });
+  }
+
+  private handleError(error: any): void {
+    console.error('An error occurred:', error);
+    this.showErrorModal = true;
   }
 
   receiveSortOrder(sortOrder: any): void {
@@ -222,8 +228,26 @@ export class AffiliateMasterDetailComponent implements OnInit {
 
   onSortByChange(sortBy: string): void {
     this.customRangeChartActive = false;
+    this.resetDefaultSort = false;
+    this.updateDateRange(sortBy);
+    this.fetchDataChartOverview();
+  }
+
+  private updateDateRange(sortBy: string): void {
     const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
-    this.fetchDataChartOverview(startDate, endDate, this.affiliateMasterSk);
+    this.startDate = startDate;
+    this.endDate = endDate;
+    // this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
+    //   startDate,
+    //   endDate
+    // );
+  }
+
+  resetCustomRangeSet(): void {
+    this.initializeData();
+    this.resetDefaultSort = true;
+    this.customRangeChartActive = false;
+    this.customTopAffiliateRangeActive = false;
   }
 
   handleDateRange(dateRange: string): void {
@@ -232,14 +256,19 @@ export class AffiliateMasterDetailComponent implements OnInit {
 
     const [startDate, endDate] = dateRange.split(' to ');
 
-    this.startDateAffl = startDate;
-    this.endDateAffl = endDate;
+    this.startDate = startDate;
+    this.endDate = endDate;
 
-    this.stringDateRange = this.dateRangeService.getSpanishDateRange(
-      this.startDateAffl,
-      this.endDateAffl
+    this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
+      startDate,
+      endDate
     );
-    this.fetchDataChartOverview(startDate, endDate, this.affiliateMasterSk);
-    this.fetchTotalsByAffiliatesUnderMaster(startDate, endDate);
+
+    this.fetchDataChartOverview();
+    this.fetchTotalsByAffiliatesUnderMaster();
+  }
+
+  closeModal(): void {
+    this.showErrorModal = false;
   }
 }

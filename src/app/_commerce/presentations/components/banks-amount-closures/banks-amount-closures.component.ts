@@ -28,14 +28,18 @@ import { ChartComponent } from 'ng-apexcharts';
 export class BanksTotalAmountClosuresComponent implements OnInit, OnChanges {
   @Input() bankClosuresData: BankClosuresReport | null = null;
   @Input() customRangeActive: boolean = false;
+  @Input() defaultSort!: string;
+  @Input() resetDefaultSort: boolean = false;
   @ViewChild('chart') chart!: ChartComponent;
   @Output() sortByChange = new EventEmitter<string>();
 
   barChart: ChartType = this.getInitialBarChartConfig();
   totalAmount = 0;
-  currentSortBy: string = MONTHLY_SORT;
+
   loading: boolean = true;
   error: boolean = false;
+
+  currentSortBy!: string;
 
   WEEKLY = WEEKLY_SORT;
   YEARLY = YEARLY_SORT;
@@ -50,11 +54,16 @@ export class BanksTotalAmountClosuresComponent implements OnInit, OnChanges {
     if (this.bankClosuresData) {
       this.updateChartData(this.bankClosuresData);
     }
+    this.currentSortBy = this.defaultSort;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.bankClosuresData && changes.bankClosuresData.currentValue) {
       this.updateChartData(changes.bankClosuresData.currentValue);
+    }
+
+    if (this.resetDefaultSort) {
+      this.currentSortBy = this.defaultSort;
     }
   }
 

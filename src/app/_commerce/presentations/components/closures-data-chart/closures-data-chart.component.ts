@@ -35,16 +35,18 @@ export class ClosuresDataChartComponent
   @Input() chartData!: ChartClosureData;
   @Input() chartOverviewData: ChartOverviewData | null = null;
   @Input() customRangeActive: boolean = false;
+  @Input() defaultSort!: string;
+  @Input() resetDefaultSort: boolean = false;
   @Output() sortByChange = new EventEmitter<string>();
 
   @ViewChild('chart') chart!: ChartComponent;
 
+  currentSortBy!: string;
   analyticsChart: ChartType = this.getInitialChartConfig();
   totalAmmount: number = 0;
   countClosures: number = 0;
   totalQTY: number = 0;
   zoomed: boolean = false;
-  currentSortBy: string = MONTHLY_SORT;
   loading: boolean = true;
   error: boolean = false;
 
@@ -64,6 +66,7 @@ export class ClosuresDataChartComponent
     if (this.chartOverviewData) {
       this.updateChartOverviewData(this.chartOverviewData);
     }
+    this.currentSortBy = this.defaultSort;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -72,6 +75,10 @@ export class ClosuresDataChartComponent
     }
     if (changes.chartOverviewData && changes.chartOverviewData.currentValue) {
       this.updateChartOverviewData(changes.chartOverviewData.currentValue);
+    }
+
+    if (this.resetDefaultSort) {
+      this.currentSortBy = this.defaultSort;
     }
   }
 

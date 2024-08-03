@@ -23,15 +23,15 @@
   </div>
   <div class="col-xl-4 col-sm-6">
     <app-date-range-picker
-      [customRangeChartActive]="customRangeChartActive"
       (dateRangeSet)="handleDateRange($event)"
+      (resetCustomRangeSet)="resetCustomRangeSet()"
     >
     </app-date-range-picker>
   </div>
 </div>
 <div class="row">
   <app-date-range-display
-    [stringDateRange]="stringDateRange"
+    [stringDateRange]="formattedDateRange"
   ></app-date-range-display>
 </div>
 <div class="row">
@@ -41,6 +41,8 @@
       [chartData]="chartData"
       [chartOverviewData]="chartOverviewData"
       (sortByChange)="onSortByChange($event)"
+      [defaultSort]="globalCurrentSortBy"
+      [resetDefaultSort]="resetDefaultSort"
     >
     </closures-data-chart>
   </div>
@@ -54,6 +56,8 @@
       [affiliates]="affiliateClosure"
       [customRangeActive]="customTopAffiliateRangeActive"
       (sortByChange)="onSortTopAffiliateByChange($event)"
+      [defaultSort]="globalCurrentSortBy"
+      [resetDefaultSort]="resetDefaultSort"
       [page]="pageAfflClosure"
       [limit]="limitAfflClosure"
       [total]="totalAfflClosure"

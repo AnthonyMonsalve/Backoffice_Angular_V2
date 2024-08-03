@@ -31,6 +31,9 @@ export class SummaryCommerceComponent implements OnInit {
   customRangeActive: boolean = false;
   customBankRangeActive: boolean = false;
   customTopCommerceRangeActive: boolean = false;
+  startDate!: string;
+  endDate!: string;
+  stringDateRange!: string;
 
   constructor(
     private terminalService: TerminalService,
@@ -49,6 +52,15 @@ export class SummaryCommerceComponent implements OnInit {
     this.fetchOverviewTerminals();
     const { startDate, endDate } =
       this.dateRangeService.getDateRange(LAST_MONTH_SORT);
+
+    this.stringDateRange = this.dateRangeService.getSpanishDateRange(
+      startDate,
+      endDate
+    );
+
+    this.startDate = startDate;
+    this.endDate = startDate;
+
     this.fetchDataChartOverview(startDate, endDate);
     this.fetchBanksTotalClosures(startDate, endDate);
     this.fetchAffiliatesMasterTotalClosures(startDate, endDate);
@@ -170,6 +182,15 @@ export class SummaryCommerceComponent implements OnInit {
     this.customBankRangeActive = true;
     this.customTopCommerceRangeActive = true;
     const [startDate, endDate] = dateRange.split(' to ');
+
+    this.startDate = startDate;
+    this.endDate = endDate;
+
+    this.stringDateRange = this.dateRangeService.getSpanishDateRange(
+      this.startDate,
+      this.endDate
+    );
+
     this.fetchDataChartOverview(startDate, endDate);
     this.fetchBanksTotalClosures(startDate, endDate);
     this.fetchAffiliatesMasterTotalClosures(startDate, endDate);

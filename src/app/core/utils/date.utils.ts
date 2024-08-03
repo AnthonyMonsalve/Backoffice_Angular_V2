@@ -72,3 +72,50 @@ export function getLastMonthRange(): { startDate: string; endDate: string } {
     endDate: endDate.toISOString().split('T')[0],
   };
 }
+
+export function formatSpanishDateRange(
+  startDate: string,
+  endDate: string
+): string {
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+
+  const start = new Date(
+    Number(startDate.split('-')[0]),
+    Number(startDate.split('-')[1]) - 1,
+    Number(startDate.split('-')[2])
+  );
+  const end = new Date(
+    Number(endDate.split('-')[0]),
+    Number(endDate.split('-')[1]) - 1,
+    Number(endDate.split('-')[2])
+  );
+
+  if (
+    start.getFullYear() === end.getFullYear() &&
+    start.getMonth() === end.getMonth()
+  ) {
+    const dayStart = start.getDate();
+    const dayEnd = end.getDate();
+    const monthYear = start.toLocaleDateString('es-ES', {
+      month: 'long',
+      year: 'numeric',
+    });
+    return `Del ${dayStart} al ${dayEnd} de ${monthYear}`;
+  } else if (start.getFullYear() === end.getFullYear()) {
+    const dayStart = start.getDate();
+    const monthStart = start.toLocaleDateString('es-ES', { month: 'long' });
+    const dayEnd = end.getDate();
+    const monthEnd = end.toLocaleDateString('es-ES', { month: 'long' });
+    const year = start.getFullYear();
+    return `Del ${dayStart} de ${monthStart} al ${dayEnd} de ${monthEnd} de ${year}`;
+  }
+
+  const startFormatted = start.toLocaleDateString('es-ES', options);
+  const endFormatted = end.toLocaleDateString('es-ES', options);
+
+  return `Del ${startFormatted} al ${endFormatted}`;
+}

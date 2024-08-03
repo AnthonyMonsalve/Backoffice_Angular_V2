@@ -10,7 +10,11 @@ import { TerminalList } from '@core/interfaces/terminals-list.interface';
 import { Affiliate } from '@core/models/affiliate.model';
 import { Closure } from '@core/models/closure.model';
 import { Terminal } from '@core/models/terminal.model';
-import { CUSTOM_SORT, MONTHLY_SORT } from '@core/utils/constants';
+import {
+  CUSTOM_SORT,
+  LAST_MONTH_SORT,
+  MONTHLY_SORT,
+} from '@core/utils/constants';
 import { AffiliateService } from '@services/affiliate.service';
 import { DateRangeService } from '@services/date-range.service';
 import { FactClosureService } from '@services/fact-closure.service';
@@ -36,6 +40,10 @@ export class AffiliateDetailComponent implements OnInit {
   sortClosures = 'TimeId';
   orderClosures = 'DESC';
   customRangeChartActive: boolean = false;
+
+  stringDateRange!: string;
+  startDate!: string;
+  endDate!: string;
 
   affiliateSK: string;
 
@@ -66,7 +74,16 @@ export class AffiliateDetailComponent implements OnInit {
     this.fetchAffiliateTerminal();
     this.fetchOverviewTerminals();
     const { startDate, endDate } =
-      this.dateRangeService.getDateRange(MONTHLY_SORT);
+      this.dateRangeService.getDateRange(LAST_MONTH_SORT);
+
+    this.startDate = startDate;
+    this.endDate = endDate;
+
+    this.stringDateRange = this.dateRangeService.getSpanishDateRange(
+      startDate,
+      endDate
+    );
+
     this.fetchDataChartOverview(startDate, endDate, this.affiliateSK);
     this.fetchClosuresAffiliate();
   }
@@ -179,6 +196,15 @@ export class AffiliateDetailComponent implements OnInit {
   handleDateRange(dateRange: string): void {
     this.customRangeChartActive = true;
     const [startDate, endDate] = dateRange.split(' to ');
+
+    this.startDate = startDate;
+    this.endDate = endDate;
+
+    this.stringDateRange = this.dateRangeService.getSpanishDateRange(
+      this.startDate,
+      this.endDate
+    );
+
     this.fetchDataChartOverview(startDate, endDate, this.affiliateSK);
   }
 }

@@ -32,6 +32,7 @@ export class AffiliateMasterDetailComponent implements OnInit {
   chartData!: ChartClosureData;
   chartOverviewData: ChartOverviewData | null = null;
   overviewTerminalData: OverviewTerminals | null = null;
+  stringDateRange!: string;
 
   affiliateClosure!: AffiliateClosure[];
   pageAfflClosure: number = 1;
@@ -78,7 +79,12 @@ export class AffiliateMasterDetailComponent implements OnInit {
     this.fetchAffiliates();
     this.fetchAfflMaster();
     const { startDate, endDate } =
-      this.dateRangeService.getDateRange(YEARLY_SORT);
+      this.dateRangeService.getDateRange(LAST_MONTH_SORT);
+
+    this.stringDateRange = this.dateRangeService.getSpanishDateRange(
+      startDate,
+      endDate
+    );
 
     this.startDateAffl = startDate;
     this.endDateAffl = endDate;
@@ -222,7 +228,18 @@ export class AffiliateMasterDetailComponent implements OnInit {
 
   handleDateRange(dateRange: string): void {
     this.customRangeChartActive = true;
+    this.customTopAffiliateRangeActive = true;
+
     const [startDate, endDate] = dateRange.split(' to ');
+
+    this.startDateAffl = startDate;
+    this.endDateAffl = endDate;
+
+    this.stringDateRange = this.dateRangeService.getSpanishDateRange(
+      this.startDateAffl,
+      this.endDateAffl
+    );
     this.fetchDataChartOverview(startDate, endDate, this.affiliateMasterSk);
+    this.fetchTotalsByAffiliatesUnderMaster(startDate, endDate);
   }
 }

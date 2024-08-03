@@ -24,6 +24,7 @@ import {} from './shared-routing.module';
 import { WidgetModule } from './widget/widget.module';
 import { TopAffiliatesFromCommerceComponent } from './components/top-affiliates-from-commerce/top-affiliates-from-commerce.component';
 import { TopCommercesComponent } from './components/top-commerces/top-commerces.component';
+import { DateRangeDisplayComponent } from './components/date-range-display/date-range-display.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { TopCommercesComponent } from './components/top-commerces/top-commerces.
     ModalErrorComponent,
     TopAffiliatesFromCommerceComponent,
     TopCommercesComponent,
+    DateRangeDisplayComponent,
   ],
   imports: [
     CommonModule,
@@ -63,6 +65,7 @@ import { TopCommercesComponent } from './components/top-commerces/top-commerces.
     TopAffiliatesFromCommerceComponent,
     ModalErrorComponent,
     TopCommercesComponent,
+    DateRangeDisplayComponent,
   ],
 })
 export class SharedModule {}

@@ -5,6 +5,7 @@ import {
   getWeeklyRange,
   getSemesterRange,
   getLastMonthRange,
+  formatSpanishDateRange,
 } from '../utils/date.utils';
 import {
   LAST_MONTH_SORT,
@@ -31,5 +32,9 @@ export class DateRangeService {
       return getLastMonthRange();
     }
     return { startDate: '', endDate: '' }; // Default case, you might want to handle it differently
+  }
+
+  getSpanishDateRange(startDate: string, endDate: string): string {
+    return formatSpanishDateRange(startDate, endDate);
   }
 }

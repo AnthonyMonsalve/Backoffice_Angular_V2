@@ -10,12 +10,7 @@ import { AffiliateClosure } from '@core/interfaces/affiliate-closures.interface'
 import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
 import { AffiliateMaster } from '@core/models/affiliate-master.model';
 import { Affiliate } from '@core/models/affiliate.model';
-import {
-  CUSTOM_SORT,
-  LAST_MONTH_SORT,
-  MONTHLY_SORT,
-  YEARLY_SORT,
-} from '@core/utils/constants';
+import { LAST_MONTH_SORT } from '@core/utils/constants';
 import { AffiliateMasterService } from '@services/affiliate-master.service';
 import { AffiliateService } from '@services/affiliate.service';
 import { DateRangeService } from '@services/date-range.service';
@@ -216,7 +211,6 @@ export class AffiliateMasterDetailComponent implements OnInit {
   receiveSortOrder(sortOrder: any): void {
     this.sort = sortOrder.sort;
     this.order = sortOrder.order;
-    console.log(sortOrder);
     this.fetchAffiliates();
   }
 

@@ -10,11 +10,7 @@ import { TerminalList } from '@core/interfaces/terminals-list.interface';
 import { Affiliate } from '@core/models/affiliate.model';
 import { Closure } from '@core/models/closure.model';
 import { Terminal } from '@core/models/terminal.model';
-import {
-  CUSTOM_SORT,
-  LAST_MONTH_SORT,
-  MONTHLY_SORT,
-} from '@core/utils/constants';
+import { LAST_MONTH_SORT } from '@core/utils/constants';
 import { AffiliateService } from '@services/affiliate.service';
 import { DateRangeService } from '@services/date-range.service';
 import { FactClosureService } from '@services/fact-closure.service';
@@ -31,6 +27,7 @@ export class AffiliateDetailComponent implements OnInit {
   overviewTerminalData: OverviewTerminals | null = null;
   chartData!: ChartClosureData;
   chartOverviewData: ChartOverviewData | null = null;
+
   limitPageTerminals = 9;
   pageTerminals = 1;
   totalTerminals = 0;
@@ -39,19 +36,20 @@ export class AffiliateDetailComponent implements OnInit {
   totalClosures = 0;
   sortClosures = 'TimeId';
   orderClosures = 'DESC';
-  customRangeChartActive: boolean = false;
+  customRangeActive: boolean = false;
 
-  stringDateRange!: string;
-  startDate!: string;
-  endDate!: string;
+  globalCurrentSortBy: string = LAST_MONTH_SORT;
+  resetDefaultSort: boolean = false;
+
+  showErrorModal: boolean = false;
+
+  formattedDateRange!: string;
+  startDate: string = '';
+  endDate: string = '';
 
   affiliateSK: string;
 
-  breadCrumbItems: Array<{}> = [
-    { label: 'Insta Comercio' },
-    { label: 'Afiliados' },
-    { label: 'Detalle', active: true },
-  ];
+  breadCrumbItems!: Array<{}>;
 
   constructor(
     private route: ActivatedRoute,
@@ -70,22 +68,47 @@ export class AffiliateDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initializeBreadcrumb();
+    this.initializeData();
+  }
+
+  private initializeBreadcrumb(): void {
+    this.breadCrumbItems = [
+      { label: 'Insta Comercio' },
+      { label: 'Afiliación', active: true },
+    ];
+  }
+
+  private initializeData(): void {
+    this.startDate =
+      this.dateRangeService.getDateRange(LAST_MONTH_SORT).startDate;
+    this.endDate = this.dateRangeService.getDateRange(LAST_MONTH_SORT).endDate;
+
+    this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
+      this.startDate,
+      this.endDate
+    );
+    this.fetchData();
+  }
+
+  private fetchData(): void {
     this.fetchAffiliate();
     this.fetchAffiliateTerminal();
     this.fetchOverviewTerminals();
-    const { startDate, endDate } =
-      this.dateRangeService.getDateRange(LAST_MONTH_SORT);
-
-    this.startDate = startDate;
-    this.endDate = endDate;
-
-    this.stringDateRange = this.dateRangeService.getSpanishDateRange(
-      startDate,
-      endDate
-    );
-
-    this.fetchDataChartOverview(startDate, endDate, this.affiliateSK);
+    this.fetchDataChartOverview();
     this.fetchClosuresAffiliate();
+  }
+
+  private fetchDataChartFromReset(): void {
+    this.startDate =
+      this.dateRangeService.getDateRange(LAST_MONTH_SORT).startDate;
+    this.endDate = this.dateRangeService.getDateRange(LAST_MONTH_SORT).endDate;
+
+    this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
+      this.startDate,
+      this.endDate
+    );
+    this.fetchDataChartOverview();
   }
 
   fetchAffiliate(): void {
@@ -120,31 +143,36 @@ export class AffiliateDetailComponent implements OnInit {
       .getOverviewAffiliateTerminals(this.affiliateSK)
       .subscribe({
         next: (data) => (this.overviewTerminalData = data),
-        error: (error) => console.error('Error fetching overview data', error),
+        error: (error) => this.handleError(error),
         complete: () => console.log('Fetching complete'),
       });
   }
 
-  private fetchDataChartOverview(
-    startDate: string,
-    endDate: string,
-    affiliateSK: string
-  ): void {
+  private fetchDataChartOverview(): void {
     this.merchantService
-      .getAmountDayAffiliateBetweenTwoDates(startDate, endDate, affiliateSK)
+      .getAmountDayAffiliateBetweenTwoDates(
+        this.startDate,
+        this.endDate,
+        this.affiliateSK
+      )
       .subscribe({
         next: (data) => (this.chartData = data),
-        error: (error) => console.error('Error fetching chart data', error),
-        complete: () => console.log('Fetching complete'),
+        error: (error) => this.handleError(error),
+        complete: () =>
+          console.log('Fetch getAmountDayAfflBetTwoDates complete'),
       });
 
     this.merchantService
-      .getAmountAffiliateBetweenTwoDates(startDate, endDate, affiliateSK)
+      .getAmountAffiliateBetweenTwoDates(
+        this.startDate,
+        this.endDate,
+        this.affiliateSK
+      )
       .subscribe({
         next: (data) => (this.chartOverviewData = data),
-        error: (error) =>
-          console.error('Error fetching chart overview data', error),
-        complete: () => console.log('Fetching complete'),
+        error: (error) => this.handleError(error),
+        complete: () =>
+          console.log('Fetch getAmountAffBetweenTwoDates complete'),
       });
   }
 
@@ -165,9 +193,14 @@ export class AffiliateDetailComponent implements OnInit {
           (this.totalClosures = data.metadata.total),
           (this.pageClosures = data.metadata.page)
         ),
-        error: (error) => console.error('Error fetching data', error),
+        error: (error) => this.handleError(error),
         complete: () => console.log('Fetching complete'),
       });
+  }
+
+  private handleError(error: any): void {
+    console.error('An error occurred:', error);
+    this.showErrorModal = true;
   }
 
   receiveSortOrder(sortOrder: any): void {
@@ -188,23 +221,43 @@ export class AffiliateDetailComponent implements OnInit {
   }
 
   onSortByChange(sortBy: string): void {
-    this.customRangeChartActive = false;
+    this.customRangeActive = false;
+    this.resetDefaultSort = false;
+    this.updateDateRange(sortBy);
+    this.fetchDataChartOverview();
+  }
+
+  private updateDateRange(sortBy: string): void {
     const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
-    this.fetchDataChartOverview(startDate, endDate, this.affiliateSK);
+    this.startDate = startDate;
+    this.endDate = endDate;
+    // this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
+    //   startDate,
+    //   endDate
+    // );
+  }
+
+  resetCustomRangeSet(): void {
+    this.fetchDataChartFromReset();
+    this.resetDefaultSort = true;
+    this.customRangeActive = false;
   }
 
   handleDateRange(dateRange: string): void {
-    this.customRangeChartActive = true;
+    this.customRangeActive = true;
     const [startDate, endDate] = dateRange.split(' to ');
 
     this.startDate = startDate;
     this.endDate = endDate;
-
-    this.stringDateRange = this.dateRangeService.getSpanishDateRange(
-      this.startDate,
-      this.endDate
+    this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
+      startDate,
+      endDate
     );
 
-    this.fetchDataChartOverview(startDate, endDate, this.affiliateSK);
+    this.fetchDataChartOverview();
+  }
+
+  closeModal(): void {
+    this.showErrorModal = false;
   }
 }

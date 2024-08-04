@@ -26,7 +26,6 @@ export class SummaryCommerceComponent implements OnInit {
   chartOverviewData: ChartOverviewData | null = null;
   totalAffiliatesMaster: number = 0; // Inicializa la variable aquí
   totalAffiliates: number = 0; // Inicializa la variable aquí
-  customRangeChartActive: boolean = false;
   showErrorModal: boolean = false;
   customRangeActive: boolean = false;
   customBankRangeActive: boolean = false;

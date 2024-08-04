@@ -73,6 +73,60 @@ export function getLastMonthRange(): { startDate: string; endDate: string } {
   };
 }
 
+export function getLastWeekRange(): { startDate: string; endDate: string } {
+  const today = new Date();
+  const currentDay = today.getDay();
+
+  // Ajuste de días para que la semana empiece el lunes (0 = domingo, 1 = lunes, ..., 6 = sábado)
+  const daysToMonday = (currentDay + 6) % 7;
+  const startOfCurrentWeek = new Date(today);
+  startOfCurrentWeek.setDate(today.getDate() - daysToMonday);
+
+  // Rango de la semana pasada
+  const startOfLastWeek = new Date(startOfCurrentWeek);
+  startOfLastWeek.setDate(startOfCurrentWeek.getDate() - 7);
+
+  const endOfLastWeek = new Date(startOfLastWeek);
+  endOfLastWeek.setDate(startOfLastWeek.getDate() + 6); // Hasta el domingo
+
+  // Convertir a formato YYYY-MM-DD
+  const formatDate = (date: Date): string => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  return {
+    startDate: formatDate(startOfLastWeek),
+    endDate: formatDate(endOfLastWeek),
+  };
+}
+
+export function getLast15DaysRange(): { startDate: string; endDate: string } {
+  const today = new Date();
+
+  // Fecha de inicio: hace 15 días
+  const startDate = new Date(today);
+  startDate.setDate(today.getDate() - 15);
+
+  // Fecha de fin: hoy
+  const endDate = today;
+
+  // Convertir a formato YYYY-MM-DD
+  const formatDate = (date: Date): string => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  return {
+    startDate: formatDate(startDate),
+    endDate: formatDate(endDate),
+  };
+}
+
 export function formatSpanishDateRange(
   startDate: string,
   endDate: string

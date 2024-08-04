@@ -1,36 +1,12 @@
 <div class="card">
   <div class="card-body">
     <div class="float-end d-flex align-items-center">
-      <div class="dropdown" ngbDropdown>
-        <button class="btn btn-light btn-sm dropdown-toggle" ngbDropdownToggle>
-          @if(customRangeActive){
-          <span class="text-muted"
-            >{{ CUSTOM }}<i class="mdi mdi-chevron-down ms-1"></i
-          ></span>
-          }@else{
-          <span class="text-muted"
-            >{{ currentSortBy }}<i class="mdi mdi-chevron-down ms-1"></i
-          ></span>
-          }
-        </button>
-        <div class="dropdown-menu" ngbDropdownMenu>
-          <button class="dropdown-item" (click)="updateSortBy(WEEKLY)">
-            {{ WEEKLY }}
-          </button>
-          <button class="dropdown-item" (click)="updateSortBy(MONTHLY)">
-            {{ MONTHLY }}
-          </button>
-          <button class="dropdown-item" (click)="updateSortBy(LAST_MONTH)">
-            {{ LAST_MONTH }}
-          </button>
-          <button class="dropdown-item" (click)="updateSortBy(SEMESTER)">
-            {{ SEMESTER }}
-          </button>
-          <button class="dropdown-item" (click)="updateSortBy(YEARLY)">
-            {{ YEARLY }}
-          </button>
-        </div>
-      </div>
+      <app-dropdown-date-range
+        [currentSelection]="currentSortBy"
+        [customRangeActive]="customRangeActive"
+        (selectionChange)="updateSortBy($event)"
+      >
+      </app-dropdown-date-range>
     </div>
     <h4 class="card-title mb-4">Top afiliaciones</h4>
     <ul class="list-group list-group-flush">

@@ -33,6 +33,7 @@ export class SummaryCommerceComponent implements OnInit {
   startDate: string = '';
   endDate: string = '';
   formattedDateRange: string = '';
+  closureDataChartFormattedDateRange: string = '';
   globalCurrentSortBy: string = LAST_MONTH_SORT;
   resetDefaultSort: boolean = false;
 
@@ -170,6 +171,8 @@ export class SummaryCommerceComponent implements OnInit {
     this.resetDefaultSort = false;
     this.updateDateRange(sortBy);
     this.loadChartData();
+    this.closureDataChartFormattedDateRange =
+      this.dateRangeService.getSpanishDateRange(this.startDate, this.endDate);
   }
 
   private updateDateRange(sortBy: string): void {
@@ -195,6 +198,8 @@ export class SummaryCommerceComponent implements OnInit {
     this.customRangeActive = true;
     this.customBankRangeActive = true;
     this.customTopCommerceRangeActive = true;
+    this.closureDataChartFormattedDateRange = '';
+
     const [startDate, endDate] = dateRange.split(' to ');
 
     this.startDate = startDate;

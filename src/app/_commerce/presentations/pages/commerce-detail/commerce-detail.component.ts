@@ -28,6 +28,7 @@ export class AffiliateMasterDetailComponent implements OnInit {
   chartOverviewData: ChartOverviewData | null = null;
   overviewTerminalData: OverviewTerminals | null = null;
   formattedDateRange!: string;
+  closureDataChartFormattedDateRange: string = '';
   globalCurrentSortBy: string = LAST_MONTH_SORT;
   resetDefaultSort: boolean = false;
 
@@ -225,6 +226,8 @@ export class AffiliateMasterDetailComponent implements OnInit {
     this.resetDefaultSort = false;
     this.updateDateRange(sortBy);
     this.fetchDataChartOverview();
+    this.closureDataChartFormattedDateRange =
+      this.dateRangeService.getSpanishDateRange(this.startDate, this.endDate);
   }
 
   private updateDateRange(sortBy: string): void {
@@ -247,6 +250,7 @@ export class AffiliateMasterDetailComponent implements OnInit {
   handleDateRange(dateRange: string): void {
     this.customRangeChartActive = true;
     this.customTopAffiliateRangeActive = true;
+    this.closureDataChartFormattedDateRange = '';
 
     const [startDate, endDate] = dateRange.split(' to ');
 

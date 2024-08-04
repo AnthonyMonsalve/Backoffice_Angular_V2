@@ -44,6 +44,7 @@ export class AffiliateDetailComponent implements OnInit {
   showErrorModal: boolean = false;
 
   formattedDateRange!: string;
+  closureDataChartFormattedDateRange: string = '';
   startDate: string = '';
   endDate: string = '';
 
@@ -225,6 +226,8 @@ export class AffiliateDetailComponent implements OnInit {
     this.resetDefaultSort = false;
     this.updateDateRange(sortBy);
     this.fetchDataChartOverview();
+    this.closureDataChartFormattedDateRange =
+      this.dateRangeService.getSpanishDateRange(this.startDate, this.endDate);
   }
 
   private updateDateRange(sortBy: string): void {
@@ -245,6 +248,8 @@ export class AffiliateDetailComponent implements OnInit {
 
   handleDateRange(dateRange: string): void {
     this.customRangeActive = true;
+    this.closureDataChartFormattedDateRange = '';
+
     const [startDate, endDate] = dateRange.split(' to ');
 
     this.startDate = startDate;

@@ -6,9 +6,13 @@ import {
   getSemesterRange,
   getLastMonthRange,
   formatSpanishDateRange,
+  getLastWeekRange,
+  getLast15DaysRange,
 } from '../utils/date.utils';
 import {
+  LAST_15_DAYS,
   LAST_MONTH_SORT,
+  LAST_WEEK_SORT,
   MONTHLY_SORT,
   SEMESTER_SORT,
   WEEKLY_SORT,
@@ -30,6 +34,10 @@ export class DateRangeService {
       return getSemesterRange();
     } else if (sortBy === LAST_MONTH_SORT) {
       return getLastMonthRange();
+    } else if (sortBy === LAST_WEEK_SORT) {
+      return getLastWeekRange();
+    } else if (sortBy === LAST_15_DAYS) {
+      return getLast15DaysRange();
     }
     return { startDate: '', endDate: '' }; // Default case, you might want to handle it differently
   }

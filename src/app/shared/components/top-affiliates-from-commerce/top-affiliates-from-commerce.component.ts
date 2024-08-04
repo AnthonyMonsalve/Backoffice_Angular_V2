@@ -1,14 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AffiliateClosure } from '@core/interfaces/affiliate-closures.interface';
-import { AffiliateMasterClosure } from '@core/interfaces/affiliate-master-closures.interface';
-import {
-  CUSTOM_SORT,
-  LAST_MONTH_SORT,
-  MONTHLY_SORT,
-  SEMESTER_SORT,
-  WEEKLY_SORT,
-  YEARLY_SORT,
-} from '@core/utils/constants';
 
 @Component({
   selector: 'app-top-affiliates-from-commerce',
@@ -27,13 +18,6 @@ export class TopAffiliatesFromCommerceComponent implements OnInit {
   @Input() resetDefaultSort: boolean = false;
 
   currentSortBy!: string;
-
-  WEEKLY = WEEKLY_SORT;
-  YEARLY = YEARLY_SORT;
-  MONTHLY = MONTHLY_SORT;
-  SEMESTER = SEMESTER_SORT;
-  CUSTOM = CUSTOM_SORT;
-  LAST_MONTH = LAST_MONTH_SORT;
 
   constructor() {}
 

@@ -1,39 +1,17 @@
 <div class="card card-h-100">
   <div class="card-body">
     <div class="float-end d-flex align-items-center">
-      <div class="dropdown" ngbDropdown>
-        <button class="btn btn-light btn-sm dropdown-toggle" ngbDropdownToggle>
-          @if(customRangeActive){
-          <span class="text-muted"
-            >{{ CUSTOM }}<i class="mdi mdi-chevron-down ms-1"></i
-          ></span>
-          }@else{
-          <span class="text-muted"
-            >{{ currentSortBy }}<i class="mdi mdi-chevron-down ms-1"></i
-          ></span>
-          }
-        </button>
-        <div class="dropdown-menu" ngbDropdownMenu>
-          <button class="dropdown-item" (click)="updateSortBy(WEEKLY)">
-            {{ WEEKLY }}
-          </button>
-          <button class="dropdown-item" (click)="updateSortBy(MONTHLY)">
-            {{ MONTHLY }}
-          </button>
-          <button class="dropdown-item" (click)="updateSortBy(LAST_MONTH)">
-            {{ LAST_MONTH }}
-          </button>
-          <button class="dropdown-item" (click)="updateSortBy(SEMESTER)">
-            {{ SEMESTER }}
-          </button>
-          <button class="dropdown-item" (click)="updateSortBy(YEARLY)">
-            {{ YEARLY }}
-          </button>
-        </div>
-      </div>
+      <p class="m-0 me-2">
+        {{ formattedDateRange }}
+      </p>
+      <app-dropdown-date-range
+        [currentSelection]="currentSortBy"
+        [customRangeActive]="customRangeActive"
+        (selectionChange)="updateSortBy($event)"
+      >
+      </app-dropdown-date-range>
     </div>
     <h4 class="card-title mb-4">Sales Analytics</h4>
-
     <div class="mt-1">
       <ul class="list-inline main-chart mb-0 text-center">
         <li class="list-inline-item chart-border-left me-1 border-0">

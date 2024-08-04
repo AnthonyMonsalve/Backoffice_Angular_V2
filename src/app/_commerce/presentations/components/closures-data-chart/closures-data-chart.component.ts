@@ -16,7 +16,9 @@ import {
 import { ChartType } from '@commerce/domain/models/chart.model';
 import {
   CUSTOM_SORT,
+  LAST_15_DAYS,
   LAST_MONTH_SORT,
+  LAST_WEEK_SORT,
   MONTHLY_SORT,
   SEMESTER_SORT,
   WEEKLY_SORT,
@@ -37,6 +39,7 @@ export class ClosuresDataChartComponent
   @Input() customRangeActive: boolean = false;
   @Input() defaultSort!: string;
   @Input() resetDefaultSort: boolean = false;
+  @Input() formattedDateRange: string = '';
   @Output() sortByChange = new EventEmitter<string>();
 
   @ViewChild('chart') chart!: ChartComponent;
@@ -49,13 +52,6 @@ export class ClosuresDataChartComponent
   zoomed: boolean = false;
   loading: boolean = true;
   error: boolean = false;
-
-  WEEKLY = WEEKLY_SORT;
-  YEARLY = YEARLY_SORT;
-  MONTHLY = MONTHLY_SORT;
-  SEMESTER = SEMESTER_SORT;
-  CUSTOM = CUSTOM_SORT;
-  LAST_MONTH = LAST_MONTH_SORT;
 
   constructor(private numberAbbreviationService: NumberAbbreviationService) {}
 

@@ -16,6 +16,7 @@ export class TopAffiliatesFromCommerceComponent implements OnInit {
   @Input() total: number = 0;
   @Input() defaultSort!: string;
   @Input() resetDefaultSort: boolean = false;
+  @Input() formattedDateRange: string = '';
 
   currentSortBy!: string;
 

@@ -34,6 +34,8 @@ export class SummaryCommerceComponent implements OnInit {
   endDate: string = '';
   formattedDateRange: string = '';
   closureDataChartFormattedDateRange: string = '';
+  closureBanksAmountFormattedDateRange: string = '';
+  closureTopCommercesFormattedDateRange: string = '';
   globalCurrentSortBy: string = LAST_MONTH_SORT;
   resetDefaultSort: boolean = false;
 
@@ -156,6 +158,8 @@ export class SummaryCommerceComponent implements OnInit {
     this.resetDefaultSort = false;
     this.updateDateRange(sortBy);
     this.loadBankClosures();
+    this.closureBanksAmountFormattedDateRange =
+      this.dateRangeService.getSpanishDateRange(this.startDate, this.endDate);
   }
 
   onSortTopCommercesByChange(sortBy: string): void {
@@ -163,6 +167,8 @@ export class SummaryCommerceComponent implements OnInit {
     this.resetDefaultSort = false;
     this.updateDateRange(sortBy);
     this.loadAffiliateMasterClosures();
+    this.closureTopCommercesFormattedDateRange =
+      this.dateRangeService.getSpanishDateRange(this.startDate, this.endDate);
   }
 
   //Sort independiente para cada cuadro
@@ -199,6 +205,8 @@ export class SummaryCommerceComponent implements OnInit {
     this.customBankRangeActive = true;
     this.customTopCommerceRangeActive = true;
     this.closureDataChartFormattedDateRange = '';
+    this.closureBanksAmountFormattedDateRange = '';
+    this.closureTopCommercesFormattedDateRange = '';
 
     const [startDate, endDate] = dateRange.split(' to ');
 

@@ -10,6 +10,7 @@ export class TopCommercesComponent implements OnInit {
   @Input() customRangeActive: boolean = false;
   @Input() defaultSort!: string;
   @Input() resetDefaultSort: boolean = false;
+  @Input() formattedDateRange: string = '';
   @Output() sortByChange = new EventEmitter<string>();
 
   currentSortBy!: string;

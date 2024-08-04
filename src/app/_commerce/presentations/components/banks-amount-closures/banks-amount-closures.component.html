@@ -1,6 +1,9 @@
 <div class="card">
   <div class="card-body">
     <div class="float-end d-flex align-items-center">
+      <p class="m-0 me-2">
+        {{ formattedDateRange }}
+      </p>
       <app-dropdown-date-range
         [currentSelection]="currentSortBy"
         [customRangeActive]="customRangeActive"

@@ -8,7 +8,10 @@
       >
       </app-dropdown-date-range>
     </div>
-    <h4 class="card-title mb-4">Top Comercios</h4>
+    <h4 class="card-title mb-1">Top Comercios</h4>
+    <p class="m-0 mb-3">
+      {{ formattedDateRange }}
+    </p>
     <ul class="list-group list-group-flush">
       <li
         *ngFor="let merchant of merchants; let i = index"

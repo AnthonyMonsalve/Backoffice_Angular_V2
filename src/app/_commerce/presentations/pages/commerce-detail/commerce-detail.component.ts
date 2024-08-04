@@ -29,6 +29,7 @@ export class AffiliateMasterDetailComponent implements OnInit {
   overviewTerminalData: OverviewTerminals | null = null;
   formattedDateRange!: string;
   closureDataChartFormattedDateRange: string = '';
+  closureTopAffiliatesFormattedDateRange: string = '';
   globalCurrentSortBy: string = LAST_MONTH_SORT;
   resetDefaultSort: boolean = false;
 
@@ -109,13 +110,6 @@ export class AffiliateMasterDetailComponent implements OnInit {
       .subscribe((data: AffiliateMaster) => {
         this.affiliateMaster = data;
       });
-  }
-
-  onSortTopAffiliateByChange(sortBy: string): void {
-    this.customTopAffiliateRangeActive = false;
-    this.resetDefaultSort = false;
-    this.updateDateRange(sortBy);
-    this.fetchTotalsByAffiliatesUnderMaster();
   }
 
   fetchAffiliates(): void {
@@ -230,6 +224,15 @@ export class AffiliateMasterDetailComponent implements OnInit {
       this.dateRangeService.getSpanishDateRange(this.startDate, this.endDate);
   }
 
+  onSortTopAffiliateByChange(sortBy: string): void {
+    this.customTopAffiliateRangeActive = false;
+    this.resetDefaultSort = false;
+    this.updateDateRange(sortBy);
+    this.fetchTotalsByAffiliatesUnderMaster();
+    this.closureTopAffiliatesFormattedDateRange =
+      this.dateRangeService.getSpanishDateRange(this.startDate, this.endDate);
+  }
+
   private updateDateRange(sortBy: string): void {
     const { startDate, endDate } = this.dateRangeService.getDateRange(sortBy);
     this.startDate = startDate;
@@ -251,6 +254,7 @@ export class AffiliateMasterDetailComponent implements OnInit {
     this.customRangeChartActive = true;
     this.customTopAffiliateRangeActive = true;
     this.closureDataChartFormattedDateRange = '';
+    this.closureTopAffiliatesFormattedDateRange = '';
 
     const [startDate, endDate] = dateRange.split(' to ');
 

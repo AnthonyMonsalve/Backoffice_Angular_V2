@@ -23,6 +23,7 @@ export class BanksTotalAmountClosuresComponent implements OnInit, OnChanges {
   @Input() customRangeActive: boolean = false;
   @Input() defaultSort!: string;
   @Input() resetDefaultSort: boolean = false;
+  @Input() formattedDateRange: string = '';
   @ViewChild('chart') chart!: ChartComponent;
   @Output() sortByChange = new EventEmitter<string>();
 

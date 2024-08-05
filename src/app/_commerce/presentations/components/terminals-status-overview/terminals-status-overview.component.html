@@ -1,4 +1,4 @@
-<div class="card card-h-100">
+<div class="card ">
   <div class="card-body">
     <div class="d-flex align-items-start">
       <div class="flex-grow-1">
@@ -8,45 +8,25 @@
     <div>
       @if(showLoad){
       <div class="text-center">
-        <ngx-skeleton-loader
-          appearance="circle"
-          [theme]="{ height: '180px', width: '180px' }"
-        ></ngx-skeleton-loader>
+        <ngx-skeleton-loader appearance="circle" [theme]="{ height: '180px', width: '180px' }"></ngx-skeleton-loader>
       </div>
       }@else {
-      <apx-chart
-        class="apex-charts"
-        [chart]="donutChart.chart"
-        [plotOptions]="donutChart.plotOptions"
-        [dataLabels]="donutChart.dataLabels"
-        [series]="donutChart.series"
-        [labels]="donutChart.labels"
-        [colors]="donutChart.colors"
-        [legend]="donutChart.legend"
-      >
-      </apx-chart
-      >}
+      <apx-chart class="apex-charts" [chart]="donutChart.chart" [plotOptions]="donutChart.plotOptions"
+        [dataLabels]="donutChart.dataLabels" [series]="donutChart.series" [labels]="donutChart.labels"
+        [colors]="donutChart.colors" [legend]="donutChart.legend">
+      </apx-chart>}
 
       <div class="row mb-0 mt-3">
         <div class="col-12 text-center">
           @if(showLoad){
           <div>
-            <ngx-skeleton-loader
-              appearance="line"
-              [theme]="{ height: '20px', width: '50px' }"
-            ></ngx-skeleton-loader>
+            <ngx-skeleton-loader appearance="line" [theme]="{ height: '20px', width: '50px' }"></ngx-skeleton-loader>
           </div>
           <div>
-            <ngx-skeleton-loader
-              appearance="line"
-              [theme]="{ height: '20px', width: '180px' }"
-            ></ngx-skeleton-loader>
+            <ngx-skeleton-loader appearance="line" [theme]="{ height: '20px', width: '180px' }"></ngx-skeleton-loader>
           </div>
           <div>
-            <ngx-skeleton-loader
-              appearance="line"
-              [theme]="{ height: '20px', width: '80px' }"
-            ></ngx-skeleton-loader>
+            <ngx-skeleton-loader appearance="line" [theme]="{ height: '20px', width: '80px' }"></ngx-skeleton-loader>
           </div>
           }@else {
           <p class="text-muted mb-2">Cantidad total de terminales</p>

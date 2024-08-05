@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { checkToken } from '@core/helpers/jwt.interceptor';
 import { AffiliateClosuresReportModel } from '@core/models/affiliate-closures.model';
 import { AffiliateMasterClosuresReportModel } from '@core/models/affiliate-master-closures.model';
+import { BankClosuresReportModel } from '@core/models/bank-closures.model';
 import { environment_dev } from '@environments/environment.dev';
 import { Observable } from 'rxjs';
 
@@ -160,6 +161,28 @@ export class FactClosureService {
 
     return this.http.get<AffiliateMasterClosuresReportModel>(
       `${this.apiUrl}/api/closures/total-amount/date-range/affiliates-master`,
+      {
+        context: checkToken(),
+        params,
+      }
+    );
+  }
+
+  getTotalsByBanksUnderMaster(
+    affiliateMasterSK: string,
+    startDate: string,
+    endDate: string,
+    sort: string = 'TotalAmountGross',
+    order: string = 'DESC'
+  ): Observable<BankClosuresReportModel> {
+    const params = new HttpParams()
+      .set('sort', sort)
+      .set('order', order)
+      .set('endDate', endDate)
+      .set('startDate', startDate);
+
+    return this.http.get<BankClosuresReportModel>(
+      `${this.apiUrl}/api/closures/banks/date-range-totals/${affiliateMasterSK}`,
       {
         context: checkToken(),
         params,

@@ -15,6 +15,7 @@ import { TerminalsStatusOverviewComponent } from './presentations/components/ter
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { AffiliateListComponent } from './presentations/components/affiliate-list/affiliate-list.component';
 import { BanksTotalAmountClosuresComponent } from './presentations/components/banks-amount-closures/banks-amount-closures.component';
 import { ClosuresDataChartComponent } from './presentations/components/closures-data-chart/closures-data-chart.component';
@@ -25,7 +26,6 @@ import { CommerceListComponent } from './presentations/pages/commerce-list/comme
 import { PageAffiliateListComponent } from './presentations/pages/page-affiliate-list/page-affiliate-list.component';
 import { SummaryCommerceComponent } from './presentations/pages/summary/summary.component';
 import { TerminalDetailComponent } from './presentations/pages/terminal-detail/terminal-detail.component';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [

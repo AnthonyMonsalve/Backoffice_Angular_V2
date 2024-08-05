@@ -1,0 +1,66 @@
+<div class="card">
+    <div class="card-header border-bottom-0">
+        <div class="d-flex align-items-start">
+            <div class="flex-grow-1">
+                <h5 class="card-title">Top bancos</h5>
+            </div>
+
+            <div class="flex-shrink-0">
+                <div class="dropdown" ngbDropdown placement="bottom-right">
+                    <a class="font-size-16 text-muted dropdown-toggle" href="javascript:void(0);"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>
+                        <i class="mdi mdi-dots-horizontal"></i>
+                    </a>
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                        <a class="dropdown-item" href="javascript:void(0);">Action</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Another action</a>
+                        <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ngx-simplebar style="max-height: 240px;">
+        <ul class="list-unstyled unstyled mb-0">
+            @if(showLoad){
+            <li class="px-4 py-3">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0 me-3">
+                        <div>
+                            <ngx-skeleton-loader appearance="line"
+                                [theme]="{ height: '35px', width: '100px' }"></ngx-skeleton-loader>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div>
+                            <ngx-skeleton-loader appearance="line"
+                                [theme]="{ height: '35px', width: '200px' }"></ngx-skeleton-loader>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            }@else{
+            <li *ngFor="let bank of bankClosure; let i = index" class="px-4 py-3">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0 me-3">
+                        <app-bank-image-small-name [bankName]="bank.BankName" [width]="100"></app-bank-image-small-name>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p class="text-muted mb-2 font-size-16"><span class="fw-medium">Bs. {{bank.TotalAmountGross |
+                                abbreviateNumber}}</span> <span class=" float-end
+                                fw-medium">{{bank.TotalAmountGross | percentage: totalAmountGrossAllBanks}}%</span>
+                        </p>
+                        <div class="progress animated-progess custom-progress">
+                            <div class="progress-bar" role="progressbar"
+                                [style.width.%]="(bank.TotalAmountGross / totalAmountGrossAllBanks) * 100"
+                                [attr.aria-valuenow]="(bank.TotalAmountGross / totalAmountGrossAllBanks) * 100"
+                                aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            }
+        </ul>
+    </ngx-simplebar>
+</div>

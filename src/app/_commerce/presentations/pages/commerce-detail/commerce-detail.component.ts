@@ -8,6 +8,7 @@ import { OverviewTerminals } from '@commerce/application/interfaces/overview-ter
 import { MerchantService } from '@commerce/application/services/data-merchant.service';
 import { AffiliateClosure } from '@core/interfaces/affiliate-closures.interface';
 import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
+import { BankClosure } from '@core/interfaces/bank-closures.interface';
 import { AffiliateMaster } from '@core/models/affiliate-master.model';
 import { Affiliate } from '@core/models/affiliate.model';
 import { LAST_MONTH_SORT } from '@core/utils/constants';
@@ -44,6 +45,8 @@ export class AffiliateMasterDetailComponent implements OnInit {
   startDate: string = '';
   endDate: string = '';
 
+  bankClosure!: BankClosure[];
+
   customRangeChartActive: boolean = false;
 
   breadCrumbItems!: Array<{}>;
@@ -58,6 +61,7 @@ export class AffiliateMasterDetailComponent implements OnInit {
   isLoadingTerminalData: boolean = false;
   isLoadingOverviewDatachart: boolean = false;
   isLoadingDatachart: boolean = false;
+  isLoadingTotalBanks: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -106,6 +110,7 @@ export class AffiliateMasterDetailComponent implements OnInit {
     this.fetchDataChartOverview();
     this.fetchTotalsByAffiliatesUnderMaster();
     this.fetchOverviewTerminals();
+    this.fetchTotalsByBanksUnderMaster();
   }
 
   fetchAfflMaster(): void {
@@ -186,6 +191,26 @@ export class AffiliateMasterDetailComponent implements OnInit {
         next: (data) => {
           this.overviewTerminalData = data;
           this.isLoadingTerminalData = false;
+        },
+        error: (error) => this.handleError(error),
+        complete: () => console.log('Fetching complete'),
+      });
+  }
+
+  private fetchTotalsByBanksUnderMaster(): void {
+    this.isLoadingTotalBanks = true;
+    this.factService
+      .getTotalsByBanksUnderMaster(
+        this.affiliateMasterSk,
+        this.startDate,
+        this.endDate,
+        this.sortAfflClosure,
+        this.orderAfflClosure
+      )
+      .subscribe({
+        next: (data) => {
+          this.bankClosure = data.banks;
+          this.isLoadingTotalBanks = false;
         },
         error: (error) => this.handleError(error),
         complete: () => console.log('Fetching complete'),
@@ -285,6 +310,7 @@ export class AffiliateMasterDetailComponent implements OnInit {
 
     this.fetchDataChartOverview();
     this.fetchTotalsByAffiliatesUnderMaster();
+    this.fetchTotalsByBanksUnderMaster();
   }
 
   closeModal(): void {

@@ -14,16 +14,6 @@ import {
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
 import { ChartType } from '@commerce/domain/models/chart.model';
-import {
-  CUSTOM_SORT,
-  LAST_15_DAYS,
-  LAST_MONTH_SORT,
-  LAST_WEEK_SORT,
-  MONTHLY_SORT,
-  SEMESTER_SORT,
-  WEEKLY_SORT,
-  YEARLY_SORT,
-} from '@core/utils/constants';
 import { NumberAbbreviationService } from '@services/charts-amount-formatter.service';
 import { ChartComponent } from 'ng-apexcharts';
 
@@ -163,7 +153,7 @@ export class ClosuresDataChartComponent
   private getInitialChartConfig(): ChartType {
     return {
       chart: {
-        height: 300,
+        height: 350,
         type: 'line',
         stacked: false,
         offsetY: 20,

@@ -25,6 +25,7 @@ import { CommerceListComponent } from './presentations/pages/commerce-list/comme
 import { PageAffiliateListComponent } from './presentations/pages/page-affiliate-list/page-affiliate-list.component';
 import { SummaryCommerceComponent } from './presentations/pages/summary/summary.component';
 import { TerminalDetailComponent } from './presentations/pages/terminal-detail/terminal-detail.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { TerminalDetailComponent } from './presentations/pages/terminal-detail/t
     NgbTypeaheadModule,
     FormsModule,
     NgbModule,
+    NgxSkeletonLoaderModule,
     FlatpickrModule.forRoot(),
   ],
   providers: [DecimalPipe],

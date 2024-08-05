@@ -1,22 +1,52 @@
+@if(affiliateMaster?.nombreComercial){
 <app-pagetitle
   title="{{ affiliateMaster?.nombreComercial | titlecase }} ({{
     affiliateMaster?.rif | titlecase
   }})"
   [breadcrumbItems]="breadCrumbItems"
 ></app-pagetitle>
+}@else{
+<ngx-skeleton-loader
+  appearance="line"
+  [theme]="{ height: '25px', width: '250px' }"
+></ngx-skeleton-loader>
+}
 
-@if(chartOverviewData?.totalAmount){
 <div class="row">
   <div class="col-xl-8 col-sm-6">
     <div class="card border-0 shadow-sm">
       <div class="card-body py-2 px-3">
         <div class="mb-1">
+          @if(affiliateMaster?.address){
           <i class="fas fa-map-marker-alt me-2 text-info-purpleblue"></i>
           <span class="text-muted">{{ affiliateMaster?.address }}</span>
+          }@else{
+          <ngx-skeleton-loader
+            appearance="line"
+            [theme]="{
+              height: '15px',
+              width: '80%',
+              margin: 0,
+              marginBottom: '0'
+            }"
+          ></ngx-skeleton-loader>
+          }
         </div>
         <div class="mb-1">
+          @if(affiliateMaster?.email){
           <i class="fas fa-envelope me-2 text-info-purpleblue"></i>
           <span class="text-muted">{{ affiliateMaster?.email }}</span>
+          }@else{
+          <ngx-skeleton-loader
+            appearance="line"
+            [theme]="{
+              height: '15px',
+              width: '50%',
+              margin: 0,
+              marginBottom: '0'
+            }"
+          ></ngx-skeleton-loader>
+          }
         </div>
       </div>
     </div>
@@ -44,12 +74,15 @@
       [defaultSort]="globalCurrentSortBy"
       [resetDefaultSort]="resetDefaultSort"
       [formattedDateRange]="closureDataChartFormattedDateRange"
+      [isLoadingData]="isLoadingDatachart"
+      [isLoadingOverview]="isLoadingOverviewDatachart"
     >
     </closures-data-chart>
   </div>
   <div class="col-xl-4 col-md-12">
     <terminal-status-overview
       [overviewData]="overviewTerminalData"
+      [isLoading]="isLoadingTerminalData"
     ></terminal-status-overview>
   </div>
   <div class="col-xl-8 col-md-12">
@@ -67,7 +100,7 @@
     ></app-top-affiliates-from-commerce>
   </div>
 </div>
-}
+
 <div class="row">
   <div class="col-lg-12">
     <div class="card">
@@ -111,4 +144,3 @@
   </div>
   <!-- end col -->
 </div>
-<!-- end row -->

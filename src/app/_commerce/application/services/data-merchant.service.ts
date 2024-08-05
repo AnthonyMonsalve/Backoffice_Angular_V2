@@ -109,10 +109,13 @@ export class MerchantService {
       .set('endDate', endDate)
       .set('origen', 'Merchant');
 
-    return this.http.get(`${this.apiUrl}/api/closures/date-range-amount`, {
-      context: checkToken(),
-      params,
-    });
+    return this.http.get(
+      `${this.apiUrl}/api/closures/total-amount/date-range`,
+      {
+        context: checkToken(),
+        params,
+      }
+    );
   }
 
   getBanksAmountBetweenTwoDates(
@@ -125,7 +128,7 @@ export class MerchantService {
       .set('origen', 'Merchant');
 
     return this.http.get(
-      `${this.apiUrl}/api/closures/date-range-banks-amount`,
+      `${this.apiUrl}/api/closures/total-amount/date-range/banks`,
       {
         context: checkToken(),
         params,
@@ -143,7 +146,7 @@ export class MerchantService {
       .set('endDate', endDate);
 
     return this.http.get(
-      `${this.apiUrl}/api/closures/date-range-amount/affiliate/${affiliateSK}`,
+      `${this.apiUrl}/api/closures/total-amount/date-range/affiliate/${affiliateSK}`,
       {
         context: checkToken(),
         params,
@@ -161,7 +164,7 @@ export class MerchantService {
       .set('endDate', endDate);
 
     return this.http.get(
-      `${this.apiUrl}/api/closures/date-range-amount/affiliate-master/${affiliateMasterSK}`,
+      `${this.apiUrl}/api/closures/total-amount/date-range/affiliate-master/${affiliateMasterSK}`,
       {
         context: checkToken(),
         params,

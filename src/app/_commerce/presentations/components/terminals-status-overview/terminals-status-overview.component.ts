@@ -14,8 +14,10 @@ import { ChartType } from '@commerce/domain/models/chart.model';
 })
 export class TerminalsStatusOverviewComponent implements OnInit, OnChanges {
   @Input() overviewData: OverviewTerminals | null = null;
+  @Input() isLoading: boolean = true;
   donutChart: ChartType = this.getInitialDonutChartConfig();
   countTerminals = 0;
+  showLoad: boolean = true;
 
   constructor() {}
 
@@ -28,6 +30,13 @@ export class TerminalsStatusOverviewComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.overviewData && changes.overviewData.currentValue) {
       this.updateChartData(changes.overviewData.currentValue);
+    }
+
+    if (changes['isLoading']) {
+      this.showLoad = true;
+      if (!this.isLoading) {
+        this.showLoad = false;
+      }
     }
   }
 

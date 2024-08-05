@@ -52,6 +52,10 @@ export class AffiliateDetailComponent implements OnInit {
 
   breadCrumbItems!: Array<{}>;
 
+  isLoadingDatachart: boolean = false;
+  isLoadingOverviewDatachart: boolean = false;
+  isLoadingTerminalData: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private affiliateService: AffiliateService,
@@ -140,16 +144,23 @@ export class AffiliateDetailComponent implements OnInit {
   }
 
   private fetchOverviewTerminals(): void {
+    this.isLoadingTerminalData = true;
     this.terminalService
       .getOverviewAffiliateTerminals(this.affiliateSK)
       .subscribe({
-        next: (data) => (this.overviewTerminalData = data),
+        next: (data) => {
+          this.overviewTerminalData = data;
+          this.isLoadingTerminalData = false;
+        },
         error: (error) => this.handleError(error),
         complete: () => console.log('Fetching complete'),
       });
   }
 
   private fetchDataChartOverview(): void {
+    this.isLoadingDatachart = true;
+    this.isLoadingOverviewDatachart = true;
+
     this.merchantService
       .getAmountDayAffiliateBetweenTwoDates(
         this.startDate,
@@ -157,7 +168,10 @@ export class AffiliateDetailComponent implements OnInit {
         this.affiliateSK
       )
       .subscribe({
-        next: (data) => (this.chartData = data),
+        next: (data) => {
+          this.chartData = data;
+          this.isLoadingDatachart = false;
+        },
         error: (error) => this.handleError(error),
         complete: () =>
           console.log('Fetch getAmountDayAfflBetTwoDates complete'),
@@ -170,7 +184,10 @@ export class AffiliateDetailComponent implements OnInit {
         this.affiliateSK
       )
       .subscribe({
-        next: (data) => (this.chartOverviewData = data),
+        next: (data) => {
+          this.chartOverviewData = data;
+          this.isLoadingOverviewDatachart = false;
+        },
         error: (error) => this.handleError(error),
         complete: () =>
           console.log('Fetch getAmountAffBetweenTwoDates complete'),

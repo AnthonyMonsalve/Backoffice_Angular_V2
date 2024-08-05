@@ -1,9 +1,13 @@
 <!-- start page title -->
-<app-pagetitle superTitle="{{ affiliate?.nameAffiliateMaster | titlecase }} | {{
+<app-pagetitle
+  superTitle="{{ affiliate?.nameAffiliateMaster | titlecase }} | {{
     affiliate?.name | titlecase
-  }}" title="Terminal: {{ terminal?.Terminal | titlecase }}"
-  superTitleLink="/commerce/affiliate-detail/{{ affiliate?.affiliatesSK }}" [breadcrumbItems]="breadCrumbItems"
-  [bankName]="affiliate?.bankSmallName"></app-pagetitle>
+  }}"
+  title="Terminal: {{ terminal?.Terminal | titlecase }}"
+  superTitleLink="/commerce/affiliate-detail/{{ affiliate?.affiliatesSK }}"
+  [breadcrumbItems]="breadCrumbItems"
+  [bankName]="affiliate?.bankSmallName"
+></app-pagetitle>
 <!-- end page title -->
 
 <div class="row">
@@ -13,22 +17,36 @@
         <div class="row mb-md-2">
           <div class="col-sm-12 col-md-6">
             <div class="dataTables_length" id="tickets-table_length">
-              <label class="d-inline-flex align-items-center">Show
-                <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
-                  [(ngModel)]="limitPageClosures" (ngModelChange)="onLimitChange($event)"
-                  class="form-control form-control-sm mx-2">
+              <label class="d-inline-flex align-items-center"
+                >Show
+                <select
+                  name="tickets-table_length"
+                  aria-controls="tickets-table"
+                  name="pageSize"
+                  [(ngModel)]="limitPageClosures"
+                  (ngModelChange)="onLimitChange($event)"
+                  class="form-control form-control-sm mx-2"
+                >
                   <option [ngValue]="10">10</option>
                   <option [ngValue]="25">25</option>
                   <option [ngValue]="50">50</option>
                   <option [ngValue]="100">100</option>
                 </select>
-                closures</label>
+                closures</label
+              >
             </div>
           </div>
         </div>
-        <app-closures-list (sortOrderEmitter)="receiveSortOrder($event)" [TitleNotFound]="'No se encontraron cirres'"
-          [MessageNotFound]="'Este terminal no tiene cierres asociados'" [closures]="factClosures"
-          [total]="totalClosures" [page]="pageClosures" [limit]="limitPageClosures" (pageChange)="onPageChange($event)">
+        <app-closures-list
+          (sortOrderEmitter)="receiveSortOrder($event)"
+          [TitleNotFound]="'No se encontraron cierres'"
+          [MessageNotFound]="'Este terminal no tiene cierres asociados'"
+          [closures]="factClosures"
+          [total]="totalClosures"
+          [page]="pageClosures"
+          [limit]="limitPageClosures"
+          (pageChange)="onPageChange($event)"
+        >
         </app-closures-list>
       </div>
     </div>

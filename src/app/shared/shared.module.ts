@@ -26,6 +26,7 @@ import { TopAffiliatesFromCommerceComponent } from './components/top-affiliates-
 import { TopCommercesComponent } from './components/top-commerces/top-commerces.component';
 import { DateRangeDisplayComponent } from './components/date-range-display/date-range-display.component';
 import { DropdownDateRangeComponent } from './components/dropdown-date-range/dropdown-date-range.component';
+import { LoadingCardComponent } from './components/loading-card/loading-card.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { DropdownDateRangeComponent } from './components/dropdown-date-range/dro
     TopCommercesComponent,
     DateRangeDisplayComponent,
     DropdownDateRangeComponent,
+    LoadingCardComponent,
   ],
   imports: [
     CommonModule,
@@ -69,6 +71,7 @@ import { DropdownDateRangeComponent } from './components/dropdown-date-range/dro
     TopCommercesComponent,
     DateRangeDisplayComponent,
     DropdownDateRangeComponent,
+    LoadingCardComponent,
   ],
 })
 export class SharedModule {}

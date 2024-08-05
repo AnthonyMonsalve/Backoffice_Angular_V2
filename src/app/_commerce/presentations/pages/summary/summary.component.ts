@@ -39,6 +39,12 @@ export class SummaryCommerceComponent implements OnInit {
   globalCurrentSortBy: string = LAST_MONTH_SORT;
   resetDefaultSort: boolean = false;
 
+  isLoadingtotalAffiliatesMaster: boolean = false;
+  isLoadingtotalAffiliates: boolean = false;
+  isLoadingDatachart: boolean = false;
+  isLoadingOverviewDatachart: boolean = false;
+  isLoadingTerminalData: boolean = false;
+
   constructor(
     private terminalService: TerminalService,
     private merchantService: MerchantService,
@@ -80,27 +86,40 @@ export class SummaryCommerceComponent implements OnInit {
   }
 
   private loadAffiliateMasterData(): void {
+    this.isLoadingtotalAffiliatesMaster = true;
     this.merchantService.getListAffiliatesMaster().subscribe(
       (data) => {
-        this.totalAffiliatesMaster = data.metadata.total; // Asigna el valor recibido a la variable
+        this.totalAffiliatesMaster = data.metadata.total;
+        this.isLoadingtotalAffiliatesMaster = false; // Asigna el valor recibido a la variable
       },
-      (error) => this.handleError(error)
+      (error) => {
+        this.handleError(error);
+        this.isLoadingtotalAffiliatesMaster = false;
+      }
     );
   }
 
   private loadAffiliateData(): void {
+    this.isLoadingtotalAffiliates = true;
     this.merchantService.getListAffiliates().subscribe(
       (data) => {
         this.totalAffiliates = data.metadata.total; // Asigna el valor recibido a la variable
+        this.isLoadingtotalAffiliates = false; // Asigna el valor recibido a la variable
       },
-      (error) => this.handleError(error)
+      (error) => {
+        this.handleError(error);
+        this.isLoadingtotalAffiliates = false; // Asigna el valor recibido a la variable
+      }
     );
   }
 
   private loadOverviewTerminals(): void {
-    const search = 'Merchant';
-    this.terminalService.getOverviewTerminals(search).subscribe({
-      next: (data) => (this.overviewTerminalData = data),
+    this.isLoadingTerminalData = true;
+    this.terminalService.getOverviewTerminals('Merchant').subscribe({
+      next: (data) => {
+        this.overviewTerminalData = data;
+        this.isLoadingTerminalData = false;
+      },
       error: (error) => this.handleError(error),
     });
   }
@@ -131,17 +150,26 @@ export class SummaryCommerceComponent implements OnInit {
   }
 
   private loadChartData(): void {
+    this.isLoadingDatachart = true;
+    this.isLoadingOverviewDatachart = true;
+
     this.merchantService
       .getAmountDayBetweenTwoDates(this.startDate, this.endDate)
       .subscribe({
-        next: (data) => (this.chartData = data),
+        next: (data) => {
+          this.chartData = data;
+          this.isLoadingDatachart = false;
+        },
         error: (error) => this.handleError(error),
       });
 
     this.merchantService
       .getAmountBetweenTwoDates(this.startDate, this.endDate)
       .subscribe({
-        next: (data) => (this.chartOverviewData = data),
+        next: (data) => {
+          this.chartOverviewData = data;
+          this.isLoadingOverviewDatachart = false;
+        },
         error: (error) => this.handleError(error),
         complete: () => console.log('Fetching complete'),
       });

@@ -40,9 +40,15 @@ export class ClosuresDataChartComponent
   @Input() defaultSort!: string;
   @Input() resetDefaultSort: boolean = false;
   @Input() formattedDateRange: string = '';
+  @Input() isLoadingOverview: boolean = true;
+  @Input() isLoadingData: boolean = true;
+
   @Output() sortByChange = new EventEmitter<string>();
 
   @ViewChild('chart') chart!: ChartComponent;
+
+  showLoadData: boolean = true;
+  showLoadOverview: boolean = true;
 
   currentSortBy!: string;
   analyticsChart: ChartType = this.getInitialChartConfig();
@@ -50,7 +56,7 @@ export class ClosuresDataChartComponent
   countClosures: number = 0;
   totalQTY: number = 0;
   zoomed: boolean = false;
-  loading: boolean = true;
+
   error: boolean = false;
 
   constructor(private numberAbbreviationService: NumberAbbreviationService) {}
@@ -77,7 +83,19 @@ export class ClosuresDataChartComponent
       this.currentSortBy = this.defaultSort;
     }
 
-    console.log(this.currentSortBy);
+    if (changes['isLoadingData']) {
+      this.showLoadData = true;
+      if (!this.isLoadingData) {
+        this.showLoadData = false;
+      }
+    }
+
+    if (changes['isLoadingOverview']) {
+      this.showLoadOverview = true;
+      if (!this.isLoadingOverview) {
+        this.showLoadOverview = false;
+      }
+    }
   }
 
   ngAfterViewInit(): void {
@@ -126,11 +144,8 @@ export class ClosuresDataChartComponent
             ]
           : [],
       };
-
-      this.loading = false;
     } catch (error) {
       this.error = true;
-      this.loading = false;
     }
   }
 

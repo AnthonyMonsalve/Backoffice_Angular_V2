@@ -1,0 +1,6 @@
+<div *ngIf="showLoad" class="loading-card">
+  <div class="content">
+    <!-- Aquí puedes colocar tu animación de carga -->
+  </div>
+</div>
+<ng-content *ngIf="!showLoad"></ng-content>

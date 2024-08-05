@@ -26,7 +26,7 @@ export class FactClosureService {
       .set('origen', origen);
 
     return this.http.get(
-      `${this.apiUrl}/api/closures/date-range-daily-amount`,
+      `${this.apiUrl}/api/closures/daily-total-amount/date-range`,
       {
         context: checkToken(),
         params,
@@ -44,7 +44,7 @@ export class FactClosureService {
       .set('endDate', endDate);
 
     return this.http.get(
-      `${this.apiUrl}/api/closures/date-range-daily-amount/affiliate/${affiliateSK}`,
+      `${this.apiUrl}/api/closures/daily-total-amount/date-range/affiliate/${affiliateSK}`,
       {
         context: checkToken(),
         params,
@@ -62,7 +62,7 @@ export class FactClosureService {
       .set('endDate', endDate);
 
     return this.http.get(
-      `${this.apiUrl}/api/closures/date-range-daily-amount/affiliate-master/${affiliateMasterSK}`,
+      `${this.apiUrl}/api/closures/daily-total-amount/date-range/affiliate-master/${affiliateMasterSK}`,
       {
         context: checkToken(),
         params,
@@ -132,7 +132,7 @@ export class FactClosureService {
       .set('startDate', startDate);
 
     return this.http.get<AffiliateClosuresReportModel>(
-      `${this.apiUrl}/api/closures/affiliates/totals-by-date-range/${affiliateMasterSK}`,
+      `${this.apiUrl}/api/closures/affiliates/date-range-totals/${affiliateMasterSK}`,
       {
         context: checkToken(),
         params,
@@ -159,7 +159,7 @@ export class FactClosureService {
       .set('search', search);
 
     return this.http.get<AffiliateMasterClosuresReportModel>(
-      `${this.apiUrl}/api/closures/date-range-affiliates-master-amount`,
+      `${this.apiUrl}/api/closures/total-amount/date-range/affiliates-master`,
       {
         context: checkToken(),
         params,

@@ -15,6 +15,12 @@
     <div class="mt-1">
       <ul class="list-inline main-chart mb-0 text-center">
         <li class="list-inline-item chart-border-left me-1 border-0">
+          @if(showLoadOverview){
+          <ngx-skeleton-loader
+            appearance="line"
+            [theme]="{ height: '35px', width: '200px' }"
+          ></ngx-skeleton-loader>
+          }@else{
           <h3 class="text-primary">
             <span data-plugin="counterup"
               >Bs. {{ totalAmmount | abbreviateNumber }}</span
@@ -22,8 +28,15 @@
               >Total Amount</span
             >
           </h3>
+          }
         </li>
         <li class="list-inline-item chart-border-left me-1">
+          @if(showLoadOverview){
+          <ngx-skeleton-loader
+            appearance="line"
+            [theme]="{ height: '35px', width: '120px' }"
+          ></ngx-skeleton-loader>
+          }@else{
           <h3>
             <span data-plugin="counterup">{{
               countClosures == 0 ? 0 : (countClosures | abbreviateNumber)
@@ -32,8 +45,15 @@
               >Closures</span
             >
           </h3>
+          }
         </li>
         <li class="list-inline-item chart-border-left me-1">
+          @if(showLoadOverview){
+          <ngx-skeleton-loader
+            appearance="line"
+            [theme]="{ height: '35px', width: '180px' }"
+          ></ngx-skeleton-loader>
+          }@else{
           <h3>
             <span data-plugin="counterup">{{
               totalQTY == 0 ? 0 : (totalQTY | abbreviateNumber)
@@ -42,41 +62,39 @@
               >Transactions</span
             >
           </h3>
+          }
         </li>
       </ul>
     </div>
 
     <div class="">
-      <ng-container *ngIf="loading; else content">
-        <div class="text-center">Loading...</div>
-      </ng-container>
-      <ng-template #content>
-        <ng-container *ngIf="!error; else errorContent">
-          <apx-chart
-            #chart
-            dir="ltr"
-            class="apex-charts"
-            [chart]="analyticsChart.chart"
-            [series]="analyticsChart.series"
-            [legend]="analyticsChart.legend"
-            [stroke]="analyticsChart.stroke"
-            [colors]="analyticsChart.colors"
-            [fill]="analyticsChart.fill"
-            [dataLabels]="analyticsChart.dataLabels"
-            [xaxis]="analyticsChart.xaxis"
-            [markers]="analyticsChart.markers"
-            [plotOptions]="analyticsChart.plotOptions"
-            [yaxis]="analyticsChart.yaxis"
-            [tooltip]="analyticsChart.tooltip"
-            [grid]="analyticsChart.grid"
-            [labels]="analyticsChart.labels"
-          >
-          </apx-chart>
-        </ng-container>
-        <ng-template #errorContent>
-          <div class="text-center">No se pudieron obtener los datos</div>
-        </ng-template>
-      </ng-template>
+      @if(showLoadData){
+      <ngx-skeleton-loader
+        appearance="line"
+        [theme]="{ height: '250px', width: '100%' }"
+      ></ngx-skeleton-loader>
+      }@else{
+      <apx-chart
+        #chart
+        dir="ltr"
+        class="apex-charts"
+        [chart]="analyticsChart.chart"
+        [series]="analyticsChart.series"
+        [legend]="analyticsChart.legend"
+        [stroke]="analyticsChart.stroke"
+        [colors]="analyticsChart.colors"
+        [fill]="analyticsChart.fill"
+        [dataLabels]="analyticsChart.dataLabels"
+        [xaxis]="analyticsChart.xaxis"
+        [markers]="analyticsChart.markers"
+        [plotOptions]="analyticsChart.plotOptions"
+        [yaxis]="analyticsChart.yaxis"
+        [tooltip]="analyticsChart.tooltip"
+        [grid]="analyticsChart.grid"
+        [labels]="analyticsChart.labels"
+      >
+      </apx-chart
+      >}
     </div>
   </div>
   <!-- end card-body-->

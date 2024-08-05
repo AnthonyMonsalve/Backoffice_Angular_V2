@@ -55,6 +55,10 @@ export class AffiliateMasterDetailComponent implements OnInit {
   searchTerm: string = '';
   affiliateMasterSk: string;
 
+  isLoadingTerminalData: boolean = false;
+  isLoadingOverviewDatachart: boolean = false;
+  isLoadingDatachart: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private affiliateService: AffiliateService,
@@ -140,6 +144,9 @@ export class AffiliateMasterDetailComponent implements OnInit {
   }
 
   private fetchDataChartOverview(): void {
+    this.isLoadingOverviewDatachart = true;
+    this.isLoadingDatachart = true;
+
     this.merchantService
       .getAmountDayAffiliateMasterBetweenTwoDates(
         this.startDate,
@@ -147,7 +154,10 @@ export class AffiliateMasterDetailComponent implements OnInit {
         this.affiliateMasterSk
       )
       .subscribe({
-        next: (data) => (this.chartData = data),
+        next: (data) => {
+          this.chartData = data;
+          this.isLoadingDatachart = false;
+        },
         error: (error) => this.handleError(error),
         complete: () => console.log('Fetching complete'),
       });
@@ -159,17 +169,24 @@ export class AffiliateMasterDetailComponent implements OnInit {
         this.affiliateMasterSk
       )
       .subscribe({
-        next: (data) => (this.chartOverviewData = data),
+        next: (data) => {
+          this.chartOverviewData = data;
+          this.isLoadingOverviewDatachart = false;
+        },
         error: (error) => this.handleError(error),
         complete: () => console.log('Fetching complete'),
       });
   }
 
   private fetchOverviewTerminals(): void {
+    this.isLoadingTerminalData = true;
     this.terminalService
       .getOverviewAffiliateMasterTerminals(this.affiliateMasterSk)
       .subscribe({
-        next: (data) => (this.overviewTerminalData = data),
+        next: (data) => {
+          this.overviewTerminalData = data;
+          this.isLoadingTerminalData = false;
+        },
         error: (error) => this.handleError(error),
         complete: () => console.log('Fetching complete'),
       });

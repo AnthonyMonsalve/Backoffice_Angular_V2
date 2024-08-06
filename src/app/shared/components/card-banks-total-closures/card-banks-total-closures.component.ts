@@ -1,6 +1,6 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { BankClosure } from '@core/interfaces/bank-closures.interface';
-import { UtilsService } from '@services/utils.service';
+import { UtilsService } from '@services/utils/utils.service';
 
 @Component({
   selector: 'card-banks-total-closures',

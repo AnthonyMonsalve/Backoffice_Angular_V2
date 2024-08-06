@@ -7,7 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { User } from '@core/models/auth.models';
 import { AuthenticationService } from '@core/services/auth.service';
 
-import { LanguageService } from '@core/services/language.service';
+import { LanguageService } from '@services/utils/language.service';
 
 @Component({
   selector: 'app-topbar',

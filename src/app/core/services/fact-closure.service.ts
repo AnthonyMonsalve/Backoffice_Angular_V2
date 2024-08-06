@@ -189,4 +189,78 @@ export class FactClosureService {
       }
     );
   }
+
+  getAmountBetweenTwoDates(
+    startDate: string,
+    endDate: string,
+    where: string
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('startDate', startDate)
+      .set('endDate', endDate)
+      .set('origen', where);
+
+    return this.http.get(
+      `${this.apiUrl}/api/closures/total-amount/date-range`,
+      {
+        context: checkToken(),
+        params,
+      }
+    );
+  }
+
+  getBanksAmountBetweenTwoDates(
+    startDate: string,
+    endDate: string,
+    where: string
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('startDate', startDate)
+      .set('endDate', endDate)
+      .set('origen', where);
+
+    return this.http.get(
+      `${this.apiUrl}/api/closures/total-amount/date-range/banks`,
+      {
+        context: checkToken(),
+        params,
+      }
+    );
+  }
+
+  getAmountAffiliateBetweenTwoDates(
+    startDate: string,
+    endDate: string,
+    affiliateSK: string
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('startDate', startDate)
+      .set('endDate', endDate);
+
+    return this.http.get(
+      `${this.apiUrl}/api/closures/total-amount/date-range/affiliate/${affiliateSK}`,
+      {
+        context: checkToken(),
+        params,
+      }
+    );
+  }
+
+  getAmountAffiliateMasterBetweenTwoDates(
+    startDate: string,
+    endDate: string,
+    affiliateMasterSK: string
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('startDate', startDate)
+      .set('endDate', endDate);
+
+    return this.http.get(
+      `${this.apiUrl}/api/closures/total-amount/date-range/affiliate-master/${affiliateMasterSK}`,
+      {
+        context: checkToken(),
+        params,
+      }
+    );
+  }
 }

@@ -7,10 +7,10 @@ import { AffiliateMasterList } from 'src/app/_commerce/application/interfaces/af
   selector: 'app-user-list',
   templateUrl: './commerce-list.component.html',
 })
-export class CommerceListComponent implements OnInit {
+export class CommerceListWebComponent implements OnInit {
   commerces: AffiliateMaster[] = [];
   breadCrumbItems: Array<{}> = [
-    { label: 'Insta Comercio' },
+    { label: 'Insta Web' },
     { label: 'Listado de comercios', active: true },
   ];
   order: string = 'ASC';
@@ -35,7 +35,7 @@ export class CommerceListComponent implements OnInit {
         sort: this.sort,
         order: this.order,
         where: this.searchTerm,
-        search: 'Merchant',
+        search: 'Instapago',
       })
       .subscribe((data: AffiliateMasterList) => {
         this.commerces = data.data;

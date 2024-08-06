@@ -10,6 +10,7 @@ import { BankClosure } from '@core/interfaces/bank-closures.interface';
 import { OverviewTerminals } from '@core/interfaces/overview-terminals.interface';
 import { AffiliateMaster } from '@core/models/affiliate-master.model';
 import { Affiliate } from '@core/models/affiliate.model';
+import { Closure } from '@core/models/closure.model';
 import { LAST_MONTH_SORT } from '@core/utils/constants';
 import { AffiliateMasterService } from '@services/affiliate-master.service';
 import { AffiliateService } from '@services/affiliate.service';
@@ -21,8 +22,8 @@ import { DateRangeService } from '@services/utils/date-range.service';
   selector: 'app-affiliate-master-detail',
   templateUrl: './commerce-detail.component.html',
 })
-export class AffiliateMasterDetailComponent implements OnInit {
-  affiliates: Affiliate[] = [];
+export class AffiliateDetailInstapagoComponent implements OnInit {
+  affiliate: Affiliate | null = null;
   affiliateMaster: AffiliateMaster | null = null;
   chartData!: ChartClosureData;
   chartOverviewData: ChartOverviewData | null = null;
@@ -32,6 +33,8 @@ export class AffiliateMasterDetailComponent implements OnInit {
   closureTopAffiliatesFormattedDateRange: string = '';
   globalCurrentSortBy: string = LAST_MONTH_SORT;
   resetDefaultSort: boolean = false;
+
+  factClosures: Closure[] = [];
 
   affiliateClosure!: AffiliateClosure[];
   pageAfflClosure: number = 1;
@@ -44,16 +47,20 @@ export class AffiliateMasterDetailComponent implements OnInit {
   startDate: string = '';
   endDate: string = '';
 
+  limitPageClosures = 5;
+  pageClosures = 1;
+  totalClosures = 0;
+  sortClosures = 'TimeId';
+  orderClosures = 'DESC';
+
   bankClosure!: BankClosure[];
 
   customRangeChartActive: boolean = false;
 
   breadCrumbItems!: Array<{}>;
-  order: string = 'ASC';
-  sort: string = 'name';
-  page: number = 1;
-  limit: number = 5;
   total: number = 0;
+  sort: string = 'name';
+  order: string = 'ASC';
   searchTerm: string = '';
   affiliateMasterSk: string;
 
@@ -69,19 +76,41 @@ export class AffiliateMasterDetailComponent implements OnInit {
     private affiliateMasterService: AffiliateMasterService,
     private terminalService: TerminalService,
     private dateRangeService: DateRangeService,
-    private factService: FactClosureService
+    private factClosureService: FactClosureService
   ) {
     // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
-    const affiliateSK = this.route.snapshot.paramMap.get('sk');
-    if (!affiliateSK) {
+    const affiliateMasterSk = this.route.snapshot.paramMap.get('sk');
+    if (!affiliateMasterSk) {
       throw new Error('AffiliateMasterSK is required');
     }
-    this.affiliateMasterSk = affiliateSK;
+    this.affiliateMasterSk = affiliateMasterSk;
   }
 
   ngOnInit(): void {
     this.initializeBreadcrumb();
-    this.initializeData();
+
+    const PAGE = 1;
+    const LIMIT = 1;
+    const SORT = 'name';
+    const ORDER = 'ASC';
+
+    this.affiliateService
+      .getAffiliatesByAfflMaster(
+        this.affiliateMasterSk,
+        PAGE,
+        LIMIT,
+        SORT,
+        ORDER,
+        this.searchTerm
+      )
+      .subscribe({
+        next: (data: AffiliateList) => {
+          this.affiliate = data.data[0];
+          this.initializeData();
+        },
+        error: (error) => this.handleError(error),
+        complete: () => console.log('Getting affiliate complete'),
+      });
   }
 
   private initializeBreadcrumb(): void {
@@ -92,9 +121,11 @@ export class AffiliateMasterDetailComponent implements OnInit {
   }
 
   private initializeData(): void {
-    this.startDate =
-      this.dateRangeService.getDateRange(LAST_MONTH_SORT).startDate;
-    this.endDate = this.dateRangeService.getDateRange(LAST_MONTH_SORT).endDate;
+    // this.startDate =
+    //   this.dateRangeService.getDateRange(LAST_MONTH_SORT).startDate;
+    // this.endDate = this.dateRangeService.getDateRange(LAST_MONTH_SORT).endDate;
+    this.startDate = '2023-08-01';
+    this.endDate = '2023-08-31';
 
     this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
       this.startDate,
@@ -104,12 +135,11 @@ export class AffiliateMasterDetailComponent implements OnInit {
   }
 
   private fetchData(): void {
-    this.fetchAffiliates();
     this.fetchAfflMaster();
     this.fetchDataChartOverview();
-    this.fetchTotalsByAffiliatesUnderMaster();
     this.fetchOverviewTerminals();
     this.fetchTotalsByBanksUnderMaster();
+    this.fetchClosuresAffiliate();
   }
 
   fetchAfflMaster(): void {
@@ -120,38 +150,31 @@ export class AffiliateMasterDetailComponent implements OnInit {
       });
   }
 
-  fetchAffiliates(): void {
+  fetchAffiliate(): void {
+    const PAGE = 1;
+    const LIMIT = 1;
+    const SORT = 'name';
+    const ORDER = 'ASC';
+
     this.affiliateService
       .getAffiliatesByAfflMaster(
         this.affiliateMasterSk,
-        this.page,
-        this.limit,
-        this.sort,
-        this.order,
+        PAGE,
+        LIMIT,
+        SORT,
+        ORDER,
         this.searchTerm
       )
       .subscribe((data: AffiliateList) => {
-        this.affiliates = data.data;
-        this.total = data.metadata.total;
-        this.page = data.metadata.page;
+        this.affiliate = data.data[0];
       });
-  }
-
-  onPageChange(newPage: number): void {
-    this.page = newPage;
-    this.fetchAffiliates();
-  }
-
-  onPageAfflChange(newPage: number): void {
-    this.pageAfflClosure = newPage;
-    this.fetchTotalsByAffiliatesUnderMaster();
   }
 
   private fetchDataChartOverview(): void {
     this.isLoadingOverviewDatachart = true;
     this.isLoadingDatachart = true;
 
-    this.factService
+    this.factClosureService
       .getAmountDayAffiliateMasterBetweenTwoDates(
         this.startDate,
         this.endDate,
@@ -166,7 +189,7 @@ export class AffiliateMasterDetailComponent implements OnInit {
         complete: () => console.log('Fetching complete'),
       });
 
-    this.factService
+    this.factClosureService
       .getAmountAffiliateMasterBetweenTwoDates(
         this.startDate,
         this.endDate,
@@ -198,7 +221,7 @@ export class AffiliateMasterDetailComponent implements OnInit {
 
   private fetchTotalsByBanksUnderMaster(): void {
     this.isLoadingTotalBanks = true;
-    this.factService
+    this.factClosureService
       .getTotalsByBanksUnderMaster(
         this.affiliateMasterSk,
         this.startDate,
@@ -216,30 +239,6 @@ export class AffiliateMasterDetailComponent implements OnInit {
       });
   }
 
-  private fetchTotalsByAffiliatesUnderMaster(): void {
-    this.isLoadingTopAffiliates = true;
-    this.factService
-      .getTotalsByAffiliatesUnderMaster(
-        this.affiliateMasterSk,
-        this.startDate,
-        this.endDate,
-        this.limitAfflClosure,
-        this.pageAfflClosure,
-        this.sortAfflClosure,
-        this.orderAfflClosure
-      )
-      .subscribe({
-        next: (data) => {
-          this.affiliateClosure = data.affiliatesClosures;
-          this.totalAfflClosure = data.metadata.total;
-          this.pageAfflClosure = data.metadata.page;
-          this.isLoadingTopAffiliates = false;
-        },
-        error: (error) => this.handleError(error),
-        complete: () => console.log('Fetching complete'),
-      });
-  }
-
   private handleError(error: any): void {
     console.error('An error occurred:', error);
     this.showErrorModal = true;
@@ -248,13 +247,18 @@ export class AffiliateMasterDetailComponent implements OnInit {
   receiveSortOrder(sortOrder: any): void {
     this.sort = sortOrder.sort;
     this.order = sortOrder.order;
-    this.fetchAffiliates();
+    this.fetchAffiliate();
   }
 
-  onSearchChange(searchTerm: string): void {
-    this.searchTerm = searchTerm;
-    this.page = 1; // Reset to first page
-    this.fetchAffiliates();
+  onPageClosureChange(newPage: number): void {
+    this.pageClosures = newPage;
+    this.fetchClosuresAffiliate();
+  }
+
+  onLimitClosureChange(newLimit: number): void {
+    this.limitPageClosures = newLimit;
+    this.pageClosures = 1; // Reset to first page
+    this.fetchClosuresAffiliate();
   }
 
   onSortByChange(sortBy: string): void {
@@ -270,7 +274,6 @@ export class AffiliateMasterDetailComponent implements OnInit {
     this.customTopAffiliateRangeActive = false;
     this.resetDefaultSort = false;
     this.updateDateRange(sortBy);
-    this.fetchTotalsByAffiliatesUnderMaster();
     this.closureTopAffiliatesFormattedDateRange =
       this.dateRangeService.getSpanishDateRange(this.startDate, this.endDate);
   }
@@ -283,6 +286,28 @@ export class AffiliateMasterDetailComponent implements OnInit {
     //   startDate,
     //   endDate
     // );
+  }
+
+  private fetchClosuresAffiliate(): void {
+    if (!this.affiliate?.affiliatesSK) return;
+
+    this.factClosureService
+      .getClosuresByAffiliateSK(
+        this.affiliate.affiliatesSK.toString(),
+        this.limitPageClosures,
+        this.pageClosures,
+        this.sortClosures,
+        this.orderClosures
+      )
+      .subscribe({
+        next: (data) => (
+          (this.factClosures = data.closures),
+          (this.totalClosures = data.metadata.total),
+          (this.pageClosures = data.metadata.page)
+        ),
+        error: (error) => this.handleError(error),
+        complete: () => console.log('Fetching complete'),
+      });
   }
 
   resetCustomRangeSet(): void {
@@ -309,8 +334,8 @@ export class AffiliateMasterDetailComponent implements OnInit {
     );
 
     this.fetchDataChartOverview();
-    this.fetchTotalsByAffiliatesUnderMaster();
     this.fetchTotalsByBanksUnderMaster();
+    this.fetchClosuresAffiliate();
   }
 
   closeModal(): void {

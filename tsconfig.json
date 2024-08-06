@@ -26,6 +26,7 @@
       "@shared/*": ["./src/app/shared/*"],
       "@user/*": ["./src/app/user/*"],
       "@commerce/*": ["./src/app/_commerce/*"],
+      "@web/*": ["./src/app/_web/*"],
       "@core/*": ["./src/app/core/*"]
     },
     "useDefineForClassFields": false

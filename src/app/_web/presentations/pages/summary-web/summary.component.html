@@ -1,0 +1,43 @@
+<app-modal-error [showErrorModal]="showErrorModal" (closeModal)="closeModal()"></app-modal-error>
+<!-- start page title -->
+<app-pagetitle title="Insta Web" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<!-- end page title -->
+<div class="row">
+  <div class="col-xl-4 col-sm-6">
+    <card-count [title]="'Comercios'" [icon]="'uil uil-shopping-cart-alt'" [count]="totalAffiliatesMaster"
+      [link]="'/web/commerces-list'" [isLoading]="isLoadingtotalAffiliatesMaster"></card-count>
+  </div>
+  <div class="col-xl-4 col-sm-6"></div>
+  <div class="col-xl-4 col-sm-6">
+    <app-date-range-picker (dateRangeSet)="handleDateRange($event)" (resetCustomRangeSet)="resetCustomRangeSet()">
+    </app-date-range-picker>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-12 col-md-12 col-sm-12">
+    <closures-data-chart [customRangeActive]="customRangeActive" [chartData]="chartData"
+      [chartOverviewData]="chartOverviewData" (sortByChange)="onSortByChange($event)"
+      [defaultSort]="globalCurrentSortBy" [resetDefaultSort]="resetDefaultSort"
+      [formattedDateRange]="closureDataChartFormattedDateRange" [isLoadingData]="isLoadingDatachart"
+      [isLoadingOverview]="isLoadingOverviewDatachart">
+    </closures-data-chart>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-3 col-md-3 col-sm-12">
+    <terminal-status-overview [overviewData]="overviewTerminalData"
+      [isLoading]="isLoadingTerminalData"></terminal-status-overview>
+  </div>
+  <div class="col-xl-6 col-md-6 col-sm-12">
+    <banks-total-amount-closures [customRangeActive]="customBankRangeActive" [bankClosuresData]="bankClosuresReport"
+      (sortByChange)="onSortBankByChange($event)" [defaultSort]="globalCurrentSortBy"
+      [resetDefaultSort]="resetDefaultSort"
+      [formattedDateRange]="closureBanksAmountFormattedDateRange"></banks-total-amount-closures>
+  </div>
+  <div class="col-xl-3 col-md-3 col-sm-12">
+    <app-top-commerces [customRangeActive]="customTopCommerceRangeActive" [merchants]="affiliateMasterClosure"
+      (sortByChange)="onSortTopCommercesByChange($event)" [defaultSort]="globalCurrentSortBy"
+      [resetDefaultSort]="resetDefaultSort"
+      [formattedDateRange]="closureTopCommercesFormattedDateRange"></app-top-commerces>
+  </div>
+</div>

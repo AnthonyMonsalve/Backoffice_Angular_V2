@@ -4,13 +4,15 @@ import {
   ChartClosureData,
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
-import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
+import { MerchantService } from '@commerce/application/services/data-merchant.service';
 import { AffiliateMasterClosure } from '@core/interfaces/affiliate-master-closures.interface';
-import { LAST_MONTH_SORT, MONTHLY_SORT } from '@core/utils/constants';
-import { DateRangeService } from '@services/date-range.service';
+import { OverviewTerminals } from '@core/interfaces/overview-terminals.interface';
+import { LAST_MONTH_SORT } from '@core/utils/constants';
+import { AffiliateMasterService } from '@services/affiliate-master.service';
+import { AffiliateService } from '@services/affiliate.service';
 import { FactClosureService } from '@services/fact-closure.service';
 import { TerminalService } from '@services/terminal.service';
-import { MerchantService } from 'src/app/_commerce/application/services/data-merchant.service';
+import { DateRangeService } from '@services/utils/date-range.service';
 
 @Component({
   selector: 'app-summary-commerce-dashboard',
@@ -49,7 +51,9 @@ export class SummaryCommerceComponent implements OnInit {
     private terminalService: TerminalService,
     private merchantService: MerchantService,
     private dateRangeService: DateRangeService,
-    private factService: FactClosureService
+    private factService: FactClosureService,
+    private affiliateMasterService: AffiliateMasterService,
+    private affiliateService: AffiliateService
   ) {}
 
   ngOnInit(): void {
@@ -87,21 +91,26 @@ export class SummaryCommerceComponent implements OnInit {
 
   private loadAffiliateMasterData(): void {
     this.isLoadingtotalAffiliatesMaster = true;
-    this.merchantService.getListAffiliatesMaster().subscribe(
-      (data) => {
-        this.totalAffiliatesMaster = data.metadata.total;
-        this.isLoadingtotalAffiliatesMaster = false; // Asigna el valor recibido a la variable
-      },
-      (error) => {
-        this.handleError(error);
-        this.isLoadingtotalAffiliatesMaster = false;
-      }
-    );
+    this.affiliateMasterService
+      .getListAffiliatesMaster({
+        search: 'Merchant',
+      })
+      .subscribe(
+        (data) => {
+          this.totalAffiliatesMaster = data.metadata.total;
+          this.isLoadingtotalAffiliatesMaster = false; // Asigna el valor recibido a la variable
+        },
+        (error) => {
+          this.handleError(error);
+          this.isLoadingtotalAffiliatesMaster = false;
+        }
+      );
   }
 
   private loadAffiliateData(): void {
     this.isLoadingtotalAffiliates = true;
-    this.merchantService.getListAffiliates().subscribe(
+    const search = 'Merchant';
+    this.affiliateService.getListAffiliates({ search: 'Merchant' }).subscribe(
       (data) => {
         this.totalAffiliates = data.metadata.total; // Asigna el valor recibido a la variable
         this.isLoadingtotalAffiliates = false; // Asigna el valor recibido a la variable

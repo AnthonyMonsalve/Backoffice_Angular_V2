@@ -5,7 +5,7 @@ import { AffiliateDetailComponent } from './presentations/pages/affiliate-detail
 import { AffiliateMasterDetailComponent } from './presentations/pages/commerce-detail/commerce-detail.component';
 import { CommerceListComponent } from './presentations/pages/commerce-list/commerce-list.component';
 import { PageAffiliateListComponent } from './presentations/pages/page-affiliate-list/page-affiliate-list.component';
-import { SummaryCommerceComponent } from './presentations/pages/summary/summary.component';
+import { SummaryCommerceComponent } from './presentations/pages/summary-commerce/summary.component';
 import { TerminalDetailComponent } from './presentations/pages/terminal-detail/terminal-detail.component';
 
 const routes: Routes = [

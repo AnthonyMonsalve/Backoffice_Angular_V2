@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
 import { checkToken } from '@core/helpers/jwt.interceptor';
+import { OverviewTerminals } from '@core/interfaces/overview-terminals.interface';
 import { TerminalList } from '@core/interfaces/terminals-list.interface';
 import { Terminal } from '@core/models/terminal.model';
 import { environment_dev } from '@environments/environment.dev';
@@ -70,9 +70,7 @@ export class TerminalService {
     );
   }
 
-  getOneTerminal(
-    TerminalSK: string
-  ): Observable<Terminal> {
+  getOneTerminal(TerminalSK: string): Observable<Terminal> {
     return this.http.get<Terminal>(
       `${this.apiUrl}/api/terminals/terminal/${TerminalSK}`,
       {
@@ -80,5 +78,4 @@ export class TerminalService {
       }
     );
   }
-
 }

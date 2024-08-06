@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
 import { Affiliate } from '@core/models/affiliate.model';
-import { MerchantService } from 'src/app/_commerce/application/services/data-merchant.service';
+import { AffiliateService } from '@services/affiliate.service';
 
 @Component({
   selector: 'app-user-list',
@@ -20,21 +20,22 @@ export class PageAffiliateListComponent implements OnInit {
   total: number = 0;
   sort: string = 'name';
 
-  constructor(private merchantService: MerchantService) {}
+  constructor(private affiliateService: AffiliateService) {}
 
   ngOnInit(): void {
     this.fetchCommerces();
   }
 
   fetchCommerces(): void {
-    this.merchantService
-      .getListAffiliates(
-        this.page,
-        this.limit,
-        this.sort,
-        this.order,
-        this.searchTerm
-      )
+    this.affiliateService
+      .getListAffiliates({
+        page: this.page,
+        limit: this.limit,
+        sort: this.sort,
+        order: this.order,
+        where: this.searchTerm,
+        search: 'Merchant',
+      })
       .subscribe((data: AffiliateList) => {
         this.affiliates = data.data;
         this.total = data.metadata.total;

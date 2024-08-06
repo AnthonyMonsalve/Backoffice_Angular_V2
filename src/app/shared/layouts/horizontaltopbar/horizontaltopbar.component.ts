@@ -3,8 +3,8 @@ import { NavigationEnd, Router } from '@angular/router';
 
 import { User } from '@core/models/auth.models';
 import { AuthenticationService } from '@core/services/auth.service';
-import { LanguageService } from '@core/services/language.service';
 import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '@services/utils/language.service';
 import { CookieService } from 'ngx-cookie-service';
 
 import { LAYOUT_MODE } from '../layouts.model';

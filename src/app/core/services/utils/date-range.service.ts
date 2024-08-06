@@ -1,15 +1,5 @@
 import { Injectable } from '@angular/core';
 import {
-  getYearlyRange,
-  getMonthlyRange,
-  getWeeklyRange,
-  getSemesterRange,
-  getLastMonthRange,
-  formatSpanishDateRange,
-  getLastWeekRange,
-  getLast15DaysRange,
-} from '../utils/date.utils';
-import {
   LAST_15_DAYS,
   LAST_MONTH_SORT,
   LAST_WEEK_SORT,
@@ -18,6 +8,16 @@ import {
   WEEKLY_SORT,
   YEARLY_SORT,
 } from '@core/utils/constants';
+import {
+  formatSpanishDateRange,
+  getLast15DaysRange,
+  getLastMonthRange,
+  getLastWeekRange,
+  getMonthlyRange,
+  getSemesterRange,
+  getWeeklyRange,
+  getYearlyRange,
+} from '../../utils/date.utils';
 
 @Injectable({
   providedIn: 'root',

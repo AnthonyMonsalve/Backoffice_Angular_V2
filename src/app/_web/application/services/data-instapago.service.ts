@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class MerchantService {
+export class InstapagoService {
   apiUrl = environment_dev.API_URL;
 
   constructor(private factClosureService: FactClosureService) {}
@@ -20,7 +20,7 @@ export class MerchantService {
     return this.factClosureService.getAmountDayBetweenTwoDates(
       startDate,
       endDate,
-      'Merchant'
+      'Instapago'
     );
   }
 
@@ -31,7 +31,7 @@ export class MerchantService {
     return this.factClosureService.getAmountBetweenTwoDates(
       startDate,
       endDate,
-      'Merchant'
+      'Instapago'
     );
   }
 
@@ -42,7 +42,7 @@ export class MerchantService {
     return this.factClosureService.getBanksAmountBetweenTwoDates(
       startDate,
       endDate,
-      'Merchant'
+      'Instapago'
     );
   }
 }

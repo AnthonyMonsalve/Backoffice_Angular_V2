@@ -4,17 +4,17 @@ import {
   ChartClosureData,
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
-import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
 import { MerchantService } from '@commerce/application/services/data-merchant.service';
+import { OverviewTerminals } from '@core/interfaces/overview-terminals.interface';
 import { TerminalList } from '@core/interfaces/terminals-list.interface';
 import { Affiliate } from '@core/models/affiliate.model';
 import { Closure } from '@core/models/closure.model';
 import { Terminal } from '@core/models/terminal.model';
 import { LAST_MONTH_SORT } from '@core/utils/constants';
 import { AffiliateService } from '@services/affiliate.service';
-import { DateRangeService } from '@services/date-range.service';
 import { FactClosureService } from '@services/fact-closure.service';
 import { TerminalService } from '@services/terminal.service';
+import { DateRangeService } from '@services/utils/date-range.service';
 
 @Component({
   selector: 'app-affiliate-detail',
@@ -161,7 +161,7 @@ export class AffiliateDetailComponent implements OnInit {
     this.isLoadingDatachart = true;
     this.isLoadingOverviewDatachart = true;
 
-    this.merchantService
+    this.factClosureService
       .getAmountDayAffiliateBetweenTwoDates(
         this.startDate,
         this.endDate,
@@ -177,7 +177,7 @@ export class AffiliateDetailComponent implements OnInit {
           console.log('Fetch getAmountDayAfflBetTwoDates complete'),
       });
 
-    this.merchantService
+    this.factClosureService
       .getAmountAffiliateBetweenTwoDates(
         this.startDate,
         this.endDate,

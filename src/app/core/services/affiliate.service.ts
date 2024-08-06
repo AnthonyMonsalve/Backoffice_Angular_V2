@@ -45,4 +45,36 @@ export class AffiliateService {
       }
     );
   }
+
+  getListAffiliates(
+    values: {
+      page?: number;
+      limit?: number;
+      sort?: string;
+      order?: string;
+      where?: string;
+      search?: string;
+    } = {}
+  ): Observable<AffiliateList> {
+    const {
+      page = 1,
+      limit = 10,
+      sort = 'nombreComercial',
+      order = 'ASC',
+      where = '',
+      search = '',
+    } = values;
+
+    const params = new HttpParams()
+      .set('search', search)
+      .set('page', page.toString())
+      .set('limit', limit.toString())
+      .set('sort', sort)
+      .set('order', order)
+      .set('where', where);
+    return this.http.get<AffiliateList>(`${this.apiUrl}/api/affiliates/list`, {
+      context: checkToken(),
+      params,
+    });
+  }
 }

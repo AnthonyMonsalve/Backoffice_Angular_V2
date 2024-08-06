@@ -1,0 +1,129 @@
+<!-- start page title -->
+<app-pagetitle title="Listado de comercios" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-md-2">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="tickets-table_length">
+                            <label class="d-inline-flex align-items-center">Show
+                                <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
+                                    [(ngModel)]="limit" (ngModelChange)="onLimitChange($event)"
+                                    class="form-control form-control-sm mx-2">
+                                    <option [ngValue]="10">10</option>
+                                    <option [ngValue]="25">25</option>
+                                    <option [ngValue]="50">50</option>
+                                    <option [ngValue]="100">100</option>
+                                </select> entries</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div id="tickets-table_filter" class="dataTables_filter text-md-end">
+                            <label class="d-inline-flex align-items-center">Search:
+                                <input type="text" name="searchTerm" class="form-control form-control-sm ms-2"
+                                    [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange($event)"
+                                    aria-controls="tickets-table">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="border_none">
+                            <div class="py-2">
+                                <!-- Table -->
+                                <div class="table-responsive datatables">
+                                    <table class="table align-middle table-nowrap table-check">
+                                        <thead>
+                                            <tr>
+                                                <th (click)="changeSort('nombreComercial')"
+                                                    [ngClass]="{'asc': sort === 'nombreComercial' && order === 'ASC', 'desc': sort === 'nombreComercial' && order === 'DESC'}">
+                                                    Name
+                                                </th>
+                                                <th (click)="changeSort('numAffiliates')"
+                                                    [ngClass]="{'asc': sort === 'numAffiliates' && order === 'ASC', 'desc': sort === 'numAffiliates' && order === 'DESC'}">
+                                                    Afiliaciones bancarias</th>
+                                                <th (click)="changeSort('email')"
+                                                    [ngClass]="{'asc': sort === 'email' && order === 'ASC', 'desc': sort === 'email' && order === 'DESC'}">
+                                                    Email</th>
+                                                <th (click)="changeSort('address')"
+                                                    [ngClass]="{'asc': sort === 'address' && order === 'ASC', 'desc': sort === 'address' && order === 'DESC'}">
+                                                    Dirección</th>
+                                                <th (click)="changeSort('created')"
+                                                    [ngClass]="{'asc': sort === 'created' && order === 'ASC', 'desc': sort === 'created' && order === 'DESC'}">
+                                                    Member since</th>
+
+                                            </tr><!-- end tr -->
+                                        </thead><!-- end thead -->
+                                        <tbody>
+                                            <tr *ngFor="let commerce of commerces">
+                                                <td>
+                                                    <a [routerLink]="['/web/commerce-detail', commerce.affiliateMasterSK]"
+                                                        class="text-body fw-medium">
+                                                        {{commerce.nombreComercial | titlecase}}
+                                                    </a>
+                                                </td>
+                                                <td class="text-center">
+                                                    {{commerce.numAffiliates}}
+                                                </td>
+                                                <td>
+                                                    {{commerce.email}}
+                                                </td>
+                                                <td>
+                                                    {{commerce.address}}
+                                                </td>
+                                                <td>
+                                                    {{commerce.created | date}}
+                                                </td>
+                                                <!-- <td>
+                                                    <div class="dropdown" ngbDropdown>
+                                                        <button class="btn btn-light btn-sm dropdown-toggle"
+                                                            type="button" data-bs-toggle="dropdown"
+                                                            aria-expanded="false" ngbDropdownToggle>
+                                                            <i class="uil uil-ellipsis-h"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+                                                            <li><a class="dropdown-item"
+                                                                    href="javascript:void(0);">Edit</a></li>
+                                                            <li><a class="dropdown-item"
+                                                                    href="javascript:void(0);">Print</a></li>
+
+                                                        </ul>
+                                                    </div>
+                                                </td> -->
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                                <!-- End table -->
+                                <div class="row justify-content-md-between align-items-md-center mt-2">
+                                    <div class="col-sm-12 col-md-5">
+                                        <div class="dataTables_info mb-2" id="tickets-table_info" role="status"
+                                            aria-live="polite">
+                                            Showing {{page}} to {{lastPage}} of {{total}} entries
+                                        </div>
+                                    </div>
+                                    <!-- Pagination -->
+                                    <div class="col-sm-12 col-md-5">
+                                        <div class="text-md-right float-md-end pagination-rounded">
+                                            <app-table-pagination [total]="total" [page]="page" [limit]="limit"
+                                                (pageChange)="onPageChange($event)">
+                                            </app-table-pagination>
+                                        </div>
+                                    </div>
+                                    <!-- End Pagination -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+</div><!-- end row -->

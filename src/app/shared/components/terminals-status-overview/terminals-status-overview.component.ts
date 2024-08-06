@@ -5,8 +5,8 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { OverviewTerminals } from '@commerce/application/interfaces/overview-terminals.interface';
 import { ChartType } from '@commerce/domain/models/chart.model';
+import { OverviewTerminals } from '@core/interfaces/overview-terminals.interface';
 
 @Component({
   selector: 'terminal-status-overview',

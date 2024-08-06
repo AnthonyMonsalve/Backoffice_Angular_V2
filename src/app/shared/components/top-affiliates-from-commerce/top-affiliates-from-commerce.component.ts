@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { AffiliateClosure } from '@core/interfaces/affiliate-closures.interface';
 
 @Component({
@@ -17,8 +24,10 @@ export class TopAffiliatesFromCommerceComponent implements OnInit {
   @Input() defaultSort!: string;
   @Input() resetDefaultSort: boolean = false;
   @Input() formattedDateRange: string = '';
+  @Input() isLoading: boolean = true;
 
   currentSortBy!: string;
+  showLoad: boolean = true;
 
   constructor() {}
 
@@ -26,9 +35,16 @@ export class TopAffiliatesFromCommerceComponent implements OnInit {
     this.currentSortBy = this.defaultSort;
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this.resetDefaultSort) {
       this.currentSortBy = this.defaultSort;
+    }
+
+    if (changes['isLoading']) {
+      this.showLoad = true;
+      if (!this.isLoading) {
+        this.showLoad = false;
+      }
     }
   }
 

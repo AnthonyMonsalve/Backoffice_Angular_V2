@@ -1,9 +1,15 @@
 @if(affiliateMaster?.nombreComercial){
-<app-pagetitle title="{{ affiliateMaster?.nombreComercial | titlecase }} ({{
+<app-pagetitle
+  title="{{ affiliateMaster?.nombreComercial | titlecase }} ({{
     affiliateMaster?.rif | titlecase
-  }})" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+  }})"
+  [breadcrumbItems]="breadCrumbItems"
+></app-pagetitle>
 }@else{
-<ngx-skeleton-loader appearance="line" [theme]="{ height: '25px', width: '250px' }"></ngx-skeleton-loader>
+<ngx-skeleton-loader
+  appearance="line"
+  [theme]="{ height: '25px', width: '250px' }"
+></ngx-skeleton-loader>
 }
 
 <div class="row">
@@ -15,12 +21,15 @@
           <i class="fas fa-map-marker-alt me-2 text-info-purpleblue"></i>
           <span class="text-muted">{{ affiliateMaster?.address }}</span>
           }@else{
-          <ngx-skeleton-loader appearance="line" [theme]="{
+          <ngx-skeleton-loader
+            appearance="line"
+            [theme]="{
               height: '15px',
               width: '80%',
               margin: 0,
               marginBottom: '0'
-            }"></ngx-skeleton-loader>
+            }"
+          ></ngx-skeleton-loader>
           }
         </div>
         <div class="mb-1">
@@ -28,47 +37,71 @@
           <i class="fas fa-envelope me-2 text-info-purpleblue"></i>
           <span class="text-muted">{{ affiliateMaster?.email }}</span>
           }@else{
-          <ngx-skeleton-loader appearance="line" [theme]="{
+          <ngx-skeleton-loader
+            appearance="line"
+            [theme]="{
               height: '15px',
               width: '50%',
               margin: 0,
               marginBottom: '0'
-            }"></ngx-skeleton-loader>
+            }"
+          ></ngx-skeleton-loader>
           }
         </div>
       </div>
     </div>
   </div>
   <div class="col-xl-4 col-sm-6">
-    <app-date-range-picker (dateRangeSet)="handleDateRange($event)" (resetCustomRangeSet)="resetCustomRangeSet()">
+    <app-date-range-picker
+      (dateRangeSet)="handleDateRange($event)"
+      (resetCustomRangeSet)="resetCustomRangeSet()"
+    >
     </app-date-range-picker>
   </div>
 </div>
 <div class="row">
-  <app-date-range-display [stringDateRange]="formattedDateRange"></app-date-range-display>
+  <app-date-range-display
+    [stringDateRange]="formattedDateRange"
+  ></app-date-range-display>
 </div>
 <div class="row">
-  <div class="col-xl-9 col-md-9 col-sm-12">
-    <closures-data-chart [customRangeActive]="customRangeChartActive" [chartData]="chartData"
-      [chartOverviewData]="chartOverviewData" (sortByChange)="onSortByChange($event)"
-      [defaultSort]="globalCurrentSortBy" [resetDefaultSort]="resetDefaultSort"
-      [formattedDateRange]="closureDataChartFormattedDateRange" [isLoadingData]="isLoadingDatachart"
-      [isLoadingOverview]="isLoadingOverviewDatachart">
+  <div class="col-xl-12 col-md-12 col-sm-12">
+    <closures-data-chart
+      [customRangeActive]="customRangeChartActive"
+      [chartData]="chartData"
+      [chartOverviewData]="chartOverviewData"
+      (sortByChange)="onSortByChange($event)"
+      [defaultSort]="globalCurrentSortBy"
+      [resetDefaultSort]="resetDefaultSort"
+      [formattedDateRange]="closureDataChartFormattedDateRange"
+      [isLoadingData]="isLoadingDatachart"
+      [isLoadingOverview]="isLoadingOverviewDatachart"
+    >
     </closures-data-chart>
-    <app-top-affiliates-from-commerce [affiliates]="affiliateClosure"
-      [customRangeActive]="customTopAffiliateRangeActive" (sortByChange)="onSortTopAffiliateByChange($event)"
-      [defaultSort]="globalCurrentSortBy" [resetDefaultSort]="resetDefaultSort" [page]="pageAfflClosure"
-      [limit]="limitAfflClosure" [total]="totalAfflClosure" (pageChange)="onPageAfflChange($event)"
-      [formattedDateRange]="closureTopAffiliatesFormattedDateRange"></app-top-affiliates-from-commerce>
   </div>
-  <div class="col-xl-3 col-md-3 col-sm-12">
-    <card-banks-total-closures [isLoading]="isLoadingTotalBanks"
-      [bankClosure]="bankClosure"></card-banks-total-closures>
-    <terminal-status-overview [overviewData]="overviewTerminalData"
-      [isLoading]="isLoadingTerminalData"></terminal-status-overview>
+  <div class="col-xl-7 col-md-7 col-sm-12">
+    <card-banks-total-closures
+      [isLoading]="isLoadingTotalBanks"
+      [bankClosure]="bankClosure"
+    ></card-banks-total-closures>
+    <app-top-affiliates-from-commerce
+      [affiliates]="affiliateClosure"
+      [customRangeActive]="customTopAffiliateRangeActive"
+      (sortByChange)="onSortTopAffiliateByChange($event)"
+      [defaultSort]="globalCurrentSortBy"
+      [resetDefaultSort]="resetDefaultSort"
+      [page]="pageAfflClosure"
+      [limit]="limitAfflClosure"
+      [total]="totalAfflClosure"
+      (pageChange)="onPageAfflChange($event)"
+      [formattedDateRange]="closureTopAffiliatesFormattedDateRange"
+    ></app-top-affiliates-from-commerce>
   </div>
-  <div class="col-xl-9 col-md-9 col-md-12">
-
+  <div class="col-xl-5 col-md-5 col-md-12">
+    <terminal-status-overview
+      [overviewData]="overviewTerminalData"
+      [isLoading]="isLoadingTerminalData"
+    ></terminal-status-overview>
   </div>
 </div>
 
@@ -78,19 +111,35 @@
       <div class="card-body">
         <div class="row mb-md-2">
           <div class="col-sm-12 col-md-12">
-            <div id="tickets-table_filter" class="dataTables_filter text-md-end">
-              <label class="d-inline-flex align-items-center">Search:
-                <input type="text" name="searchTerm" class="form-control form-control-sm ms-2" [(ngModel)]="searchTerm"
-                  (ngModelChange)="onSearchChange($event)" aria-controls="tickets-table" />
+            <div
+              id="tickets-table_filter"
+              class="dataTables_filter text-md-end"
+            >
+              <label class="d-inline-flex align-items-center"
+                >Search:
+                <input
+                  type="text"
+                  name="searchTerm"
+                  class="form-control form-control-sm ms-2"
+                  [(ngModel)]="searchTerm"
+                  (ngModelChange)="onSearchChange($event)"
+                  aria-controls="tickets-table"
+                />
               </label>
             </div>
           </div>
         </div>
 
-        <app-affiliate-list (sortOrderEmitter)="receiveSortOrder($event)"
+        <app-affiliate-list
+          (sortOrderEmitter)="receiveSortOrder($event)"
           [TitleNotFound]="'No se encontraron afiliaciones asociadas'"
-          [MessageNotFound]="'Este comercio no tiene afiliaciones asociadas'" [affiliates]="affiliates" [total]="total"
-          [page]="page" [limit]="limit" (pageChange)="onPageChange($event)">
+          [MessageNotFound]="'Este comercio no tiene afiliaciones asociadas'"
+          [affiliates]="affiliates"
+          [total]="total"
+          [page]="page"
+          [limit]="limit"
+          (pageChange)="onPageChange($event)"
+        >
         </app-affiliate-list>
       </div>
       <!-- end card body -->

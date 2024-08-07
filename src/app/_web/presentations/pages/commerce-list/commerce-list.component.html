@@ -73,7 +73,7 @@
                                                     {{commerce.email}}
                                                 </td>
                                                 <td>
-                                                    {{commerce.address}}
+                                                    {{commerce.address | truncate:50:'...'}}
                                                 </td>
                                                 <td>
                                                     {{commerce.created | date}}

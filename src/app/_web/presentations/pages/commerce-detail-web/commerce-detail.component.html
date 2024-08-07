@@ -58,14 +58,18 @@
     </closures-data-chart>
     }
   </div>
-  <div class="col-xl-4 col-md-4 col-md-12">
+  <div [ngClass]="{'col-xl-12 col-md-12': totalTerminals === 0, 'col-xl-4 col-md-4': totalTerminals > 0}"
+    class="col-md-12">
+    @if(bankClosure.length > 0){
     <card-banks-total-closures [isLoading]="isLoadingTotalBanks"
       [bankClosure]="bankClosure"></card-banks-total-closures>
-    @if(chartData != undefined){
+    }
+    @if(overviewTerminalData != undefined){
     <terminal-status-overview [overviewData]="overviewTerminalData"
       [isLoading]="isLoadingTerminalData"></terminal-status-overview>
     }
   </div>
+  @if(totalTerminals > 0){
   <div class="col-xl-8 col-md-8 col-sm-12">
     <div class="card card-h-100 p-3 pb-1 bg-gray-transparent">
       @if(terminals && affiliate){
@@ -79,6 +83,8 @@
       }
     </div>
   </div>
+  }
+
 </div>
 <div class="row">
   <div class="col-lg-12">

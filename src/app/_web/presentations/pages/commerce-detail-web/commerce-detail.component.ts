@@ -152,6 +152,7 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
       .getAffiliateMaster(this.affiliateMasterSk)
       .subscribe((data: AffiliateMaster) => {
         this.affiliateMaster = data;
+        console.log(this.affiliateMaster);
       });
   }
 

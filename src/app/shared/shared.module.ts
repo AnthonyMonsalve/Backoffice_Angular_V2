@@ -35,6 +35,7 @@ import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.compone
 import { AbbreviateNumberPipe } from './pipes/abbreviate-number.pipe';
 import { PercentagePipe } from './pipes/percentage.pipe';
 import { NumberToDatePipe } from './pipes/timeId-to-date.pipe';
+import { TruncatePipe } from './pipes/truncate.pipe';
 import {} from './shared-routing.module';
 import { WidgetModule } from './widget/widget.module';
 
@@ -45,6 +46,7 @@ import { WidgetModule } from './widget/widget.module';
     CardMessageComponent,
     CardTerminalComponent,
     AbbreviateNumberPipe,
+    TruncatePipe,
     PercentagePipe,
     UnauthorizedComponent,
     Basic404Component,
@@ -83,6 +85,7 @@ import { WidgetModule } from './widget/widget.module';
     GroupOfTerminalsComponent,
     CardMessageComponent,
     AbbreviateNumberPipe,
+    TruncatePipe,
     PercentagePipe,
     NumberToDatePipe,
     BankImageSmallName,

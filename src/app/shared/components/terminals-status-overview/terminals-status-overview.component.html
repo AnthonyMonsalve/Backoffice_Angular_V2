@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="d-flex align-items-start">
       <div class="flex-grow-1">
-        <h5 class="card-title mb-4 text-center">Terminales</h5>
+        <h5 class="card-title mb-2 text-center">Terminales</h5>
       </div>
     </div>
     <div>
@@ -10,7 +10,7 @@
       <div class="text-center">
         <ngx-skeleton-loader appearance="circle" [theme]="{ height: '180px', width: '180px' }"></ngx-skeleton-loader>
       </div>
-      }@else {
+      }@else if(countTerminals){
       <apx-chart class="apex-charts" [chart]="donutChart.chart" [plotOptions]="donutChart.plotOptions"
         [dataLabels]="donutChart.dataLabels" [series]="donutChart.series" [labels]="donutChart.labels"
         [colors]="donutChart.colors" [legend]="donutChart.legend">

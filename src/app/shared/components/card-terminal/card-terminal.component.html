@@ -13,15 +13,21 @@
         <div class="flex-grow-1 overflow-hidden">
           <p class="mb-1 text-truncate text-muted">Terminal</p>
           <h5 class="font-size-16 mb-0">{{ terminal.Terminal }}</h5>
-          <div class="status">
-            <span *ngIf="terminal.Active && terminal.Available">Disponible</span>
-            <span *ngIf="terminal.Active && terminal.InUse">En uso</span>
-            <span *ngIf="terminal.OnClosure">En cierre</span>
-            <span *ngIf="!terminal.Active">Inactivo</span>
-          </div>
-          <div class="bank">
+          <div class="bank mt-1">
             <app-bank-image-small-name [bankName]="terminal.BankSmallName" [width]="85"></app-bank-image-small-name>
           </div>
+          <div class="status mt-1">
+            <span class="d-inline-block me-1 bg-primary-subtle px-1 rounded"
+              *ngIf="terminal.Active && terminal.Available">Disponible</span>
+            <span class="d-inline-block me-1 bg-success-subtle px-1 rounded"
+              *ngIf="terminal.Active && terminal.InUse">En
+              uso</span>
+            <span class="d-inline-block me-1 bg-warning-subtle
+ px-1 rounded" *ngIf="terminal.OnClosure">En
+              cierre</span>
+            <span class="d-inline-block me-1 bg-secondary-subtle px-1 rounded" *ngIf="!terminal.Active">Inactivo</span>
+          </div>
+
         </div>
       </div>
     </div>

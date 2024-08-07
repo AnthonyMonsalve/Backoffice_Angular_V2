@@ -4,13 +4,14 @@ import {
   ChartClosureData,
   ChartOverviewData,
 } from '@commerce/application/interfaces/chart.interface';
-import { AffiliateClosure } from '@core/interfaces/affiliate-closures.interface';
 import { AffiliateList } from '@core/interfaces/affiliate-list.interface';
 import { BankClosure } from '@core/interfaces/bank-closures.interface';
 import { OverviewTerminals } from '@core/interfaces/overview-terminals.interface';
+import { TerminalList } from '@core/interfaces/terminals-list.interface';
 import { AffiliateMaster } from '@core/models/affiliate-master.model';
 import { Affiliate } from '@core/models/affiliate.model';
 import { Closure } from '@core/models/closure.model';
+import { Terminal } from '@core/models/terminal.model';
 import { LAST_MONTH_SORT } from '@core/utils/constants';
 import { AffiliateMasterService } from '@services/affiliate-master.service';
 import { AffiliateService } from '@services/affiliate.service';
@@ -30,19 +31,13 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
   overviewTerminalData: OverviewTerminals | null = null;
   formattedDateRange!: string;
   closureDataChartFormattedDateRange: string = '';
-  closureTopAffiliatesFormattedDateRange: string = '';
   globalCurrentSortBy: string = LAST_MONTH_SORT;
   resetDefaultSort: boolean = false;
 
   factClosures: Closure[] = [];
 
-  affiliateClosure!: AffiliateClosure[];
-  pageAfflClosure: number = 1;
-  limitAfflClosure: number = 5;
-  totalAfflClosure: number = 0;
   orderAfflClosure: string = 'DESC';
   sortAfflClosure: string = 'TotalAmountGross';
-  customTopAffiliateRangeActive: boolean = false;
   showErrorModal: boolean = false;
   startDate: string = '';
   endDate: string = '';
@@ -64,11 +59,15 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
   searchTerm: string = '';
   affiliateMasterSk: string;
 
+  terminals: Terminal[] = [];
+  limitPageTerminals = 9;
+  pageTerminals = 1;
+  totalTerminals = 0;
+
   isLoadingTerminalData: boolean = false;
   isLoadingOverviewDatachart: boolean = false;
   isLoadingDatachart: boolean = false;
   isLoadingTotalBanks: boolean = false;
-  isLoadingTopAffiliates: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -105,8 +104,13 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
       )
       .subscribe({
         next: (data: AffiliateList) => {
-          this.affiliate = data.data[0];
-          this.initializeData();
+          if (data.data.length > 0) {
+            this.affiliate = data.data[0];
+            this.initializeData();
+          } else {
+            // Manejar el caso de no datos: mostrar mensaje, redireccionar, etc.
+            console.error('No affiliates found for the specified master.');
+          }
         },
         error: (error) => this.handleError(error),
         complete: () => console.log('Getting affiliate complete'),
@@ -124,8 +128,8 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
     // this.startDate =
     //   this.dateRangeService.getDateRange(LAST_MONTH_SORT).startDate;
     // this.endDate = this.dateRangeService.getDateRange(LAST_MONTH_SORT).endDate;
-    this.startDate = '2023-08-01';
-    this.endDate = '2023-08-31';
+    this.startDate = '2022-08-01';
+    this.endDate = '2022-08-31';
 
     this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
       this.startDate,
@@ -140,6 +144,7 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
     this.fetchOverviewTerminals();
     this.fetchTotalsByBanksUnderMaster();
     this.fetchClosuresAffiliate();
+    this.fetchAffiliateTerminal();
   }
 
   fetchAfflMaster(): void {
@@ -186,7 +191,6 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
           this.isLoadingDatachart = false;
         },
         error: (error) => this.handleError(error),
-        complete: () => console.log('Fetching complete'),
       });
 
     this.factClosureService
@@ -201,7 +205,6 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
           this.isLoadingOverviewDatachart = false;
         },
         error: (error) => this.handleError(error),
-        complete: () => console.log('Fetching complete'),
       });
   }
 
@@ -215,7 +218,6 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
           this.isLoadingTerminalData = false;
         },
         error: (error) => this.handleError(error),
-        complete: () => console.log('Fetching complete'),
       });
   }
 
@@ -235,7 +237,6 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
           this.isLoadingTotalBanks = false;
         },
         error: (error) => this.handleError(error),
-        complete: () => console.log('Fetching complete'),
       });
   }
 
@@ -255,6 +256,25 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
     this.fetchClosuresAffiliate();
   }
 
+  fetchAffiliateTerminal(): void {
+    this.terminalService
+      .getTerminalsByAffiliate(
+        this.affiliate?.affiliatesSK.toString(),
+        this.limitPageTerminals,
+        this.pageTerminals
+      )
+      .subscribe((terminals: TerminalList) => {
+        this.terminals = terminals.data;
+        this.totalTerminals = terminals.metadata.total; // Suponiendo que el servicio devuelve el total de terminales
+        console.log(this.terminals, this.pageTerminals);
+      });
+  }
+
+  onPageChange(newPage: number): void {
+    this.pageTerminals = newPage;
+    this.fetchAffiliateTerminal();
+  }
+
   onLimitClosureChange(newLimit: number): void {
     this.limitPageClosures = newLimit;
     this.pageClosures = 1; // Reset to first page
@@ -267,14 +287,6 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
     this.updateDateRange(sortBy);
     this.fetchDataChartOverview();
     this.closureDataChartFormattedDateRange =
-      this.dateRangeService.getSpanishDateRange(this.startDate, this.endDate);
-  }
-
-  onSortTopAffiliateByChange(sortBy: string): void {
-    this.customTopAffiliateRangeActive = false;
-    this.resetDefaultSort = false;
-    this.updateDateRange(sortBy);
-    this.closureTopAffiliatesFormattedDateRange =
       this.dateRangeService.getSpanishDateRange(this.startDate, this.endDate);
   }
 
@@ -306,7 +318,6 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
           (this.pageClosures = data.metadata.page)
         ),
         error: (error) => this.handleError(error),
-        complete: () => console.log('Fetching complete'),
       });
   }
 
@@ -314,14 +325,11 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
     this.initializeData();
     this.resetDefaultSort = true;
     this.customRangeChartActive = false;
-    this.customTopAffiliateRangeActive = false;
   }
 
   handleDateRange(dateRange: string): void {
     this.customRangeChartActive = true;
-    this.customTopAffiliateRangeActive = true;
     this.closureDataChartFormattedDateRange = '';
-    this.closureTopAffiliatesFormattedDateRange = '';
 
     const [startDate, endDate] = dateRange.split(' to ');
 
@@ -335,7 +343,6 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
 
     this.fetchDataChartOverview();
     this.fetchTotalsByBanksUnderMaster();
-    this.fetchClosuresAffiliate();
   }
 
   closeModal(): void {

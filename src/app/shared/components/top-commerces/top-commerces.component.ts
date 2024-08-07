@@ -11,6 +11,7 @@ export class TopCommercesComponent implements OnInit {
   @Input() defaultSort!: string;
   @Input() resetDefaultSort: boolean = false;
   @Input() formattedDateRange: string = '';
+  @Input() basePathCommerceDetail: string = '';
   @Output() sortByChange = new EventEmitter<string>();
 
   currentSortBy!: string;

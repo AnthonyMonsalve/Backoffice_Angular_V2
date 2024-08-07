@@ -49,20 +49,35 @@
 </div>
 <div class="row">
   <div class="col-xl-12 col-md-12 col-sm-12">
+    @if(chartData != undefined){
     <closures-data-chart [customRangeActive]="customRangeChartActive" [chartData]="chartData"
       [chartOverviewData]="chartOverviewData" (sortByChange)="onSortByChange($event)"
       [defaultSort]="globalCurrentSortBy" [resetDefaultSort]="resetDefaultSort"
       [formattedDateRange]="closureDataChartFormattedDateRange" [isLoadingData]="isLoadingDatachart"
       [isLoadingOverview]="isLoadingOverviewDatachart">
     </closures-data-chart>
+    }
   </div>
-  <div class="col-xl-7 col-md-7 col-sm-12">
+  <div class="col-xl-4 col-md-4 col-md-12">
     <card-banks-total-closures [isLoading]="isLoadingTotalBanks"
       [bankClosure]="bankClosure"></card-banks-total-closures>
-  </div>
-  <div class="col-xl-5 col-md-5 col-md-12">
+    @if(chartData != undefined){
     <terminal-status-overview [overviewData]="overviewTerminalData"
       [isLoading]="isLoadingTerminalData"></terminal-status-overview>
+    }
+  </div>
+  <div class="col-xl-8 col-md-8 col-sm-12">
+    <div class="card card-h-100 p-3 pb-1 bg-gray-transparent">
+      @if(terminals && affiliate){
+      <app-group-of-terminals [terminals]="terminals" [affiliate]="affiliate"></app-group-of-terminals>
+      } @if(totalTerminals > limitPageTerminals){
+      <div class="text-center m-0">
+        <ngb-pagination [collectionSize]="totalTerminals" [(page)]="pageTerminals" [pageSize]="limitPageTerminals"
+          (pageChange)="onPageChange($event)"></ngb-pagination>
+      </div>
+      <!-- Pagination -->
+      }
+    </div>
   </div>
 </div>
 <div class="row">

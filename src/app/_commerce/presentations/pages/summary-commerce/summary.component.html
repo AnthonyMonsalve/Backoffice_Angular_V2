@@ -43,7 +43,7 @@
   <div class="col-xl-3 col-md-3 col-sm-12">
     <app-top-commerces [customRangeActive]="customTopCommerceRangeActive" [merchants]="affiliateMasterClosure"
       (sortByChange)="onSortTopCommercesByChange($event)" [defaultSort]="globalCurrentSortBy"
-      [resetDefaultSort]="resetDefaultSort"
-      [formattedDateRange]="closureTopCommercesFormattedDateRange"></app-top-commerces>
+      [resetDefaultSort]="resetDefaultSort" [formattedDateRange]="closureTopCommercesFormattedDateRange"
+      [basePathCommerceDetail]="'commerce'"></app-top-commerces>
   </div>
 </div>

@@ -1,11 +1,8 @@
 <div class="card">
   <div class="card-body">
     <div class="float-end d-flex align-items-center">
-      <app-dropdown-date-range
-        [currentSelection]="currentSortBy"
-        [customRangeActive]="customRangeActive"
-        (selectionChange)="updateSortBy($event)"
-      >
+      <app-dropdown-date-range [currentSelection]="currentSortBy" [customRangeActive]="customRangeActive"
+        (selectionChange)="updateSortBy($event)">
       </app-dropdown-date-range>
     </div>
     <h4 class="card-title mb-1">Top Comercios</h4>
@@ -13,38 +10,27 @@
       {{ formattedDateRange }}
     </p>
     <ul class="list-group list-group-flush">
-      <li
-        *ngFor="let merchant of merchants; let i = index"
-        class="list-group-item p-0 py-2"
-      >
+      <li *ngFor="let merchant of merchants; let i = index" class="list-group-item p-0 py-2">
         <div class="d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center">
             <div class="flex-shrink-0 me-2">
               <div class="avatar-xs-sm">
-                <div
-                  class="avatar-title bg-primary-subtle text-primary rounded-circle font-size-14"
-                >
+                <div class="avatar-title bg-primary-subtle text-primary rounded-circle font-size-14">
                   {{ i + 1 }}
                 </div>
               </div>
             </div>
             <span>
-              <a
-                [routerLink]="[
-                  '/commerce/commerce-detail',
+              <a [routerLink]="['/',basePathCommerceDetail,
+                  'commerce-detail',
                   merchant.AffiliateMasterSK
-                ]"
-                class="text-body fw-medium"
-              >
+                ]" class="text-body fw-medium">
                 {{ merchant.AffiliateMasterName | titlecase }}
               </a>
             </span>
           </div>
-          <span
-            class="badge bg-secondary-subtle font-size-13 p-2 text-info-purpleblue"
-          >
-            Bs. {{ merchant.Closure.TotalAmountGross | abbreviateNumber }}</span
-          >
+          <span class="badge bg-secondary-subtle font-size-13 p-2 text-info-purpleblue">
+            Bs. {{ merchant.Closure.TotalAmountGross | abbreviateNumber }}</span>
         </div>
       </li>
     </ul>

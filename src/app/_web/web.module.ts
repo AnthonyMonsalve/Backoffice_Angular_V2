@@ -13,7 +13,7 @@ import { SharedModule } from '@shared/shared.module';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { AffiliateDetailInstapagoComponent } from './presentations/pages/commerce-detail/commerce-detail.component';
+import { AffiliateDetailInstapagoComponent } from './presentations/pages/commerce-detail-web/commerce-detail.component';
 import { CommerceListWebComponent } from './presentations/pages/commerce-list/commerce-list.component';
 import { SummaryWebComponent } from './presentations/pages/summary-web/summary.component';
 import { WebRoutingModule } from './web-routing.module';

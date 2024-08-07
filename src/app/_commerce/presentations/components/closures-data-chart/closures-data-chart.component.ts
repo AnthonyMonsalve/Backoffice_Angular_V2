@@ -238,12 +238,7 @@ export class ClosuresDataChartComponent
   }
 
   updateSortBy(period: string): void {
-    console.log(
-      period.charAt(0).toUpperCase() + period.slice(1),
-      'period.charAt(0).toUpperCase() + period.slice(1)'
-    );
     this.currentSortBy = period.charAt(0).toUpperCase() + period.slice(1);
     this.sortByChange.emit(this.currentSortBy);
-    console.log(this.currentSortBy, 'updateSortBy');
   }
 }

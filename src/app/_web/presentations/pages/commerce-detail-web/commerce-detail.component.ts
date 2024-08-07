@@ -113,7 +113,6 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
           }
         },
         error: (error) => this.handleError(error),
-        complete: () => console.log('Getting affiliate complete'),
       });
   }
 
@@ -152,7 +151,12 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
       .getAffiliateMaster(this.affiliateMasterSk)
       .subscribe((data: AffiliateMaster) => {
         this.affiliateMaster = data;
-        console.log(this.affiliateMaster);
+        if (this.affiliateMaster.address === null) {
+          this.affiliateMaster.address = 'No tiene dirección asociada';
+        }
+        if (this.affiliateMaster.email === null) {
+          this.affiliateMaster.email = 'No tiene email asociado';
+        }
       });
   }
 
@@ -267,7 +271,6 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
       .subscribe((terminals: TerminalList) => {
         this.terminals = terminals.data;
         this.totalTerminals = terminals.metadata.total; // Suponiendo que el servicio devuelve el total de terminales
-        console.log(this.terminals, this.pageTerminals);
       });
   }
 

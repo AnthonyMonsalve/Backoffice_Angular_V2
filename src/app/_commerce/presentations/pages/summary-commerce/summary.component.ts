@@ -151,7 +151,6 @@ export class SummaryCommerceComponent implements OnInit {
       )
       .subscribe({
         next: (data) => {
-          console.log('Data received:', data); // Agrega este console.log para verificar lo recibido
           this.affiliateMasterClosure = data.affiliatesMasterClosures;
         },
         error: (error) => this.handleError(error),
@@ -180,7 +179,6 @@ export class SummaryCommerceComponent implements OnInit {
           this.isLoadingOverviewDatachart = false;
         },
         error: (error) => this.handleError(error),
-        complete: () => console.log('Fetching complete'),
       });
   }
 

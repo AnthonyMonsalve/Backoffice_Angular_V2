@@ -11,7 +11,7 @@
     <div class="card border-0 shadow-sm">
       <div class="card-body py-2 px-3">
         <div class="mb-1">
-          @if(affiliateMaster?.address){
+          @if(affiliateMaster?.address !== null){
           <i class="fas fa-map-marker-alt me-2 text-info-purpleblue"></i>
           <span class="text-muted">{{ affiliateMaster?.address }}</span>
           }@else{
@@ -60,7 +60,7 @@
   </div>
   <div [ngClass]="{'col-xl-12 col-md-12': totalTerminals === 0, 'col-xl-4 col-md-4': totalTerminals > 0}"
     class="col-md-12">
-    @if(bankClosure.length > 0){
+    @if(bankClosure && bankClosure.length > 0){
     <card-banks-total-closures [isLoading]="isLoadingTotalBanks"
       [bankClosure]="bankClosure"></card-banks-total-closures>
     }

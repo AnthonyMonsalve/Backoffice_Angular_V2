@@ -7,7 +7,7 @@ import {
   SEMESTER_SORT,
   WEEKLY_SORT,
   YEARLY_SORT,
-} from '@core/utils/constants';
+} from '@core/utils/date-range-constants';
 import {
   formatSpanishDateRange,
   getLast15DaysRange,

@@ -277,5 +277,28 @@
         }
       }
     }
+  },
+  "DROPDOWN_RANGE_SELECT": {
+    "THIS_WEEK": {
+      "TEXT": "На этой неделе"
+    },
+    "THIS_YEAR": {
+      "TEXT": "В этом году (с января до сегодня)"
+    },
+    "THIS_MONTH": {
+      "TEXT": "В этом месяце"
+    },
+    "THIS_SEMESTER": {
+      "TEXT": "В этом семестре"
+    },
+    "LAST_WEEK": {
+      "TEXT": "На прошлой неделе"
+    },
+    "LAST_15_DAYS": {
+      "TEXT": "Последние 15 дней"
+    },
+    "LAST_MONTH": {
+      "TEXT": "В прошлом месяце"
+    }
   }
 }

@@ -277,5 +277,28 @@
         }
       }
     }
+  },
+  "DROPDOWN_RANGE_SELECT": {
+    "THIS_WEEK": {
+      "TEXT": "Esta semana"
+    },
+    "THIS_MONTH": {
+      "TEXT": "Este mes"
+    },
+    "THIS_SEMESTER": {
+      "TEXT": "Este semestre"
+    },
+    "THIS_YEAR": {
+      "TEXT": "Este año (de enero a hoy)"
+    },
+    "LAST_WEEK": {
+      "TEXT": "La semana pasada"
+    },
+    "LAST_15_DAYS": {
+      "TEXT": "Los últimos 15 días"
+    },
+    "LAST_MONTH": {
+      "TEXT": "El mes pasado"
+    }
   }
 }

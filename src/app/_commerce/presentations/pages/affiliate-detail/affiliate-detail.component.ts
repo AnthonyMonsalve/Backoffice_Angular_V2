@@ -10,7 +10,7 @@ import { TerminalList } from '@core/interfaces/terminals-list.interface';
 import { Affiliate } from '@core/models/affiliate.model';
 import { Closure } from '@core/models/closure.model';
 import { Terminal } from '@core/models/terminal.model';
-import { LAST_MONTH_SORT } from '@core/utils/constants';
+import { LAST_MONTH_SORT } from '@core/utils/date-range-constants';
 import { AffiliateService } from '@services/affiliate.service';
 import { FactClosureService } from '@services/fact-closure.service';
 import { TerminalService } from '@services/terminal.service';

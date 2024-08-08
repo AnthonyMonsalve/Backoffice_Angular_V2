@@ -10,7 +10,7 @@ import { BankClosure } from '@core/interfaces/bank-closures.interface';
 import { OverviewTerminals } from '@core/interfaces/overview-terminals.interface';
 import { AffiliateMaster } from '@core/models/affiliate-master.model';
 import { Affiliate } from '@core/models/affiliate.model';
-import { LAST_MONTH_SORT } from '@core/utils/constants';
+import { LAST_MONTH_SORT } from '@core/utils/date-range-constants';
 import { AffiliateMasterService } from '@services/affiliate-master.service';
 import { AffiliateService } from '@services/affiliate.service';
 import { FactClosureService } from '@services/fact-closure.service';

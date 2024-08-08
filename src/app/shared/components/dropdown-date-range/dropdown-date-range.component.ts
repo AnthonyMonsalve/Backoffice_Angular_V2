@@ -1,47 +1,62 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
-  CUSTOM_SORT,
-  LAST_15_DAYS,
-  LAST_MONTH_SORT,
-  LAST_WEEK_SORT,
-  MONTHLY_SORT,
-  SEMESTER_SORT,
-  WEEKLY_SORT,
-  YEARLY_SORT,
-} from '@core/utils/constants';
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { DropdownItem } from './dropdown.model';
+import { DROPDOWN } from './dropdown';
+import { LanguageService } from '@services/utils/language.service';
+import { CookieService } from 'ngx-cookie-service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dropdown-date-range',
   templateUrl: './dropdown-date-range.component.html',
 })
 export class DropdownDateRangeComponent {
-  @Input() currentSelection: string = '';
+  @Input() currentSelection!: string;
   @Input() customRangeActive: boolean = false;
   @Output() selectionChange = new EventEmitter<string>();
   items: string[] = [];
+  dropdownItems: DropdownItem[] = [];
+  nameCurrentSelection: string = '';
 
-  WEEKLY = WEEKLY_SORT;
-  YEARLY = YEARLY_SORT;
-  MONTHLY = MONTHLY_SORT;
-  SEMESTER = SEMESTER_SORT;
-  CUSTOM = CUSTOM_SORT;
-  LAST_MONTH = LAST_MONTH_SORT;
-  LAST_WEEK = LAST_WEEK_SORT;
-  LAST_15_DAYS = LAST_15_DAYS;
+  constructor(
+    public languageService: LanguageService,
+    public _cookiesService: CookieService,
+    public translate: TranslateService
+  ) {}
+
+  ngOnInit(): void {
+    this.initialize();
+    this.initNameCurrentSelection();
+    console.log(this.currentSelection);
+  }
 
   updateSelection(item: string): void {
     this.selectionChange.emit(item);
   }
 
-  ngOnInit(): void {
-    this.items = [
-      this.WEEKLY,
-      this.MONTHLY,
-      this.SEMESTER,
-      this.YEARLY,
-      this.LAST_MONTH,
-      this.LAST_WEEK,
-      this.LAST_15_DAYS,
-    ];
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['currentSelection']) {
+      this.initNameCurrentSelection();
+    }
+  }
+
+  initialize(): void {
+    this.dropdownItems = DROPDOWN;
+  }
+
+  initNameCurrentSelection(): void {
+    const foundItem = this.dropdownItems.find(
+      (item) => item.action === this.currentSelection
+    );
+
+    // Si se encuentra el objeto, asigna su nombre a la variable monthlySortName
+    if (foundItem) {
+      this.nameCurrentSelection = foundItem.name;
+    }
   }
 }

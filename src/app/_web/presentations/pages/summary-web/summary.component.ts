@@ -6,7 +6,7 @@ import {
 } from '@commerce/application/interfaces/chart.interface';
 import { AffiliateMasterClosure } from '@core/interfaces/affiliate-master-closures.interface';
 import { OverviewTerminals } from '@core/interfaces/overview-terminals.interface';
-import { LAST_MONTH_SORT } from '@core/utils/constants';
+import { LAST_MONTH_SORT } from '@core/utils/date-range-constants';
 import { AffiliateMasterService } from '@services/affiliate-master.service';
 import { AffiliateService } from '@services/affiliate.service';
 import { FactClosureService } from '@services/fact-closure.service';

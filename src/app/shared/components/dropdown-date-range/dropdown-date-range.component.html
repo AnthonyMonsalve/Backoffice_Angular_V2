@@ -1,17 +1,17 @@
 <div class="dropdown" ngbDropdown>
   <button class="btn btn-light btn-sm dropdown-toggle" ngbDropdownToggle>
     <span class="text-muted">
-      {{ customRangeActive ? "Custom" : currentSelection
+      {{ customRangeActive ? "Custom" : (nameCurrentSelection | translate)
       }}<i class="mdi mdi-chevron-down ms-1"></i>
     </span>
   </button>
   <div class="dropdown-menu" ngbDropdownMenu>
     <button
       class="dropdown-item"
-      *ngFor="let item of items"
-      (click)="updateSelection(item)"
+      *ngFor="let item of dropdownItems"
+      (click)="updateSelection(item.action)"
     >
-      {{ item }}
+      {{ item.name | translate }}
     </button>
   </div>
 </div>

@@ -38,6 +38,7 @@ import { NumberToDatePipe } from './pipes/timeId-to-date.pipe';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import {} from './shared-routing.module';
 import { WidgetModule } from './widget/widget.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { WidgetModule } from './widget/widget.module';
     SimplebarAngularModule,
     NgxSkeletonLoaderModule,
     NgApexchartsModule,
+    TranslateModule,
   ],
   exports: [
     PagetitleComponent,

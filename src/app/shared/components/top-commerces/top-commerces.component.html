@@ -1,38 +1,49 @@
-<div class="card">
+<div class="card card-h-100">
   <div class="card-body">
-    <div class="float-end d-flex align-items-center">
+    <h4 class="card-title mb-1">Top Comercios</h4>
+    <p class="m-0 mb-1">
+      {{ formattedDateRange }}
+    </p>
+    <div class="d-flex align-items-center">
       <app-dropdown-date-range [currentSelection]="currentSortBy" [customRangeActive]="customRangeActive"
         (selectionChange)="updateSortBy($event)">
       </app-dropdown-date-range>
     </div>
-    <h4 class="card-title mb-1">Top Comercios</h4>
-    <p class="m-0 mb-3">
-      {{ formattedDateRange }}
-    </p>
-    <ul class="list-group list-group-flush">
-      <li *ngFor="let merchant of merchants; let i = index" class="list-group-item p-0 py-2">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="d-flex align-items-center">
-            <div class="flex-shrink-0 me-2">
-              <div class="avatar-xs-sm">
-                <div class="avatar-title bg-primary-subtle text-primary rounded-circle font-size-14">
-                  {{ i + 1 }}
+    @if(merchants && merchants.length > 0){
+    <ngx-simplebar style="max-height: 280px;" class="mt-2">
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let merchant of merchants; let i = index" class="list-group-item p-0 py-2">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <div class="flex-shrink-0 me-2">
+                <div class="avatar-xs-sm">
+                  <div class="avatar-title bg-primary-subtle text-primary rounded-circle font-size-14">
+                    {{ i + 1 }}
+                  </div>
                 </div>
               </div>
+              <span>
+                <a [routerLink]="['/',basePathCommerceDetail,
+                    'commerce-detail',
+                    merchant.AffiliateMasterSK
+                  ]" class="text-body fw-medium">
+                  {{ merchant.AffiliateMasterName | titlecase }}
+                </a>
+              </span>
             </div>
-            <span>
-              <a [routerLink]="['/',basePathCommerceDetail,
-                  'commerce-detail',
-                  merchant.AffiliateMasterSK
-                ]" class="text-body fw-medium">
-                {{ merchant.AffiliateMasterName | titlecase }}
-              </a>
-            </span>
+            <span class="badge bg-secondary-subtle font-size-13 p-2 text-info-purpleblue">
+              Bs. {{ merchant.Closure.TotalAmountGross | abbreviateNumber }}</span>
           </div>
-          <span class="badge bg-secondary-subtle font-size-13 p-2 text-info-purpleblue">
-            Bs. {{ merchant.Closure.TotalAmountGross | abbreviateNumber }}</span>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </ngx-simplebar>
+    }@else {
+    <div class="row h-50 d-flex align-items-center">
+      <div class="col-12 text-center">
+        <p class="text-muted mb-2">No hay datos para mostrar</p>
+      </div>
+    </div>
+    }
+
   </div>
 </div>

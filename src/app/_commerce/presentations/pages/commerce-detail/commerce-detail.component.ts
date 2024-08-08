@@ -10,10 +10,10 @@ import { BankClosure } from '@core/interfaces/bank-closures.interface';
 import { OverviewTerminals } from '@core/interfaces/overview-terminals.interface';
 import { AffiliateMaster } from '@core/models/affiliate-master.model';
 import { Affiliate } from '@core/models/affiliate.model';
-import { LAST_MONTH_SORT } from '@core/utils/date-range-constants';
 import { AffiliateMasterService } from '@services/affiliate-master.service';
 import { AffiliateService } from '@services/affiliate.service';
 import { FactClosureService } from '@services/fact-closure.service';
+import { GlobalStateService } from '@services/global-state.service';
 import { TerminalService } from '@services/terminal.service';
 import { DateRangeService } from '@services/utils/date-range.service';
 
@@ -30,7 +30,7 @@ export class AffiliateMasterDetailComponent implements OnInit {
   formattedDateRange!: string;
   closureDataChartFormattedDateRange: string = '';
   closureTopAffiliatesFormattedDateRange: string = '';
-  globalCurrentSortBy: string = LAST_MONTH_SORT;
+  globalCurrentSortBy!: string;
   resetDefaultSort: boolean = false;
 
   affiliateClosure!: AffiliateClosure[];
@@ -69,7 +69,8 @@ export class AffiliateMasterDetailComponent implements OnInit {
     private affiliateMasterService: AffiliateMasterService,
     private terminalService: TerminalService,
     private dateRangeService: DateRangeService,
-    private factService: FactClosureService
+    private factService: FactClosureService,
+    private globalStateService: GlobalStateService
   ) {
     // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
     const affiliateSK = this.route.snapshot.paramMap.get('sk');
@@ -92,9 +93,14 @@ export class AffiliateMasterDetailComponent implements OnInit {
   }
 
   private initializeData(): void {
-    this.startDate =
-      this.dateRangeService.getDateRange(LAST_MONTH_SORT).startDate;
-    this.endDate = this.dateRangeService.getDateRange(LAST_MONTH_SORT).endDate;
+    this.globalCurrentSortBy = this.globalStateService.currentSortBy;
+
+    this.startDate = this.dateRangeService.getDateRange(
+      this.globalCurrentSortBy
+    ).startDate;
+    this.endDate = this.dateRangeService.getDateRange(
+      this.globalCurrentSortBy
+    ).endDate;
 
     this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
       this.startDate,

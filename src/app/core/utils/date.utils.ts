@@ -103,15 +103,56 @@ export function getLastWeekRange(): { startDate: string; endDate: string } {
   };
 }
 
-export function getLast15DaysRange(): { startDate: string; endDate: string } {
+export function getLastNDaysRange(days: number): {
+  startDate: string;
+  endDate: string;
+} {
   const today = new Date();
 
-  // Fecha de inicio: hace 15 días
+  // Fecha de inicio: hace 'days' días
   const startDate = new Date(today);
-  startDate.setDate(today.getDate() - 15);
+  startDate.setDate(today.getDate() - days);
 
   // Fecha de fin: hoy
   const endDate = today;
+
+  // Convertir a formato YYYY-MM-DD
+  const formatDate = (date: Date): string => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  return {
+    startDate: formatDate(startDate),
+    endDate: formatDate(endDate),
+  };
+}
+
+export function getDateRangeForMonths(monthsAgo: number): {
+  startDate: string;
+  endDate: string;
+} {
+  const today = new Date();
+
+  // Calcular la fecha de inicio restando los meses especificados
+  const startDate = new Date(today);
+  startDate.setMonth(today.getMonth() - monthsAgo);
+
+  // Ajustar la fecha de inicio para que no caiga en un mes inválido
+  const endDate = new Date(today);
+
+  // Ajustar el día de la fecha de inicio para evitar días inválidos
+  // Obtener el último día del mes de inicio para ajustar el día
+  const lastDayOfMonth = new Date(
+    startDate.getFullYear(),
+    startDate.getMonth() + 1,
+    0
+  ).getDate();
+  if (startDate.getDate() > lastDayOfMonth) {
+    startDate.setDate(lastDayOfMonth);
+  }
 
   // Convertir a formato YYYY-MM-DD
   const formatDate = (date: Date): string => {

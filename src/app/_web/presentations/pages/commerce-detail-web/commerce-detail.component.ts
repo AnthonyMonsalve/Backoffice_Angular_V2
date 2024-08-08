@@ -12,10 +12,10 @@ import { AffiliateMaster } from '@core/models/affiliate-master.model';
 import { Affiliate } from '@core/models/affiliate.model';
 import { Closure } from '@core/models/closure.model';
 import { Terminal } from '@core/models/terminal.model';
-import { LAST_MONTH_SORT } from '@core/utils/date-range-constants';
 import { AffiliateMasterService } from '@services/affiliate-master.service';
 import { AffiliateService } from '@services/affiliate.service';
 import { FactClosureService } from '@services/fact-closure.service';
+import { GlobalStateService } from '@services/global-state.service';
 import { TerminalService } from '@services/terminal.service';
 import { DateRangeService } from '@services/utils/date-range.service';
 
@@ -31,7 +31,7 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
   overviewTerminalData: OverviewTerminals | null = null;
   formattedDateRange!: string;
   closureDataChartFormattedDateRange: string = '';
-  globalCurrentSortBy: string = LAST_MONTH_SORT;
+  globalCurrentSortBy!: string;
   resetDefaultSort: boolean = false;
 
   factClosures: Closure[] = [];
@@ -54,8 +54,6 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
 
   breadCrumbItems!: Array<{}>;
   total: number = 0;
-  sort: string = 'name';
-  order: string = 'ASC';
   searchTerm: string = '';
   affiliateMasterSk: string;
 
@@ -75,7 +73,8 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
     private affiliateMasterService: AffiliateMasterService,
     private terminalService: TerminalService,
     private dateRangeService: DateRangeService,
-    private factClosureService: FactClosureService
+    private factClosureService: FactClosureService,
+    private globalStateService: GlobalStateService
   ) {
     // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
     const affiliateMasterSk = this.route.snapshot.paramMap.get('sk');
@@ -124,11 +123,14 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
   }
 
   private initializeData(): void {
-    // this.startDate =
-    //   this.dateRangeService.getDateRange(LAST_MONTH_SORT).startDate;
-    // this.endDate = this.dateRangeService.getDateRange(LAST_MONTH_SORT).endDate;
-    this.startDate = '2022-08-01';
-    this.endDate = '2022-08-31';
+    this.globalCurrentSortBy = this.globalStateService.currentSortBy;
+
+    this.startDate = this.dateRangeService.getDateRange(
+      this.globalCurrentSortBy
+    ).startDate;
+    this.endDate = this.dateRangeService.getDateRange(
+      this.globalCurrentSortBy
+    ).endDate;
 
     this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
       this.startDate,
@@ -251,9 +253,9 @@ export class AffiliateDetailInstapagoComponent implements OnInit {
   }
 
   receiveSortOrder(sortOrder: any): void {
-    this.sort = sortOrder.sort;
-    this.order = sortOrder.order;
-    this.fetchAffiliate();
+    this.sortClosures = sortOrder.sort;
+    this.orderClosures = sortOrder.order;
+    this.fetchClosuresAffiliate();
   }
 
   onPageClosureChange(newPage: number): void {

@@ -13,6 +13,7 @@ import { Terminal } from '@core/models/terminal.model';
 import { LAST_MONTH_SORT } from '@core/utils/date-range-constants';
 import { AffiliateService } from '@services/affiliate.service';
 import { FactClosureService } from '@services/fact-closure.service';
+import { GlobalStateService } from '@services/global-state.service';
 import { TerminalService } from '@services/terminal.service';
 import { DateRangeService } from '@services/utils/date-range.service';
 
@@ -38,7 +39,7 @@ export class AffiliateDetailComponent implements OnInit {
   orderClosures = 'DESC';
   customRangeActive: boolean = false;
 
-  globalCurrentSortBy: string = LAST_MONTH_SORT;
+  globalCurrentSortBy!: string;
   resetDefaultSort: boolean = false;
 
   showErrorModal: boolean = false;
@@ -62,7 +63,8 @@ export class AffiliateDetailComponent implements OnInit {
     private terminalService: TerminalService,
     private merchantService: MerchantService,
     private factClosureService: FactClosureService,
-    private dateRangeService: DateRangeService
+    private dateRangeService: DateRangeService,
+    private globalStateService: GlobalStateService
   ) {
     // Obtener el parámetro 'sk' de la URL y asegurar que no es nulo
     const affiliateSK = this.route.snapshot.paramMap.get('sk');
@@ -85,9 +87,14 @@ export class AffiliateDetailComponent implements OnInit {
   }
 
   private initializeData(): void {
-    this.startDate =
-      this.dateRangeService.getDateRange(LAST_MONTH_SORT).startDate;
-    this.endDate = this.dateRangeService.getDateRange(LAST_MONTH_SORT).endDate;
+    this.globalCurrentSortBy = this.globalStateService.currentSortBy;
+
+    this.startDate = this.dateRangeService.getDateRange(
+      this.globalCurrentSortBy
+    ).startDate;
+    this.endDate = this.dateRangeService.getDateRange(
+      this.globalCurrentSortBy
+    ).endDate;
 
     this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
       this.startDate,

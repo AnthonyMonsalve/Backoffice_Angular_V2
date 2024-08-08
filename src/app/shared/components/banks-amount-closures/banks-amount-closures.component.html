@@ -1,40 +1,31 @@
-<div class="card">
+<div class="card card-h-100">
   <div class="card-body">
     <div class="float-end d-flex align-items-center">
       <p class="m-0 me-2">
         {{ formattedDateRange }}
       </p>
-      <app-dropdown-date-range
-        [currentSelection]="currentSortBy"
-        [customRangeActive]="customRangeActive"
-        (selectionChange)="updateSortBy($event)"
-      >
+      <app-dropdown-date-range [currentSelection]="currentSortBy" [customRangeActive]="customRangeActive"
+        (selectionChange)="updateSortBy($event)">
       </app-dropdown-date-range>
     </div>
     <h4 class="card-title mb-4">Monto procesado por banco</h4>
-    <div *ngIf="barChart.series && barChart.series.length > 0; else loading">
-      <apx-chart
-        #chart
-        [series]="barChart.series"
-        [chart]="barChart.chart"
-        [xaxis]="barChart.xaxis"
-        [yaxis]="barChart.yaxis"
-        [colors]="barChart.colors"
-        [plotOptions]="barChart.plotOptions"
-        [dataLabels]="barChart.dataLabels"
-        [legend]="barChart.legend"
-        [tooltip]="barChart.tooltip"
-      ></apx-chart>
-      <div class="row mb-0 mt-1">
-        <div class="col-12 text-center">
-          <p class="text-muted mb-2">Monto total procesado</p>
-          <h5>Bs. {{ totalAmount | abbreviateNumber }}</h5>
-        </div>
+    @if(bankClosuresData && bankClosuresData.banks && bankClosuresData.banks.length > 0){
+    <apx-chart #chart [series]="barChart.series" [chart]="barChart.chart" [xaxis]="barChart.xaxis"
+      [yaxis]="barChart.yaxis" [colors]="barChart.colors" [plotOptions]="barChart.plotOptions"
+      [dataLabels]="barChart.dataLabels" [legend]="barChart.legend" [tooltip]="barChart.tooltip"></apx-chart>
+    <div class="row mb-0 mt-1">
+      <div class="col-12 text-center">
+        <p class="text-muted mb-2">Monto total procesado</p>
+        <h5>Bs. {{ totalAmount | abbreviateNumber }}</h5>
       </div>
     </div>
-    <ng-template #loading>
-      <div class="text-center">Loading...</div>
-    </ng-template>
+    } @else{
+    <div class="row h-50 d-flex align-items-center">
+      <div class="col-12 text-center">
+        <p class="text-muted mb-2">No hay datos para mostrar</p>
+      </div>
+    </div>
+    }
   </div>
   <!-- end card body -->
 </div>

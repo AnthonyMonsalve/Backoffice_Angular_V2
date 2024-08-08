@@ -7,10 +7,10 @@ import {
 import { MerchantService } from '@commerce/application/services/data-merchant.service';
 import { AffiliateMasterClosure } from '@core/interfaces/affiliate-master-closures.interface';
 import { OverviewTerminals } from '@core/interfaces/overview-terminals.interface';
-import { LAST_MONTH_SORT } from '@core/utils/date-range-constants';
 import { AffiliateMasterService } from '@services/affiliate-master.service';
 import { AffiliateService } from '@services/affiliate.service';
 import { FactClosureService } from '@services/fact-closure.service';
+import { GlobalStateService } from '@services/global-state.service';
 import { TerminalService } from '@services/terminal.service';
 import { DateRangeService } from '@services/utils/date-range.service';
 
@@ -38,7 +38,7 @@ export class SummaryCommerceComponent implements OnInit {
   closureDataChartFormattedDateRange: string = '';
   closureBanksAmountFormattedDateRange: string = '';
   closureTopCommercesFormattedDateRange: string = '';
-  globalCurrentSortBy: string = LAST_MONTH_SORT;
+  globalCurrentSortBy!: string;
   resetDefaultSort: boolean = false;
 
   isLoadingtotalAffiliatesMaster: boolean = false;
@@ -53,7 +53,8 @@ export class SummaryCommerceComponent implements OnInit {
     private dateRangeService: DateRangeService,
     private factService: FactClosureService,
     private affiliateMasterService: AffiliateMasterService,
-    private affiliateService: AffiliateService
+    private affiliateService: AffiliateService,
+    private globalStateService: GlobalStateService
   ) {}
 
   ngOnInit(): void {
@@ -69,9 +70,14 @@ export class SummaryCommerceComponent implements OnInit {
   }
 
   private initializeData(): void {
-    this.startDate =
-      this.dateRangeService.getDateRange(LAST_MONTH_SORT).startDate;
-    this.endDate = this.dateRangeService.getDateRange(LAST_MONTH_SORT).endDate;
+    this.globalCurrentSortBy = this.globalStateService.currentSortBy;
+
+    this.startDate = this.dateRangeService.getDateRange(
+      this.globalCurrentSortBy
+    ).startDate;
+    this.endDate = this.dateRangeService.getDateRange(
+      this.globalCurrentSortBy
+    ).endDate;
 
     this.formattedDateRange = this.dateRangeService.getSpanishDateRange(
       this.startDate,
@@ -137,7 +143,9 @@ export class SummaryCommerceComponent implements OnInit {
     this.merchantService
       .getBanksAmountBetweenTwoDates(this.startDate, this.endDate)
       .subscribe({
-        next: (data) => (this.bankClosuresReport = data),
+        next: (data) => {
+          this.bankClosuresReport = data;
+        },
         error: (error) => this.handleError(error),
       });
   }

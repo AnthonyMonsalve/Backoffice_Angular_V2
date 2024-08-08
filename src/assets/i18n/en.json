@@ -297,8 +297,26 @@
     "LAST_15_DAYS": {
       "TEXT": "Last 15 days"
     },
+    "LAST_28_DAYS": {
+      "TEXT": "Last 28 days"
+    },
+    "LAST_30_DAYS": {
+      "TEXT": "Last 30 days"
+    },
+    "LAST_60_DAYS": {
+      "TEXT": "Last 60 days"
+    },
+    "LAST_90_DAYS": {
+      "TEXT": "Last 90 days"
+    },
     "LAST_MONTH": {
       "TEXT": "Last month"
+    },
+    "LAST_3_MONTHS": {
+      "TEXT": "Last 3 months"
+    },
+    "LAST_12_MONTHS": {
+      "TEXT": "Last 12 months"
     }
   }
 }

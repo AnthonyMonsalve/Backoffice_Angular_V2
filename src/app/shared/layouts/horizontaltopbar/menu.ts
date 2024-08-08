@@ -8,7 +8,7 @@ export const MENU: MenuItem[] = [
     subItems: [
       {
         id: 10001,
-        label: 'HEADER.REPORTS.LIST.PAGE',
+        label: 'HEADER.REPORTS.LIST.SUMMARY',
         link: '/',
         parentId: 1,
       },
@@ -21,8 +21,14 @@ export const MENU: MenuItem[] = [
     subItems: [
       {
         id: 20001,
-        label: 'HEADER.INSTAPOS.LIST.PAGE',
+        label: 'HEADER.INSTAPOS.LIST.SUMMARY',
         link: '/pos/summary',
+        parentId: 2,
+      },
+      {
+        id: 20002,
+        label: 'HEADER.INSTAWEB.LIST.COMMERCES',
+        link: '/pos/commerces-list',
         parentId: 2,
       },
     ],
@@ -34,8 +40,14 @@ export const MENU: MenuItem[] = [
     subItems: [
       {
         id: 30001,
-        label: 'HEADER.INSTAWEB.LIST.PAGE',
+        label: 'HEADER.INSTAWEB.LIST.SUMMARY',
         link: '/web/summary',
+        parentId: 3,
+      },
+      {
+        id: 30002,
+        label: 'HEADER.INSTAWEB.LIST.COMMERCES',
+        link: '/web/commerces-list',
         parentId: 3,
       },
     ],
@@ -47,8 +59,20 @@ export const MENU: MenuItem[] = [
     subItems: [
       {
         id: 40001,
-        label: 'HEADER.INSTACOMERCIO.LIST.PAGE',
+        label: 'HEADER.INSTACOMERCIO.LIST.SUMMARY',
         link: '/commerce/summary',
+        parentId: 4,
+      },
+      {
+        id: 40002,
+        label: 'HEADER.INSTACOMERCIO.LIST.COMMERCES',
+        link: '/commerce/commerces-list',
+        parentId: 4,
+      },
+      {
+        id: 40003,
+        label: 'HEADER.INSTACOMERCIO.LIST.AFFILIATES',
+        link: '/commerce/affiliates-list',
         parentId: 4,
       },
     ],

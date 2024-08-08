@@ -8,7 +8,7 @@ export const MENU: MenuItem[] = [
   },
   {
     id: 2,
-    label: 'HEADER.REPORTS.LIST.PAGE',
+    label: 'HEADER.REPORTS.LIST.SUMMARY',
     icon: 'trending-up',
     link: '/',
   },
@@ -21,14 +21,10 @@ export const MENU: MenuItem[] = [
     id: 4,
     label: 'HEADER.INSTAPOS.TEXT',
     icon: 'smartphone',
-    // badge: {
-    //   variant: 'orange-instapago',
-    //   text: 'MENUITEMS.AUTHENTICATION.BADGE',
-    // },
     subItems: [
       {
         id: 40001,
-        label: 'HEADER.INSTAPOS.LIST.PAGE',
+        label: 'HEADER.INSTAPOS.LIST.SUMMARY',
         link: '/pos/summary',
         parentId: 4,
       },
@@ -38,15 +34,17 @@ export const MENU: MenuItem[] = [
     id: 5,
     label: 'HEADER.INSTAWEB.TEXT',
     icon: 'monitor',
-    // badge: {
-    //   variant: 'orange-instapago',
-    //   text: 'MENUITEMS.AUTHENTICATION.BADGE',
-    // },
     subItems: [
       {
         id: 50001,
-        label: 'HEADER.INSTAWEB.LIST.PAGE',
+        label: 'HEADER.INSTAWEB.LIST.SUMMARY',
         link: '/web/summary',
+        parentId: 5,
+      },
+      {
+        id: 50002,
+        label: 'HEADER.INSTAWEB.LIST.COMMERCES',
+        link: '/web/commerces-list',
         parentId: 5,
       },
     ],
@@ -55,15 +53,23 @@ export const MENU: MenuItem[] = [
     id: 6,
     label: 'HEADER.INSTACOMERCIO.TEXT',
     icon: 'shopping-cart',
-    // badge: {
-    //   variant: 'orange-instapago',
-    //   text: 'MENUITEMS.AUTHENTICATION.BADGE',
-    // },
     subItems: [
       {
         id: 60001,
-        label: 'HEADER.INSTACOMERCIO.LIST.PAGE',
+        label: 'HEADER.INSTACOMERCIO.LIST.SUMMARY',
         link: '/commerce/summary',
+        parentId: 6,
+      },
+      {
+        id: 60002,
+        label: 'HEADER.INSTACOMERCIO.LIST.COMMERCES',
+        link: '/commerce/commerces-list',
+        parentId: 6,
+      },
+      {
+        id: 60003,
+        label: 'HEADER.INSTACOMERCIO.LIST.AFFILIATES',
+        link: '/commerce/affiliates-list',
         parentId: 6,
       },
     ],

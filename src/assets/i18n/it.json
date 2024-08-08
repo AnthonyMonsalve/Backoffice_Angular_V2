@@ -1,38 +1,10 @@
 {
   "HEADER": {
     "SEARCH": "Ricerca...",
-    "MEGA_MENU": "Menu Mega",
-    "NOTIFICATIONS": {
-      "TITLE": "Notifiche",
-      "VIEW_ALL": "Mostra tutto",
-      "NEW": "Nuovo",
-      "EARLIER": "Prima",
-      "LOAD_MORE": "Visualizza altro..",
-      "FIRST": {
-        "TITLE": "Il tuo ordine è stato effettuato",
-        "TEXT": "Se più lingue uniscono la grammatica",
-        "TIME": "3 minuti fa"
-      },
-      "SECOND": {
-        "TITLE": "James Lemire",
-        "TEXT": "Sembrerà un inglese semplificato.",
-        "TIME": "1 ora fa"
-      },
-      "THIRD": {
-        "TITLE": "Il tuo articolo viene spedito",
-        "TEXT": "Se più lingue uniscono la grammatica",
-        "TIME": "3 minuti fa"
-      },
-      "FOUR": {
-        "TITLE": "Salena Layfield",
-        "TEXT": "Come un mio amico occidentale scettico di Cambridge.",
-        "TIME": "1 ora fa"
-      }
-    },
     "REPORTS": {
       "TEXT": "Rapporti Instapago",
       "LIST": {
-        "PAGE": "Rapporto delle vendite"
+        "SUMMARY": "Rapporto delle vendite"
       }
     },
     "INSTAPRODUCTS": {
@@ -41,19 +13,23 @@
     "INSTAPOS": {
       "TEXT": "Insta Pos",
       "LIST": {
-        "PAGE": "Riepilogo generale"
+        "SUMMARY": "Riepilogo generale",
+        "COMMERCES": "Elenco dei commerci"
       }
     },
     "INSTAWEB": {
       "TEXT": "Insta Web",
       "LIST": {
-        "PAGE": "Riepilogo generale"
+        "SUMMARY": "Riepilogo generale",
+        "COMMERCES": "Elenco dei commerci"
       }
     },
     "INSTACOMERCIO": {
       "TEXT": "Insta Comercio",
       "LIST": {
-        "PAGE": "Riepilogo generale"
+        "SUMMARY": "Riepilogo generale",
+        "COMMERCES": "Elenco dei commerci",
+        "AFFILIATES": "Affiliazioni dei commerci"
       }
     },
     "DASHBOARDS": {
@@ -61,30 +37,6 @@
       "LIST": {
         "SALES": "I saldi",
         "ANALYTICS": "Analisi"
-      }
-    },
-    "APPS": {
-      "TEXT": "App"
-    },
-    "COMPONENTS": {
-      "TEXT": "Componenti"
-    },
-    "EXTRAPAGES": {
-      "TEXT": "Pagine extra"
-    },
-    "AUTHENTICATION": {
-      "TEXT": "Autenticazione",
-      "BADGE": "nove",
-      "LIST": {
-        "BASIC": "Di base",
-        "COVER": "Coperchio",
-        "SIGNOUT": "Disconnessione",
-        "LOCKSCREEN": "Blocca schermo",
-        "FORGOTPASSWORD": "Ha dimenticato la password",
-        "RESETPWD": "Resetta la password",
-        "EMAILVERIFICATION": "verifica email",
-        "TWOSTEPVERIFICATION": "Verifica in 2 passaggi",
-        "THANKYOU": "Grazie"
       }
     }
   },
@@ -115,166 +67,6 @@
         "LAPTOPSTABLETS": "Computer portatili e tablet",
         "DESKTOPCOMPUTERS": "Computer desktop",
         "NETWORKINGPRODUCTS": "Prodotti di rete (NAS)"
-      }
-    }
-  },
-  "MENUITEMS": {
-    "DASHBOARDS": {
-      "TEXT": "CRUSCOTTI"
-    },
-    "SALES": {
-      "TEXT": "I saldi",
-      "BADGE": "cinque"
-    },
-    "ANALYTICS": {
-      "TEXT": "Analisi"
-    },
-    "APPLICATIONS": {
-      "TEXT": "APPLICAZIONI"
-    },
-    "CALENDAR": {
-      "TEXT": "Calendario"
-    },
-    "CHAT": {
-      "TEXT": "Chiacchierata",
-      "BADGE": "PICCANTE"
-    },
-    "CONTACTS": {
-      "TEXT": "Contatti",
-      "LIST": {
-        "USERGRID": "Griglia utente",
-        "USERLIST": "lista degli utenti",
-        "SETTINGS": "Impostazioni utente"
-      }
-    },
-    "GALLERY": {
-      "TEXT": "Galleria"
-    },
-    "PROJECTS": {
-      "TEXT": "Progetti",
-      "LIST": {
-        "PROJECTSGRID": "Griglia di progetto",
-        "PROJECTSLIST": "Elenco dei progetti",
-        "PROJECTSOVERVIEW": "Panoramica del progetto",
-        "CREATENEW": "Create New"
-      }
-    },
-    "PAGES": {
-      "TEXT": "PAGINE"
-    },
-    "APPS": {
-      "TEXT": "App",
-      "LIST": {
-        "INVOICEDETAIL": "Dettaglio fattura",
-        "CONTACTS": "Contatti",
-        "USERGRID": "Griglia utente",
-        "USERLIST": "lista degli utenti",
-        "PROFILE": "Profilo"
-      }
-    },
-    "AUTHENTICATION": {
-      "TEXT": "Autenticazione",
-      "BADGE": "nove",
-      "LIST": {
-        "BASIC": "Di base",
-        "COVER": "Coperchio",
-        "SIGNOUT": "Disconnessione",
-        "LOCKSCREEN": "Blocca schermo",
-        "FORGOTPASSWORD": "Ha dimenticato la password",
-        "RESETPWD": "Resetta la password",
-        "EMAILVERIFICATION": "verifica email",
-        "TWOSTEPVERIFICATION": "Verifica in 2 passaggi",
-        "THANKYOU": "Grazie"
-      }
-    },
-    "UTILITY": {
-      "TEXT": "Utilità",
-      "LIST": {
-        "STARTER": "Pagina iniziale",
-        "PROFILE": "Profilo",
-        "MAINTENANCE": "Manutenzione",
-        "COMINGSOON": "Prossimamente",
-        "FAQS": "FAQ"
-      }
-    },
-    "COMPONENTS": {
-      "TEXT": "COMPONENTI"
-    },
-    "EXTENDED": {
-      "TEXT": "Interfaccia utente estesa",
-      "LIST": {
-        "LIGHTBOX": "Lightbox",
-        "RANGESLIDER": "Dispositivo di scorrimento dell'intervallo",
-        "SWEETALERT": "SweetAlert 2",
-        "RATING": "Valutazione",
-        "NOTIFICATION": "Notifiche",
-        "SWIPERSLIDER": "Swiper Slider"
-      }
-    },
-    "WIDGETS": {
-      "TEXT": "Widget"
-    },
-    "FORMS": {
-      "TEXT": "Forme",
-      "LIST": {
-        "ELEMENTS": "Elementi basici",
-        "VALIDATION": "Convalida",
-        "ADVANCED": "Plugin avanzato",
-        "EDITOR": "Editori",
-        "FILEUPLOAD": "Upload di file",
-        "WIZARD": "procedura guidata",
-        "MASK": "Maschera"
-      }
-    },
-    "TABLES": {
-      "TEXT": "Tabelle",
-      "LIST": {
-        "BASIC": "Bootstrap di base",
-        "ADVANCEDTABLES": "Tabelle avanzate"
-      }
-    },
-    "APEXCHARTS": {
-      "TEXT": "Grafici Apex",
-      "LIST": {
-        "LINE": "Linea",
-        "AREA": "La zona",
-        "COLUMN": "Colonna",
-        "BAR": "Sbarra",
-        "MIXED": "Misto",
-        "TIMELINE": "Sequenza temporale",
-        "CANDLESTICK": "Candeliere",
-        "BOXPLOT": "trama a scatole",
-        "BUBBLE": "Bolla",
-        "SCATTER": "dispersione",
-        "HEATMAP": "Mappa di calore",
-        "TREEMAP": "Mappa ad albero",
-        "PIE": "Torta",
-        "RADIALBAR": "barra radiale",
-        "RADAR": "Radar",
-        "POLARAREA": "Polararea"
-      }
-    },
-    "ICONS": {
-      "TEXT": "Icone",
-      "LIST": {
-        "UNICONS": "Unicon",
-        "FEATHERICONS": "Icone di piume",
-        "BOXICONS": "Boxicon",
-        "MATERIALDESIGN": "Design dei materiali",
-        "FONTAWESOME": "Carattere fantastico"
-      }
-    },
-    "MULTILEVEL": {
-      "TEXT": "Multi livello",
-      "LIST": {
-        "LEVEL1": {
-          "1": "Livello 1.1",
-          "2": "Livello 1.2",
-          "LEVEL2": {
-            "1": "Livello 2.1",
-            "2": "Livello 2.2"
-          }
-        }
       }
     }
   },

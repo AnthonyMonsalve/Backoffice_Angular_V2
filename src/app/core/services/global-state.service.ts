@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { LAST_60_DAYS } from '@core/utils/date-range-constants';
+import { MONTHLY_SORT } from '@core/utils/date-range-constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GlobalStateService {
-  private _currentSortBy: string = LAST_60_DAYS;
+  private _currentSortBy: string = MONTHLY_SORT;
 
   get currentSortBy(): string {
     return this._currentSortBy;

@@ -1,90 +1,43 @@
 {
   "HEADER": {
     "SEARCH": "Search...",
-    "MEGA_MENU": "Mega Menu",
-    "NOTIFICATIONS": {
-      "TITLE": "Notifications",
-      "VIEW_ALL": "Mark all as read",
-      "NEW": "New",
-      "EARLIER": "Earlier",
-      "LOAD_MORE": "View More..",
-      "FIRST": {
-        "TITLE": "Your order is placed",
-        "TEXT": "If several languages coalesce the grammar",
-        "TIME": "3 min ago"
-      },
-      "SECOND": {
-        "TITLE": "James Lemire",
-        "TEXT": "It will seem like simplified English.",
-        "TIME": "1 hours ago"
-      },
-      "THIRD": {
-        "TITLE": "Your item is shipped",
-        "TEXT": "If several languages coalesce the grammar",
-        "TIME": "3 min ago"
-      },
-      "FOUR": {
-        "TITLE": "Salena Layfield",
-        "TEXT": "As a skeptical Cambridge friend of mine occidental.",
-        "TIME": "1 hours ago"
-      }
-    },
     "REPORTS": {
       "TEXT": "Instapago Reporting",
       "LIST": {
-        "PAGE": "Sales Report"
+        "SUMMARY": "Sales Report",
+        "COMMERCES": "List of commerces"
       }
     },
     "INSTAPRODUCTS": {
-      "TEXT": "Business products"
+      "SUMMARY": "Business products"
     },
     "INSTAPOS": {
       "TEXT": "Insta Pos",
       "LIST": {
-        "PAGE": "Summary"
+        "SUMMARY": "Summary",
+        "COMMERCES": "List of commerces"
       }
     },
     "INSTAWEB": {
       "TEXT": "Insta Web",
       "LIST": {
-        "PAGE": "Summary"
+        "SUMMARY": "Summary",
+        "COMMERCES": "List of commerces"
       }
     },
     "INSTACOMERCIO": {
       "TEXT": "Insta Comercio",
       "LIST": {
-        "PAGE": "Summary"
+        "SUMMARY": "Summary",
+        "COMMERCES": "List of commerces",
+        "AFFILIATES": "Affiliates of commerces"
       }
     },
     "DASHBOARDS": {
       "TEXT": "Dashboards",
       "LIST": {
-        "SALES": "Sales",
+        "SUMMARY": "Sales",
         "ANALYTICS": "Analytics"
-      }
-    },
-    "APPS": {
-      "TEXT": "Apps"
-    },
-    "COMPONENTS": {
-      "TEXT": "Components"
-    },
-    "EXTRAPAGES": {
-      "TEXT": "Extra pages"
-    },
-    "AUTHENTICATION": {
-      "TEXT": "Authentication",
-      "BADGE": "9",
-      "LIST": {
-        "BASIC": "Basic",
-        "COVER": "Cover",
-        "SIGNOUT": "Sign Out",
-        "LOCKSCREEN": "Lock screen",
-        "FORGOTPASSWORD": "Forgot Password",
-        "RESETPWD": "Reset Password",
-        "EMAILVERIFICATION": "Email Verification",
-        "TWOSTEPVERIFICATION": "2-step Verification",
-        "THANKYOU": "Thank you"
       }
     }
   },
@@ -115,166 +68,6 @@
         "LAPTOPSTABLETS": "Laptops & Tablets",
         "DESKTOPCOMPUTERS": "Desktop Computers",
         "NETWORKINGPRODUCTS": "Networking Products (NAS)"
-      }
-    }
-  },
-  "MENUITEMS": {
-    "DASHBOARDS": {
-      "TEXT": "DASHBOARDS"
-    },
-    "SALES": {
-      "TEXT": "Sales",
-      "BADGE": "5+"
-    },
-    "ANALYTICS": {
-      "TEXT": "Analytics"
-    },
-    "APPLICATIONS": {
-      "TEXT": "APPLICATIONS"
-    },
-    "CALENDAR": {
-      "TEXT": "Calendar"
-    },
-    "CHAT": {
-      "TEXT": "Chat",
-      "BADGE": "Hot"
-    },
-    "CONTACTS": {
-      "TEXT": "Contacts",
-      "LIST": {
-        "USERGRID": "User Grid",
-        "USERLIST": "User List",
-        "SETTINGS": "User Settings"
-      }
-    },
-    "GALLERY": {
-      "TEXT": "Gallery"
-    },
-    "PROJECTS": {
-      "TEXT": "Projects",
-      "LIST": {
-        "PROJECTSGRID": "Project Grid",
-        "PROJECTSLIST": "Project List",
-        "PROJECTSOVERVIEW": "Project Overview",
-        "CREATENEW": "Create New"
-      }
-    },
-    "PAGES": {
-      "TEXT": "PAGES"
-    },
-    "APPS": {
-      "TEXT": "Apps",
-      "LIST": {
-        "INVOICEDETAIL": "Invoice Detail",
-        "CONTACTS": "Contacts",
-        "USERGRID": "User Grid",
-        "USERLIST": "User List",
-        "PROFILE": "Profile"
-      }
-    },
-    "AUTHENTICATION": {
-      "TEXT": "Authentication",
-      "BADGE": "9",
-      "LIST": {
-        "BASIC": "Basic",
-        "COVER": "Cover",
-        "SIGNOUT": "Sign Out",
-        "LOCKSCREEN": "Lock screen",
-        "FORGOTPASSWORD": "Forgot Password",
-        "RESETPWD": "Reset Password",
-        "EMAILVERIFICATION": "Email Verification",
-        "TWOSTEPVERIFICATION": "2-step Verification",
-        "THANKYOU": "Thank you"
-      }
-    },
-    "UTILITY": {
-      "TEXT": "Utility",
-      "LIST": {
-        "STARTER": "Starter Page",
-        "PROFILE": "Profile",
-        "MAINTENANCE": "Maintenance",
-        "COMINGSOON": "Coming Soon",
-        "FAQS": "FAQs"
-      }
-    },
-    "COMPONENTS": {
-      "TEXT": "COMPONENTS"
-    },
-    "EXTENDED": {
-      "TEXT": "Extended UI",
-      "LIST": {
-        "LIGHTBOX": "Lightbox",
-        "RANGESLIDER": "Range Slider",
-        "SWEETALERT": "SweetAlert 2",
-        "RATING": "Rating",
-        "NOTIFICATION": "Notifications",
-        "SWIPERSLIDER": "Swiper Slider"
-      }
-    },
-    "WIDGETS": {
-      "TEXT": "Widgets"
-    },
-    "FORMS": {
-      "TEXT": "Forms",
-      "LIST": {
-        "ELEMENTS": "Basic Elements",
-        "VALIDATION": "Validation",
-        "ADVANCED": "Advanced Plugin",
-        "EDITOR": "Editors",
-        "FILEUPLOAD": "File Upload",
-        "WIZARD": "Wizard",
-        "MASK": "Mask"
-      }
-    },
-    "TABLES": {
-      "TEXT": "Tables",
-      "LIST": {
-        "BASIC": "Bootstrap Basic",
-        "ADVANCEDTABLES": "Advance Tables"
-      }
-    },
-    "APEXCHARTS": {
-      "TEXT": "Apex Charts",
-      "LIST": {
-        "LINE": "Line",
-        "AREA": "Area",
-        "COLUMN": "Column",
-        "BAR": "Bar",
-        "MIXED": "Mixed",
-        "TIMELINE": "Timeline",
-        "CANDLESTICK": "Candlestick",
-        "BOXPLOT": "Boxplot",
-        "BUBBLE": "Bubble",
-        "SCATTER": "Scatter",
-        "HEATMAP": "Heatmap",
-        "TREEMAP": "Treemap",
-        "PIE": "Pie",
-        "RADIALBAR": "Radialbar",
-        "RADAR": "Radar",
-        "POLARAREA": "Polararea"
-      }
-    },
-    "ICONS": {
-      "TEXT": "Icons",
-      "LIST": {
-        "UNICONS": "Unicons",
-        "FEATHERICONS": "Feather icons",
-        "BOXICONS": "Boxicons",
-        "MATERIALDESIGN": "Material Design",
-        "FONTAWESOME": "Font Awesome"
-      }
-    },
-    "MULTILEVEL": {
-      "TEXT": "Multi Level",
-      "LIST": {
-        "LEVEL1": {
-          "1": "Level 1.1",
-          "2": "Level 1.2",
-          "LEVEL2": {
-            "1": "Level 2.1",
-            "2": "Level 2.2"
-          }
-        }
       }
     }
   },

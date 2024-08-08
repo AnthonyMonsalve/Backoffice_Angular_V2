@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AdminGuard } from '../core/guards/admin.guard';
+import { AdminGuard } from '@core/guards/admin.guard';
 import { ProfileComponent } from './presentations/pages/profile/profile.component';
 import { UserListComponent } from './presentations/pages/user-list/user-list.component';
 import { UserSettingsComponent } from './presentations/pages/user-settings/user-settings.component';

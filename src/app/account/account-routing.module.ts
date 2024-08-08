@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { RedirectGuard } from '../core/guards/redirect.guard';
+import { RedirectGuard } from '@core/guards/redirect.guard';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 

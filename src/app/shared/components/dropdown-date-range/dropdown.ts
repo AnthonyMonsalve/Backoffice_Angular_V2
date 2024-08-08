@@ -7,7 +7,7 @@ import {
   WEEKLY_SORT,
   YEARLY_SORT,
 } from '@core/utils/date-range-constants';
-import { DropdownItem } from './dropdown.model';
+import { DropdownItem } from '@core/interfaces/dropdown-date-range.interface';
 
 export const DROPDOWN: DropdownItem[] = [
   {

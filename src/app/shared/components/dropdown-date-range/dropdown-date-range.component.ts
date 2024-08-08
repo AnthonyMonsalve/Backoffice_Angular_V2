@@ -5,7 +5,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { DropdownItem } from './dropdown.model';
+import { DropdownItem } from '@core/interfaces/dropdown-date-range.interface';
 import { DROPDOWN } from './dropdown';
 import { LanguageService } from '@services/utils/language.service';
 import { CookieService } from 'ngx-cookie-service';
